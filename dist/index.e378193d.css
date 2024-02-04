@@ -60,4 +60,70 @@ body.dark #menu button {
   background-color: #666;
 }
 
+.unnumbered-list-container {
+  list-style: square inside;
+}
+
+.numbered-list-container {
+  margin: 20px;
+  list-style: decimal inside;
+}
+
+.nav-container {
+  background: #6d0ee9;
+}
+
+.nav-list-container {
+  flex-wrap: wrap;
+  justify-content: start;
+  gap: 0 5px;
+  padding: 10px 30px 20px;
+  display: flex;
+}
+
+.nav-list-container a {
+  background: beige;
+  gap: 10px;
+  margin: 10px auto;
+  padding: 10px;
+  display: flex;
+  position: relative;
+  box-shadow: 0 2px 1px -1px #0003, 0 1px 1px #00000024, 0 1px 3px #0000001f;
+}
+
+.nav-list-container a:hover {
+  color: #000;
+  background: #6d0ee9;
+}
+
+.current-page:after {
+  content: "";
+  background-color: #b94bb9;
+  border-radius: 2px;
+  width: 100%;
+  height: 4px;
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+}
+
+.body-container {
+  background-size: 50% 150%;
+  width: 1280px;
+  margin: 0 auto;
+}
+
+.main-container {
+  background-image: linear-gradient(#6d0ee9, #301212);
+  background-size: 1280px;
+  width: 1280px;
+  position: relative;
+}
+
+.text {
+  color: #fff;
+  padding: 0 30px;
+  font-size: 18px;
+}
+
 /*# sourceMappingURL=index.e378193d.css.map */
