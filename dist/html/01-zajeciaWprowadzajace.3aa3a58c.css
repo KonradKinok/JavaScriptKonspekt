@@ -88,4 +88,20 @@ span {
   width: 100%;
 }
 
+.section24-img-container {
+  border: 2px solid #000;
+  border-radius: 15px;
+  width: 700px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.section30-img-container {
+  border: 2px solid #000;
+  border-radius: 15px;
+  width: 400px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
 /*# sourceMappingURL=01-zajeciaWprowadzajace.3aa3a58c.css.map */
