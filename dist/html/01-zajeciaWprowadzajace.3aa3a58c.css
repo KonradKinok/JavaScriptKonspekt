@@ -12,6 +12,10 @@ span {
   color: #fff;
 }
 
+h3 {
+  margin-top: 10px;
+}
+
 .unnumbered-list-container {
   list-style: square inside;
 }
@@ -96,7 +100,7 @@ span {
   overflow: hidden;
 }
 
-.section30-img-container {
+.section30-img-container, .section34-img-container {
   border: 2px solid #000;
   border-radius: 15px;
   width: 400px;

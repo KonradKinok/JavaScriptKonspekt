@@ -39,7 +39,7 @@
             instrukcji w pliku tekstowym, które ma wykonać komputer.
           </p>
           <p class="text-p">
-            Kod źródłowy (source code) - pliki zawierające “treść” programu
+            Kod źródłowy (source code) - pliki zawierające "treść" programu
             komputerowego zapisaną przy pomocy określonego języka programowania.
             Opisują one operacje, jakie powinien wykonać komputer na
             przechowywanych w pamięci lub przesyłanych do niego danych.
@@ -86,7 +86,7 @@
           <h2>Section3: JavaScript</h2>
           <p class="text-p">
             JavaScript - implementacja specyfikacji EcmaScript, język
-            programowania “wysokiego poziomu”, obsługiwany przez każdą
+            programowania "wysokiego poziomu", obsługiwany przez każdą
             współczesną przeglądarkę. Początkowo on został zaprojektowany do
             zarządzania elementami stron internetowych i obsługiwania interakcji
             z użytkownikiem (m.in. nasłuchiwania jego akcji takich jak
@@ -201,7 +201,7 @@
           <h2>Section5: Kilka skryptów</h2>
           <p class="text-p">
             Kiedy podłączamy kilka plików JavaScript do strony, interpretator
-            “odczyta” je w takiej kolejności w jakiej są umieszczone w pliku
+            "odczyta" je w takiej kolejności w jakiej są umieszczone w pliku
             HTML, co czasem może wywołać błędy spowodowane brakiem zmiennych,
             jeżeli kolejność jest nieprawidłowa.
           </p>
@@ -343,7 +343,7 @@
           <p>
             Kiedy prowadzimy samochód, korzystamy z jego systemów które
             pozwalają na zmianę jego zachowania (kierownica, pedały, przyciski i
-            przełączniki) W programowaniu zbiór takich “narzędzi” nazywamy
+            przełączniki) W programowaniu zbiór takich "narzędzi" nazywamy
             interfejsem.
           </p>
           <p>
@@ -499,7 +499,7 @@
           </pre>
           <p>
             Deklaracja zmiennej bez słowa kluczowego let lub const doprowadzi do
-            błędu, jeśli skrypt jest wykonywany w “strict mode”.
+            błędu, jeśli skrypt jest wykonywany w "strict mode".
           </p>
         </div>
       </section>
@@ -603,7 +603,7 @@
           </p>
           <p>
             Number - liczby całkowite i liczby zmiennoprzecinkowe (z wartościami
-            dziesiętnymi po “kropce”)
+            dziesiętnymi po "kropce")
           </p>
           <pre>
             const age = 20;
@@ -769,7 +769,7 @@
             Ważną cechą prompt jest to, że bez względu na to, co wprowadził
             użytkownik, zawsze zwróci się string (wiersz). Oznacza to, że jeśli
             użytkownik wpisał 5, to nie zostanie zwrócona liczba 5, ale string
-            „5”.
+            "5".
           </p>
           <pre>
             const value = prompt("Please enter a number!");
@@ -1153,6 +1153,332 @@
             dla pierwszych dwóch liczb 1 oraz 2, po czym liczba 3 przekształciła
             się w wiersz "3" i została połączona z wierszem "4".
           </p>
+        </div>
+      </section>
+      <!-- section32 -->
+      <section>
+        <div class="text">
+          <h2>Section32: Wiersze szablonowe</h2>
+          <p>
+            Wiersze szablonowe są alternatywą dla konkatenacji z wygodniejszą
+            składnią. Wiersz szablonu jest ujęty w grawisy, z angielskiego
+            backticks - `` , zamiast podwójnych lub pojedynczych cudzysłowów i
+            może zawierać wyrażenia, które są użyte przez znak dolara i nawiasy
+            klamrowe ${wyrażenie}`.
+          </p>
+          <pre>
+            // Używając zmiennych należy skomponować string z podstawionymi wartościami
+            const guestName = "Mango";
+            const roomNumber = 207;
+            const greeting =
+            "Welcome " + guestName + ", your room number is " + roomNumber + "!";
+            console.log(greeting);// "Welcome Mango, your room number is 207!"
+          </pre>
+          <p>
+            Komponowanie wierszy z wartościami określonymi za pomocą
+            konkatenacji jest bardzo niewygodne. Na ratunek przychodzą wiersze
+            szablonów.
+          </p>
+          <pre>
+            const guestName = "Mango";
+            const roomNumber = 207;
+            const greeting = `Welcome ${guestName}, your room number is ${roomNumber}!`;
+            console.log(greeting);// "Welcome Mango, your room number is 207!"
+          </pre>
+        </div>
+      </section>
+      <!-- section33 -->
+      <section>
+        <div class="text">
+          <h2>Section33: Właściwości i metody ciągów</h2>
+          <p>
+            Każdy string ma swoje wbudowane właściwości i metody, zobaczmy jak
+            działają niektóre z nich.
+          </p>
+          <h3>Właściwość length</h3>
+          <p>
+            Aby poznać długość wiersza, czyli liczbę jego znaków, dla wszystkich
+            stringów istnieje wbudowana właściwość length, której wartość można
+            uzyskać przez zwrócenie się do niej za pomocą kropki po nazwie
+            zmiennej.
+          </p>
+          <pre>
+            const message = "Welcome to Bahamas!";
+            console.log(message.length);// 19
+            console.log("There is nothing impossible to him who will try".length);// 47</pre>
+          <h3>Metody toLowerCase() i toUpperCase()</h3>
+          <p>
+            Zwracają nowy wiersz zastępując wszystkie litery odpowiednio małymi
+            lub dużymi wersjami, nie zmieniając treści oryginalnej zmiennej.
+          </p>
+          <p>Cyfry i znaki specjalne nie zmieniają się.</p>
+          <pre>
+            const message = "Welcome to Bahamas!";
+            console.log(message.toLowerCase());// "welcome to bahamas!"
+            console.log(message.toUpperCase());// "WELCOME TO BAHAMAS!"
+            console.log(message);// "Welcome to Bahamas!"
+          </pre>
+          <p>
+            Zdarzają się sytuacje, w których wszystkie znaki w ciągu muszą
+            zostać przekonwertowane na jedną wielkość liter, duże lub małe.
+            Przykładem będzie wyszukiwanie po słowie kluczowym, użytkownik
+            wpisuje wiersz 'saMsUng', który musi zostać porównany ze stringiem
+            'samsung' lub 'SAMSUNG'.
+          </p>
+          <pre>
+            console.log("saMsUng" === "samsung");// false
+            console.log("saMsUng" === "SAMSUNG");// false
+          </pre>
+          <p>
+            Aby nie wymagać absolutnie dokładnych danych wejściowych, można
+            wprowadzić «normalizację» wprowadzonego przez użytkownika wiersza,
+            czyli przekonwertować wszystkie jego znaki na duże lub małe litery.
+            Metody wierszy toLowerCase() i toUpperCase() zwrócą nowy wiersz w
+            odpowiedniej postaci bez zmiany treści.
+          </p>
+          <pre>
+            const BRAND_NAME = "SAMSUNG";
+            const userInput = "saMsUng";
+            const normalizedToUpperCaseInput = userInput.toUpperCase();
+
+            console.log(userInput);// 'saMsUng'
+            console.log(userInput === BRAND_NAME);// false
+            console.log(normalizedToUpperCaseInput);// 'SAMSUNG'
+            console.log(normalizedToUpperCaseInput === BRAND_NAME);// true
+          </pre>
+          <h3>Metoda indexOf()</h3>
+          <p>
+            Zwraca pozycję (indeks), na której zaczyna się pierwsze dopasowanie
+            podanego stringa lub -1 jeśli nigdzie takiego nie mamy. Wielkość
+            liter jest tutaj istotna
+          </p>
+          <pre>
+            const message = "Welcome to Bahamas!";
+            console.log(message.indexOf("to"));// 8
+            console.log(message.indexOf("To"));// -1
+            console.log(message.indexOf("hello"));// -1
+          </pre>
+          <h3>Metoda includes()</h3>
+          <p>
+            Sprawdza, czy dany string jest zawarty w wierszu, (jest jego tak
+            zwanym substringiem) zwraca boolean - true jeśli tak i false w
+            przeciwnym wypadku. Dla tej metody również ważna jest wielkość
+            liter, ponieważ litera "a" nie równa się literze "А".
+          </p>
+          <pre>
+            const productName = "Repair droid";
+
+            console.log(productName.includes("p"));// true
+            console.log(productName.includes("P"));// false
+            console.log(productName.includes("droid"));// true
+            console.log(productName.includes("Droid"));// false
+            console.log(productName.includes("Repair"));// true
+            console.log(productName.includes("repair"));// false</pre>
+          <p>
+            Wszystkie metody wierszy uwzględniają wielkość litery. Mówimy o
+            nich, że są "case-sensitive"
+          </p>
+          <h3>Metoda endsWith()</h3>
+          <p>
+            Pozwala określić, czy wiersz kończy się określonym stringiem podanym
+            w nawiasach, zwracając true lub false.
+          </p>
+          <pre>
+            const jsFileName = "script.js";
+            console.log(jsFileName.endsWith(".js"));// true
+
+            const cssFileName = "styles.css";
+            console.log(cssFileName.endsWith(".js"));// false
+          </pre>
+          <h3>Metoda replace() i replaceAll()</h3>
+          <p>
+            Zwraca nowy wiersz, w którym pierwsze (replace) lub wszystkie
+            dopasowania (replaceAll) podanego stringa są zastępowane określoną
+            wartością (w nawiasach po przecinku).
+          </p>
+          <pre>
+            const jsFileName = "script.js";
+            const minifiedJsFileName = jsFileName.replace(".js", ".min.js");
+            console.log(minifiedJsFileName);// "script.min.js"
+
+            const cssFileNames = "styles.css, about.css, portfolio.css";
+            const minifiedCssFileNames = cssFileNames.replaceAll(".css", ".min.css");
+            console.log(minifiedCssFileNames);// "styles.min.css, about.min.css, portfolio.min.css"
+          </pre>
+          <h3>Metoda slice()</h3>
+          <p>
+            Metodę string slice(startIndex, endIndex) wykorzystuje się do
+            utworzenia kopii części lub całego łańcucha. Tworzy kopię elementów
+            wiersza od znaku o indeksie startIndex i do, ale nie włączając w to
+            znaku o indeksie podanym jako endIndex i zwraca nowy string.
+          </p>
+          <pre>
+            const productName = "Repair droid";
+            console.log(productName.slice(0, 4)); // "Repa"
+            console.log(productName.slice(3, 9)); // "air dr"
+            console.log(productName.slice(0, productName.length)); // "Repair droid"
+            console.log(productName.slice(7, productName.length)); // "droid"
+          </pre>
+        </div>
+      </section>
+      <!-- section34 -->
+      <section>
+        <div class="text">
+          <h2>Section34: Operatory logiczne</h2>
+          <p>
+            Operatory logiczne służą do sprawdzenia warunków z wieloma
+            wyrażeniami, na przykład operacjami porównania.
+          </p>
+          <h3>Konwertowanie typu</h3>
+          <p>
+            W operacjach logicznych typy operandów są konwertowane na true lub
+            false. Konwersja występuje, gdy w kodzie zostanie znaleziony
+            operator logiczny.
+          </p>
+          <p>
+            Truthy i Falsy - terminy używane dla tych wartości, które w operacji
+            logicznej są konwertowane na true lub false, chociaż jako takie nie
+            miały typu boolean.
+          </p>
+          <p>
+            Istnieje 6 nieprawdziwych (false) wartości, które sprowadzają się do
+            false (są falsy) w logicznej konwersji: 0, NaN, null, undefined,
+            pusty string czyli "" i false. Wszystkie inne wartości sprowadzają
+            się do true (są truthy).
+          </p>
+          <h3>Operatory logiczne</h3>
+          <p>
+            W JavaScript Istnieją trzy operatory logiczne, które służą do
+            sprawdzania wyrażeń.
+          </p>
+          <div class="section34-img-container">
+            <img src="/boolean-operators.03f2e39c.png" alt="">
+          </div>
+          <h3>Logiczne «AND»(i)</h3>
+          <p>
+            Operator && sprowadzi wszystkie operandy do typu boolean i zwraca
+            'true' jeśli wszystkie operandy są prawdziwe. Operandy są sprawdzane
+            w kolejności zapisu, więc jeśli lewy warunek jest false, prawy już
+            nie będzie sprawdzany a całość wyrażenia zwróci false.
+          </p>
+          <pre>
+            wyrażenie && wyrażenie
+          </pre>
+          <p>
+            W poniższym przykładzie oba warunki zwrócą true, więc wynikiem
+            całego wyrażenia będzie true - zostanie zwrócona wartość skrajnego
+            prawego operandu.
+          </p>
+          <pre>
+            const age = 20;
+            console.log(age > 10 && age < 30);// true && true -> true
+          </pre>
+          <p>
+            Jeśli chociażby jeden z operandów będzie false, rezultat wyrażenia
+            otrzyma jego wartość.
+          </p>
+          <pre>
+            const age = 50;
+            console.log(age > 10 && age < 30);// true && false -> false
+            console.log(age > 80 && age < 120);// false && true -> false
+          </pre>
+          <p>
+            Jak widzimy, logiczne «And(I)» szuka pierwszego operandu falsy i
+            zwraca go, a jeśli go nie odnajdzie to zwróci ostatni w kolejności
+            operand.
+          </p>
+          <pre>
+            console.log(1 && 5);// true && true -> 5
+            console.log(5 && 1);// true && true -> 1
+            console.log(0 && 2);// false && true -> 0
+            console.log(2 && 0);// true && false -> 0
+            console.log("" && "Mango");// false && true -> ""
+            console.log("Mango" && "");// true && false -> ""
+            console.log("Mango" && "Poly");// true && true -> "Poly"
+            console.log("Poly" && "Mango");// true && true -> "Mango"
+          </pre>
+          <p>
+            Przy wykonaniu logicznego «AND», prawy operand może nie być
+            sprawdzony, jeśli lewy doprowadzi do false.
+          </p>
+          <h3>Logiczne «LUB(OR)»</h3>
+          <p>
+            Operator || konwertuje wszystkie operandy do typu boolean i zwraca
+            wartość 'true' jeżeli chociaż jeden jest prawdziwy. Lewy operand,
+            jeśli można go przekształcić na true, i prawy operand w przeciwnych
+            wypadkach.
+          </p>
+          <pre>
+            wyrażenie || wyrażenie
+          </pre>
+          <p>
+            W poniższym przykładzie warunek po lewej stronie zwróci true, więc
+            wynik całego wyrażenia będzie true - zostanie zwrócona wartość
+            pierwszego operandu, który po wykonaniu go pokaże true.
+          </p>
+          <pre>
+            const age = 5;
+            console.log(age < 10 || age > 30);// true || false -> true
+          </pre>
+          <p>
+            Tutaj wynik też będzie true, ponieważ jeden z operandów, w tym
+            wypadku ten po prawej po wykonaniu równał się true.
+          </p>
+          <pre>
+            const age = 40;
+            console.log(age < 10 || age > 30);// false || true -> true
+          </pre>
+          <p>
+            W kolejnym przykładzie żaden warunek nie był spełniony, dlatego
+            otrzymujemy false - wartość ostatniego operanda.
+          </p>
+          <pre>
+            const age = 20;
+            console.log(age < 10 || age > 30);// false || false -> false
+          </pre>
+          <p>
+            Oznacza to, że logiczne «OR» wyłapuje pierwszą prawdę/wartość truthy
+            i zwraca tę wartość lub ostatni w kolejności operand.
+          </p>
+          <pre>
+            console.log(true || false);// true
+            console.log(false || true);// true
+            console.log(true || true);// true
+
+            console.log(3 || false);// 3
+            console.log(false || 3);// 3
+            console.log(3 || true);// 3
+            console.log(true || 3);// true
+          </pre>
+          <p>
+            Przy wykonaniu logicznego «OR», prawy operand niekoniecznie musi być
+            sprawdzony, jeśli lewy już był sprowadził się do true.
+          </p>
+          <h3>Logiczne «NO»</h3>
+          <p>
+            Wszystkie operatory, które omówiliśmy wcześniej, były binarne -
+            zawierały dwa operandy, lewy i prawy. Logiczne "NIE" jest operatorem
+            jednoargumentowym - operacje wykonują się na jednym operandzie po
+            prawej stronie.
+          </p>
+          <pre>
+            !wyrażenie
+          </pre>
+          <p>
+            Operator ! konwertuje operand do typu boolean, jeśli jest to
+            koniecznie. Później odbywa się inwersja - zmienia jego znaczenie na
+            odwrotne true -> false lub false -> true.
+          </p>
+          <pre>
+            console.log(!true);// false
+            console.log(!false);// true
+            console.log(!3);// !3 -> !true -> false
+            console.log(!"Mango");// !"Mango" -> !true -> false
+            console.log(!0);// !0 -> !false -> true
+            console.log(!"");// !"" -> !false -> true
+            const isOnline = true;
+            const isNotOnline = !isOnline;// !isOnline -> !true -> false
+          </pre>
         </div>
       </section>
     </main>

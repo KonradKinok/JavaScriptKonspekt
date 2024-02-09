@@ -11,6 +11,9 @@ span {
     color: #fff;
 }
 
+h3{
+    margin-top: 10px;
+}
 .unnumbered-list-container {
     list-style: square inside none;
 }
@@ -111,6 +114,15 @@ span {
 
 // section30
 .section30-img-container {
+    width: 400px;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 2px solid black;
+    border-radius: 15px;
+}
+
+// section34
+.section34-img-container {
     width: 400px;
     margin: 0 auto;
     overflow: hidden;
