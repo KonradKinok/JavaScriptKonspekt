@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;700&family=Roboto:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.min.css"
+    />
+    <!-- <style type="text/css">	@import url(./styles/stylStartowy.css);	</style> -->
+    <link rel="stylesheet" href="../styles/stylStartowy.scss" />
+    <link rel="stylesheet" href="../styles/02-rozgalezieniaCykle.scss" />
+    <title>Rozgałęzienia i cykle</title>
+  </head>
+  <body class="body-container">
+    <header class="menu-sticky">
+      <nav class="nav-container">
+        <!-- Nawigacja do innych stron -->
+        <ul class="nav-list-container">
+          <li>
+            <a class="link" href="../index.html">Menu</a>
+          </li>
+          <li>
+            <a class="link" href="../html/01-zajeciaWprowadzajace.html"
+              >01. Zmienne i typy</a
+            >
+          </li>
+          <li>
+            <a
+              class="link current-page"
+              href="../html/02-rozgalezieniaCykle.html"
+              >02. Rozgałęzienia i cykle</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main-container">
+      <!-- section1 -->
+      <section>
+        <article class="text">
+          <h1>Moduł1 - Zajęcia2 - Rozgałęzienia i cykle</h1>
+          <h2>Section1: Instrukcje warunkowe</h2>
+          <p>
+            Instrukcje warunkowe (rozgałęzienia kodu) są wykorzystywane do
+            wykonywania innego kodu w zależności od spełnionych warunków. Zasada
+            działania jest prosta - wynik warunku sprowadza się do wartości
+            boolean true lub false, po czym wykonywany kod programu jest
+            kierowany w zależności od tego czy warunek jest spełniony czy nie
+            (true lub false)
+          </p>
+        </article>
+        <article class="text">
+          <h3>Instrukcja if</h3>
+          <pre>
+            if (warunek) {
+            // ciało if
+            }
+          </pre>
+          <p>
+            Warunkiem nazywamy wyrażenie które sprowadzi się do wartości truthy
+            lub falsy. Warunki są umieszczane po instrukcji if w nawiasach.
+            Jeśli warunek sprowadzi się do true, wtedy wykonywany jest kod w
+            nawiasach klamrowych ciała if.
+          </p>
+          <pre>
+            let cost = 0;
+            const subscription = "pro";
+            if (subscription === "pro") {
+                cost = 100;
+            }
+            console.log(cost);// 100
+          </pre>
+          <p>
+            Jeśli warunek nie jest spełniony i zwraca false, kod w nawiasach
+            klamrowych nie zostanie wykonany.
+          </p>
+          <pre>
+            let cost = 0;
+            const subscription = "free";
+            if (subscription === "pro") {
+                cost = 100;
+            }
+            console.log(cost);// 0
+          </pre>
+          <pre>
+            if (warunek) {
+                // ciało if
+            } else {
+                // ciało else
+            }
+          </pre>
+          <p>
+            To dodatkowy element składni if. Jeśli warunek nie jest spełniony
+            czyli sprowadza się do false, zostanie wykonany kod, który znajduje
+            się w nawiasach klamrowych po operatorze else.
+          </p>
+          <pre>
+            let cost;
+            const subscription = "free";
+            if (subscription === "pro") {
+                cost = 100;
+            } else {
+                cost = 0;
+            }
+            console.log(cost);// 0
+          </pre>
+          <p>
+            Jeśli warunek zostanie spełniony i zwróci true, ciało bloku else
+            zostanie zignorowane.
+          </p>
+          <pre>
+            let cost;
+            const subscription = "pro";
+            if (subscription === "pro") {
+                cost = 100;
+            } else {
+                cost = 0;
+            }
+            console.log(cost);// 100
+          </pre>
+          <p>
+            Instrukcja else nie może występować samodzielnie, zawsze następuje
+            po instrukcji if
+          </p>
+        </article>
+        <article class="text">
+          <h3>Instrukcja else...if</h3>
+          <p>
+            Konstrukcja if...else może sprawdzić i zareagować na wykonanie lub
+            niewykonanie wyłącznie jednego warunku z kilku możliwości.
+          </p>
+          <p>
+            Blok else...if pozwala po else dodać jeszcze jeden operator if z
+            warunkiem. Na końcu łańcucha możemy napisać klasyczny blok else,
+            który zostanie wykonany tylko wtedy, gdy żaden z wcześniejszych
+            warunków nie będzie sprowadzał się do true.
+          </p>
+          <pre>
+            let cost;
+            const subscription = "premium";
+            if (subscription === "free") {
+                cost = 0;
+            } else if (subscription === "pro") {
+                cost = 100;
+            } else if (subscription === "premium") {
+                cost = 500;
+            } else {
+                console.log("Invalid subscription type");
+            }
+            console.log(cost);// 500
+          </pre>
+          <p>
+            Przy pierwszym spełnieniu się warunku w if kod przestanie sprawdzać
+            kolejne warunki i zostanie wykonany tylko jeden blok kodu
+            odpowiadający danemu warunkowi. Taki zapis możemy rozumieć jako:
+            szukam pierwszego spełnionego warunku, reszta instrukcji zostaje
+            zignorowana, jeśli żaden warunek nie jest spełniony wykonam kod w
+            ostatnim bloku czyli else
+          </p>
+        </article>
+      </section>
+      <!-- section2 -->
+      <section>
+        <article class="text">
+          <h2>Ternary operator</h2>
+          <p>
+            Operator trójargumentowy (czasem nazywamy warunkowym) jest używany
+            jako bardziej bardziej zwięzły zapis instrukcji if ... else, w
+            sytuacjach, gdy trzeba przypisać tej samej zmiennej różne wartości w
+            zależności tego czy warunek został spełniony.
+          </p>
+          <pre>
+            "warunek" ? "wyrażenie_jeśli_warunek_spełniony" : "wyrażenie_jeśli_warunek_nieprawdziwy"</pre
+          >
+          <p>Działa to według następującego schematu:</p>
+          <ul class="unnumbered-list-container">
+            <li>warunek zostaje obliczony</li>
+            <li>
+              Jeśli warunek jest prawdziwy - true, wykonuje się wyrażenie po ? i
+              jego wartość jest zwracana
+            </li>
+            <li>
+              Jeśli warunek nie jest prawdziwy - false, wykonuje się wyrażenie
+              po : i jego wartość jest zwracana
+            </li>
+            <li>
+              Zwróconą wartość możemy następnie przypisać do zmiennej lub
+              wykorzystać w inny sposób.
+            </li>
+          </ul>
+          <pre>
+            let type;
+            const age = 20;
+            if (age >= 18) {
+                type = "adult";
+            } else {
+                type = "child";
+            }
+            console.log(type);// "adult"
+          </pre>
+          <p>Zróbmy refaktoryzacje zastępując if...else operatorem ternary.</p>
+          <pre>
+            const age = 20;
+            const type = age >= 18 ? "adult" : "child";
+            console.log(type);// "adult"
+          </pre>
+          <p>
+            Napiszmy algorytm odnajdujący która liczba (z podanych dwóch) jest
+            większa
+          </p>
+          <pre>
+            const num1 = 5;
+            const num2 = 10;
+            let biggerNumber;
+            if (num1 > num2) {
+                biggerNumber = num1;
+            } else {
+                biggerNumber = num2;
+            }
+            console.log(biggerNumber);// 10
+          </pre>
+          <p>
+            Kod działa poprawnie, otrzymujemy największą liczbę, ale biorąc pod
+            uwagę prostotę operacji wykonywanych w blokach if...else warto
+            wykorzystać operator ternary co znacznie skróci kod.
+          </p>
+          <pre>
+            const num1 = 5;
+            const num2 = 10;
+            const biggerNumber = num1 > num2 ? num1 : num2;
+            console.log(biggerNumber);// 10
+          </pre>
+          <p>
+            Operator trójargumentowy powinien być używany tylko w prostych
+            operacjach przypisania lub otrzymywania danych. Złą praktyką
+            (antywzorem) jest używanie go do bardziej złożonych operacji.
+          </p>
+        </article>
+      </section>
+      <!-- section3 -->
+      <section>
+        <article class="text">
+          <h2>Section3: Instrukcja switch</h2>
+          <p>
+            W niektórych przypadkach możemy uniknąć trudności związanych z
+            odczytywaniem złożonych bloków if ... else. Czasem można użyć
+            bardziej «płaskiej» składni - instrukcji switch.
+          </p>
+          <p>
+            Przydatność tej konkretnej instrukcji jest ograniczona do zadań w
+            których mamy wiele możliwych scenariuszy ale jedyne warunki logiczne
+            które nas interesują to porównania zmiennej z konkretnymi
+            wartościami (znanymi przez nas podczas pisania kodu).
+          </p>
+          <p>Składnia tego bloku składa się z</p>
+          <ul class="unnumbered-list-container">
+            <li>switch (value) - gdzie value to zmienna którą porównujemy</li>
+            <li>
+              oraz przypadki case value - gdzie podajemy możliwe wartości dla
+              zmiennej.
+            </li>
+          </ul>
+          <p>
+            Do porównania użyty zostanie operator ścisłej równości ===. Oznacza
+            to, że nie możemy skorzystać z takich operatorów jak < czy !==
+          </p>
+          <pre>
+            switch (value) {
+                case value:
+                instrukcja; 
+                break;
+
+                case value:
+                instrukcja; 
+                break;
+
+                default:
+                instrukcje;
+            }
+          </pre>
+          <p>
+            Value w bloku switch (value) jest zmienną zawierającą string lub
+            liczbę, która jest porównywana według ścisłej równości ze wszystkimi
+            wartościami podanymi w blokach case value . Kolejność bloków ma
+            znaczenie i sprawdzenia odbywają się z góry na dół.
+          </p>
+          <p>
+            Instrukcja break na końcu każdego bloku case jest potrzebna do
+            przerwania dalszego wykonywania bloku jeżeli dany case został
+            spełniony. Wtedy JavaScript przejdzie do dalszych instrukcji pod
+            blokiem switch
+          </p>
+          <p>
+            Jeśli nie doszło do dopasowania wartości w żadnym case, powinniśmy
+            zdefiniować kod który należy wykonać domyślnie, podobnie jak w bloku
+            else dla instrukcji if ... else. W tym celu po wszystkich blokach
+            case, dodawany jest blok default. Operator break po bloku default
+            nie jest wymagany, ponieważ jeśli ten blok się wykona, to będzie to
+            ostatnie co zrobi dany switch
+          </p>
+          <pre>
+            let cost;
+            const subscription = "premium";
+
+            switch (subscription) {
+                case "free":
+                cost = 0;
+                break;
+
+                case "pro":
+                cost = 100;
+                break;
+
+                case "premium":
+                cost = 500;
+                break;
+
+                default:
+                console.log("Invalid subscription type");
+            }
+            console.log(cost);// 500
+          </pre>
+          <p>
+            Jeśli nie ma operatora break to gdy zostanie spełniony jakiś warunek
+            case, wszystkie kolejne bloki kodu będą wykonywane po kolei do
+            momentu natrafienia na operator break lub koniec bloku switch, co
+            może doprowadzić do niepożądanych konsekwencji.
+          </p>
+        </article>
+      </section>
+      <!-- section4 -->
+      <section>
+        <article class="text">
+          <h2>Variable scope</h2>
+          <p>
+            Zakres widoczności zmiennych (variable scope) - tak określamy
+            dostępność zmiennych w określonym miejscu kodu.
+          </p>
+          <p>
+            Globalny variable scope jest używany domyślnie. Wszędzie mamy dostęp
+            do zadeklarowanej w nim zmiennej. Na przykład zmienna value,
+            zadeklarowana w zasięgu globalnym, czyli poza jakimkolwiek blokiem,
+            będzie dostępna w dowolnym miejscu w kodzie.
+          </p>
+          <pre>
+            const value = 5;
+            if (true) {
+                console.log("Block scope: ", value);// 5
+            }
+            console.log("Global scope: ", value);// 5
+          </pre>
+          <p>
+            Wszystkie konstrukcje używające nawiasów klamrowych {} (warunki,
+            pętle, funkcje itp.) tworzą nowy zakres lokalny, a zmienne
+            zadeklarowane w tym zakresie przy użyciu let lub const nie są
+            dostępne poza tym blokiem.
+          </p>
+          <pre>
+            if (true) {
+                const value = 5;
+                console.log("Block scope: ", value);// 5
+            }
+            console.log("Global scope: ", value);// ReferenceError: value is not defined
+          </pre>
+          <p>
+            Głębokość zagnieżdżania zakresów nie jest ograniczona i niezależnie
+            o niej, zakresy będą działać zgodnie z jedną zasadą - scope ma
+            dostęp do wszystkich zadeklarowanych zmiennych, które znajdują się
+            wyżej w hierarchii zagnieżdżania, ale nie ma dostępu do zmiennych
+            zadeklarowanych w zagnieżdżonych w nim zakresach.
+          </p>
+          <p>Stwórzmy kilka zakresów i nadajmy im nazwy dla jasności.</p>
+          <div class="section4-img-container">
+            <img src="../images/main/scopes.png" alt="" />
+          </div>
+          <ul class="unnumbered-list-container">
+            <li>
+              Globalny zakres jest ustawiony domyślnie, stwórzmy w nim zmienną
+              global
+            </li>
+            <li>
+              Wykorzystajmy operator if dla utworzenia zakresu bloku block A
+            </li>
+            <li>
+              Wewnątrz zakresu block A stwórzmy jeszcze jeden operator if, który
+              utworzy zakres bloku block B
+            </li>
+            <li>
+              Na tym samym poziome z block A, stwórzmy zakres bloku block C
+              wykorzystując ten sam operator co wcześniej czyli if
+            </li>
+          </ul>
+          <pre>
+            const global = "global";
+
+            if (true) {
+                const blockA = "block A";
+
+                // Możemy użyć globalnego zakresu i lokalnego zakresu A
+                console.log(global);// 'global'
+                console.log(blockA);// block A
+
+                // Zmienne blockB i blockC nie są odznalezione w dostępnych zakresach.
+                // Pojawi się błąd wykorzystania zmiennej.
+                console.log(blockB);// ReferenceError: blockB is not defined
+                console.log(blockC);// ReferenceError: blockC is not defined
+
+                if (true) {
+                    const blockB = "block B";
+
+                    // Możemy użyć globalnego zakresu + zewnętrznego A + lokalnego B
+                    console.log(global);// global
+                    console.log(blockA);// block A
+                    console.log(blockB);// block B
+
+                    // Zmienna blockC nie jest odnaleziona w dostępnych zakresach.
+                    // Pojawi się błąd wykorzystania zmiennej.
+                    console.log(blockC);// ReferenceError: blockC is not defined
+                }
+            }
+
+            if (true) {
+                const blockC = "block C";
+
+                // Możemy użyć globalnego zakresu + lokalnego C
+                console.log(global);// global
+                console.log(blockC);// block C
+
+                // Zmienne blockA i blockB nie są odnalezione w dostępnych zakresach.
+                // Pojawi się błąd wykorzystania zmiennej.
+                console.log(blockA);// ReferenceError: blockA is not defined
+                console.log(blockB);// ReferenceError: blockB is not defined
+            }
+
+            // Użyjmy tylko globalnego zakresu
+            console.log(global);// global
+
+            // Zmienne blockA, blockB i blockC 
+            // nie są odznalezione w dostępnych zakresach.
+            // Pojawi się błąd wykorzystania zmiennej.
+            console.log(blockA);// ReferenceError: blockA is not defined
+            console.log(blockB);// ReferenceError: blockB is not defined
+            console.log(blockC);// ReferenceError: blockC is not defined
+          </pre>
+          <p>
+            Bądź czujny wykorzystując zakresy bloków i zmiennych utworzonych
+            wewnątrz tych zakresów. Często właśnie dostępność i zakresy stanowią
+            duży problem dla osób początkujących
+          </p>
+        </article>
+      </section>
+      <!-- section5 -->
+      <section>
+        <article class="text">
+          <h2>Section5: Pętle</h2>
+          <p>
+            Typowym problemem dla programisty jest wykonanie tego samego kodu
+            zdefiniowaną ilość razy. Przykładem będzie usuwanie klientów z listy
+            jeden po drugim lub sortowanie kwot wynagrodzeń dla pracowników. Dla
+            każdej z tych czynności trzeba wykonać ten sam kod więcej niż raz.
+            Możemy do takich zadań wykorzystać pętle, które ułatwiają pracę z
+            powtarzającym się kodem.
+          </p>
+          <ul class="unnumbered-list-container">
+            <li>
+              Pętla - instrukcja w językach programowania, która pozwala
+              wielokrotne wykonać ten sam kod.
+            </li>
+            <li>
+              Ciało pętli - kod który zostanie wykonany dla każdego
+              przejścia/obrotu pętli
+            </li>
+            <li>
+              Iteracja - jednorazowe wykonanie ciała pętli, nazywane też obrotem
+              lub przejściem pętli.
+            </li>
+            <li>
+              Warunek - wyrażenie, które określa, czy po danej iteracji ma
+              nastąpić kolejna, czy pętla zakończyła swoje działanie, sprawdzany
+              po każdej iteracji.
+            </li>
+            <li>
+              Licznik / Iterator Variable - zmienna liczbowa, która przechowuje
+              w której iteracji jesteśmy. Licznik jest opcjonalny i
+              niekoniecznie musi być tylko jeden, warunek zatrzymania pętli może
+              zależeć od wielu zmiennych.
+            </li>
+          </ul>
+        </article>
+        <article class="text">
+          <h3>Pętla while</h3>
+          <p>
+            Pętla z warunkiem wstępnym — pętla, która działa tak długo, aż nie
+            zostanie spełniony określony warunek. Ten warunek jest sprawdzamy
+            przed każdą iteracją, przez co pętla może nie wykonać się ani razu.
+            Stanie się to w przypadku, gdy warunek na samym początku jest
+            nieprawdziwy.
+          </p>
+          <pre>
+            while (condition) {
+                // Kod, ciało pętli (body)
+            }
+          </pre>
+          <p>
+            Konstrukcja while tworzy pętle, który wykonuje blok kodu,
+            jednocześnie sprawdzając czy warunek jest prawdziwy - true.
+          </p>
+          <ul class="unnumbered-list-container">
+            <li>condition, warunek, jest sprawdzany przed każdą iteracją.</li>
+            <li>
+              Jeśli condition jest prawdziwy true, operator while wykonuje kod w
+              body pętli.
+            </li>
+            <li>
+              Jeśli condition jest nieprawdziwy false, pętla jest zatrzymana i
+              wykonane zostaną dalsze instrukcje w naszym kodzie
+            </li>
+          </ul>
+          <p>Stwórzmy licznik.</p>
+          <pre>
+            let counter = 0;
+            while (counter < 10) {
+                console.log("counter: ", counter);
+                counter += 1;
+            }
+          </pre>
+          <p>
+            Zapełniajmy miejsca w hotelu do tego momentu, aż liczba klientów
+            stanie się równa dozwolonemu maksimum.
+          </p>
+          <pre>
+            let clientCounter = 18;
+            const maxClients = 25;
+
+            while (clientCounter < maxClients) {
+                console.log(clientCounter);
+                clientCounter += 1;
+            }
+          </pre>
+        </article>
+        <article class="text">
+          <h3>Pętla do...while</h3>
+          <p>
+            Pętla z warunkiem końcowym - pętla, w której warunek jest sprawdzany
+            po wykonaniu ciała pętli. Z tej z pozoru drobnej różnicy wynika, że
+            ciało jest zawsze wykonywane przynajmniej raz niezależnie od
+            warunku.
+          </p>
+          <pre>
+            do {
+                // body
+            } while (condition);
+          </pre>
+          <p>
+            Konstrukcja do...while tworzy pętlę, który wykonuje kod do tego
+            momentu aż condition nie zwróci wartość false.
+          </p>
+          <p>
+            W przeciwieństwie do pętli while, pętla do...while zawsze wykonuje
+            swoje body przynajmniej jeden raz, zanim będzie ewaluować condition.
+          </p>
+          <p>
+            Wewnątrz pętli należy wprowadzić zmiany zmiennej decydującej o
+            wartości wyrażenie, aby upewnić się, że po iteracjach wyrażenie ma
+            wartość false. W przeciwnym razie pętla będzie nieskończona.
+          </p>
+          <p>Schemat bloku pętli do-while</p>
+          <pre>
+            let password = "";
+
+            do {
+                password = prompt("Wprowadź hasło dłuższe niż 4 znaki", "");
+            } while (password.length < 5);
+
+            console.log("Hasło zostało wprowadzone: ", password);
+          </pre>
+        </article>
+        <article class="text">
+          <h3>Pętla for</h3>
+          <p>
+            Pętla z licznikiem - pętla, w którym po każdej iteracji licznik
+            zostaje zmieniony wedle naszych instrukcji, w momencie gdy licznik
+            przestaje spełniać warunek pętla zatrzyma się.
+          </p>
+          <p>
+            W większości języków programowania istnieje instrukcja for, w której
+            określamy licznik, wymaganą liczbę iteracji i wyrażenie na podstawie
+            którego licznik zmienia się po każdej iteracji (czasem nazywamy to
+            krokiem pętli).
+          </p>
+          <pre>
+            for (initialization; condition; post-expression) {
+                // statements
+            }
+          </pre>
+          <p>Algorytm wykonania pętli for:</p>
+          <ul class="unnumbered-list-container">
+            <li>
+              Inicjalizacja (initialization) - wykonywana jeden raz przed
+              rozpoczęciem pętli. Służy do tworzenia zmiennej-licznika i
+              określenia jej początkowej wartości.
+            </li>
+            <li>
+              Warunek (condition) - wyrażenie wykonujące ocenę przed każdą
+              iteracją (powtórzeniem) pętli Ciało pętli jest wykonywane tylko
+              wtedy, gdy wyrażenie jest prawdziwe true. Pętla kończy się jeśli
+              warunek zostanie ewaluowany na wartość nieprawdziwą false.
+            </li>
+            <li>
+              Post-expression - wykonywane na koniec każdej iteracji przed
+              sprawdzeniem warunków. Używane jest do aktualizacji
+              zmiennej-licznika.
+            </li>
+            <li>
+              Ciało (statements) - zestaw instrukcji do wykonania przy każdym
+              powtórzeniu. Wykonywane, jeśli wynikiem wyrażenia warunku jest
+              true.
+            </li>
+          </ul>
+          <p>Zmienne-liczniki zwykle nazywamy literami i, j lub k.</p>
+          <pre>
+            for (let i = 0; i <= 20; i += 5) {
+                console.log(i);
+            }
+          </pre>
+          <p>
+            Możemy na przykład zadeklarować zmienną-licznik i, inicjalizujemy ją
+            z wartością0 i pętla ma być wykonywana tak długo, aż i <= 10, czyli
+            warunek sprowadza się do true. Po każdej iteracji licznik jest
+            zwiększany o 5.
+          </p>
+          <p>
+            W ciele pętli policzmy sumę wartości które przyjmie licznik podczas
+            trwania działania pętli.
+          </p>
+          <pre>
+            const target = 10;
+            let sum = 0;
+
+            for (let i = 0; i <= target; i += 5) {
+                sum += i;
+            }
+
+            console.log(sum); // 15
+          </pre>
+          <p>
+            Przypomnijmy sobie o operacji a % b i pokażmy resztę po dzieleniu
+            wykorzystując pętlę.
+          </p>
+          <pre>
+            const max = 4;
+
+            for (let i = 0; i < max; i += 1) {
+                console.log(`${max} % ${i} = `, max % i);
+            }
+
+            // '4 % 0 = ' NaN
+            // '4 % 1 = ' 0
+            // '4 % 2 = ' 0
+            // '4 % 3 = ' 1
+          </pre>
+        </article>
+        <article class="text">
+          <h3>Operator break</h3>
+          <p>
+            Możemy w dowolnym momencie przerwać wykonanie pętli. Aby to zrobić
+            wykorzystujemy operator break, który zakończy wykonywanie pętli i
+            sprawia, że interpreter przejdzie do kodu znajdującego się pod naszą
+            pętlą.
+          </p>
+          <p>
+            W poniższej pętli sprawdzamy czy wartość licznika wynosi 3. Jak
+            tylko zostanie spełniony taki warunek if, pętla przestanie wykonywać
+            się (zostanie przerwana).
+          </p>
+          <pre>
+            for (let i = 0; i <= 5; i += 1) {
+                console.log(i);
+                if (i === 3) {
+                    console.log("osiągneliśmy 3, przerywamy wykonywanie pętli");
+                    break;
+                }
+            }
+            console.log("wiadomość po pętli");
+          </pre>
+        </article>
+        <article class="text">
+          <h3>Operator continue</h3>
+          <p>
+            Nie przerywa naszej pętli całkiem, jedynie aktualną iterację.
+            continue używamy, gdy wiemy, że w bieżącej iteracji pętli nie musimy
+            wykonywać dalszej części kodu więc oszczędzamy zasoby i przechodzimy
+            do kolejnego obrotu.
+          </p>
+          <p>
+            Wykorzystajmy pętlę do wyświetlenia tylko liczb nieparzystych. Dla
+            parzystych i używamy operatora continue, wykonywanie obrotu zostaje
+            zatrzymane i przechodzimy do następnej iteracji.
+          </p>
+          <pre>
+            const number = 10;
+
+            for (let i = 0; i < number; i += 1) {
+                if (i % 2 === 0) {
+                    continue;
+                }
+                console.log("Nieparzyste i: ", i); // 1, 3, 5, 7, 9
+            }
+            </pre
+          >
+        </article>
+      </section>
+    </main>
+    <footer class="container footer">
+      <div class="contener-shadow-text2">
+        <h2>Footer</h2>
+        <div class="display-footer">
+          <a
+            class="link-footer"
+            href=""
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <img src="../images/footer/konikMaly24x24Squoosh.png" alt="logo" />
+          </a>
+          <div class="display-footer2">
+            <p class="footer-selection">All rights reserved &copy;</p>
+            <p>Konrad</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

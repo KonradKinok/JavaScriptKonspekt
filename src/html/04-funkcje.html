@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;700&family=Roboto:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.min.css"
+    />
+    <!-- <style type="text/css">	@import url(./styles/stylStartowy.css);	</style> -->
+    <link rel="stylesheet" href="../styles/stylStartowy.scss" />
+    <link rel="stylesheet" href="../styles/04-funkcje.scss" />
+    <title>Funkcje</title>
+  </head>
+  <body class="body-container">
+    <header class="menu-sticky">
+      <nav class="nav-container">
+        <!-- Nawigacja do innych stron -->
+        <ul class="nav-list-container">
+          <li>
+            <a class="link" href="../index.html">Menu</a>
+          </li>
+          <li>
+            <a class="link" href="../html/01-zajeciaWprowadzajace.html"
+              >01. Zmienne i typy
+            </a>
+          </li>
+          <li>
+            <a class="link" href="../html/02-rozgalezieniaCykle.html"
+              >02. Rozgałęzienia i cykle
+            </a>
+          </li>
+          <li>
+            <a class="link" href="../html/03-tablice.html">03. Tablice </a>
+          </li>
+          <li>
+            <a class="link current-page" href="../html/04-funkcje.html"
+              >04. Funkcje
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main-container">
+      <!-- section1 -->
+      <section class="text">
+        <article>
+          <h1>Moduł2 - Zajęcia 4 - Funkcje</h1>
+          <h2>Funkcje</h2>
+          <p>
+            Funkcja to podprogram, niezależny fragment kodu przeznaczony do
+            wielokrotnego wykonywania tego samego zestawu instrukcji dla różnych
+            wartości. Funkcje pomagają w tworzeniu dużych programów, ograniczają
+            powtórzenia i lepiej izolują fragmenty kodu.
+          </p>
+          <p>
+            Funkcję można traktować jak czarną skrzynkę, która otrzymuje coś na
+            wejściu (dane) i może zwrócić coś na wyjściu (wynik wykonania
+            zawartego w niej kodu).
+          </p>
+          <div class="">
+            <img
+              class="section1-img"
+              src="../images/main/fn-basics.png"
+              alt=""
+            />
+          </div>
+        </article>
+        <article>
+          <h2>Deklaracja funkcji</h2>
+          <pre>
+            // 1. Deklaracja funkcji multiply
+            function multiply() {
+                // Ciało funkcji
+                console.log("Log podczas wywoływania funkcji multiply");
+            }
+
+            // 2. Wywołania funkcji multiply
+            multiply();// 'To jest log podczas wywoływania funkcji multiply'
+            multiply();// 'To jest log podczas wywoływania funkcji multiply'
+            multiply();// 'To jest log podczas wywoływania funkcji multiply'
+          </pre>
+          <p>
+            Deklaracja funkcji (function declaration) zaczyna się od słowa
+            kluczowego function, po którym następuje jej nazwa - zwyczajowo
+            czasownik odpowiadający na pytanie «Co zrobić?» oraz para nawiasów
+            okrągłych. Podobnie jak dla zmiennych, korzystamy z konwencji
+            camelCase
+          </p>
+          <p>
+            Ciało funkcji znajduje się w nawiasach klamrowych {} i zawiera
+            instrukcje, które zostaną wykonane podczas jej wywołania. Sama
+            deklaracja nie wykona instrukcji, do tego niezbędne jest, aby
+            funkcja została wywoływana za pomocą jej nazwy i pary nawiasów
+            okrągłych.
+          </p>
+        </article>
+        <article>
+          <h3>Parametry i argumenty</h3>
+          <p>
+            Przy deklaracji, w nawiasach okrągłych po nazwie funkcji znajdują
+            się parametry - "zmienne", dla których wartości będziemy podawać
+            podczas wywołania.
+          </p>
+          <pre>
+            // Deklaracja parametrów x, y, z
+            function multiply(x, y, z) {
+                console.log(`Wynikiem mnożenia jest ${x * y * z}`);
+            }
+          </pre>
+          <p>
+            Parametry to zmienne lokalne dostępne tylko w ciele danej funkcji.
+            Kolejne parametry oddzielone są przecinkami. Możemy zadeklarować
+            zero parametrów, wtedy nawias zarówno przy deklaracji jak i przy
+            wywołaniu będzie pusty.
+          </p>
+          <p>
+            Parametry będą przyjmowane przy każdym wywołaniu funkcji, ich
+            wartości podczas kilku wywołań nie będą ze sobą powiązane.
+          </p>
+          <p>
+            Podczas wywoływania funkcji w nawiasach można przekazać argumenty
+            czyli wartości dla zadeklarowanych parametrów funkcji.
+          </p>
+          <pre>
+            // 1. Deklaracja parametrów x, y, z
+            function multiply(x, y, z) {
+                console.log(`Wynikiem mnożenia jest ${x * y * z}`);
+            }
+
+            // 2. Przekazywanie argumentów
+            multiply(2, 3, 5);// Wynikiem mnożenia jest 30
+            multiply(4, 8, 12);// Wynikiem mnożenia jest 384
+            multiply(17, 6, 25);// Wynikiem mnożenia jest 2550
+          </pre>
+          <p>
+            Kolejność przekazywania argumentów musi odpowiadać kolejności
+            zadeklarowanych parametrów: wartość pierwszego argumentu zostanie
+            przypisana do pierwszego parametru, drugiego argumentu do drugiego
+            parametru itd. Jeśli jest więcej parametrów niż argumentów, to
+            parametrom bez odpowiadającego im argumentu zostanie przypisane
+            undefined.
+          </p>
+        </article>
+        <article>
+          <h2>Zwracanie wartości</h2>
+          <p>
+            Operator return służy do zwrócenia wartości z ciała funkcji do
+            miejsca gdzie zostaje ona wywołana. Kiedy interpreter napotka
+            return, natychmiast wychodzi z funkcji (kończy jej wykonywanie) i
+            zwraca określoną wartość w miejscu gdzie nastąpiło wywołanie.
+          </p>
+          <pre>
+            function multiply(x, y, z) {
+                console.log("Kod przed return jest wykonywany jak zwykle");
+                // Zwracamy wynik wyrażenia mnożenia
+                return x * y * z;
+                console.log("Ten log nigdy nie zostanie wywołany, jest po return");
+            }
+
+            // Wynik funkcji można zapisać do zmiennej
+            let result = multiply(2, 3, 5);
+            console.log(result);// 30
+
+            result = multiply(4, 8, 12);
+            console.log(result);// 384
+
+            result = multiply(17, 6, 25);
+            console.log(result);// 2550
+          </pre>
+          <p>
+            Instrukcja return bez jawnie określonej wartości zwraca wartość
+            specjalną undefined. Jeśli nie ma return w ciele funkcji, nadal
+            zwróci ona undefined. Z tego powodu, return bez podanej wartości
+            służy tylko do przerwania wykonywania funkcji bez potrzeby użycia
+            instrukcji warunkowych co w niektórych przypadkach poprawia
+            czytelność kodu.
+          </p>
+        </article>
+        <article>
+          <h2>Kolejność wykonywania kodu</h2>
+          <p>
+            Gdy interpreter napotka wywołanie funkcji (lub metody), wstrzymuje
+            wykonywanie bieżącego kodu i rozpoczyna wykonywanie kodu
+            znajdującego się w ciele funkcji. Po wykonaniu całego kodu funkcji,
+            interpreter opuszcza ciało funkcji, wracając do miejsca w którym
+            nastąpiło wywołanie i kontynuuje wykonywanie dalszego kodu.
+          </p>
+          <pre>
+            function multiply(x, y, z) {
+                console.log(`Wynikiem mnożenia jest ${x * y * z}`);
+            }
+
+            console.log("Log przed wywołaniem funkcji multiply");
+            multiply(2, 3, 5);// Wynikiem mnożenia jest 30
+            console.log("Log po wywołaniu funkcji multiply");
+
+            // Kolejność logów w konsoli
+            // "Log przed wywołaniem funkcji multiply"
+            // "Wynikiem mnożenia jest 30"
+            // "Log po wywołaniu funkcji multiply"
+          </pre>
+        </article>
+        <article>
+          <h2>Domyślne wartości parametrów</h2>
+          <p>
+            Czasami konieczne jest zadeklarowanie funkcji, której parametry będą
+            miały wartości inne niż undefined, nawet jeśli nie przekazano do
+            nich argumentu. W nowoczesnym standardzie JavaScript wspierana jest
+            bardzo prosta składnia, wystarczy podać wartość domyślną
+            bezpośrednio podczas deklarowania parametrów w sygnaturze funkcji
+            poprzedzając ją znakiem =. W przypadku użycia takiej konstrukcji,
+            jeśli dla parametru nie zostanie przekazana wartość argumentu, użyta
+            zostanie wartość podana przez nas jako domyślna.
+          </p>
+          <pre>
+            function count(countFrom = 0, countTo = 10, step = 1) {
+                console.log(`countFrom = ${countFrom}, countTo = ${countTo}, step = ${step}`);
+
+                for (let i = countFrom; i <= countTo; i += step) {
+                    console.log(i);
+                }
+            }
+
+            count(1, 5);// countFrom = 1, countTo = 5, step = 1
+            count(2);// countFrom = 2, countTo = 10, step = 1
+            count();// countFrom = 0, countTo = 10, step = 1
+          </pre>
+        </article>
+      </section>
+    </main>
+    <footer class="container footer">
+      <div class="contener-shadow-text2">
+        <h2>Footer</h2>
+        <div class="display-footer">
+          <a
+            class="link-footer"
+            href=""
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <img src="../images/footer/konikMaly24x24Squoosh.png" alt="logo" />
+          </a>
+          <div class="display-footer2">
+            <p class="footer-selection">All rights reserved &copy;</p>
+            <p>Konrad</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
