@@ -235,6 +235,473 @@
             count();// countFrom = 0, countTo = 10, step = 1
           </pre>
         </article>
+        <article>
+          <h2>Pseudotablica arguments</h2>
+          <p>
+            Dostęp do listy wszystkich argumentów podanych przy wywołaniu można
+            uzyskać za pomocą specjalnej zmiennej arguments, która jest dostępna
+            tylko wewnątrz funkcji i przechowuje wszystkie argumenty jako
+            pseudotablicę.
+          </p>
+          <p>
+            Pseudotablica to kolekcja z właściwością length i możliwością
+            dostępu do elementu przez indeks, natomiast nie posiada ona
+            większości metod normalnie dostępnych w tablicach.
+          </p>
+          <p>
+            Zobaczmy przykład użycia arguments w funkcji mnożącej dowolną ilość
+            argumentów. Do iterowania po argumentach użyjemy pętli for...of
+          </p>
+          <pre>
+            function multiply() {  
+              let total = 1;
+
+              for (const argument of arguments) {
+                total *= argument;  
+              }
+
+              return total;
+            }
+
+            console.log(multiply(1, 2, 3));//  6
+            console.log(multiply(1, 2, 3, 4));//  24
+            console.log(multiply(1, 2, 3, 4, 5));//  120
+          </pre>
+        </article>
+        <article>
+          <h2>Konwersja pseudotablicy</h2>
+          <p>
+            Czasami pseudotablica musi zostać przekonwertowana na normalną
+            tablicę, ponieważ pseudotablica nie ma metod tablicowych, takich jak
+            slice() albo includes(). Zobaczmy dwa przykłady jak możemy to
+            osiągnąć
+          </p>
+          <p>
+            Użycie metody Array.from(), która zamieni tablicę na pseudotablicę.
+          </p>
+          <pre>
+            function fn() {
+              // Zmienna args będzie zawierać pełnowartościową tablicę
+              const args = Array.from(arguments);
+            }
+          </pre>
+          <p>
+            Użycie operatora ... (spread) dzięki któremu wypełniamy literał
+            tablicy wartościami z pseudotablicy (więcej zastosowań operatora
+            spread poznamy w dalszych partiach materiału)
+          </p>
+          <pre>
+            function fn() {
+              // Zmienna args będzie zawierać pełnowartościową tablicę
+              const args = [...arguments]
+            }
+          </pre>
+          <p>
+            Używając operacji ... (rest), możemy zebrać dowolną liczbę
+            elementów, w naszym przypadku argumentów, do tablicy i przechowywać
+            ją w zmiennej. Wszystkie argumenty zbieramy za pomocą operacji rest
+            bezpośrednio w sygnaturze funkcji bez podania innych argumentów.
+          </p>
+          <pre>
+            function fn(...args) {
+              // Zmienna args będzie zawierać pełnowartościową tablicę
+            }
+          </pre>
+          <p>
+            Możemy również zadeklarować kilka "stałych" parametrów i zebrać
+            pozostałe do tablicy args
+          </p>
+          <pre>
+            function fn(a, b, ...args) {
+              // zmienna a i b będą zwykłymi parametrami przechowującymi
+              // odpowiednio pierwszy i drugi podany argument
+              // Zmienna args będzie zawierać pełnowartościową tablicę z trzecim, czwartym
+              // i kolejnymi podanymi argumentami
+            }
+          </pre>
+          <p>
+            Operację rest omówiono bardziej szczegółowo w dalszej części kursu,
+            a tutaj pokazano jedno z jej możliwych zastosowań.
+          </p>
+        </article>
+        <article>
+          <h2>Wzorzec "Early Return"</h2>
+          <p>
+            Operator if...else jest głównym sposobem tworzenia rozgałęzień
+            warunkowych. Czasami jednak złożone, zagnieżdżone warunki sprawiają,
+            że kod jest trudny do zrozumienia.
+          </p>
+          <p>
+            Stwórzmy funkcję, która opracowuje wypłaty z osobistego konta
+            bankowego. Otrzymuje jako argumenty kwotę wypłaty oraz saldo
+            rachunku bieżącego, po czym, w zależności od warunku, wykonuje
+            odpowiedni blok instrukcji.
+          </p>
+          <pre>
+            function withdraw(amount, balance) {
+              if (amount === 0) {
+                console.log("Wprowadź kwotę większą od zera");
+              } else if (amount > balance) {
+                console.log("Za mało środków na koncie");
+              } else {
+                console.log("Operacja wypłaty powiodła się");
+              }
+            }
+
+            withdraw(0, 300);// "Wprowadź kwotę większą od zera"
+            withdraw(500, 300);// "Za mało środków na koncie"
+            withdraw(100, 300);// "Operacja wypłaty powiodła się"
+          </pre>
+          <p>
+            Nawet w tak prostym przykładzie istnieje kilka zagnieżdżonych
+            operatorów warunkowych, które musimy przeanalizować w całości, aby
+            zrozumieć logikę wykonywania kodu.
+          </p>
+          <p>
+            W jednej funkcji może być więcej niż jedna instrukcja return. Musimy
+            pamiętać, że wykonywanie funkcji jest przerywane, gdy interpreter
+            napotka zwrot w dowolnym miejscu, a cały kod po nim zostanie
+            zignorowany w bieżącym wywołaniu funkcji.
+          </p>
+          <p>
+            Wzorzec "Early Return" jest sposobem na wykorzystanie możliwości
+            wcześniejszego wyjścia z funkcji przy użyciu operatora return.
+            Korzystając z tej techniki, otrzymujemy czystszy, bardziej płaski i
+            bardziej zrozumiały kod, który jest łatwiejszy do refaktoryzacji lub
+            rozbudowania.
+          </p>
+          <p>
+            Dodajmy wszystkie sprawdzenia warunków w oddzielnych instrukcjach
+            if, w każdym bloku instrukcję return, a na końcu ten fragment kodu
+            który wcześniej znajdował się w bloku else. W tym przypadku
+            otrzymamy płaską strukturę warunków, następujących po sobie, a na
+            końcu blok, który zostanie wykonany tylko wtedy, gdy nie zostanie
+            wykonana żadna instrukcja warunkowa if.
+          </p>
+          <pre>
+            function withdraw(amount, balance) {
+              // Jeśli warunek jest wykonany, wywoływany jest console.log
+              // i wyjście z funkcji. 
+              // Kod następujący po tym bloku if nie zostanie wtedy wykonany.
+              if (amount === 0) {
+                console.log("Wprowadź kwotę większą od zera");
+                return;
+              }
+
+              // Jeśli warunek pierwszego if nie jest wykonany, jest on pomijany
+              // a interpreter przechodzi do drugiego if.
+              // Jeśli warunek jest wykonany, wywoływany jest console.log i wyjście z funkcji.
+              // Kod następujący po tym bloku if nie zostanie wtedy wykonany.
+              if (amount > balance) {
+                console.log("Za mało środków na koncie");
+                return;
+              }
+
+              // Jeśli żaden z poprzednich if nie został wykonany,
+              // interpreter natrafia na ten fragment kodu i wykonuje go.
+              // kolejne return nie jest tu koniecznie ponieważ funkcja i tak się kończy
+              console.log("Operacja wypłaty zakończona");
+            }
+
+            withdraw(0, 300);// "Wprowadź kwotę większą od zera"
+            withdraw(500, 300);// "Za mało środków na koncie"
+            withdraw(100, 300);// "Operacja wypłaty zakończona"
+          </pre>
+        </article>
+        <article>
+          <h2>Wyrażenie funkcyjne</h2>
+          <p>
+            Wyrażenie funkcyjne (function expression) to deklaracja zmiennej,
+            której wartością będzie funkcja. Jest to alternatywny sposób
+            deklarowania funkcji.
+          </p>
+          <pre>
+            // Deklaracja funkcji (function declaration)
+            function multiply(x, y, z) {
+              console.log(`Wynikiem mnożenia jest ${x * y * z}`);
+            }
+
+            // Wyrażenie funkcyjne (function expression)
+            const multiply = function (x, y, z) {
+              console.log(`Wynikiem mnożenia jest ${x * y * z}`);
+            };
+          </pre>
+          <p>
+            Najważniejsza różnica polega na tym, że wyrażenia funkcyjnego nie
+            można wywołać przed jego utworzeniem, lecz dopiero po jego
+            utworzeniu, ponieważ jest to deklaracja zmiennej const. Dla
+            normalnie zdefiniowanych funkcji działa mechanizm hoisting który
+            sprawia, że interpreter "widzi" funkcje w miejscach w kodzie przed
+            ich fizyczna deklaracją. Mechanizm ten nie działa dla zmiennych
+            zadeklarowanych przy pomocy const i let
+          </p>
+          <pre>
+            // ❌ Błąd! Wywołanie nie działa przed deklaracją
+            multiply(1, 2, 3);
+            const multiply = function (x, y, z) {
+              console.log(`Wynikiem mnożenia jest ${x * y * z}`);
+            };
+            // ✅ Wywołanie działa po deklaracji
+            multiply(4, 5, 6);
+          </pre>
+          <p>
+            Zadeklarowaną funkcję można wywołać przed miejscem jej utworzenia w
+            kodzie.
+          </p>
+          <pre>
+            // ✅ Wywołanie działa przed deklaracją
+            multiply(1, 2, 3);
+
+            function multiply(x, y, z) {
+              console.log(`Wynikiem mnożenia jest ${x * y * z}`);
+            }
+
+            // ✅ Wywołanie działa po deklaracji
+            multiply(4, 5, 6);
+          </pre>
+          <p>
+            Nie ma znaczenia jakiej składni używasz, najważniejsze jest to, żeby
+            kod w projekcie był przewidywalny. Oznacza to, że musisz starać się
+            nie mieszać deklaracji funkcji z wyrażeniami funkcyjnymi.
+          </p>
+        </article>
+      </section>
+      <!-- section2 -->
+      <section class="text">
+        <article>
+          <h2>Section2: Zakres</h2>
+          <p>
+            Zakres (scope) to mechanizm określający dostępność zmiennych w
+            wykonywanym kodzie.
+          </p>
+          <p>
+            Łańcuch zakresu (scope chain) - zakresy tworzą hierarchię, dzięki
+            czemu zakresy podrzędne mogą uzyskiwać dostęp do zmiennych z
+            zakresów nadrzędnych, ale nie odwrotnie.
+          </p>
+          <p>
+            Zmienna jest widoczna dla kodu wykonywalnego tylko jeśli znajduje
+            się w bieżącym scope lub scope chain
+          </p>
+        </article>
+        <article>
+          <h3>Zakres globalny</h3>
+          <p>
+            Zmienne zadeklarowane na najwyższym poziomie, to znaczy poza
+            wszelkimi konstrukcjami, takimi jak if, while, for, oraz funkcje,
+            znajdują się w zakresie globalnym i są dostępne wszędzie po ich
+            zadeklarowaniu, ponieważ każdy kolejny scope jest dla nich
+            podrzędny.
+          </p>
+          <pre>
+            const globalValue = 10;
+            console.log(globalValue);// 10
+
+            function foo() {
+              console.log(globalValue);// 10
+            }
+
+            for (let i = 0; i < 5; i++) {
+              console.log(globalValue);// 10
+
+              if (i === 2) {
+                console.log(globalValue);// 10
+              }
+            }
+          </pre>
+        </article>
+        <article>
+          <h3>Zakres blokowy</h3>
+          <p>
+            Zmienne zadeklarowane wewnątrz instrukcji if, for, funkcji i innych
+            bloków kodu ujęte w nawiasy klamrowe {}, znajdują się w zakresie
+            blokowym i są dostępne tylko w tym bloku kodu lub w blokach w nim
+            zagnieżdżonych.
+          </p>
+          <pre>
+            function foo() {
+              const a = 20; 
+              console.log(a);// 20
+
+              for (let i = 0; i < 5; i++) { 
+                console.log(a);// 20
+
+                if (i === 2) {
+                  console.log(a);// 20
+                }
+              }
+            }
+
+            // ❌ Błąd! Zmienna a nie jest dostępna w zakresie globalnym
+            console.log(a);
+
+            for (let i = 0; i < 3; i++) {
+              // ❌ Błąd! Zmienna a nie jest dostępna w tym zakresie
+              console.log(a);
+            }
+          </pre>
+          <p>
+            Możemy porównać to do domu z pokojami. Cały dom to nasz zakres
+            globalny. Każda funkcja i blok tworzy nowy pokój zagnieżdżony w
+            domu. Zmienne zadeklarowane w tych pokojach są dostępne tylko wtedy,
+            gdy jesteś w tym pokoju, z innego pokoju te zmienne nie są dostępne.
+            Dla zakresu globalnego (domu) wszystko dostępne w dowolnych pokojach
+            jest widoczne.
+          </p>
+          <pre>
+            for (let i = 0; i < 5; i++) {
+              const a = 20;  
+              console.log(a);// 20
+
+              if (i === 2) {
+                const b = 30;
+                console.log(a);// 20
+                console.log(b);// 30  
+              }
+
+              if (i === 3) {  
+                console.log(a);// 20
+
+                // ❌ Błąd! Zmienna b nie jest dostępna w tym zakresie
+                console.log(b);
+              }
+            }
+          </pre>
+        </article>
+        <article>
+          <h3>Wyszukiwanie za pomocą scope chain</h3>
+          <p>
+            Interpreter najpierw próbuje znaleźć zmienną w zakresie, w którym do
+            niej się zwrócono. Jeśli nie ma takiej zmiennej w zakresie lokalnym,
+            sięgamy o jeden poziom wyżej do momentu aż znajdziemy wartość albo
+            zostanie osiągnięty zakres globalny. Jeżeli w żadnym momencie nie
+            zostanie odnaleziona zmienna lub funkcja o danej nazwie zostanie
+            wyrzucony błąd.
+          </p>
+        </article>
+      </section>
+      <!-- section3 -->
+      <section class="text">
+        <article>
+          <h2>Stos wywołań</h2>
+          <p>
+            Kiedy funkcja jest wywoływana, inne funkcje mogą być wywoływane w
+            jej ciele, w tych funkcjach kolejne itd. JavaScript jest językiem
+            jednowątkowym, co oznacza, że tylko jedna instrukcja może być
+            wykonywana na raz. Z uwagi na to, wywołane funkcje, które nie
+            zakończyły swojego wykonywania, muszą zaczekać na wykonanie funkcji
+            wywołanych wewnątrz siebie, aby kontynuować swoją pracę.
+          </p>
+          <pre>
+            function fnA() {
+              console.log("Log wewnątrz funkcji fnA przed wywołaniem fnB");
+              fnB();
+              console.log("Log wewnątrz funkcji fnA po wywołaniu fnB");
+            }
+
+            function fnB() {
+              console.log("Log wewnątrz funkcji fnB");
+            }
+
+            console.log("Log przed wywołaniem fnA");
+            fnA();
+            console.log("Log po wywołaniu fnA");
+
+            // "Log przed wywołaniem fnA"
+            // "Log wewnątrz funkcji fnA przed wywołaniem fnB"
+            // "Log wewnątrz funkcji fnB"
+            // "Log wewnątrz funkcji fnA po wywołaniu fnB"
+            // "Log po wywołaniu fnA"
+          </pre>
+          <p>
+            JavaScript potrzebuje mechanizmu do przechowywania listy funkcji,
+            które zostały wywołane, ale jeszcze nie zakończyły ich wykonywania
+            oraz mechanizmu do zarządzania kolejnością wykonywania instrukcji w
+            tych funkcjach - odpowiada za to stos wywołań. (call stack).
+          </p>
+        </article>
+        <article>
+          <h3>Stos</h3>
+          <p>
+            Stos to struktura danych działająca na zasadzie LIFO
+            (Last-In-First-Out), czyli ostatnie weszło, pierwsze wyszło.
+            Ostatnia rzecz dodana do stosu zostanie z niego usunięta jako
+            pierwsza, co oznacza, że możesz dodawać lub usuwać elementy tylko ze
+            szczytu stosu.
+          </p>
+          <p>
+            Pomyśl o stosie jak o tablicy, która ma tylko metody pop i push, co
+            oznacza, że możesz dodać lub usunąć tylko element na końcu kolekcji,
+            a nie masz dostępu do elementów wcześniejszych. Poniżej możesz
+            zobaczyć zilustrowane działanie stosu.
+          </p>
+          <div class="">
+            <img class="section3-img" src="../images/main/stack.png" alt="" />
+          </div>
+        </article>
+        <article>
+          <h3>Stos wywołań</h3>
+          <p>
+            Stos wywołań (call stack) to mechanizm śledzenia bieżącej
+            lokalizacji interpretera w kodzie w którym wywoływane jest kilka
+            funkcji. Przechowuje on to
+          </p>
+          <ul class="unnumbered-list-container">
+            <li>która z funkcji jest aktualnie wykonywana,</li>
+            <li>które funkcje są wywoływane z wykonywanej funkcji,</li>
+            <li>która zostanie wywołana w następnej kolejności itd.</li>
+            <li>
+              Kiedy skrypt wywołuje funkcję, interpreter dodaje ją do stosu
+              wywołań i rozpoczyna wykonywanie.
+            </li>
+            <li>
+              Każda funkcja wywoływana przez wykonywaną funkcję jest dodawana do
+              stosu wywołań i jest wykonywana natychmiast po jej wywołaniu.
+            </li>
+            <li>
+              Gdy wykonanie funkcji zostanie zakończone, interpreter zdejmuje ją
+              ze stosu wywołań i wznawia wykonywanie kodu od punktu, w którym
+              zostało ono wcześniej przerwane. Oznacza to, że rozpoczyna się
+              wykonywanie funkcji, której wpis jest następny na stosie.
+            </li>
+          </ul>
+          <p>
+            Stack frame (ramka stosu) - struktura dodawana do stosu podczas
+            wywołania funkcji. Przechowuje informacje takie jak nazwa funkcji i
+            numer linii, w której nastąpiło wywołanie.
+          </p>
+          <pre>
+            function bar() {
+              console.log("bar");
+            }
+
+            function baz() {
+              console.log("baz");
+            }
+
+            function foo() {
+              console.log("foo");
+              bar();
+              baz();
+            }
+
+            foo();
+          </pre>
+          <p>
+            Podczas wykonywania tego kodu najpierw wywoływane jest foo(),
+            następnie wewnątrz foo() wywołuje się bar(), a następnie baz().
+            Wywołania console.log() również trafiają do stosu, ponieważ jest to
+            funkcja. Poniższa ilustracja przedstawia stos wywołań krok po kroku
+            dla powyższego przykładu.
+          </p>
+          <div class="">
+            <img
+              class="section3-img"
+              src="../images/main/call-stack.png"
+              alt=""
+            />
+          </div>
+        </article>
       </section>
     </main>
     <footer class="container footer">
