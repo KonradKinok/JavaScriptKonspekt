@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;700&family=Roboto:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.min.css"
+    />
+    <!-- <style type="text/css">	@import url(./styles/stylStartowy.css);	</style> -->
+    <link rel="stylesheet" href="../styles/stylStartowy.scss" />
+    <link rel="stylesheet" href="../styles/05-obiekty.scss" />
+    <title>Obiekty</title>
+  </head>
+  <body class="body-container">
+    <header class="menu-sticky">
+      <nav class="nav-container">
+        <!-- Nawigacja do innych stron -->
+        <ul class="nav-list-container">
+          <li>
+            <a class="link" href="../index.html">Menu</a>
+          </li>
+          <li>
+            <a class="link" href="../html/01-zajeciaWprowadzajace.html"
+              >01. Zmienne i typy
+            </a>
+          </li>
+          <li>
+            <a class="link" href="../html/02-rozgalezieniaCykle.html"
+              >02. Rozgałęzienia i cykle
+            </a>
+          </li>
+          <li>
+            <a class="link" href="../html/03-tablice.html">03. Tablice </a>
+          </li>
+          <li>
+            <a class="link" href="../html/04-funkcje.html">04. Funkcje </a>
+          </li>
+          <li>
+            <a class="link current-page" href="../html/05-obiekty.html"
+              >05. Obiekty
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main-container">
+      <!-- section1 -->
+      <section class="text">
+        <article>
+          <h1>Moduł4 - Zajęcia 5 - Obiekty</h1>
+          <p>
+            Obiekty to rodzaj danych pozwalający opisać i pogrupować cechy w
+            jedną strukturę. Możemy w ten sposób opisać użytkownika, książkę,
+            produkt itp. Obiekty nazywane są czasem słownikami, to znaczy
+            zawierają terminy (właściwości) i ich definicje (wartości).
+          </p>
+        </article>
+        <article>
+          <h2>Tworzenie obiektu</h2>
+          <p>
+            Aby zadeklarować obiekt używane są nawiasy klamrowe { } - literał
+            obiektowy. Przypomina on nieco literał tablicowy [ ]
+          </p>
+          <pre>
+            const book = {
+                title: "The Last Kingdom",
+                author: "Bernard Cornwell",
+                genres: ["historical prose", "adventure"],
+                isPublic: true,
+                rating: 8.38,
+            };
+          </pre>
+          <p>
+            Kiedy tworzysz obiekt, możesz dodać właściwości (properties lub
+            props), z których każda jest opisana parami key:value. Klucz jest
+            również nazywany nazwą właściwości i zawsze jest ciągiem znaków.
+            Wartość właściwości może być dowolnego typu: prymitywy, tablice,
+            obiekty, wartości logiczne, funkcje itp. Kolejne właściwości są
+            oddzielone przecinkami.
+          </p>
+          <p>Zasady nazewnictwa kluczy są proste:</p>
+          <ul class="unnumbered-list-container">
+            <li>
+              Jeśli klucz jest ujęty w cudzysłów, może to być dowolny ciąg.
+            </li>
+            <li>
+              Jeśli nie ma cudzysłowiu, to nazwa ma pewne ograniczenia - nie
+              może mieć spacji i zaczyna się od litery lub znaków _ i $
+              (podobnie jak nazwy zmiennych).
+            </li>
+          </ul>
+        </article>
+        <article>
+          <h2>Właściwości zagnieżdżone</h2>
+          <p>
+            Wartość właściwości może być kolejnym obiektem w celu przechowywania
+            dołączonych i pogrupowanych danych. Dla przykładu, statystyki
+            użytkownika sieci społecznościowej składają się z liczby
+            obserwujących, wyświetleń i polubień, więc najwygodniej jest
+            przechowywać te dane w postaci obiektu w jednej z właściwości. Tak
+            samo będzie z lokalizacją, która składa się osobno z kraju i miasta.
+          </p>
+          <pre>
+            const user = {
+                name: "Jacques Gluke",
+                tag: "jgluke",
+                location: {
+                    country: "Jamaica",
+                    city: "Ocho Rios",
+                },
+                stats: {
+                    followers: 5603,
+                    views: 4827,
+                    likes: 1308,
+                },
+            };
+          </pre>
+          <p>
+            W przyszłości będziemy mogli wykorzystać to do wyszukiwania
+            użytkowników według kraju, miasta, minimalnej lub maksymalnej liczby
+            obserwujących itp.
+          </p>
+        </article>
+        <article>
+          <h2>Odwołanie się do właściwości za pomocą kropki</h2>
+          <p>
+            Pierwszym sposobem uzyskania dostępu do właściwości obiektu jest
+            składnia object.propertyName. Odwołanie za pomocą kropki jest
+            używane w większości przypadków i jest przydatne, gdy znamy z góry
+            nazwę (klucz) właściwości, do której chcemy uzyskać dostęp.
+          </p>
+          <ul class="unnumbered-list-container">
+            <li>
+              Wartość właściwości o podanej samej nazwie zostanie zwrócona w
+              miejscu odwołania się do niej.
+            </li>
+            <li>
+              Jeśli w obiekcie nie ma właściwości o tej samej nazwie, zostanie
+              zwrócone undefined w miejscu odwołania się.
+            </li>
+          </ul>
+          <pre>
+            const book = {
+                title: "The Last Kingdom",
+                author: "Bernard Cornwell",
+                genres: ["historical prose", "adventure"],
+                isPublic: true,
+                rating: 8.38,
+            };
+
+            const bookTitle = book.title;
+            console.log(bookTitle);// 'The Last Kingdom'
+
+            const bookGenres = book.genres;
+            console.log(bookGenres);// ['historical prose', 'adventurs']
+
+            const bookPrice = book.price;
+            console.log(bookPrice);// undefined
+          </pre>
+        </article>
+        <article>
+          <h2>Odwołanie się do zagnieżdżonych właściwości</h2>
+          <p>
+            Aby uzyskać dostęp do zagnieżdżonych właściwości, używany jest
+            łańcuch odwołań "przez kropki". Dla przykładu, jeśli chcesz uzyskać
+            wartość kraju użytkownika, użyj konstrukcji user.location.country,
+            gdzie user.location jest odwołaniem (ścieżką) do obiektu we
+            właściwości location, natomiast user.locaton.country jest odwołaniem
+            do właściwości country w tym obiekcie . Każda kolejna "kropka"
+            wskazuje na następne zagnieżdżenie.
+          </p>
+          <pre>
+            const user = {
+                name: "Jacques Gluke",
+                tag: "jgluke",
+                location: {
+                    country: "Jamaica",
+                    city: "Ocho Rios",
+                },
+                hobbies: ["swimming", "music", "sci-fi"],
+            };
+
+            const location = user.location;
+            console.log(location);// { country: "Jamaica", city: "Ocho Rios" }
+
+            const country = user.location.country;
+            console.log(country);// 'Jamaica'
+          </pre>
+          <p>
+            Jeśli wartością właściwości jest tablica, to w naszym przykładzie
+            user.hobbies będzie odwołaniem do tej tablicy. Następnie możesz
+            uzyskać dostęp do jej elementów przez nawiasy kwadratowe i indeks
+            lub użyć właściwości i metod tablicowych tak jak wtedy kiedy
+            odwołujemy się do tablicy w zwykłej zmiennej.
+          </p>
+          <pre>
+            const user = {
+                name: "Jacques Gluke",
+                tag: "jgluke",
+                location: {
+                    country: "Jamaica",
+                    city: "Ocho Rios",
+                },
+                hobbies: ["swimming", "music", "sci-fi"],
+            };
+
+            const hobbies = user.hobbies;
+            console.log(hobbies);// ['swimming', 'music', 'sci-fi']
+
+            const firstHobby = user.hobbies[0];
+            console.log(firstHobby);// 'swimming'
+
+            const numberOfHobbies = user.hobbies.length;
+            console.log(numberOfHobbies);// 3
+          </pre>
+        </article>
+        <article>
+          <h2>Odwołanie się do właściwości za pomocą nawiasów kwadratowych</h2>
+          <p>
+            Drugim sposobem uzyskania dostępu do właściwości obiektu jest użycie
+            składni obiekt["nazwa właściwości"]. Ten sposób jest podobny do
+            odwoływania się do elementu tablicy, z tą różnicą, że w nawiasach
+            podaje się nie indeks elementu, ale nazwę właściwości jako string.
+          </p>
+          <p>
+            Składnia "nawiasów kwadratowych" jest używana znacznie rzadziej,
+            zazwyczaj wtedy gdy nazwa właściwości nie jest z góry znana lub jest
+            przechowywana w zmiennej, na przykład jako wartość parametru
+            funkcji.
+          </p>
+          <ul class="unnumbered-list-container">
+            <li>
+              Wartość właściwości o tej samej nazwie zostanie zwrócona do
+              miejsca odwołania się.
+            </li>
+            <li>
+              Jeśli obiekt nie posiada właściwości o tej samej nazwie, do
+              miejsca odwołania się powróci undefined.
+            </li>
+          </ul>
+          <pre>
+            const book = {
+                title: "The Last Kingdom",
+                author: "Bernard Cornwell",
+                genres: ["historical prose", "adventure"],
+                isPublic: true,
+                rating: 8.38,
+            };
+
+            const bookTitle = book["title"];
+            console.log(bookTitle);// 'The Last Kingdom'
+
+            const bookGenres = book["genres"];
+            console.log(bookGenres);// ['historical prose', 'adventure']
+
+            const propKey = "author";
+            const bookAuthor = book[propKey];
+            console.log(bookAuthor);// 'Bernard Cornwell'
+          </pre>
+        </article>
+        <article>
+          <h2>Zmiana wartości właściwości</h2>
+          <p>
+            Po utworzeniu obiektu można zmienić wartość jego właściwości. Aby to
+            zrobić, musisz odnieść się do nich poprzez nazwę, na przykład „przez
+            kropkę" i przypisać nową wartość. Działa to podobnie jak w przypadku
+            tablic.
+          </p>
+          <pre>
+            const book = {
+                title: "The Last Kingdom",
+                author: "Bernard Cornwell",
+                genres: ["historical prose", "adventure"],
+                isPublic: true,
+                rating: 8.38,
+            };
+
+            book.rating = 9;
+            book.isPublic = false;
+            book.genres.push("drama");
+
+            console.log(book.rating);// 9
+            console.log(book.isPublic);// false
+            console.log(book.genres);// ['historical prose', 'adventures', 'drama']
+          </pre>
+        </article>
+        <article>
+          <h2>Dodawanie właściwości</h2>
+          <p>
+            Operacja dodawania nowej właściwości po utworzeniu obiektu nie różni
+            się od zmiany wartości istniejącej właściwości. Jeśli podczas
+            przypisania wartości przez jej nazwę nie ma jeszcze takiej
+            właściwości w obiekcie to zostanie ona utworzona. Znowu widzimy tu
+            analogię do tablic w których również możemy przypisać wartość pod
+            indeks który wartości jeszcze nie przechowuje.
+          </p>
+          <pre>
+            const book = {
+                title: "The Last Kingdom",
+                author: "Bernard Cornwell",
+                genres: ["historical prose", "adventure"],
+                isPublic: true,
+                rating: 8.38,
+            };
+
+            book.pageCount = 836;
+            book.originalLanguage = "en";
+            book.translations = ["ua", "ru"];
+
+            console.log(book.pageCount);// 836
+            console.log(book.originalLanguage);// 'en'
+            console.log(book.translations);// ['ua', 'ru']
+          </pre>
+        </article>
+        <article>
+          <h2>Shorthand Property</h2>
+          <p>
+            Czasami podczas tworzenia obiektu wartość właściwości musi zostać
+            pobrana ze zmiennej lub parametru funkcji o tej samej nazwie którą
+            chcemy nadać właściwości.
+          </p>
+          <p>
+            Składnia w poniższym przykładzie jest mniej czytelna i dłuższa,
+            ponieważ trzeba powielić nazwę właściwości i nazwę zmiennej
+            przechowującej wymaganą wartość.
+          </p>
+          <pre>
+            const name = "Henry Cibola";
+            const age = 25;
+
+            const user = {
+                name: name,
+                age: age,
+            };
+
+            console.log(user.name);// "Henry Cibola"
+            console.log(user.age);// 25
+          </pre>
+          <p>
+            Skrócona składnia shorthand property rozwiązuje ten problem,
+            umożliwiając użycie nazwy zmiennej jako nazwy właściwości i jej
+            wartości jako wartości właściwości.
+          </p>
+          <pre>
+            const name = "Henry Cibola";
+            const age = 25;
+
+            const user = {
+                name,
+                age,
+            };
+
+            console.log(user.name);// "Henry Cibola"
+            console.log(user.age);// 25
+          </pre>
+          <p>
+            Oznacza to, że podczas deklarowania obiektu wystarczy podać tylko
+            nazwę właściwości, a wartość zostanie pobrana ze zmiennej o tej
+            samej nazwie. Podane powyżej przykłady osiągają dokładnie ten sam
+            efekt, jednak przykład drugi zawiera mniej kodu.
+          </p>
+        </article>
+        <article>
+          <h2>Computed properties</h2>
+          <p>
+            Zdarzają się sytuacje, w których podczas deklarowania obiektu
+            konieczne jest dodanie właściwości o nazwie, której z góry nie
+            znamy, ponieważ jest ona przechowywana jako wartość zmiennej lub
+            jako wynik funkcji.
+          </p>
+          <p>
+            We wcześniejszych standardach JavaScript w tym celu trzeba było
+            najpierw utworzyć obiekt, a następnie dodać właściwości za pomocą
+            nawiasów kwadratowych, co komplikuje zapis.
+          </p>
+          <pre>
+            const propName = "name";
+            const user = {
+                age: 25,
+            };
+
+            user[propName] = "Henry Cibola";
+            console.log(user.name);// 'Henry Cibola'
+          </pre>
+          <p>
+            Składnia obliczonych właściwości (computed properties) pomaga
+            uniknąć niepotrzebnego kodu. Wartością obliczonej właściwości może
+            być dowolne poprawne wyrażenie.
+          </p>
+          <pre>
+            const propName = "name";
+            const user = {
+                age: 25,
+                // Nazwa tej właściwości zostanie pobrana z wartości zmiennej propName
+                [propName]: "Henry Cibola",
+            };
+
+            console.log(user.name);// 'Henry Cibola'
+          </pre>
+        </article>
+      </section>
+    </main>
+    <footer class="container footer">
+      <div class="contener-shadow-text2">
+        <h2>Footer</h2>
+        <div class="display-footer">
+          <a
+            class="link-footer"
+            href=""
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <img src="../images/footer/konikMaly24x24Squoosh.png" alt="logo" />
+          </a>
+          <div class="display-footer2">
+            <p class="footer-selection">All rights reserved &copy;</p>
+            <p>Konrad</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -682,8 +682,25 @@
             dla powyższego przykładu.
           </p>
           <div class="">
-            <img class="section3-img" src="/call-stack.ace4e62d.png" alt="">
+            <img class="section3-img-big" src="/call-stack.ace4e62d.png" alt="">
           </div>
+        </article>
+        <article>
+          <h2>Przepełnienie stosu wywołań</h2>
+          <p>
+            Stos wywołań nie jest nieograniczony, ma przydzieloną skończoną
+            ilość pamięci. Czasami możesz zobaczyć błąd w konsoli "Uncaught
+            RangeError: Maximum call stack size exceeded" - oznacza on
+            przepełnienie stosu (stack overflow).
+          </p>
+          <p>
+            Może się to zdarzyć z powodu niewłaściwego użycia rekurencji lub
+            pętli wywołań funkcji, to znaczy, jeśli istnieje nieskończona (lub
+            bardzo wysoka) liczba wywołań funkcji i nie jest zwracany żaden
+            wynik, czyli wywołania nigdy nie kończą się, stos rośnie. Gdy
+            zostanie osiągnięty limit liczby wpisów na stosie, wystąpi taki błąd
+            i skrypt zawiesi się.
+          </p>
         </article>
       </section>
     </main>

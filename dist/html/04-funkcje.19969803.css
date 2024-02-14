@@ -89,4 +89,13 @@ h2, h3 {
   overflow: hidden;
 }
 
+.section3-img-big {
+  border: 2px solid #000;
+  border-radius: 15px;
+  width: 800px;
+  margin: 0 auto;
+  transition: width 2s, height 2s, transform 2s;
+  overflow: hidden;
+}
+
 /*# sourceMappingURL=04-funkcje.19969803.css.map */
