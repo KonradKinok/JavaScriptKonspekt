@@ -407,6 +407,301 @@
             console.log(user.name);// 'Henry Cibola'
           </pre>
         </article>
+        <article>
+          <h2>Metody obiektowe</h2>
+          <p>
+            Do tej pory traktowaliśmy obiekty tylko jako magazyny powiązanych ze
+            sobą właściwości, na przykład informacji o książce itp. Tego typu
+            obiekty często znajdziemy w tablicach gdzie poszczególne elementy
+            przechowują podobne do siebie obiekty z takimi samymi właściwościami
+            o innych wartościach (np. lista książek z informacjami o ich
+            gatunku, autorze itp)
+          </p>
+          <p>
+            Obiekty mogą przechowywać jednak nie tylko dane, ale także funkcje
+            do pracy z tymi danymi - metody. Jeśli wartością właściwości jest
+            funkcja, właściwość ta nazywana jest właśnie metodą obiektową.
+            Oznacz to, że każda metoda jest funkcją, ale nie każda funkcja jest
+            metodą.
+          </p>
+          <pre>
+            // ✅ Widzimy zgrupowane ze sobą właściwości i metody w strukturze obiektu
+            const bookShelf = {
+              books: ["The Last Kingdom", "Dream Guardian"],
+    
+              // To jest metoda obiektowa
+              getBooks() {
+                console.log("Ta metoda zwróci wszystkie książki - właściwość books");
+              },
+    
+              // To jest metoda obiektowa
+              addBook(bookName) {
+                console.log("Ta metoda doda nową książkę do właściwości books");
+              },
+            };
+
+            // Wywołania metod
+            bookShelf.getBooks();
+            bookShelf.addBook("Nowa książka");
+          </pre>
+          <p>
+            Takie obiekty można nazwać "modelami". Wiążą dane i metody do pracy
+            z tymi danymi. W teorii moglibyśmy zadeklarować zmienną books oraz
+            dwie funkcje getBooks() i addBook(bookName), ale wtedy byłyby trzema
+            niezależnymi strukturami bez wyraźnego połączenia logicznego.
+          </p>
+          <pre>
+            // ❌ Luźno powiązane, niezależne od siebie struktury
+            const books = [];
+            function getBooks() {}
+            function addBook() {}
+          </pre>
+        </article>
+        <article>
+          <h2>Dostęp do właściwości obiektu w metodach</h2>
+          <p>
+            Metody służą do pracy z właściwościami obiektów i ich zmiany. Aby
+            uzyskać dostęp do obiektu, metoda która się w nim znajduje, nie
+            używa nazwy zmiennej, na przykład bookShelf, ale słowa kluczowego
+            this - kontekstu swojego wykonywania. Wartością this będzie obiekt
+            przed "kropką", czyli obiekt, na którym wywołaliśmy tę metodę, czyli
+            w naszym przypadku jest to link do obiektu bookShelf.
+          </p>
+          <pre>
+          const bookShelf = {
+            books: ["The Last Kingdom"],
+            getBooks() {
+              console.log(this);
+            },
+          };
+
+          // Kropka jest poprzedzona obiektem bookShelf,
+          // więc kiedy metoda jest wywoływana,
+          // this będzie przechowywało link do niego.
+          bookShelf.getBooks();// {books: ['The Last Kingdom'], getBooks: f getBooks()}
+        </pre
+          >
+          <p>
+            Aby uzyskać dostęp do właściwości obiektu w metodach, odwołujemy się
+            do niego przez this, a następnie, jak zwykle, przez kropkę, do
+            właściwości.
+          </p>
+          <pre>
+          const bookShelf = {
+          books: ["The Last Kingdom"],
+          getBooks() {
+            return this.books;
+          },
+  
+          addBook(bookName) {
+            this.books.push(bookName);
+          },
+  
+          removeBook(bookName) {
+            const bookIndex = this.books.indexOf(bookName);
+            this.books.splice(bookIndex, 1);
+          },
+        };
+
+        console.log(bookShelf.getBooks());// ["The Last Kingdom"]
+        bookShelf.addBook("The Mist");
+        bookShelf.addBook("Dream Guardian");
+        console.log(bookShelf.getBooks());// ['The Last Kingdom', 'The Mist', 'Dream Guardian']
+        bookShelf.removeBook("The Mist");
+        console.log(bookShelf.getBooks());// ['The Last Kingdom', 'Dream Guardian']
+        </pre
+          >
+          <p>
+            Można zadać pytanie - dlaczego nie używamy nazwy obiektu podczas
+            odwołania się do właściwości, skoro ta nie wydaje się zmieniać?
+            Podejście to wynika z następujących powodów:
+          </p>
+          <ul class="unnumbered-list-container">
+            <li>
+              nazwa obiektu może się zmienić i musielibyśmy wtedy zmienić ją
+              wtedy w każdej metodzie
+            </li>
+            <li>
+              metody jednego obiektu można skopiować do drugiego (który będzie
+              miał inną nazwę)
+            </li>
+            <li>
+              w przyszłości przekonamy się, że często tworząc obiekt w ogóle nie
+              znamy jego nazwy z góry.
+            </li>
+          </ul>
+          <p>
+            Użycie this jest wygodnym sposobem na upewnienie się, że metoda
+            działa dokładnie na obiekcie, który ją wywołał.
+          </p>
+          <p>
+            Więcej szczegółów na temat słowa kluczowego this i wszystkich jego
+            pułapek omówimy w następnych lekcjach, ale na razie wystarczy po
+            prostu używać this podczas odwoływania się do właściwości obiektu w
+            jego metodach.
+          </p>
+        </article>
+      </section>
+      <!-- section2 -->
+      <section class="text">
+        <article>
+          <h2>Iteracja po obiekcie</h2>
+          <p>
+            W przeciwieństwie do tablicy lub stringa, obiekt nie jest strukturą
+            iterowalną, czyli nie możemy "przejśc" po nim za pomocą pętli for
+            lub for...of.
+          </p>
+        </article>
+        <article>
+          <h3>Pętla for...in</h3>
+          <p>
+            Jednym ze sposobów do iteracji po obiektach jest specjalna pętla
+            for...in, która iteruje po kluczach obiektu object. Jest ona podobna
+            do pętli for...of.
+          </p>
+          <pre>
+            for (key in object) {
+              // instrukcje
+            }
+          </pre>
+          <p>
+            Zmienna key jest dostępna tylko w ciele pętli. W każdej iteracji
+            zostanie do niej zapisana wartość klucza (nazwa) właściwości. Aby
+            uzyskać wartość właściwości z takim kluczem (nazwą), używana jest
+            składnia nawiasów kwadratowych.
+          </p>
+          <pre>
+            const book = {
+              title: "The Last Kingdom",
+              author: "Bernard Cornwell",
+              genres: ["historical prose", "adventure"],
+              rating: 8.38,
+            };
+
+            for (const key in book) {
+              // Klucz
+              console.log(key);
+              // Wartość właściwości pod tym kluczem
+              console.log(book[key]);
+            }
+          </pre>
+        </article>
+        <article>
+          <h3>Metoda hasOwnProperty()</h3>
+          <p>
+            Przeanalizujmy pojęcie własnych (own) i dziedziczonych (inherited)
+            właściwości obiektu i nauczmy się poprawnie używać pętli for...in.
+          </p>
+          <pre>
+            const animal = {
+              legs: 4,
+            };
+            const dog = Object.create(animal);
+            dog.name = "Mango";
+
+            console.log(dog);// {name: 'Mango'}
+            console.log(dog.name);// 'Mango'
+            console.log(dog.legs);// 4
+          </pre>
+          <p>
+            Metoda Object.create(animal) tworzy i zwraca nowy obiekt, używając i
+            wiążąc go z obiektem animal. W związku z tym możemy uzyskać wartość
+            właściwości legs przez odniesienie do niej jako dog.legs, mimo że
+            nie znajduje się ona jako tako w obiekcie dog - jest to jej
+            właściwość dziedziczona obiektu animal.
+          </p>
+          <p>
+            Operator in, który jest używany w pętli for...in, nie rozróżnia
+            własnych i dziedziczonych właściwości obiektu. To zachowanie może
+            nam przeszkadzać, ponieważ raczej chcemy iterować tylko po własnych
+            właściwościach obiektu. Aby dowiedzieć się, czy dana właściwość
+            obiektu jest "własna", używana jest metoda hasOwnProperty(key),
+            która zwraca true albo false.
+          </p>
+          <pre>
+            const animal = {
+              legs: 4,
+            };
+            const dog = Object.create(animal);
+            dog.name = "Mango";
+
+            // ❌ Zwraca true dla wszystkich właściwości
+            console.log("name" in dog);// true
+            console.log("legs" in dog);// true
+
+            // ✅ Zwraca true tylko dla własnych właściwości
+            console.log(dog.hasOwnProperty("name"));// true
+            console.log(dog.hasOwnProperty("legs"));// false
+          </pre>
+          <p>
+            Dlatego podczas iteracji w pętli for...in konieczne jest dodanie
+            sprawdzenia właściwości przy każdej iteracji. Nawet jeśli
+            teoretycznie mamy pewność, że obiekt nie ma dziedziczonych
+            właściwości, uchroni to przed ewentualnymi błędami w przyszłości
+            podczas wprowadzania zmian w kodzie.
+          </p>
+          <pre>
+            const book = {
+              title: "The Last Kingdom",
+              author: "Bernard Cornwell",
+              genres: ["historical prose", "adventure"],
+              rating: 8.38,
+            };
+
+            for (const key in book) {
+              // Jeśli to jest własna właściwość, wykonaj instrukcje w bloku if
+              if (book.hasOwnProperty(key)) {
+                console.log(key);
+                console.log(book[key]);
+              }
+              // Jeśli to nie jest własna właściwość, nie rób nic
+            }
+          </pre>
+        </article>
+        <article>
+          <h3>Metoda Object.keys()</h3>
+          <p>
+            Wbudowana w JavaScript klasa Object posiada kilka przydatnych metod
+            do pracy z obiektami. Pierwsza z nich to Object.keys(obj), która
+            pobiera obiekt i zwraca tablicę kluczy jej własnych właściwości.
+            Jeśli obiekt nie ma właściwości, metoda zwróci pustą tablicę.
+          </p>
+          <pre>
+            const book = {
+              title: "The Last Kingdom",
+              author: "Bernard Cornwell",
+              genres: ["historical prose", "adventure"],
+              rating: 8.38,
+            };
+            const keys = Object.keys(book);
+            console.log(keys);// ['title', 'author', 'genres', 'rating']
+          </pre>
+          <p>
+            Łącząc wynik Object.keys() i pętlę for...of można wygodnie iterować
+            po własnych właściwościach obiektu bez użycia archaicznej pętli
+            for...in łączonej ze sprawdzeniem własności właściwości.
+          </p>
+          <pre>
+            const book = {
+              title: "The Last Kingdom",
+              author: "Bernard Cornwell",
+              genres: ["historical prose", "adventure"],
+              rating: 8.38,
+            };
+            const keys = Object.keys(book);
+
+            for (const key of keys) {
+              // Klucz
+              console.log(key);
+              // Wartość właściwości
+              console.log(book[key]);
+            }
+          </pre>
+          <p>
+            Iterujemy po tablicy kluczy obiektu i w każdej iteracji dostajemy
+            się do wartości właściwości z danym kluczem.
+          </p>
+        </article>
       </section>
     </main>
     <footer class="container footer">
