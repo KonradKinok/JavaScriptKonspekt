@@ -56,7 +56,7 @@
       <!-- section1 -->
       <section class="text">
         <article>
-          <h1>Moduł4 - Zajęcia 5 - Obiekty</h1>
+          <h1>Moduł3 - Zajęcia 5 - Obiekty</h1>
           <p>
             Obiekty to rodzaj danych pozwalający opisać i pogrupować cechy w
             jedną strukturę. Możemy w ten sposób opisać użytkownika, książkę,
@@ -701,6 +701,160 @@
             Iterujemy po tablicy kluczy obiektu i w każdej iteracji dostajemy
             się do wartości właściwości z danym kluczem.
           </p>
+        </article>
+        <article>
+          <h3>Metoda Object.values()</h3>
+          <p>
+            O ile metoda Object.keys(obj) zwraca tablicę kluczy własnych
+            właściwości obiektu, to metoda Object.values(obj) zwraca tablicę
+            wartości jego własnych właściwości. Jeśli obiekt nie ma właściwości,
+            metoda Object.values(obj) zwróci pustą tablicę.
+          </p>
+          <pre>
+            const book = {
+              title: "The Last Kingdom",
+              author: "Bernard Cornwell",
+              rating: 8.38,
+            };
+            const keys = Object.keys(book);
+            console.log(keys);// ['title', 'author', 'rating']
+
+            const values = Object.values(book);
+            console.log(values);// ['The Last Kingdom', 'Bernard Cornwell', 8.38]
+          </pre>
+          <p>
+            Tablicę wartości właściwości można również iterować za pomocą pętli
+            for...of, na przykład, aby uzyskać łączną sumę wartości liczbowych.
+          </p>
+          <p>
+            Dla przykładu, mamy do czynienia z zadaniem obliczenia całkowitej
+            liczby produktów w obiekcie w formacie nazwa-produktu:
+            ilość-produktu. Wtedy metoda Object.values() jest odpowiednia, aby
+            uzyskać tablicę wszystkich wartości, a następnie wygodnie je
+            zsumować.
+          </p>
+          <pre>
+            const goods = {
+              apples: 6,
+              grapes: 3,
+              bread: 4,
+              cheese: 7,
+            };
+
+            const values = Object.values(goods);// [6, 3, 4, 7]
+            let total = 0;
+
+            for (const value of values) {
+              total += value;
+            }
+
+            console.log(total);// 20
+          </pre>
+        </article>
+        <article>
+          <h2>Metoda Object.entries()</h2>
+          <p>
+            Metoda Object.entries(obj) zwraca tablicę w której każdy element
+            będzie kolejną tablicą składającą się z dwóch elementów: nazwa
+            właściwości i wartość tej właściwości z obiektu obj.
+          </p>
+          <pre>
+            const book = {
+              title: "The Last Kingdom",
+              author: "Bernard Cornwell",
+              rating: 8.38,
+            };
+            const keys = Object.keys(book);
+            console.log(keys);// ['title', 'author', 'rating']
+
+            const values = Object.values(book);
+            console.log(values);// ['The Last Kingdom', 'Bernard Cornwell', 8.38]
+
+            const entries = Object.entries(book);
+            console.log(entries);
+            // [["title", "The Last Kingdom"], ["author", "Bernard Cornwell"], ["rating", 8.38]]
+          </pre>
+          <p>
+            W praktyce metoda Object.entries(obj) jest rzadko używana.
+            Najczęściej wystarczy użycie metody Object.keys() lub
+            Object.values().
+          </p>
+        </article>
+      </section>
+      <!-- section3 -->
+      <section class="text">
+        <article>
+          <h1>Tablica obiektów</h1>
+          <p>
+            Standardowym zadaniem programisty będzie manipulowanie tablicą
+            obiektów tego samego rodzaju. Oznacza to, że wszystkie obiekty w
+            tablicy mają ten sam zestaw właściwości, ale z różnymi wartościami.
+          </p>
+          <pre>
+            const books = [
+            {
+              title: "The Last Kingdom",
+              author: "Bernard Cornwell",
+              rating: 8.38,
+            },
+            {
+              title: "Beside Still Waters",
+              author: "Robert Sheckley",
+              rating: 8.51,
+            },
+            {
+              title: "Sen śmiesznego człowieka",
+              author: "Fiodor Dostojewski",
+              rating: 7.75,
+            },
+            ];
+          </pre>
+          <p>
+            Do iteracji po takiej tablicy używana jest standardowa pętla
+            for...of. Wartości właściwości każdego obiektu można uzyskać za
+            pomocą składni przez "kropkę", ponieważ w każdym obiekcie zestaw
+            właściwości i ich nazwy będą takie same, różnią się tylko wartości.
+          </p>
+          <pre>
+            for (const book of books) {
+              // Obiekt książki
+              console.log(book);
+              // Tytuł
+              console.log(book.title);
+              // Autor
+              console.log(book.author);
+              // Ocena
+              console.log(book.rating);
+            }
+          </pre>
+          <p>
+            W poniższym przykładzie uzyskaliśmy listę tytułów wszystkich książek
+            z kolekcji books.
+          </p>
+          <pre>
+            const bookNames = [];
+
+            for (const book of books) {
+              bookNames.push(book.title);
+            }
+
+            console.log(bookNames);// ["The Last Kingdom", "Beside Still Waters", "Sen śmiesznego człowieka"]
+          </pre>
+          <p>
+            Odnajdźmy teraz średnią ocenę całej naszej kolekcji. Aby to zrobić,
+            zsumuj wszystkie oceny, a następnie podziel tę wartość przez liczbę
+            książek w kolekcji.
+          </p>
+          <pre>
+            let totalRating = 0;
+
+            for (const book of books) {
+              totalRating += book.rating;
+            }
+
+            const averageRating = (totalRating / books.length).toFixed(1);
+            console.log(averageRating); // 8.2
+          </pre>
         </article>
       </section>
     </main>

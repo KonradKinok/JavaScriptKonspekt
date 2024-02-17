@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;700&family=Roboto:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.min.css"
+    />
+    <!-- <style type="text/css">	@import url(./styles/stylStartowy.css);	</style> -->
+    <link rel="stylesheet" href="../styles/stylStartowy.scss" />
+    <link rel="stylesheet" href="../styles/06-operacjeSpreadRest.scss" />
+    <title>Operacje spread/rest</title>
+  </head>
+  <body class="body-container">
+    <header class="menu-sticky">
+      <nav class="nav-container">
+        <!-- Nawigacja do innych stron -->
+        <ul class="nav-list-container">
+          <li>
+            <a class="link" href="../index.html">Menu</a>
+          </li>
+          <li>
+            <a class="link" href="../html/01-zajeciaWprowadzajace.html"
+              >01. Zmienne i typy
+            </a>
+          </li>
+          <li>
+            <a class="link" href="../html/02-rozgalezieniaCykle.html"
+              >02. Rozgałęzienia i cykle
+            </a>
+          </li>
+          <li>
+            <a class="link" href="../html/03-tablice.html">03. Tablice </a>
+          </li>
+          <li>
+            <a class="link" href="../html/04-funkcje.html">04. Funkcje </a>
+          </li>
+          <li>
+            <a class="link" href="../html/05-obiekty.html">05. Obiekty </a>
+          </li>
+          <li>
+            <a
+              class="link current-page"
+              href="../html/06-operacjeSpreadRest.html"
+              >06. Operacje spread/rest
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main-container">
+      <!-- section1 -->
+      <section class="text">
+        <article>
+          <h1>Moduł3 - Zajęcia 6 - Operacje spread/rest</h1>
+          <h2>Składnia spread i rest</h2>
+          <p>
+            Współczesny standard wprowadził nową składnię do pracy z
+            iterowalnymi strukturami, takimi jak string, tablica czyli obiekt.
+            Jego funkcjonalność i nazwa zależy od miejsca zastosowania.
+          </p>
+        </article>
+        <article>
+          <h3>spread: przekazywanie argumentów</h3>
+          <p>
+            Operacja ... (spread) umożliwia rozłożenie kolekcji elementów
+            (tablicy, stringa lub obiektu) do miejsca, w którym oczekiwany jest
+            zestaw różnych wartości. Istnieją pewne ograniczenia, na przykład
+            nie można rozkładać tablicy do obiektu i odwrotnie.
+          </p>
+          <p>
+            Wytłumaczmy sobie to na analogii z pudełkiem jabłek. Stawiając
+            pudełko na podłodze bez wyjmowania z niego jabłek, otrzymujemy
+            odpowiednik tablicy wartości. Jeśli wysypać jabłka z pudełka na
+            podłogę, następuje rozłożenie - kolekcja przetwarza się w zestaw
+            oddzielnych wartości.
+          </p>
+          <p>
+            Istnieje pewna różnica - w JavaScript takie rozłożenie nie zmienia
+            oryginalnej kolekcji, czyli tworzy kopię każdego elementu. Po
+            rozłożeniu będziemy mieli zarówno pudełko pełne jabłek jak i kopię
+            każdego z jabłek.
+          </p>
+          <p>
+            Dla przykładu, metoda Math.max(argumenty) wyszukuje i zwraca
+            największy z argumentów (liczb), co oznacza, że nie oczekuje tablicy
+            wartości, ale dowolnej ilości argumentów.
+          </p>
+          <pre>
+            const temps = [14, -4, 25, 8, 11];
+
+            // Konsola wyświetli tablicę
+            console.log(temps);
+            // ❌ To nie zadziała, ponieważ przekazujemy całą tablicę
+            console.log(Math.max(temps));// NaN
+
+            // Konsola wyświetli zestaw oddzielnych liczb
+            console.log(...temps);
+            // ✅ Rozkładamy kolekcję elementów na oddzielne argumenty
+            console.log(Math.max(...temps));// 25
+          </pre>
+          <p>
+            Czyli zapis Math.max(...[14, -4, 25, 8, 11]), po interpretacji
+            operatora ... zmieni się w Math.max(14, -4, 25, 8, 11) - składnia
+            ... zwraca "rozpakowuje" tablicę, czyli rozkłada jej elementy na
+            oddzielne argumenty.
+          </p>
+        </article>
+        <article>
+          <h3>spread: tworzenie nowej tablicy</h3>
+          <p>
+            Operacja ... (spread) pozwala również na utworzenie kopii tablicy
+            lub "sklejenie" dowolnej liczby tablic w jedną nową. Wcześniej
+            używaliśmy do tego metod slice() i concat(), ale operacja rozłożenia
+            pozwala zrobić to samo w krótszej formie.
+          </p>
+          <pre>
+            const temps = [14, -4, 25, 8, 11];
+
+            // To jest dokładna, niezależna kopia tablicy temps
+            const copyOfTemps = [...temps];
+            console.log(copyOfTemps);// [14, -4, 25, 8, 11]
+          </pre>
+          <p>
+            W powyższym przykładzie mamy pudełko "jabłek" temps i chcemy
+            stworzyć jego niezależną kopię. Bierzemy puste pudełko i wsypujemy
+            do niego jabłka z oryginalnego pudełka temps - rozkładamy go do
+            innej kolekcji. W tym przypadku pudełko temps nie zmieni się, nadal
+            będzie zawierało jabłka, a nowe pudełko będzie zawierało ich
+            dokładne kopie. W ten sposób unikamy problemów związanych z
+            referencją.
+          </p>
+          <p>
+            W poniższym przykładzie wsypujemy jabłka z dwóch pudełek do nowego.
+            Oryginalne pudełka (tablice) nie ulegną zmianie, ale nowe będą
+            zawierały kopie wszystkich ich jabłek (elementów). Kolejność
+            rozkładania jest ważna - wpływa na kolejność elementów w nowej
+            tablicy.
+          </p>
+          <pre>
+            const lastWeekTemps = [14, 25, 11];
+            const currentWeekTemps = [23, 17, 18];
+            const allTemps = [...lastWeekTemps, ...currentWeekTemps];
+            console.log(allTemps);// [14, 25, 11, 23, 17, 18]
+          </pre>
+          <p>
+            Kolejność rozkładania ma znaczenie. Nazwy właściwości obiektów są
+            niepowtarzalne, więc właściwości rozkładanego obiektu mogą nadpisać
+            wartość istniejącej już właściwości, jeśli ich nazwy są takie same.
+          </p>
+          <pre>
+            const first = { propA: 5, propB: 10, propC: 50 };
+            const second = { propC: 15, propD: 20 };
+
+            const third = { ...first, ...second };
+            console.log(third);// { propA: 5, propB: 10, propC: 15, propD: 20 }
+
+            const fourth = { ...second, ...first };
+            console.log(fourth);// { propA: 5, propB: 10, propC: 50, propD: 20 }
+          </pre>
+          <p>
+            Gdyby jabłka w pudełku miały etykiety, to w jednym pudełku nie
+            mogłyby znajdować się dwa jabłka z tymi samymi etykietami. Dlatego
+            podczas wysypania drugiego pudełka wszystkie jabłka, których
+            etykiety pokrywają się z tymi, które są już w nowym, zastąpią te,
+            które znalazły się już w pudełku.
+          </p>
+          <p>
+            Podczas rozkładania możesz dodać właściwości w dowolne miejsca.
+            Najważniejszą rzeczą do zapamiętania jest to, że nazwa właściwości
+            jest unikalna i że jej wartość można nadpisać.
+          </p>
+          <pre>
+            const first = { propA: 5, propB: 10, propC: 50 };
+            const second = { propC: 15 };
+
+            const third = { propB: 20, ...first, ...second };
+            console.log(third);// { propA: 5, propB: 10, propC: 15 }
+
+            const fourth = { ...first, ...second, propB: 20 };
+            console.log(fourth);// { propA: 5, propB: 20, propC: 15 }
+
+            const fifth = { ...first, propB: 20, ...second };
+            console.log(fifth);// { propA: 5, propB: 20, propC: 15 }
+          </pre>
+        </article>
+        <article>
+          <h3>rest: zbiór wszystkich argumentów funkcji</h3>
+          <p>
+            Operacja ... (rest) umożliwia zebranie grupy niezależnych elementów
+            w nową kolekcję. Syntaktycznie jest to bliźniak operacji rozłożenia,
+            ale łatwo je rozróżnić — rozłożenie następuje, gdy ... znajduje się
+            po prawej stronie operacji przypisania, a zbiór ma miejsce, gdy ...
+            znajduje się po lewej stronie.
+          </p>
+          <p>
+            Wróćmy do analogii z jabłkami. Jeśli na podłodze są jabłka i mamy
+            puste pudełko, to operacja rest pozwoli nam "zbierać" jabłka do
+            pudełka. W takim przypadku oryginalne jabłka pozostaną na podłodze,
+            a w pudełku będzie kopia każdego jabłka.
+          </p>
+          <p>
+            Jedno z zastosowań operacji rest znajdziemy podczas tworzenie
+            funkcji, które mogą przyjmować dowolną liczbę argumentów.
+          </p>
+          <pre>
+            // Jak zadeklarować parametry funkcji tak,
+            // aby można było przekazać dowolną liczbę argumentów?
+            function multiply() {
+                // ...
+            }
+
+            multiply(1, 2);
+            multiply(1, 2, 3);
+            multiply(1, 2, 3, 4);
+          </pre>
+          <p>
+            Jeśli usuniemy cały "szum" z kodu i spojrzymy na argumenty i
+            parametry funkcji, to argumenty znajdują się po prawej stronie
+            operacji przypisania, a parametry po lewej, ponieważ wartości
+            argumentów są przypisane do zadeklarowanych parametrów. Możesz więc
+            "zebrać" wszystkie argumenty funkcji w jeden parametr za pomocą
+            operacji rest.
+          </p>
+          <pre>
+            function multiply(...args) {
+                console.log(args);// tablica wszystkich argumentów
+            }
+
+            multiply(1, 2);
+            multiply(1, 2, 3);
+            multiply(1, 2, 3, 4);
+          </pre>
+          <p>
+            Nazwa parametru może być dowolna. Najczęściej nazywamy go args,
+            restArgs albo otherArgs, czyli różnymi skrótami od arguments
+            (będącego słowem kluczowym więc nie możemy go tutaj wykorzystać).
+          </p>
+        </article>
+        <article>
+          <h3>rest: zbiór części argumentów funkcji</h3>
+          <p>
+            Operacja ... (rest) umożliwia również zbiór do tablicy tylko części
+            argumentów, poprzez zadeklarowanie zdefiniowanych parametrów przed
+            "zbiorem".
+          </p>
+          <pre>
+            function multiply(firstNumber, secondNumber, ...otherArgs) {
+                console.log(firstNumber);// Wartość pierwszego argumentu
+                console.log(secondNumber);// Wartość drugiego argumentu
+                console.log(otherArgs);// Tablica innych argumentów
+            }
+
+            multiply(1, 2);
+            multiply(1, 2, 3);
+            multiply(1, 2, 3, 4);
+          </pre>
+          <p>
+            Wszystkie argumenty dla których zostaną zadeklarowane parametry
+            przekażą im swoje wartości, reszta argumentów zostanie umieszczona w
+            tablicy jeśli skorzystamy z tego zapisu. Operacja rest zbiera
+            wszystkie pozostałe argumenty i dlatego musi znaleźć się na końcu w
+            sygnaturze funkcji, w przeciwnym razie wystąpi błąd.
+          </p>
+        </article>
+      </section>
+      <!-- section2 -->
+      <section class="text">
+        <article>
+          <h2>Destrukturyzacja obiektów</h2>
+          <p>
+            Podczas działania programów, dane przychodzą zazwyczaj w postaci
+            tablic i obiektów, których wartości potrzebujemy zapisywać w
+            zmiennych lokalnych. Aby to maksymalnie uprościć, współczesny
+            standard udostępnia składnię przypisania destrukturyzującego.
+          </p>
+        </article>
+        <article>
+          <h3>Destrukturyzacja obiektów</h3>
+          <p>
+            Złożone dane są zawsze reprezentowane jako obiekt. Wielokrotne
+            wywołania właściwości obiektu wizualnie zanieczyszczają kod.
+          </p>
+          <pre>
+            const book = {
+                title: "The Last Kingdom",
+                author: "Bernard Cornwell",
+                genres: ["historical prose", "adventure"],
+                isPublic: true,
+                rating: 8.38,
+            };
+
+            const accessType = book.isPublic ? "publiczny" : "zamknięty";
+            const message = `Książka ${book.title} autorstwa ${book.author} z oceną ${book.rating} ma dostęp ${accessType}.`
+            // 'Książka The Last Kingdom autorstwa Bernard Cornwell z oceną 8.38 ma dostęp publiczny.'
+          </pre>
+          <p>
+            Destrukturyzacja umożliwia "rozpakowanie" wartości właściwości
+            obiektu do zmiennych lokalnych. Dzięki temu kod w miejscu ich użycia
+            jest mniej "zaszumiony".
+          </p>
+          <pre>
+            const book = {
+                title: "The Last Kingdom",
+                author: "Bernard Cornwell",
+                genres: ["historical prose", "adventure"],
+                isPublic: true,
+                rating: 8.38,
+            };
+
+            // Destrukturyzacja
+            const { title, author, isPublic, rating, coverImage } = book;
+            console.log(coverImage);// undefined
+
+            const accessType = isPublic ? "publiczny" : "zamknięty";
+            const message = `Książka ${title} autorstwa ${author} z oceną ${rating} ma dostęp w ${accessType}.`;
+            // 'Książka The Last Kingdom autorstwa Bernard Cornwell z oceną 8.38 ma dostęp publiczny.'
+          </pre>
+          <p>
+            Destrukturyzacja zawsze znajduje się po lewej stronie operacji
+            przypisania. Zmiennym wewnątrz nawiasów klamrowych przypisywane są
+            wartości właściwości obiektu. Jeśli nazwa zmiennej i nazwa
+            właściwości są takie same, to przypisanie ma miejsce, w przeciwnym
+            razie zostanie mu przypisane undefined. Kolejność, w jakiej zmienne
+            są deklarowane w nawiasach klamrowych, nie jest ważna, ponieważ w
+            obiekcie nazwy właściwości są unikalne.
+          </p>
+        </article>
+        <article>
+          <h3>Wartości domyślne</h3>
+          <p>
+            Aby uniknąć przypisania undefined podczas destrukturyzacji
+            nieistniejących właściwości obiektu, możesz ustawić domyślne
+            wartości zmiennych, które zostaną przypisane tylko wtedy, gdy obiekt
+            nie ma właściwości o danej nazwie.
+          </p>
+          <pre>
+            const book = {
+                title: "The Last Kingdom",
+                author: "Bernard Cornwell",
+            };
+
+            // Dodajmy zdjęcie na okładkę, jeśli nie ma go w obiekcie książki
+            const {
+                title,
+                coverImage = "https://via.placeholder.com/640/480",
+                author,
+            } = book;
+
+            console.log(title);// The Last Kingdom
+            console.log(author);// Bernard Cornwell
+            console.log(coverImage);// https://via.placeholder.com/640/480
+          </pre>
+        </article>
+        <article>
+          <h3>Zmiana nazwy zmiennej</h3>
+          <p>
+            Podczas destrukturyzacji możesz zmienić nazwę zmiennej, do której
+            rozpakowana jest wartość właściwości. Aby to osiągnąć najpierw
+            piszemy nazwę właściwości, z której chcemy uzyskać wartość, po czym
+            wstawiamy dwukropek i wpisujemy nazwę zmiennej, w której ma być
+            umieszczona wartość tej właściwości.
+          </p>
+          <pre>
+            const firstBook = {
+                title: "The Last Kingdom",
+                coverImage:
+                "https://images-na.ssl-images-amazon.com/images/I/51b5YG6Y1rL.jpg",
+            };
+
+            const {
+                title: firstTitle,
+                coverImage: firstCoverImage = "https://via.placeholder.com/640/480",
+            } = firstBook;
+
+            console.log(firstTitle);// The Last Kingdom
+            console.log(firstCoverImage);// https://images-na.ssl-images-amazon.com/images/I/51b5YG6Y1rL.jpg
+
+            const secondBook = {
+                title: "Sen śmiesznego człowieka",
+            };
+
+            const {
+                title: secondTitle,
+                coverImage: secondCoverImage = "https://via.placeholder.com/640/480",
+            } = secondBook;
+
+            console.log(secondTitle);// Sen śmiesznego człowieka
+            console.log(secondCoverImage);// https://via.placeholder.com/640/480
+          </pre>
+          <p>
+            Tego typu zapis możemy zrozumieć jako: "Utwórz zmienną firstTitle, w
+            której należy umieścić wartość właściwości title z obiektu
+            firstBook" itd.
+          </p>
+        </article>
+        <article>
+          <h3>Destrukturyzacja w pętlach</h3>
+          <p>
+            Podczas iteracji po tablicy obiektów z pętlą for...of często będzie
+            wielokrotnie wywoływać obiekt.
+          </p>
+          <pre>
+            const books = [
+            {
+                title: "The Last Kingdom",
+                author: "Bernard Cornwell",
+                rating: 8.38,
+            },
+
+            {
+                title: "Beside Still Waters",
+                author: "Robert Sheckley",
+                rating: 8.51,
+            },
+            ];
+
+            for (const book of books) {
+                console.log(book.title);
+                console.log(book.author);
+                console.log(book.rating);
+            }
+          </pre>
+          <p>
+            Aby zmniejszyć liczbę powtórzeń w kodzie, możesz zdestrukturyzować
+            właściwości obiektu na zmienne lokalne w deklaracji pętli.
+          </p>
+          <pre>
+            const books = [
+            {
+                title: "The Last Kingdom",
+                author: "Bernard Cornwell",
+                rating: 8.38,
+            },
+            {
+                title: "Beside Still Waters",
+                author: "Robert Sheckley",
+                rating: 8.51,
+            },
+            ];
+
+            for (const book of books) {
+                const { title, author, rating } = book;
+
+                console.log(title);
+                console.log(author);
+                console.log(rating);
+            }
+          </pre>
+          <p>
+            Jeśli obiekt ma niewiele właściwości, destrukturyzację można
+            przeprowadzić bezpośrednio w miejscu, w którym deklarowana jest
+            zmienna book
+          </p>
+          <pre>
+            const books = [
+            {
+                title: "The Last Kingdom",
+                author: "Bernard Cornwell",
+                rating: 8.38,
+            },
+            {
+                title: "Beside Still Waters",
+                author: "Robert Sheckley",
+                rating: 8.51,
+            },
+            ];
+
+            for (const { title, author, rating } of books) {
+                console.log(title);
+                console.log(author);
+                console.log(rating);
+            }
+          </pre>
+        </article>
+        <article>
+          <h3>Głęboka destrukturyzacja</h3>
+          <p>
+            Do destrukturyzacji właściwości obiektów zagnieżdżonych są używane
+            te same zasady, jak w poprzednich trzech ćwiczeniach.
+          </p>
+          <pre>
+            const user = {
+                name: "Jacques Gluke",
+                tag: "jgluke",
+                stats: {
+                    followers: 5603,
+                    views: 4827,
+                    likes: 1308,
+                },
+            };
+
+            const {
+                name,
+                tag,
+                stats: { followers, views: userViews, likes: userLikes = 0 },
+            } = user;
+
+            console.log(name); // Jacques Gluke
+            console.log(tag); // jgluke
+            console.log(followers); // 5603
+            console.log(userViews); // 4827
+            console.log(userLikes); // 1308
+          </pre>
+        </article>
+      </section>
+      <!-- section3 -->
+      <section class="text">
+        <article>
+          <h2>Destrukturyzacja tablic</h2>
+          <p>
+            Przypisanie destrukturyzujące może być również użyte dla tablic, ale
+            będzie się nieco różniło:
+          </p>
+          <ul class="unnumbered-list-container">
+            <li>
+              Użyj nawiasów kwadratowych [] zamiast nawiasów klamrowych {}
+            </li>
+            <li>
+              Zmiennym określonym w nawiasach kwadratowych [], będą po kolei
+              przypisywane wartości elementów tablicy - kolejność zmiennych
+              będzie więc miała znaczenie.
+            </li>
+          </ul>
+          <p>
+            Dla przykładu weźmy tablicę kolorów, z której należy pobrać wartości
+            każdego składnika koloru do osobnych zmiennych.
+          </p>
+          <pre>
+            const rgb = [200, 255, 100];
+            const [red, green, blue] = rgb;
+
+            console.log(`R:${red},G:${green},B:${blue}`);// "R:200,G:255,B:100"
+          </pre>
+          <p>
+            Po słowie kluczowym const lub let umieszczamy otwierający i
+            zamykający nawias kwadratowy, tak jak przy deklarowaniu tablicy.
+            Wewnątrz nawiasów, oddzielone przecinkami, wskazujemy nazwy
+            zmiennych, w których zostaną umieszczone wartości tablicy.
+          </p>
+          <p>
+            W wyniku zapisu powyżej zostaną utworzone 3 zmienne, a elementy
+            zostaną w nich umieszczone w kolejności numeracji - od 0 do końca
+            tablicy.
+          </p>
+          <p>
+            Podczas destrukturyzacji tablic wartość zmiennej można przypisać już
+            po jej deklaracji. W praktyce jest to rzadko używane i zmniejsza
+            czytelność.
+          </p>
+          <pre>
+            const rgb = [200, 255, 100];
+            let red, green, blue;
+            [red, green, blue] = rgb;
+            console.log(`R:${red},G:${green},B:${blue}`);// "R:200,G:255,B:100"
+          </pre>
+          <p>
+            Jeśli podamy więcej zmiennych niż elementów tablicy, zostaną im
+            przypisane wartości undefined, możemy więc również skorzystać z
+            zapisu wartości domyślnych.
+          </p>
+          <pre>
+            const rgb = [200, 100, 255];
+            const [red, green, blue, alfa = 0.3] = rgb;
+            console.log(`R:${red},G:${green},B:${blue},Alfa:${alfa}`);// "R:200,G:100,B:255,Alfa:0.3"
+          </pre>
+          <p>
+            Czasami konieczna jest destrukturyzacja tylko pierwszych N elementów
+            z tablicy i przechowywanie pozostałych w jednej zmiennej w postaci
+            tablicy. Podczas destrukcji tablicy możesz rozpakować i przypisać
+            pozostałe elementy tablicy do zmiennej za pomocą operacji ...
+            (rest).
+          </p>
+          <pre>
+            const rgb = [200, 255, 100];
+            const [red, ...colors] = rgb;
+            console.log(red);// "200"
+            console.log(colors);// [255, 100]
+          </pre>
+          <p>
+            Elementy możemy też pominąć. Załóżmy, że musisz pobrać tylko
+            ostatnią wartość z tablicy rgb. Taki zapis nie jest zbyt często
+            używany, ale poznajmy go:
+          </p>
+          <pre>
+            const rgb = [200, 100, 255];
+            const [, , blue] = rgb;
+            console.log(`Blue: ${blue}`);// "Blue: 255"
+          </pre>
+        </article>
+      </section>
+      <!-- section4 -->
+      <section class="text">
+        <article>
+          <h2>Wzorzec "Obiekt parametru"</h2>
+          <p>
+            Jeśli funkcja przyjmuje więcej niż dwa lub trzy argumenty, bardzo
+            łatwo jest pomylić się, w jakiej kolejności należy przekazać
+            wartości. Rezultatem jest bardzo nieczytelny kod w miejscu jego
+            wywołania i trudne do odnalezienia na pierwszy rzut oka błędy.
+          </p>
+          <pre>
+            function doStuffWithBook(title, numberOfPages, downloads, rating, public) {
+                // wykorzystanie parametrów
+                console.log(title);
+                console.log(numberOfPages);
+                // dalsza część kodu
+            }
+
+            // ❌ Co to jest 736? Co to jest 10283? Co to jest true?
+            doStuffWithBook("The Last Kingdom", 736, 10283, 8.38, true);
+          </pre>
+          <p>
+            Wzorzec "Obiekt parametru" pomaga rozwiązać ten problem, zastępując
+            zestaw parametrów tylko jednym — obiektem o nazwanych właściwościach
+          </p>
+          <pre>
+            function doStuffWithBook(book) {
+                // wykorzystanie parametru (obiektu)
+                console.log(book.title);
+                console.log(book.numberOfPages);
+                // dalsza część kodu
+            }
+          </pre>
+          <p>
+            Następnie podczas wywołania przekazujemy jeden obiekt z niezbędnymi
+            właściwościami.
+          </p>
+          <pre>
+            // ✅ wykorzystanie wszystkich zmiennych jest jasne
+            doStuffWithBook({
+                title: "The Last Kingdom",
+                numberOfPages: 736,
+                downloads: 10283,
+                rating: 8.38,
+                isPublic: true,
+            });
+          </pre>
+          <p>
+            Kolejnym plusem jest to, że możesz również zdestrukturyzować obiekt
+            w parametrze book. Można to zrobić na dwa sposoby, albo w ciele
+            funkcji.
+          </p>
+          <pre>
+            function doStuffWithBook(book) {
+                const { title, numberOfPages, downloads, rating, isPublic } = book;
+                console.log(title);
+                console.log(numberOfPages);
+                // dalsza część kodu
+            }
+          </pre>
+          <p>Lub od razu w sygnaturze funkcji, oba zapisy są poprawne</p>
+          <pre>
+            function doStuffWithBook({
+                title,
+                numberOfPages,
+                downloads,
+                rating,
+                isPublic,
+            }) {
+                console.log(title);
+                console.log(numberOfPages);
+                // dalsza część kodu
+            }
+        </pre
+          >
+        </article>
+      </section>
+    </main>
+    <footer class="container footer">
+      <div class="contener-shadow-text2">
+        <h2>Footer</h2>
+        <div class="display-footer">
+          <a
+            class="link-footer"
+            href=""
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <img src="../images/footer/konikMaly24x24Squoosh.png" alt="logo" />
+          </a>
+          <div class="display-footer2">
+            <p class="footer-selection">All rights reserved &copy;</p>
+            <p>Konrad</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
