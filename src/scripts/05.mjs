@@ -315,7 +315,7 @@ const forecast = {
     high: 31,
   },
 };
-// Change code below this line
+
 const {
   today: {
     low: lowToday,
@@ -344,13 +344,142 @@ function calculateMeanTemperature(forecast) {
       icon: tomorrowIcon = 'https://www.flaticon.com/svg/static/icons/svg/2204/2204346.svg',
     },
   } = forecast;
-
-  // Change code above this line
   return (todayLow + todayHigh + tomorrowLow + tomorrowHigh) / 4;
 }
-console.log(
-  calculateMeanTemperature({
-    today: { low: 28, high: 32 },
-    tomorrow: { low: 25, high: 29 },
-  })
-);
+
+// console.log(
+//   calculateMeanTemperature({
+//     today: { low: 28, high: 32 },
+//     tomorrow: { low: 25, high: 29 },
+//   })
+// );
+
+// 27. Składnia ... (spread)
+const scores = [89, 64, 42, 17, 93, 51, 26];
+
+// const bestScore = Math.max(...scores);
+// const worstScore = Math.min(...scores);
+// console.log(worstScore, bestScore);
+
+// 28. Składnia ... (spread) -łączenie tablic
+const firstGroupScores = [64, 42, 93];
+const secondGroupScores = [89, 14, 51, 26];
+const thirdGroupScores = [29, 47, 18, 97, 81];
+
+const allScores = [
+  ...firstGroupScores,
+  ...secondGroupScores,
+  ...thirdGroupScores,
+];
+const bestScore = Math.max(...allScores);
+const worstScore = Math.min(...allScores);
+// console.log(allScores, worstScore, bestScore);
+
+// 29. Składnia ... (spread) -łączenie obiektów
+const defaultSettings = {
+  theme: 'light',
+  public: true,
+  withPassword: false,
+  minNumberOfQuestions: 10,
+  timePerQuestion: 60,
+};
+const overrideSettings = {
+  public: false,
+  withPassword: true,
+  timePerQuestion: 30,
+};
+
+const finalSettings = { ...defaultSettings, ...overrideSettings };
+// console.log(finalSettings);
+
+// 30. Składnia ... (spread) - Karty zadań
+function makeTask(data) {
+  const completed = false;
+  const category = 'General';
+  const priority = 'Normal';
+
+  const task = {
+    category: category,
+    priority: priority,
+    completed: completed,
+  };
+
+  const finalSettings = { ...task, ...data };
+  return finalSettings;
+}
+// console.log(makeTask({}));
+// console.log(
+//   makeTask({
+//     category: 'Homemade',
+//     priority: 'Low',
+//     text: 'Take out the trash',
+//   })
+// );
+
+// 31. Operacja ... (rest)
+function add(...args) {
+  let sum = 0;
+  for (let i = 0; i < args.length; i++) {
+    sum += args[i];
+  }
+  return sum;
+}
+// console.log(add(12, 4, 11, 48));
+
+// 32. Operacja ... (rest) - część argumentów
+function addOverNum(...args) {
+  let total = 0;
+
+  for (const arg of args) {
+    if (args[0] < arg) {
+      total += arg;
+    }
+  }
+
+  return total;
+  // Change code above this line
+}
+// console.log(addOverNum(10, 12, 4, 11, 48, 10, 8));
+
+// 33. Operacja ... (rest) - Tablica dopasowań
+function findMatches(...args) {
+  const matches = [];
+
+  for (let i = 0; i < args[0].length; i++) {
+    let firstTableNum = args[0][i];
+
+    for (let j = 1; j < args.length; j++) {
+      if (firstTableNum === args[j]) {
+        matches.push(args[j]);
+      }
+    }
+  }
+  return matches;
+}
+// console.log(findMatches([1, 2, 3, 4, 5], 1, 8, 2, 7));
+
+// 34. Metody obiektów
+const bookShelf = {
+  books: ['The last kingdom', 'The guardian of dreams'],
+  getBooks() {
+    return 'Returning all books';
+  },
+  addBook(bookName) {
+    return `Adding book ${bookName}`;
+  },
+  removeBook(bookName) {
+    return `Deleting book ${bookName}`;
+  },
+  updateBook(oldName, newName) {
+    return `Updating book ${oldName} to ${newName}`;
+  },
+};
+
+// 35. Metody obiektów - this
+const bookShelf35 = {
+  books: ['The last kingdom', 'Haze', 'The guardian of dreams'],
+  updateBook(oldName, newName) {
+    // Change code below this line
+    // Change code above this line
+  },
+};
