@@ -479,7 +479,103 @@ const bookShelf = {
 const bookShelf35 = {
   books: ['The last kingdom', 'Haze', 'The guardian of dreams'],
   updateBook(oldName, newName) {
-    // Change code below this line
-    // Change code above this line
+    const bookIndex = this.books.indexOf(oldName);
+    this.books.splice(bookIndex, 1, newName);
+    // console.log(this.books);
   },
 };
+
+bookShelf35.updateBook('Haze', 'Dungeon chronicles');
+// console.log(bookShelf35);
+
+// 36. Obiekt - dodanie właściwości
+const atTheOldToad = {
+  potions: [],
+};
+
+// 37. Obiekt - metoda odczytu
+const atTheOldToad37 = {
+  potions: ['Speed potion', 'Dragon breath', 'Stone skin'],
+  getPotions() {
+    return this.potions;
+  },
+};
+// console.log(atTheOldToad37.potions);
+
+// 38. Obiekt - metoda dodania elementu
+const atTheOldToad38 = {
+  potions: ['Speed potion', 'Dragon breath', 'Stone skin'],
+  addPotion(potionName) {
+    this.potions.push(potionName);
+  },
+};
+atTheOldToad38.addPotion('Invisibility');
+// console.log(atTheOldToad38.potions);
+
+// 39. Obiekt - metoda usunięcia elementu
+const atTheOldToad39 = {
+  potions: ['Speed potion', 'Dragon breath', 'Stone skin'],
+  removePotion(potionName) {
+    const potionIndex = this.potions.indexOf(potionName);
+    this.potions.splice(potionIndex, 1);
+  },
+};
+atTheOldToad39.removePotion('Dragon breath');
+// console.log(atTheOldToad39.potions);
+
+// 40. Obiekt - metoda zamiana elementu
+const atTheOldToad40 = {
+  potions: ['Speed potion', 'Dragon breath', 'Stone skin'],
+  updatePotionName(oldName, newName) {
+    const potionIndex = this.potions.indexOf(oldName);
+    this.potions.splice(potionIndex, 1, newName);
+  },
+};
+atTheOldToad40.updatePotionName('Dragon breath', 'Polymorth');
+// console.log(atTheOldToad40.potions);
+
+// 41. Obiekt - metoda zamiana elementu
+const atTheOldToad41 = {
+  potions: [
+    { name: 'Speed potion', price: 460 },
+    { name: 'Dragon breath', price: 780 },
+    { name: 'Stone skin', price: 520 },
+  ],
+  // Change code below this line
+  getPotions() {
+    return this.potions;
+  },
+  addPotion(newPotion) {
+    // for (const key of products) {
+    //   if (key.name === productName) {
+    //     return key.price;
+    //   }
+    // }
+    if (this.potions.includes(newPotion)) {
+      return `Error! Potion ${newPotion} is already in your inventory!`;
+    }
+
+    this.potions.push(newPotion);
+  },
+  removePotion(potionName) {
+    const potionIndex = this.potions.indexOf(potionName);
+
+    if (potionIndex === -1) {
+      return `Potion ${potionName} is not in inventory!`;
+    }
+
+    this.potions.splice(potionIndex, 1);
+  },
+  updatePotionName(oldName, newName) {
+    const potionIndex = this.potions.indexOf(oldName);
+
+    if (potionIndex === -1) {
+      return `Potion ${oldName} is not in inventory!`;
+    }
+
+    this.potions.splice(potionIndex, 1, newName);
+  },
+  // Change code above this line
+};
+
+// console.log(atTheOldToad41.addPotion('Speed potion'));
