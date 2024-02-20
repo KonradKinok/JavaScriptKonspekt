@@ -570,24 +570,26 @@ const atTheOldToad41 = {
         return this.potions;
     },
     addPotion (newPotion) {
-        // for (const key of products) {
-        //   if (key.name === productName) {
-        //     return key.price;
-        //   }
-        // }
-        if (this.potions.includes(newPotion)) return `Error! Potion ${newPotion} is already in your inventory!`;
+        for (const key of this.potions){
+            if (key.name === newPotion.name) return `Error! Potion ${newPotion.name} is already in your inventory!`;
+        }
         this.potions.push(newPotion);
     },
     removePotion (potionName) {
-        const potionIndex = this.potions.indexOf(potionName);
+        const potionIndex = this.potions.findIndex((potion)=>potion.name === potionName);
         if (potionIndex === -1) return `Potion ${potionName} is not in inventory!`;
         this.potions.splice(potionIndex, 1);
     },
     updatePotionName (oldName, newName) {
-        const potionIndex = this.potions.indexOf(oldName);
+        const potionIndex = this.potions.findIndex((potion)=>potion.name === oldName);
         if (potionIndex === -1) return `Potion ${oldName} is not in inventory!`;
-        this.potions.splice(potionIndex, 1, newName);
+        this.potions[potionIndex].name = newName;
     }
-}; // console.log(atTheOldToad41.addPotion('Speed potion'));
+};
+// console.log(atTheOldToad41.addPotion({ name: 'Stone skin', price: 240 }));
+// atTheOldToad41.addPotion({ name: 'Power potion', price: 270 });
+// console.log(atTheOldToad41.removePotion('Dragon breath'));
+atTheOldToad41.updatePotionName("Dragon breath", "Polymorth");
+console.log(atTheOldToad41.getPotions());
 
 //# sourceMappingURL=index.d858f7b6.js.map
