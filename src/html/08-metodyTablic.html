@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;700&family=Roboto:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.min.css"
+    />
+    <!-- <style type="text/css">	@import url(./styles/stylStartowy.css);	</style> -->
+    <link rel="stylesheet" href="../styles/stylStartowy.scss" />
+    <link rel="stylesheet" href="../styles/08-metodyTablic.scss" />
+    <title>Metody tablic</title>
+  </head>
+  <body class="body-container">
+    <header class="menu-sticky">
+      <nav class="nav-container">
+        <!-- Nawigacja do innych stron -->
+        <ul class="nav-list-container">
+          <li>
+            <a class="link" href="../index.html">Menu</a>
+          </li>
+          <li>
+            <a class="link" href="../html/01-zajeciaWprowadzajace.html"
+              >01. Zmienne i typy
+            </a>
+          </li>
+          <li>
+            <a class="link" href="../html/02-rozgalezieniaCykle.html"
+              >02. Rozgałęzienia i cykle
+            </a>
+          </li>
+          <li>
+            <a class="link" href="../html/03-tablice.html">03. Tablice </a>
+          </li>
+          <li>
+            <a class="link" href="../html/04-funkcje.html">04. Funkcje </a>
+          </li>
+          <li>
+            <a class="link" href="../html/05-obiekty.html">05. Obiekty </a>
+          </li>
+          <li>
+            <a class="link" href="../html/06-operacjeSpreadRest.html"
+              >06. Operacje spread/rest
+            </a>
+          </li>
+          <li>
+            <a class="link" href="../html/07-callbackFunkcjeStrzalkowe.html"
+              >07. Callback i funkcje strzałkowe
+            </a>
+          </li>
+          <li>
+            <a class="link current-page" href="../html/08-metodyTablic.html"
+              >08. Metody tablic
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main-container">
+      <!-- section1 -->
+      <section class="text">
+        <article>
+          <h1>Moduł4 - Zajęcia 8 - Metody tablic</h1>
+          <h2>Czyste funkcje</h2>
+          <p>
+            Funkcja z efektami ubocznymi to funkcja, podczas wykonywania której
+            mogą zmieniać się lub być wykorzystywane zmienne globalne, zmieniają
+            się wartości argumentów referencyjnych, wykonywane są operacje
+            wejścia-wyjścia itp.
+          </p>
+          <pre>
+            const dirtyMultiply = (array, value) => {
+                for (let i = 0; i < array.length; i += 1) {
+                    array[i] = array[i] * value;
+                }
+            };
+
+            const numbers = [1, 2, 3, 4, 5];
+            dirtyMultiply(numbers, 2);
+            // nastąpiła mutacja (zmiana) oryginalnych danych - tablicy numbers
+            console.log(numbers);// [2, 4, 6, 8, 10]
+          </pre>
+          <p>
+            Funkcja dirtyMultiply(array, value) mnoży każdy element tablicy
+            array przez liczbę value. Modyfikuje ona (mutuje) oryginalną tablicę
+            przez referencję.
+          </p>
+          <p>
+            Czysta funkcja (pure function) to funkcja, której wynik zależy tylko
+            od wartości przekazanych argumentów. Przy tych samych argumentach
+            zawsze zwraca ten sam wynik i nie ma skutków ubocznych, czyli nie
+            zmienia wartości argumentów.
+          </p>
+          <p>
+            Napiszmy implementację czystej funkcji służącej do mnożenia
+            elementów tablicy, która zwraca nową tablicę bez zmiany oryginalnej.
+          </p>
+          <pre>
+            const pureMultiply = (array, value) => {
+                const newArray = [];
+
+                array.forEach(element => {
+                    newArray.push(element * value);
+                });
+
+                return newArray;
+            };
+
+            const numbers = [1, 2, 3, 4, 5];
+            const doubledNumbers = pureMultiply(numbers, 2);
+
+            // Nie nastąpiła mutacja oryginalnych danych
+            console.log(numbers); // [1, 2, 3, 4, 5]
+            // Funkcja zwróciła nową tablicę ze zmienionymi danymi
+            console.log(doubledNumbers); // [2, 4, 6, 8, 10]
+          </pre>
+        </article>
+      </section>
+      <!-- section2 -->
+      <section class="text">
+        <article>
+          <h2>Metody iteracji po tablicy</h2>
+          <p>
+            JavaScript posiada metody tablicowe, które pochodzą z języków
+            funkcyjnych. Większość z nich to czyste funkcje. Tworzą nową
+            tablicę, wypełniają ją, stosują określoną funkcję zwrotną do
+            wartości każdego elementu, a następnie zwracają tę nową tablicę.
+          </p>
+          <p>
+            Wszystkie metody iteracji po tablicy mają podobną składnię.
+            Oryginalna tablica array, wywołanie metody method i funkcja
+            wywołania zwrotnego callback jako argument metody.
+          </p>
+          <pre>
+            array.method(callback[currentValue, index, array])
+          </pre>
+          <p>W większości metod argumentami funkcji zwrotnej są:</p>
+          <ul class="unnumbered-list-container">
+            <li>wartość elementu currentValue (pierwszy parametr),</li>
+            <li>pozycja elementu index (drugi parametr)</li>
+            <li>oraz oryginalna tablica array (trzeci parametr).</li>
+          </ul>
+          <pre>
+            array.method((item, idx, arr) => {
+                // logika, która będzie stosowana przy każdej iteracji
+            });
+          </pre>
+          <p>
+            Wszystkie parametry, z wyjątkiem wartości elementu item, są
+            opcjonalne. Nazwy parametrów mogą być dowolne, ale istnieją
+            nieoficjalne konwencje.
+          </p>
+          <pre>
+            array.method(item => {
+                // logika, która będzie stosowana przy każdej iteracji
+            });
+          </pre>
+        </article>
+      </section>
+      <!-- section3 -->
+      <section class="text">
+        <article>
+          <h2>Metoda map()</h2>
+          <p>
+            Metoda map(callback) jest używana do otrzymania przekształconej
+            kopii tablicy. Wywołuje ona funkcję zwrotną dla każdego elementu
+            oryginalnej tablicy i zapisuje jej wynik do nowej tablicy, która
+            będzie wynikiem wykonania metody map.
+          </p>
+          <pre>
+            tablica.map((element, index, array) => {
+                // Ciało funkcji zwrotnej
+            });
+          </pre>
+          <ul class="unnumbered-list-container">
+            <li>Metoda iteruje po oryginalnej tablicy element po elemencie.</li>
+            <li>Nie zmienia oryginalnej tablicy.</li>
+            <li>Wynik funkcji zwrotnej jest zapisywany w nowej tablicy.</li>
+            <li>Zwraca nową tablicę o tej samej długości.</li>
+          </ul>
+          <p>
+            Może być używana do zmiany każdego elementu tablicy. Oryginalna
+            tablica służy jako wzór, na podstawie którego można utworzyć kolejną
+            kolekcję.
+          </p>
+          <pre>
+            const planets = ["Ziemia", "Mars", "Wenus", "Jowisz"];
+
+            const planetsInUpperCase = planets.map(planet => planet.toUpperCase());
+            console.log(planetsInUpperCase);// ['ZIEMIA', 'MARS', 'WENUS', 'JOWISZ']
+
+            const planetsInLowerCase = planets.map(planet => planet.toLowerCase());
+            console.log(planetsInLowerCase);// ['ziemia', 'mars', 'wenus', 'jowisz']
+
+            // Oryginalna tablica się nie zmieniła
+            console.log(planets);// ['Ziemia', 'Mars', 'Wenus', 'Jowisz']
+          </pre>
+          <p>
+            Używanie anonimowych funkcji strzałkowych z niejawnym zwrotem
+            znacznie zmniejsza "szum" deklaracji funkcji wywołania zwrotnego,
+            dzięki czemu kod jest czystszy i łatwiejszy do odczytania.
+          </p>
+        </article>
+        <article>
+          <h2>Tablica obiektów</h2>
+          <p>
+            Wiemy już, że jednym z codziennych zadań programisty jest
+            manipulowanie tablicą obiektów. Możemy na przykład chcieć uzyskać
+            tablicę wartości właściwości ze wszystkich obiektów. Przyjmijmy, że
+            istnieje tablica studentów, ale musisz uzyskać osobną tablicę ich
+            imion.
+          </p>
+          <pre>
+            const students = [
+                { name: "Mango", score: 83 },
+                { name: "Poly", score: 59 },
+                { name: "Ajax", score: 37 },
+                { name: "Kiwi", score: 94 },
+                { name: "Houston", score: 64 },
+            ];
+
+            const names = students.map(student => student.name);
+            console.log(names);// ['Mango', 'Poly', 'Ajax', 'Kiwi', 'Houston']
+          </pre>
+          <p>
+            Używając metody map(), możesz iterować tablicę obiektów i zwracać
+            wartość właściwości każdego z nich w funkcji zwrotnej.
+          </p>
+        </article>
+      </section>
+      <!-- section4 -->
+      <section class="text">
+        <article>
+          <h2>Metoda flatMap()</h2>
+          <p>
+            Metoda flatMap(callback) jest podobna do metody map(), ale jest
+            używana w przypadkach, gdy wynikiem jest tablica wielowymiarowa,
+            która wymaga spłaszczenia.
+          </p>
+          <pre>
+            tablica.flatMap((element, index, array) => {
+                // Ciało funkcji wywołania zwrotnego
+            });
+          </pre>
+          <p>
+            Tablica students zawiera listę studentów wraz z listą przedmiotów,
+            na które student uczęszcza we właściwości courses. Kilku studentów
+            może uczęszczać na ten sam przedmiot. Konieczne jest sporządzenie
+            listy wszystkich przedmiotów, na które uczęszcza ta grupa studentów,
+            na razie nie przeszkadza nam powtarzanie się przedmiotów.
+          </p>
+          <pre>
+            const students = [
+            { name: "Mango", courses: ["matematyka", "fizyka"] },
+            { name: "Poly", courses: ["informatyka", "matematyka"] },
+            { name: "Kiwi", courses: ["fizyka", "biologia"] },
+            ];
+
+            students.map(student => student.courses);
+            // [['matematyka', 'fizyka'], ['informatyka', 'matematyka'], ['fizyka', 'biologia']]
+
+            students.flatMap(student => student.courses);
+            // ['matematyka', 'fizyka', 'informatyka', 'matematyka', 'fizyka', 'biologia'];
+          </pre>
+          <p>
+            Metoda ta wywołuje funkcję zwrotną dla każdego elementu oryginalnej
+            tablicy i zapisuje wynik swojej pracy w nowej tablicy. Różnica w
+            stosunku do map() polega na tym, że nowa tablica zostanie
+            "spłaszczona" o jeden poziom (jedno zagnieżdżenie). Ta spłaszczona
+            tablica będzie wynikiem flatMap().
+          </p>
+        </article>
+      </section>
+      <!-- section5 -->
+      <section class="text">
+        <article>
+          <h2>Metoda filter()</h2>
+          <p>
+            Metoda filter(callback) służy do filtrowania tablicy, gdy konieczne
+            jest wybranie więcej niż jednego elementu ze zbioru według jakiegoś
+            kryterium.
+          </p>
+          <pre>
+            tablica.filter((element, index, array) => {
+                // Ciało funkcji wywołania zwrotnego
+            });
+          </pre>
+          <ul class="unnumbered-list-container">
+            <li>Nie zmienia oryginalnej tablicy.</li>
+            <li>Element po elemencie iteruje po oryginalnej tablicy.</li>
+            <li>Zwraca nową tablicę.</li>
+            <li>
+              Dodaje do zwróconej tablicy elementy, które spełniają warunek
+              funkcji wywołania zwrotnego.
+            </li>
+            <li>
+              Jeśli wywołanie zwrotne zwróciło true, element jest dodawany do
+              zwróconej tablicy.
+            </li>
+            <li>
+              Jeśli wywołanie zwrotne zwróciło false, element nie jest dodawany
+              do zwróconej tablicy.
+            </li>
+            <li>
+              Jeśli żaden z elementów nie spełnia warunku, zwraca pustą tablicę.
+            </li>
+          </ul>
+          <pre>
+            const values = [51, -3, 27, 21, -68, 42, -37];
+
+            const positiveValues = values.filter(value => value >= 0);
+            console.log(positiveValues);// [51, 27, 21, 42]
+
+            const negativeValues = values.filter(value => value < 0);
+            console.log(negativeValues);// [-3, -68, -37]
+
+            const bigValues = values.filter(value => value > 1000);
+            console.log(bigValues);// []
+
+            // Oryginalna tablica się nie zmieniła
+            console.log(values);// [51, -3, 27, 21, -68, 42, -37]
+          </pre>
+          <p>
+            Oznacza to, że metoda filter wywołuje funkcję zwrotną dla każdego
+            elementu oryginalnej tablicy, a jeśli wynikiem jej wykonania jest
+            true, bieżący element jest dodawany do nowej tablicy.
+          </p>
+        </article>
+        <article>
+          <h3>Filtrowanie unikalnych elementów</h3>
+          <p>
+            Używając metody filter(), możesz filtrować tablicę tak, aby
+            pozostały w niej tylko unikalne elementy. To podejście działa tylko
+            z tablicą wartości prymitywnych, a nie obiektów.
+          </p>
+          <p>
+            Wróćmy do grupy studentów i tablicy wszystkich uczęszczanych
+            przedmiotów, które otrzymaliśmy za pomocą metody flatMap().
+          </p>
+          <pre>
+            const students = [
+            { name: "Mango", courses: ["matematyka", "fizyka"] },
+            { name: "Poly", courses: ["informatyka", "matematyka"] },
+            { name: "Kiwi", courses: ["fizyka", "biologia"] },
+            ];
+
+            const allCourses = students.flatMap(student => student.courses);
+            // ['matematyka', 'fizyka', 'informatyka', 'matematyka', 'fizyka', 'biologia'];
+          </pre>
+          <p>
+            Zmienna allCourses przechowuje tablicę wszystkich odwiedzonych
+            przedmiotów, które mogą się powtarzać. Zadaniem jest stworzenie
+            nowej tablicy zawierającej tylko unikalne przedmioty, czyli bez
+            powtórzeń.
+          </p>
+          <pre>
+            const uniqueCourses = allCourses.filter(
+            (course, index, array) => array.indexOf(course) === index
+            );
+          </pre>
+          <p>
+            Używając array.indexOf(course), wyszukujemy pierwsze dopasowanie
+            bieżącego elementu course i pobieramy jego indeks w oryginalnej
+            tablicy wszystkich kursów. Parametr index przechowuje indeks
+            bieżącego elementu course podczas iteracji po tablicy przy użyciu
+            metody filter.
+          </p>
+          <p>
+            Jeśli wynik indexOf() i wartość index są równe - jest to unikalny
+            element, ponieważ jest to pierwszy przypadek napotkania takiej
+            wartości w tablicy i w bieżącej iteracji filtr przetwarza akurat ją.
+          </p>
+          <pre>
+            # Tablica wszystkich kursów
+            ['matematyka', 'fizyka', 'informatyka', 'matematyka', 'fizyka', 'biologia'];
+          </pre>
+          <p>Dla elementu 'matematyka' przy indeksie 0:</p>
+          <ul class="unnumbered-list-container">
+            <li>indexOf() zwróci 0, ponieważ szuka pierwszego dopasowania.</li>
+            <li>Wartość parametru index będzie wynosić 0.</li>
+            <li>
+              Indeksy są równe, więc jest to pierwsze wystąpienie elementu.
+            </li>
+          </ul>
+          <p>Dla elementu 'matematyka' przy indeksie 3:</p>
+          <ul class="unnumbered-list-container">
+            <li>indexOf() zwróci 0, ponieważ szuka pierwszego dopasowania.</li>
+            <li>Wartość parametru index będzie wynosić 3.</li>
+            <li>
+              Indeksy nie są równe, więc jest to powtórzenie, a nie unikalny
+              element.
+            </li>
+          </ul>
+        </article>
+        <article>
+          <h3>Tablica obiektów</h3>
+          <p>
+            Podczas pracy z tablicą obiektów filtrowanie odbywa się według
+            wartości wybranej/wybranych właściwości. Rezultatem jest nowa
+            tablica przefiltrowanych obiektów.
+          </p>
+          <p>
+            Dla przykładu istnieje tablica studentów z wynikami testów.
+            Konieczne jest odfiltrowanie najlepszych (wyniki powyżej 80),
+            najgorszych (wyniki poniżej 50) i średnich (wyniki od 50 do 80).
+          </p>
+          <pre>
+            const LOW_SCORE = 50;
+            const HIGH_SCORE = 80;
+            const students = [
+            { name: "Mango", score: 83 },
+            { name: "Poly", score: 59 },
+            { name: "Ajax", score: 37 },
+            { name: "Kiwi", score: 94 },
+            { name: "Houston", score: 64 },
+            ];
+
+            const best = students.filter(student => student.score >= HIGH_SCORE);
+            console.log(best);// Tablica obiektów o nazwach Mango i Kiwi
+
+            const worst = students.filter(student => student.score < LOW_SCORE);
+            console.log(worst);// Tablica z jednym obiektem Ajax
+
+            // W funkcji wywołania zwrotnego wygodnie 
+            // będzie zdestrukturyzować właściwości obiektu
+            const average = students.filter(
+            ({ score }) => score >= LOW_SCORE && score < HIGH_SCORE
+            );
+            console.log(average);// Tablica obiektów o imionach Poly i Houston
+          </pre>
+        </article>
+      </section>
+      <!-- section6 -->
+      <section class="text">
+        <article>
+          <h2>Metoda find()</h2>
+          <p>
+            Metoda filter(callback) jest używana do znalezienia wszystkich
+            elementów spełniających warunek, natomiast metoda find(callback)
+            pozwala na znalezienie i zwrócenie pierwszego pasującego elementu,
+            po odnalezieniu którego iteracja po tablicy zatrzymuje się. Oznacza
+            to, że nawet jeśli mamy wiele elementów spełniających dany warunek,
+            otrzymamy tylko pierwszy element spełniający warunek.
+          </p>
+          <pre>
+            tablica.find((element, index, array) => {
+                // Ciało funkcji wywołania zwrotnego
+            });
+        </pre
+          >
+          <ul class="unnumbered-list-container">
+            <li>Nie zmienia oryginalnej tablicy</li>
+            <li>Element po elemencie iteruje po oryginalnej tablicy.</li>
+            <li>
+              Zwraca pierwszy element, który spełnia warunek, to znaczy, gdy
+              wywołanie zwrotne zwraca true.
+            </li>
+            <li>
+              Jeśli żaden element nie pasuje, czyli dla wszystkich elementów
+              wywołanie zwrotne zwróciło false, metoda zwraca undefined.
+            </li>
+          </ul>
+          <p>
+            Metoda find() powinna służyć do jednego zadania - znalezienia
+            elementu na podstawie unikalnej wartości właściwości. Na przykład
+            może to być wyszukiwanie użytkownika na podstawie adresu email,
+            samochodu na podstawie numeru seryjnego, książki na podstawie numeru
+            ISBN itp.
+          </p>
+          <pre>
+            const colorPickerOptions = [
+            { label: "red", color: "#F44336" },
+            { label: "green", color: "#4CAF50" },
+            { label: "blue", color: "#2196F3" },
+            { label: "pink", color: "#E91E63" },
+            { label: "indigo", color: "#3F51B5" },
+            ];
+
+            colorPickerOptions.find(option => option.label === "blue");// { label: 'blue', color: '#2196F3' }
+            colorPickerOptions.find(option => option.label === "pink");// { label: 'pink', color: '#E91E63' }
+            colorPickerOptions.find(option => option.label === "white");// undefined
+          </pre>
+        </article>
+      </section>
+      <!-- section7 -->
+      <section class="text">
+        <article>
+          <h2>Metoda findIndex()</h2>
+          <p>
+            Metoda findIndex(callback) jest nowoczesnym zamiennikiem metody
+            indexOf(). Umożliwia wyszukiwanie według bardziej złożonych warunków
+            niż tylko ścisła równość. Dzięki temu służy zarówno do wyszukiwania
+            w tablicy elementów typu prymitywnego, jak i w tablicy obiektów.
+          </p>
+          <pre>
+            tablica.findIndex((element, index, array) => {
+                // Ciało funkcji wywołania zwrotnego
+            });
+        </pre
+          >
+          <ul class="unnumbered-list-container">
+            <li>Nie zmienia oryginalnej tablicy.</li>
+            <li>Element po elemencie iteruje po oryginalnej tablicy.</li>
+            <li>
+              Zwraca indeks pierwszego elementu, który spełnia warunek, to
+              znaczy, gdy wywołanie zwrotne zwraca true.
+            </li>
+            <li>
+              Jeśli żaden element nie pasuje, to znaczy dla wszystkich elementów
+              wywołanie zwrotne zwróciło false, metoda zwraca -1.
+            </li>
+          </ul>
+          <pre>
+            const colorPickerOptions = [
+            { label: "red", color: "#F44336" },
+            { label: "green", color: "#4CAF50" },
+            { label: "blue", color: "#2196F3" },
+            { label: "pink", color: "#E91E63" },
+            { label: "indigo", color: "#3F51B5" },
+            ];
+
+            colorPickerOptions.findIndex(option => option.label === "blue");// 2
+            colorPickerOptions.findIndex(option => option.label === "pink");// 3
+            colorPickerOptions.findIndex(option => option.label === "white");// -1
+        </pre
+          >
+        </article>
+      </section>
+      <!-- section8 -->
+      <section class="text">
+        <article>
+          <h2>Metody every() i some()</h2>
+          <h3>Metoda every()</h3>
+          <p>
+            Sprawdza, czy wszystkie elementy tablicy spełniają warunek
+            dostarczony przez funkcję callback. Zwraca true lub false.
+          </p>
+          <pre>
+            tablica.every((element, index, array) => {
+                // Ciało funkcji wywołania zwrotnego
+            });
+          </pre>
+          <ul class="unnumbered-list-container">
+            <li>Nie zmienia oryginalnej tablicy.</li>
+            <li>Element po elemencie iteruje po oryginalnej tablicy.</li>
+            <li>
+              Zwraca true jeśli wszystkie elementy tablicy spełniają warunek.
+            </li>
+            <li>
+              Zwraca false, jeśli przynajmniej jeden element tablicy nie spełnił
+              warunku.
+            </li>
+            <li>
+              Iteracja po tablicy zostaje natychmiast zakończona, jeśli
+              wywołanie zwrotne zwróci false.
+            </li>
+            <li>Jest odpowiednikiem operatora logicznego &&</li>
+          </ul>
+          <pre>
+            // Czy wszystkie elementy są większe lub równe zero? - tak
+            [1, 2, 3, 4, 5].every(value => value >= 0);// true
+
+            // Czy wszystkie elementy są większe lub równe zero? - nie
+            [1, 2, 3, -10, 4, 5].every(value => value >= 0);// false
+          </pre>
+        </article>
+        <article>
+          <h3>Metoda some()</h3>
+          <p>
+            Sprawdza, czy przynajmniej jeden element tablicy przeszedł test
+            dostarczony przez funkcję wywołania zwrotnego. Zwraca true lub
+            false.
+          </p>
+          <pre>
+            tablica.some((element, index, array) => {
+                // Ciało funkcji wywołania zwrotnego
+            });
+          </pre>
+          <ul class="unnumbered-list-container">
+            <li>Nie zmienia oryginalnej tablicy.</li>
+            <li>Element po elemencie iteruje po oryginalnej tablicy.</li>
+            <li>
+              Zwraca true, jeśli przynajmniej jeden element tablicy spełnia
+              warunek.
+            </li>
+            <li>
+              Zwraca false, jeśli żaden element tablicy nie spełnia warunku.
+            </li>
+            <li>
+              Iteracja po tablicy zostaje zakończona, jeśli wywołanie zwrotne
+              zwróci true.
+            </li>
+            <li>Jest odpowiednikiem operatora logicznego ||</li>
+          </ul>
+          <pre>
+            // Czy jest przynajmniej jeden element większy lub równy zero? - tak
+            [1, 2, 3, 4, 5].some(value => value >= 0);// true
+
+            // Czy jest przynajmniej jeden element większy lub równy zero? - tak
+            [-7, -20, 3, -10, -14].some(value => value >= 0);// true
+
+            // Czy jest przynajmniej jeden element mniejszy od zera? - nie
+            [1, 2, 3, 4, 5].some(value => value < 0);// false
+
+            // Czy jest przynajmniej jeden element mniejszy od zera? - tak
+            [1, 2, 3, -10, 4, 5].some(value => value < 0);// true
+          </pre>
+        </article>
+        <article>
+          <h3>Tablica obiektów</h3>
+          <p>
+            Podczas pracy z tablicą obiektów sprawdzana jest wartość niektórych
+            ich właściwości. Na przykład, weźmy tablicę obiektów z owocami i
+            dowiedzmy się, czy wszystkie owoce są w magazynie i czy przynajmniej
+            niektóre owoce są w ilości więcej niż 0 sztuk w magazynie.
+          </p>
+          <pre>
+            const fruits = [
+            { name: "apples", amount: 100 },
+            { name: "bananas", amount: 0 },
+            { name: "grapes", amount: 50 },
+            ];
+
+            // every zwróci true tylko wtedy, jeśli będzie więcej niż 0 sztuk wszystkich owoców
+            const allAvailable = fruits.every(fruit => fruit.amount > 0);// false
+
+            // some zwróci true tylko wtedy, jeśli będzie więcej niż 0 sztuk przynajmniej jednego owocu
+            const anyAvailable = fruits.some(fruits => fruits.amount > 0);// true
+          </pre>
+        </article>
+      </section>
+      <!-- section9 -->
+      <section class="text">
+        <article>
+          <h2>Metoda reduce()</h2>
+          <p>
+            Metoda reduce(callback, initialValue) służy do sekwencyjnego
+            przetwarzania każdego elementu tablicy z jednoczesnym
+            przechowywaniem wyniku pośredniego w postaci zmiennej-akumulatora.
+            Jest ona nieco trudniejsza do zrozumienia niż inne, ale jej
+            możliwości są tego warte.
+          </p>
+          <pre>
+            tablica.reduce((previousValue, element, index, array) => {
+                // Ciało funkcji wywołania zwrotnego
+            }, initialValue);
+          </pre>
+          <ul class="unnumbered-list-container">
+            <li>Nie zmienia oryginalnej tablicy.</li>
+            <li>Element po elemencie iteruje po oryginalnej tablicy.</li>
+            <li>
+              Według konwencji powinna zwracać najnowszą wartość akumulatora.
+            </li>
+            <li>
+              Wykonuje dowolne operacje, akumulujące tablicę do jednej zmiennej
+              (dowolnego typu).
+            </li>
+          </ul>
+          <p>
+            Najłatwiej wyobrazić sobie, jak to działa, obliczając sumę elementów
+            tablicy.
+          </p>
+          <pre>
+            const total = [2, 7, 3, 14, 6].reduce((previousValue, number) => {
+                return previousValue + number;
+            }, 0);
+
+            console.log(total);// 32
+          </pre>
+          <p>
+            Pierwszym parametrem funkcji wywołania zwrotnego (previousValue)
+            jest akumulator, czyli wynik pośredni. Wartość zwrócona przez
+            funkcję wywołania zwrotnego w bieżącej iteracji będzie wartością
+            tego parametru w następnej. Na końcu reduce zwróci ostatnią wartość
+            akumulatora.
+          </p>
+          <p>
+            Drugim parametrem jest zmienna w której znajdziemy kolejne elementy
+            tablicy podczas iteracji.
+          </p>
+          <p>
+            Przez drugi argument dla reduce() można przekazać opcjonalną wartość
+            początkową akumulatora — parametr initialValue.
+          </p>
+          <pre>
+            # Najpierw metoda reduce() tworzy wewnętrzną zmienną-akumulator i
+            # przypisuje jej wartość parametru initialValue lub pierwszego elementu
+            # tablicy do iteracji, jeśli nie określono initialValue.
+            previousValue = 0
+
+            # Następnie funkcja wywołania zwrotnego jest wywoływana dla każdego elementu tablicy. Obecna wartość
+            # parametru previousValue jest tym, co funkcja zwrotna zwróciła w ostatniej iteracji.
+            Iteracja 1 -> previousValue = 0 -> number = 2 -> return 0 + 2 -> return 2
+            Iteracja 2 -> previousValue = 2 -> number = 7 -> return 2 + 7 -> return 9
+            Iteracja 3 -> previousValue = 9 -> number = 3 -> return 9 + 3 -> return 12
+            Iteracja 4 -> previousValue = 12 -> number = 14 -> return 12 + 14 -> return 26
+            Iteracja 5 -> previousValue = 26 -> number = 6 -> return 26 + 6 -> return 32
+
+            # Po iteracji po całej tablicy metoda reduce() zwraca wartość akumulatora.
+            Wynik - 32
+          </pre>
+          <p>
+            Oznacza to, że metoda reduce() jest używana, gdy trzeba wziąć
+            "wiele" i zredukować do "jednego". W codziennych zadaniach często
+            przydaje się ona do pracy z liczbami.
+          </p>
+        </article>
+        <article>
+          <h3>Tablica obiektów</h3>
+          <p>
+            Podczas pracy z tablicą obiektów redukcja jest wykonywana według
+            wartości jakiejś właściwości. Dla przykładu weźmy tablicę studentów
+            z wynikami testów. Chcemy uzyskać średnią ocenę.
+          </p>
+          <pre>
+            const students = [
+            { name: "Mango", score: 83 },
+            { name: "Poly", score: 59 },
+            { name: "Ajax", score: 37 },
+            { name: "Kiwi", score: 94 },
+            { name: "Houston", score: 64 },
+            ];
+
+            // Nazwa akumulatora może być dowolna, to tylko parametr funkcji
+            const totalScore = students.reduce((total, student) => {
+                return total + student.score;
+            }, 0);
+
+            const averageScore = totalScore / students.length; // 67.4
+          </pre>
+        </article>
+        <article>
+          <h3>Zaawansowane użycie reduce</h3>
+          <p>
+            Wyobraźmy, że mamy następujące zadanie: z tablicy postów na
+            Twitterze pojedynczego użytkownika musimy obliczyć sumę wszystkich
+            polubień. Możesz iterować za pomocą pętli for lub forEach, ale każde
+            z tych rozwiązań będzie wymagało zbędnego kodu. Użyjmy więc reduce.
+          </p>
+          <pre>
+            const tweets = [
+            { id: "000", likes: 5, tags: ["js", "nodejs"] },
+            { id: "001", likes: 2, tags: ["html", "css"] },
+            { id: "002", likes: 17, tags: ["html", "js", "nodejs"] },
+            { id: "003", likes: 8, tags: ["css", "react"] },
+            { id: "004", likes: 0, tags: ["js", "nodejs", "react"] },
+            ];
+
+            // Weźmy wszystkie elementy kolekcji i dodajmy wartości właściwości likes
+            // do akumulatora, którego początkowa wartość wynosi 0.
+            const likes = tweets.reduce((totalLikes, tweet) => totalLikes + tweet.likes, 0);
+
+            console.log(likes);// 32
+
+            // Liczenie polubień przyda nam się więcej niż raz, napiszmy więc funkcję
+            // do zliczania polubień z kolekcji
+            const countLikes = tweets => {
+                return tweets.reduce((totalLikes, tweet) => totalLikes + tweet.likes, 0);
+            };
+
+            console.log(countLikes(tweets));// 32
+          </pre>
+          <p>
+            Zwróć uwagę na właściwość tags dla każdego posta. Kontynuując temat
+            reduce, wszystkie tagi pojawiające się w postach zbierzemy w
+            tablicę.
+          </p>
+          <pre>
+            const tweets = [
+            { id: "000", likes: 5, tags: ["js", "nodejs"] },
+            { id: "001", likes: 2, tags: ["html", "css"] },
+            { id: "002", likes: 17, tags: ["html", "js", "nodejs"] },
+            { id: "003", likes: 8, tags: ["css", "react"] },
+            { id: "004", likes: 0, tags: ["js", "nodejs", "react"] },
+            ];
+
+            // Weźmy wszystkie elementy kolekcji i dodajmy wartości właściwości tags
+            // do akumulatora, którego początkową wartość podamy jako pustą tablicę [].
+            // W każdej iteracji dodajmy wszystkie elementy tablicy tweet.tags do akumulatora i zwróćmy go.
+            const tags = tweets.reduce((allTags, tweet) => {
+                allTags.push(...tweet.tags);
+                return allTags;
+            }, []);
+
+            console.log(tags);
+
+            // Zebranie listy tagów nie jest jednorazową operację, więc napiszmy funkcję
+            // do zbioru tagów z kolekcji
+            const getTags = tweets =>
+            tweets.reduce((allTags, tweet) => {
+                allTags.push(...tweet.tags);
+                return allTags;  
+            }, []);
+
+            console.log(getTags(tweets));
+            // [ 'js', 'nodejs', 'html', 'css', 'html', 'js', 'nodejs', 'css', 'react', 'js', 'nodejs', 'react' ]
+          </pre>
+          <p>
+            Po zebraniu wszystkich tagów z postów dobrze byłoby policzyć ile
+            razy dany tag wystąpił w tablicy. Znowu skorzystamy tu z reduce
+          </p>
+          <pre>
+            const tweets = [
+            { id: "000", likes: 5, tags: ["js", "nodejs"] },
+            { id: "001", likes: 2, tags: ["html", "css"] },
+            { id: "002", likes: 17, tags: ["html", "js", "nodejs"] },
+            { id: "003", likes: 8, tags: ["css", "react"] },
+            { id: "004", likes: 0, tags: ["js", "nodejs", "react"] },
+            ];
+
+            const getTags = tweets =>
+            tweets.reduce((allTags, tweet) => {
+                allTags.push(...tweet.tags);
+                return allTags;
+            }, []);
+
+            const tags = getTags(tweets);
+
+            // Zadeklarujmy nasz callback jako osobną zmienną i podajmy ją metodzie reduce
+            // Jest to standardowa praktyka, jeśli funkcja wywołania zwrotnego jest dość długa lub wielokrotnie używana.
+            // Jeśli obiekt-akumulator nie posiada własnej właściwości z kluczem tag,
+            // utwórzmy go i zapiszmy mu wartość 0.
+            // W przeciwnym razie zwiększamy wartość o 1.
+            const getTagStats = (acc, tag) => {
+                if (!acc.hasOwnProperty(tag)) {
+                    acc[tag] = 0;
+                }
+
+                acc[tag] += 1;
+
+                return acc;
+            };
+
+            // Początkową wartością akumulatora jest pusty obiekt {}
+            const countTags = tags => tags.reduce(getTagStats, {});
+
+            const tagCount = countTags(tags);
+            console.log(tagCount);
+          </pre>
+        </article>
+      </section>
+      <!-- section10 -->
+      <section class="text">
+        <article>
+          <h2>Metoda sort()</h2>
+          <p>
+            Metoda sort() sortuje elementy tablicy, ale w przeciwieństwie do
+            innych metod iteracyjnych sortuje oryginalną tablicę.
+          </p>
+          <ul class="unnumbered-list-container">
+            <li>Sortuje i modyfikuje oryginalną tablicę</li>
+            <li>
+              Zwraca zmodyfikowaną tablicę, czyli link do posortowanej
+              oryginalnej tablicy.
+            </li>
+            <li>Domyślnie sortuje w alfabetycznym porządku rosnącym.</li>
+            <li>
+              Sortowanie odbywa się poprzez przetwarzanie wartości do stringa i
+              porównywanie liczb porządkowych z tabeli Unicode.
+            </li>
+          </ul>
+          <p>Taka tablica liczb zostanie posortowana w porządku rosnącym.</p>
+          <pre>
+            const scores = [61, 19, 74, 35, 92, 56];
+            scores.sort();
+            console.log(scores);// [19, 35, 56, 61, 74, 92]
+          </pre>
+          <p>
+            Ponieważ jednak wartości domyślne są przetwarzane na string,
+            standardowe sortowanie liczb działa w nietypowy sposób. Dlatego w
+            następnym zadaniu przyjrzymy się, jak ustawić swoją kolejność
+            sortowania.
+          </p>
+          <pre>
+            const scores = [27, 2, 41, 4, 7, 3, 75];
+            scores.sort();
+            console.log(scores);// [2, 27, 3, 4, 41, 7, 75]
+          </pre>
+          <p>Tablica stringów jest posortowana alfabetycznie.</p>
+          <pre>
+            const students = ["Vika", "Andrey", "Oleg", "Julia", "Boris", "Katya"];
+            students.sort();
+            console.log(students);
+            // [ 'Andrey', 'Boris', 'Julia', 'Katya', 'Oleg', 'Vika' ]
+          </pre>
+          <p>
+            W tym przypadku liczba porządkowa wielkich liter jest mniejsza niż
+            liczba wielkich liter.
+          </p>
+          <pre>
+            const letters = ["b", "B", "a", "A", "c", "C"];
+            letters.sort();
+            console.log(letters);// ['A', 'B', 'C', 'a', 'b', 'c']
+          </pre>
+          <p>
+            Z uwagi na fakt, że oryginalna tablica jest posortowana, naruszana
+            jest zasada czystości funkcji i nie jest wygodne tworzenie kilku
+            kolekcji pochodnych na podstawie oryginalnej, gdy chcemy na przykład
+            utworzyć kolekcję posortowaną w kolejności rosnącej, a drugą w
+            kolejności malejącej. Dlatego przed sortowaniem tworzymy pełną kopię
+            oryginalnej tablicy i dopiero ja sortujemy.
+          </p>
+          <pre>
+            const scores = [61, 19, 74, 35, 92, 56];
+            const ascendingScores = [...scores].sort();
+
+            console.log(scores);// [61, 19, 74, 35, 92, 56]
+            console.log(ascendingScores);// [19, 35, 56, 61, 74, 92]
+          </pre>
+        </article>
+        <article>
+          <h3>Niestandardowa kolejność sortowania liczb</h3>
+          <p>
+            Aby określić niestandardową kolejność sortowania, metodzie
+            sort(compareFunction) trzeba przekazać funkcję wywołania zwrotnego z
+            dwoma parametrami. Jest to funkcja porównania, kolejność sortowania
+            zależy od jej wyniku. Metoda sort() wywoła ją dla wszystkich par
+            elementów.
+          </p>
+          <pre>
+            tablica.sort((a, b) => {
+                // Ciało funkcji wywołania zwrotnego
+            });
+          </pre>
+          <ul class="unnumbered-list-container">
+            <li>a - to pierwszy element do porównania.</li>
+            <li>b - to drugi element do porównania.</li>
+          </ul>
+          <p>
+            Jeśli wywołanie compareFunction(a, b) zwróci jakąkolwiek wartość
+            ujemną, czyli a jest mniejsze niż b, sortowanie umieści a przed b.
+            To jest sortowanie w porządku rosnącym (ascending).
+          </p>
+          <pre>
+            const scores = [61, 19, 74, 35, 92, 56];
+            const ascendingScores = [...scores].sort((a, b) => a - b);
+            console.log(ascendingScores);// [19, 35, 56, 61, 74, 92]
+          </pre>
+          <p>
+            Jeśli wywołanie compareFunction(a, b) zwróci dowolną wartość
+            dodatnią większą od zera, czyli b jest większe niż a, sortowanie
+            umieści b przed a. To jest sortowanie malejąco (descending).
+          </p>
+          <pre>
+            const scores = [61, 19, 74, 35, 92, 56];
+            const descendingScores = [...scores].sort((a, b) => b - a);
+            console.log(descendingScores);// [92, 74, 61, 56, 35, 19]
+          </pre>
+          <p>
+            Jeśli wywołanie compareFunction(a, b) zwróci 0, sortowanie pozostawi
+            a i b niezmienione względem siebie, ale posortuje je względem
+            wszystkich innych elementów. W takim wypadku tak naprawdę nie ma
+            więc znaczenia co zwrócimy, ale warto trzymać się zasad i zwrócić 0
+          </p>
+        </article>
+        <article>
+          <h3>Niestandardowa kolejność sortowania stringów</h3>
+          <p>
+            Aby posortować zmienne tekstowe (stringi) alfabetycznie, rosnąco lub
+            malejąco, użyj metody localeCompare().
+          </p>
+          <pre>
+            firstString.localeCompare(secondString)
+          </pre>
+          <p>
+            Jest ona wywoływana na stringu, który trzeba porównać do
+            (firstString) tego, który jest przekazany jej jako argument
+            (secondString).
+          </p>
+          <pre>
+            "a".localeCompare("b");// -1
+            "b".localeCompare("a");// 1
+            "a".localeCompare("a");// 0
+            "b".localeCompare("b");// 0
+          </pre>
+          <ul class="unnumbered-list-container">
+            <li>
+              Zwraca wartość ujemną, jeśli firstString musi znajdować się w
+              kolejności przed secondString
+            </li>
+            <li>
+              Zwraca wartość dodatnią większą od zera, jeśli firstString musi
+              znajdować się w kolejności po secondString
+            </li>
+            <li>Jeśli wartości są takie same, zwracane jest zero.</li>
+          </ul>
+          <p>
+            Jest to przydatne podczas sortowania ciągów, ponieważ metoda sort()
+            oczekuje dokładnie takich wartości od funkcji wywołania zwrotnego.
+          </p>
+          <pre>
+            const students = ["Vika", "Andrey", "Oleg", "Julia", "Boris", "Katya"];
+
+            const inAlphabetOrder = [...students].sort((a, b) => a.localeCompare(b));
+            console.log(inAlphabetOrder);
+            // [ 'Andrey', 'Boris', 'Julia', 'Katya', 'Oleg', 'Vika' ]
+
+            const inReversedOrder = [...students].sort((a, b) => b.localeCompare(a));
+            console.log(inReversedOrder);
+            // [ 'Vika', 'Oleg', 'Katya', 'Julia', 'Boris', 'Andrey' ]
+          </pre>
+        </article>
+        <article>
+          <h3>Sortowanie obiektów</h3>
+          <p>
+            Podczas pracy z tablicą obiektów sortowanie odbywa się według
+            wartości liczbowej lub stringowej jakiejś właściwości. Na przykład
+            weźmy grupę studentów z wynikami testów. Tablicę obiektów należy
+            posortować rosnąco i malejąco według liczby punktów oraz według
+            imienia ucznia.
+          </p>
+          <pre>
+            const students = [
+            { name: "Mango", score: 83 },
+            { name: "Poly", score: 59 },
+            { name: "Ajax", score: 37 },
+            { name: "Kiwi", score: 94 },
+            ];
+
+            const inAscendingScoreOrder = students.sort(
+            (firstStudent, secondStudent) => firstStudent.score - secondStudent.score
+            );
+
+            const inDescendingScoreOrder = students.sort(
+            (firstStudent, secondStudent) => secondStudent.score - firstStudent.score
+            );
+
+            const inAlphabeticalOrder = students.sort((firstStudent, secondStudent) =>
+            firstStudent.name.localeCompare(secondStudent.name)
+            );
+          </pre>
+        </article>
+      </section>
+      <!-- section11 -->
+      <section class="text">
+        <article>
+          <h2>Łańcuchowanie metod</h2>
+          <p>
+            Weźmy tablicę obiektów z imionami, wynikami i przedmiotami, na które
+            uczęszcza każdy student.
+          </p>
+          <pre>
+            const students = [
+            { name: "Mango", score: 83, courses: ["matematyka", "fizyka"] },
+            { name: "Poly", score: 59, courses: ["informatyka", "matematyka"] },
+            { name: "Ajax", score: 37, courses: ["fizyka", "biologia"] },
+            { name: "Kiwi", score: 94, courses: ["literatura", "informatyka"] },
+            ];
+          </pre>
+          <p>
+            Musisz posortować tablicę ich imion w porządku rosnącym według
+            wyników testów. W tym celu posortujemy kopię tablicy metodą sort(),
+            a następnie za pomocą metody map() utworzymy tablicę wartości
+            właściwości name z posortowanej tablicy.
+          </p>
+          <pre>
+            const sortedByAscendingScore = [...students].sort((a, b) => a.score - b.score);
+            const names = sortedByAscendingScore.map(student => student.name);
+            console.log(names);// ['Ajax', 'Poly', 'Mango', 'Kiwi']
+          </pre>
+          <p>
+            Problem polega na tym, że musimy tworzyć zmienne pośrednie po każdej
+            operacji oprócz ostatniej. Zmienna sortedByAscendingScore jest tak
+            naprawdę zbędna.
+          </p>
+          <p>
+            Możesz pozbyć się takich "martwych" zmiennych, grupując wywołania
+            metod w łańcuchy. Każda następna metoda zostanie wykonana na wyniku
+            poprzedniej.
+          </p>
+          <pre>
+            const names = [...students]
+            .sort((a, b) => a.score - b.score)
+            .map(student => student.name);
+
+            console.log(names);// ['Ajax', 'Poly', 'Mango', 'Kiwi']
+          </pre>
+          <ol class="numbered-list-container">
+            <li>Zrób kopię oryginalnej tablicy przed sortowaniem.</li>
+            <li>Wywołaj metodę sort() na kopii oryginalnej tablicy.</li>
+            <li>Zastosuj metodę map() do wyniku metody sort().</li>
+            <li>Zmiennej names jest przypisywany wynik metody map().</li>
+          </ol>
+          <p>
+            Uzyskajmy posortowaną alfabetycznie tablicę unikalnych odwiedzonych
+            przedmiotów.
+          </p>
+          <pre>
+            const uniqueSortedCourses = students
+            .flatMap(student => student.courses)
+            .filter((course, index, array) => array.indexOf(course) === index)
+            .sort((a, b) => a.localeCompare(b));
+
+            console.log(uniqueSortedCourses);// ['biologia', 'informatyka', 'literatura', 'matematyka', 'fizyka']
+          </pre>
+          <ol class="numbered-list-container">
+            <li>
+              Na oryginalnej tablicy wywołaj flatMap() i utwórz spłaszczoną
+              tablicę wszystkich kursów.
+            </li>
+            <li>
+              Na wyniku metody flatMap() zastosuj metodę filter(), aby
+              odfiltrować unikalne elementy.
+            </li>
+            <li>Na wyniku metody filter() wywołaj sort().</li>
+            <li>
+              Zmiennej uniqueSortedCourses przypisywany jest wynik metody
+              sort().
+            </li>
+          </ol>
+          <p>
+            Łańcuch metod może mieć dowolną długość, ale zwykle nie potrzebujemy
+            więcej niż 2-3 operacje. Po pierwsze, metody iteracyjne są używane
+            do stosunkowo prostych operacji z kolekcją. Po drugie, wywołanie
+            każdej kolejnej metody jest dodatkową iteracją po tablicy, co przy
+            większej liczbie elementów może wpłynąć na wydajność.
+          </p>
+        </article>
+      </section>
+    </main>
+    <footer class="container footer">
+      <div class="contener-shadow-text2">
+        <h2>Footer</h2>
+        <div class="display-footer">
+          <a
+            class="link-footer"
+            href=""
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <img src="../images/footer/konikMaly24x24Squoosh.png" alt="logo" />
+          </a>
+          <div class="display-footer2">
+            <p class="footer-selection">All rights reserved &copy;</p>
+            <p>Konrad</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

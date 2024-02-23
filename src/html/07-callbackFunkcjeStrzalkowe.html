@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;700&family=Roboto:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.min.css"
+    />
+    <!-- <style type="text/css">	@import url(./styles/stylStartowy.css);	</style> -->
+    <link rel="stylesheet" href="../styles/stylStartowy.scss" />
+    <link rel="stylesheet" href="../styles/07-callbackFunkcjeStrzalkowe.scss" />
+    <title>Callback i funkcje strzałkowe</title>
+  </head>
+  <body class="body-container">
+    <header class="menu-sticky">
+      <nav class="nav-container">
+        <!-- Nawigacja do innych stron -->
+        <ul class="nav-list-container">
+          <li>
+            <a class="link" href="../index.html">Menu</a>
+          </li>
+          <li>
+            <a class="link" href="../html/01-zajeciaWprowadzajace.html"
+              >01. Zmienne i typy
+            </a>
+          </li>
+          <li>
+            <a class="link" href="../html/02-rozgalezieniaCykle.html"
+              >02. Rozgałęzienia i cykle
+            </a>
+          </li>
+          <li>
+            <a class="link" href="../html/03-tablice.html">03. Tablice </a>
+          </li>
+          <li>
+            <a class="link" href="../html/04-funkcje.html">04. Funkcje </a>
+          </li>
+          <li>
+            <a class="link" href="../html/05-obiekty.html">05. Obiekty </a>
+          </li>
+          <li>
+            <a class="link" href="../html/06-operacjeSpreadRest.html"
+              >06. Operacje spread/rest
+            </a>
+          </li>
+          <li>
+            <a
+              class="link current-page"
+              href="../html/07-callbackFunkcjeStrzalkowe.html"
+              >07. Callback i funkcje strzałkowe
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main-container">
+      <!-- section1 -->
+      <section class="text">
+        <article>
+          <h1>Moduł4 - Zajęcia 7 - Callback i funkcje strzałkowe</h1>
+          <p>
+            Funkcje w JavaScript nie różnią się niczym od liczb, ciągów znaków
+            czy tablic — są po prostu specjalnym typem danych (obiektem wyższego
+            rzędu), wartością, która może być przechowywana w zmiennej lub
+            przekazywana jako argument do innej funkcji.
+          </p>
+          <pre>
+            function greet(name) {
+                return `Pozdrawiam ${name}.`;
+            }
+
+            // Wywołaj funkcję greet i wyświetl jej wynik w konsoli
+            console.log(greet("Mango"));// Pozdrawiam Mango.
+
+            // Wyświetl funkcję greet w konsoli bez jej wywoływania
+            console.log(greet);// ƒ greet() { return `Pozdrawiam ${name}.`; }
+          </pre>
+          <p>
+            W pierwszym logu jako wartość podajemy funkcję greet wywołaną za
+            pomocą nawiasów okrągłych, zostanie więc ona wyświetlona w konsoli.
+            Drugi log zawiera link do funkcji, a nie wynik wywołania (nie ma
+            nawiasów), więc tylko jej ciało jest wyświetlane w konsoli. Oznacza
+            to, że funkcję można przypisać do zmiennej lub przekazać jako
+            argument do innej funkcji.
+          </p>
+          <p>
+            Funkcja wywołania zwrotnego (callback) - to funkcja, która jest
+            przekazywana do innej funkcji jako argument, i następnie jej w niej
+            wywoływana
+          </p>
+          <p>
+            Funkcja wyższego rzędu (higher order function) - funkcja, która
+            przyjmuje inne funkcje jako argumenty lub zwraca funkcję jako wynik.
+          </p>
+          <pre>
+            // Funkcja wywołania zwrotnego
+            function greet(name) {
+                console.log(`Pozdrawiam ${name}.`);
+            }
+
+            // Funkcja wyższego rzędu
+            function registerGuest(name, callback) {
+                console.log(`Rejestracja gościa ${name}.`);
+                callback(name);
+            }
+
+            registerGuest("Mango", greet);
+          </pre>
+          <p>
+            Przekazaliśmy link do funkcji greet jako argument, więc zostanie ona
+            przypisana do parametru callback i wywołana wewnątrz funkcji
+            registerGuest przez nawiasy okrągłe. Nazwa parametru dla wywołania
+            zwrotnego może być dowolna, najważniejszą rzeczą do zapamiętania
+            jest to, że wartością będzie funkcja. Często spotkamy się z nazwą
+            cb.
+          </p>
+        </article>
+        <article>
+          <h2>Wywołania zwrotne inline</h2>
+          <p>
+            Jeśli funkcja zwrotna jest krótka i potrzebna tylko do przekazywania
+            jako argument, można ją zadeklarować bezpośrednio podczas
+            wywoływania funkcji, do której przekazujemy callback. Taka funkcja
+            będzie dostępna tylko jako wartość parametru i nigdzie indziej w
+            naszym kodzie.
+          </p>
+          <pre>
+            function registerGuest(name, callback) {
+                console.log(`Rejestracja gościa ${name}.`);
+                callback(name);
+            }
+
+            // Przekaż funkcję inline greet jako wywołanie zwrotne
+            registerGuest("Mango", function greet(name) {
+                console.log(`Pozdrawiam ${name}.`);
+            });
+
+            // Przekaż funkcję inline notify jako wywołanie zwrotne
+            registerGuest("Poly", function notify(name) {
+                console.log(`Szanowny(a) ${name}, Pana/Pani pokój będzie gotowy za 30 minut.`);
+            });
+          </pre>
+        </article>
+        <article>
+          <h2>Kilka wywołań zwrotnych</h2>
+          <p>
+            Funkcja może akceptować dowolną liczbę callbacków, tak jak możemy
+            podać jej dowolna ilość argumentów. Załóżmy, że piszemy logikę
+            odbierania połączeń telefonicznych. Program powinien włączyć
+            automatyczną sekretarkę, gdy abonent jest niedostępny lub przepuścić
+            połączenie. Zasymulujemy dostępność abonenta za pomocą generatora
+            liczb losowych, aby uzyskać różne wyniki między różnymi wywołaniami
+            funkcji.
+          </p>
+          <pre>
+            function processCall(recipient) {
+                // Symuluj dostępność abonenta za pomocą liczby losowej  
+                const isRecipientAvailable = Math.random() > 0.5;
+
+                if (!isRecipientAvailable) {
+                    console.log(`Abonent ${recipient} jest niedostępny, zostaw wiadomość.`);
+                    // Logika aktywacji automatycznej sekretarki
+                } else {
+                    console.log(`Łączenie z ${recipient}, proszę czekać...`);
+                    // Logika odbierania połączenia
+                }
+            }
+            
+            processCall("Mango");
+          </pre>
+          <p>
+            Problem z tym podejściem polega na tym, że funkcja processCall robi
+            dość dużo i wiąże sprawdzanie dostępności abonenta z dwoma
+            predefiniowanymi akcjami. Zastanówmy się, co w przypadku gdy w
+            przyszłości zamiast automatycznej sekretarki będziesz musiał
+            zostawić hologram?
+          </p>
+          <p>
+            Moglibyśmy napisać funkcję tak, aby zwracała jakąś wartość, a
+            następnie, na podstawie wyniku jej wykonania, sprawdzić i wykonać
+            potrzebny kod. Takie sprawdzenie jednak nie jest związane z
+            zewnętrznym kodem i będzie go zaśmiecać.
+          </p>
+          <p>
+            Zrefaktoryzujmy funkcję tak, aby pobierała dwa callbacki onAvailable
+            i onNotAvailable i wywoływała je warunkowo.
+          </p>
+          <pre>
+            function processCall(recipient, onAvailable, onNotAvailable) {
+                // Symuluj dostępność abonenta za pomocą liczby losowej
+                const isRecipientAvailable = Math.random() > 0.5;
+
+                if (!isRecipientAvailable) {
+                    onNotAvailable(recipient);
+                    return;
+                }
+
+                onAvailable(recipient);
+            }
+
+            function takeCall(name) {
+                console.log(`Łączenie z ${name}, proszę czekać...`);
+                // Logika odbierania połączenia
+            }
+
+            function activateAnsweringMachine(name) {
+                console.log(`Abonent ${name} jest niedostępny, zostaw wiadomość.`);
+                // Logika aktywacji automatycznej sekretarki
+            }
+
+            function leaveHoloMessage(name) {
+                console.log(`Abonent ${name} jest niedostępny, nagraj hologram.`);
+                // Logika nagrywania hologramu
+            }
+
+            processCall("Mango", takeCall, activateAnsweringMachine);
+            processCall("Poly", takeCall, leaveHoloMessage);
+          </pre>
+          <p>
+            Callback często służy do przetwarzania akcji użytkownika na stronie,
+            podczas przetwarzania żądań do serwera, wykonywania nieznanych
+            wcześniej funkcji itp. Dzieki nim możemy opóźnić wykonanie się
+            danego kodu.
+          </p>
+        </article>
+        <article>
+          <h2>Abstrakcja powtórzeń</h2>
+          <p>
+            Abstrakcja - ukrywanie szczegółów implementacji. Pozwala myśleć o
+            zadaniach na wyższym (abstrakcyjnym) poziomie. Funkcje to dobry
+            sposób na budowanie abstrakcji.
+          </p>
+          <p>
+            Powiedzmy, że skrypt wykonuje akcję określoną liczbę razy. Aby to
+            zrobić, możesz napisać pętlę for
+          </p>
+          <pre>
+            for (let i = 0; i < 10; i += 1) {
+                console.log(i);
+            }
+          </pre>
+          <p>
+            Czy możemy wyabstrahować "zrobić coś N razy" jako funkcję? - Tak!
+            Napiszmy funkcję, która wywołuje console.log() N razy.
+          </p>
+          <pre>
+            function repeatLog(n) {
+                for (let i = 0; i < n; i += 1) {
+                    console.log(i);  
+                }
+            }
+
+            repeatLog(5);
+          </pre>
+          <p>
+            Ale co, jeśli chcemy zrobić coś innego niż rejestrowanie numerów?
+            Ponieważ "zrobić coś" można zapisać jako funkcję, a same funkcje to
+            tylko wartości, możemy więc przekazać akcję jako argument.
+          </p>
+          <pre>
+            function printValue(value) {
+                console.log(value);
+            }
+
+            function prettyPrint(value) {
+                console.log("Logging value: ", value);
+            }
+
+            function repeat(n, action) {
+                for (let i = 0; i < n; i += 1) {
+                    action(i);
+                }
+            }
+
+            // Przekaż printValue jako funkcję zwrotną
+            repeat(3, printValue);
+            // 0
+            // 1
+            // 2
+
+            // Przekaż prettyPrint jako funkcję zwrotną
+            repeat(3, prettyPrint);
+            // Logging value: 0
+            // Logging value: 1
+            // Logging value: 2
+          </pre>
+        </article>
+      </section>
+      <!-- section2 -->
+      <section class="text">
+        <article>
+          <h2>Metoda forEach</h2>
+          <p>
+            Metoda do iteracji, zawarta w tablicach i używana jako zamiennik
+            pętli for i for...of podczas pracy z kolekcją danych.
+          </p>
+          <pre>
+            tablica.forEach(function callback(element, index, array) {
+                // Ciało funkcji zwrotnej
+            });
+        </pre
+          >
+          <ul class="unnumbered-list-container">
+            <li>Iteruje po tablicy element po elemencie.</li>
+            <li>Wywołuje funkcję callback dla każdego elementu tablicy.</li>
+            <li>Nic nie zwraca.</li>
+          </ul>
+          <p>
+            Argumenty funkcji zwrotnej to wartości bieżącego elementu element,
+            jego indeks index i sama oryginalna tablica array. Możesz
+            zadeklarować tylko te parametry, które są potrzebne. Najczęściej
+            jest to tylko element na którym wykonuje się callback. Pamiętajmy że
+            ich kolejność jest odgórnie ustalona więc nie możemy się pomylić.
+          </p>
+          <pre>
+            const numbers = [5, 10, 15, 20, 25];
+
+            // Klasyczny for
+            for (let i = 0; i < numbers.length; i += 1) {
+                console.log(`Indeks ${i}, wartość ${numbers[i]}`);
+            }
+
+            // Iterujący forEach
+            numbers.forEach(function (number, index) {
+                console.log(`Indeks ${index}, wartość ${number}`);
+            });
+        </pre
+          >
+          <p>
+            Jedynym warunkiem, pod którym należy użyć pętli for lub for...of do
+            iteracji po tablicy, jest konieczność przerwania pętli. Nie możesz w
+            łatwy sposób przerwać wykonywania metody forEach, domyślnie iteruje
+            po tablicy do końca. Słowa kluczowe break i continue nie działają w
+            pętli forEach
+          </p>
+        </article>
+      </section>
+      <!-- section3 -->
+      <section class="text">
+        <article>
+          <h2>Funkcje strzałek</h2>
+          <p>
+            Funkcje strzałkowe (anonimowe) mają krótszą, bardziej zwięzłą
+            składnię, co pozwala zmniejszyć ilość kodu, zwłaszcza gdy funkcja
+            jest mała lub używana jako callback
+          </p>
+          <p>
+            Wszystkie funkcje strzałkowe są tworzone jako wyrażenie funkcyjne, a
+            jeśli funkcja nie jest anonimowa, to musi być przypisana do
+            zmiennej.
+          </p>
+          <pre>
+            // "Normalna" deklaracja funkcji
+            function classicAdd(a, b, c) {
+                return a + b + c;
+            }
+
+            // To samo w postaci arrow function
+            const arrowAdd = (a, b, c) => {
+                return a + b + c;
+            };
+        </pre
+          >
+          <p>
+            Słowo kluczowe function nie jest używane, zamiast tego następuje
+            deklaracja parametrów, po których następuje symbol => i ciało
+            funkcji.
+          </p>
+          <p>
+            Jeśli istnieje kilka parametrów, są one oddzielone przecinkami w
+            nawiasach okrągłych, pomiędzy znakami równości = a strzałką =>.
+          </p>
+          <pre>
+            const add = (a, b, c) => {
+                return a + b + c;
+            };
+        </pre
+          >
+          <p>
+            Jeśli jest tylko jeden parametr, jego deklaracja może być bez
+            nawiasów okrągłych.
+          </p>
+          <pre>
+            const add = a => {
+                return a + 5;
+            };
+        </pre
+          >
+          <p>Jeśli nie ma parametrów, musimy zapisać puste nawiasy okrągłe.</p>
+          <pre>
+            const greet = () => {
+                console.log("Cześć!");
+            };
+        </pre
+          >
+        </article>
+        <article>
+          <h2>Niejawny zwrot</h2>
+          <p>W funkcji strzałki jej ciało znajduje się po symbolu =></p>
+          <p>Mamy dwie opcje jego zapisu: z nawiasami klamrowymi lub bez.</p>
+          <pre>
+            const add = (a, b, c) => {
+                console.log(a, b, c);
+                return a + b + c;
+            };
+          </pre>
+          <p>
+            Jeśli istnieją nawiasy klamrowe, a funkcja musi zwrócić jakąś
+            wartość, musisz jawnie wstawić słowo kluczowe return. Nazywamy to
+            jawnym zwrotem (explicit return). Taka składnia jest używana, jeśli
+            oprócz zwracania wartości są inne instrukcje które chcesz wykonać w
+            ciele funkcji
+          </p>
+          <pre>
+            const add = (a, b, c) => a + b + c;
+          </pre>
+          <p>
+            Jeśli nie ma nawiasów klamrowych, zwracany jest wynik wyrażenia
+            które znajduje się po =>. Nazywamy to niejawnym zwrotem (implicit
+            return). Powyższy przykład zwróci wynik wyrażenia dodania parametrów
+            a, b i c.
+          </p>
+          <p>
+            Składnia niejawnego zwrotu znacznie zmniejsza "szum" deklarowania
+            funkcji z ciałem i wyrażeniem zwracającym, ale jest odpowiednia
+            tylko wtedy, gdy nie musisz wykonywać żadnych dodatkowych instrukcji
+            w ciele funkcji poza zwracaniem jakiejś wartości.
+          </p>
+          <pre>
+            // Przed
+            function classicAdd(a, b, c) {
+                return a + b + c;
+            }
+
+            // Po
+            const arrowAdd = (a, b, c) => a + b + c;
+          </pre>
+        </article>
+        <article>
+          <h2>Pseudotablica arguments</h2>
+          <p>
+            Funkcje strzałkowe nie mają zmiennej lokalnej arguments zawierającej
+            wszystkie argumenty. Jeśli konieczne jest zebranie wszystkich
+            argumentów do tablicy, używana jest operacja rest.
+          </p>
+          <pre>
+            const add = (...args) => {
+                console.log(args);
+            };
+
+            add(1, 2, 3);// [1, 2, 3]
+          </pre>
+        </article>
+        <article>
+          <h2>Funkcje strzałkowe jak callback</h2>
+          <p>
+            Anonimowe funkcje strzałkowe są świetne jako wywołania zwrotne
+            między innymi dla metod tablicowych ze względu na krótszą składnię
+            deklaracji, zwłaszcza jeśli nie potrzebujesz długiego ciała funkcji.
+          </p>
+          <pre>
+            const numbers = [5, 10, 15, 20, 25];
+
+            // Deklaracja funkcji
+            numbers.forEach(function (number, index) {
+                console.log(`Indeks ${index}, wartość ${number}`);
+            });
+
+            // Anonimowa funkcja strzałkowa
+            numbers.forEach((number, index) => {
+                console.log(`Indeks ${index}, wartość ${number}`);
+            });
+          </pre>
+          <p>
+            Możesz również osobno zadeklarować funkcję strzałkową w zmiennej i
+            przekazać do niej link. Należy to zrobić, jeśli jedna funkcja jest
+            używana w kilku miejscach w programie lub jest w niej dużo
+            instrukcji.
+          </p>
+          <pre>
+            const numbers = [5, 10, 15, 20, 25];
+
+            const logMessage = (number, index) => {
+                console.log(`Indeks ${index}, wartość ${number}`);
+            };
+
+             numbers.forEach(logMessage);
+        </pre
+          >
+        </article>
+      </section>
+      <!-- section4 -->
+      <section class="text">
+        <article>
+          <h2>Rodzaje kodu</h2>
+          <h3>Programowanie imperatywne</h3>
+          <p>
+            Opisuje proces obliczeniowy w postaci zadanej sekwencji instrukcji
+            zmieniających stan programu. Innymi słowy jest to opis tego, jak coś
+            się wykonuje.
+          </p>
+          <p>
+            Programowanie imperatywne to takie programowanie, które daje
+            maszynie zestaw szczegółowych instrukcji do wykonania zadania. Na
+            przykład pętla for, która dostarcza dokładne instrukcje do iteracji
+            wedle danych warunków.
+          </p>
+          <p>
+            Można to porównać do przepisu na danie. Przepis to zestaw instrukcji
+            krok po kroku potrzebny do uzyskania pożądanego rezultatu.
+          </p>
+          <div class="section4-img-container">
+            <img src="../images/main/imperative-recipe.jpg" alt="" />
+          </div>
+        </article>
+        <article>
+          <h3>Programowanie deklaratywne</h3>
+          <p>
+            Opisuje, jaki jest rezultat, a nie jak to zrobić. Nie ma znaczenia
+            kolejność wykonania i sposób osiągnięcia.
+          </p>
+          <p>
+            Kiedy piszemy kod HTML, to robimy to deklaratywnie, używając
+            znaczników i atrybutów, opisujemy, co chcemy w rezultacie uzyskać.
+            Przeglądarka odczytuje ten kod i sama wykonuje wszystkie niezbędne
+            operacje do tworzenia elementów HTML i umieszczania ich na stronie.
+          </p>
+          <p>
+            Można to porównać do menu restauracji. Jest to deklaratywny zestaw
+            dań do zamówienia, których szczegóły przygotowania i podania są
+            ukryte.
+          </p>
+          <div class="section4-img-container">
+            <img src="../images/main/declarative-menu.jpg" alt="" />
+          </div>
+          <p>
+            Deklaratywny opis problemu jest bardziej wizualny i łatwiejszy do
+            sformułowania. Mówimy, co chcemy zrobić, wywołując metodę lub
+            funkcję. Jego implementacja najprawdopodobniej wykorzystuje kod
+            imperatywny, ale on jest ukryty i nie komplikuje zrozumienia
+            głównego kodu.
+          </p>
+        </article>
+        <article>
+          <h3>Imperatywne vs deklaratywne</h3>
+          <p>
+            Rozważmy różnicę w podejściach na przykładzie podstawowej operacji
+            filtrowania kolekcji. Napiszmy kod do iteracji i filtrowania tablicy
+            liczb według jakiegoś kryterium.
+          </p>
+          <pre>
+            // Podejście imperatywne
+            const numbers = [1, 2, 3, 4, 5];
+            const filteredNumbers = [];
+
+            for (let i = 0; i < numbers.length; i += 1) {
+                if (numbers[i] > 3) {
+                    filteredNumbers.push(numbers[i]);
+                }
+            }
+
+            console.log(filteredNumbers);// [4, 5]
+          </pre>
+          <p>
+            Metoda filter() ukrywa logikę iteracji po kolekcji i wywołuje
+            funkcję zwrotną, którą przekazujemy do niej dla każdego elementu,
+            zwracając tablicę elementów spełniających podane w niej kryterium.
+          </p>
+          <pre>
+            // Podejście deklaratywne
+            const numbers = [1, 2, 3, 4, 5];
+            const filteredNumbers = numbers.filter(value => value > 3);
+            console.log(filteredNumbers); // [4, 5]
+          </pre>
+        </article>
+      </section>
+    </main>
+    <footer class="container footer">
+      <div class="contener-shadow-text2">
+        <h2>Footer</h2>
+        <div class="display-footer">
+          <a
+            class="link-footer"
+            href=""
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <img src="../images/footer/konikMaly24x24Squoosh.png" alt="logo" />
+          </a>
+          <div class="display-footer2">
+            <p class="footer-selection">All rights reserved &copy;</p>
+            <p>Konrad</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
