@@ -265,7 +265,7 @@ const books16 = [
 const genres = books16.flatMap(book => book.genres);
 // console.log(genres);
 
-//17. 18. Metoda map() 22. 23. 24.Metoda filter() 25. Metoda flatMap() filter() 26. 27. Metoda filter() 29. Metoda find() 31. Metoda every() 33. Metoda some()
+//17. 18. Metoda map() 22. 23. 24.Metoda filter() 25. Metoda flatMap() filter() 26. 27. Metoda filter() 29. Metoda find() 31. Metoda every() 33. Metoda some() 36. 37. Metoda reduce(callback, initialValue) - obiekt
 const users = [
   {
     name: 'Moore Hensley',
@@ -594,4 +594,31 @@ const totalAveragePlaytimePerGame = players35.reduce(
   },
   0
 );
-console.log(totalAveragePlaytimePerGame);
+// console.log(totalAveragePlaytimePerGame);
+
+// 36. Metoda reduce(callback, initialValue) - obiekt
+const calculateTotalBalance = users => {
+  return users.reduce((totalBalance, user) => totalBalance + user.balance, 0);
+};
+// console.log(calculateTotalBalance(users));
+
+// 37. Metoda reduce(callback, initialValue) - obiekt
+const getTotalFriendCount = users => {
+  return users.reduce(
+    (totalFriends, user) => totalFriends + user.friends.length,
+    0
+  );
+};
+// console.log(getTotalFriendCount(users));
+
+// 38. Metoda sort()
+const releaseDates = [2016, 1967, 2008, 1984, 1973, 2012, 1997];
+const authors = [
+  'Tanith Lee',
+  'Bernard Cornwell',
+  'Robert Sheckley',
+  'Fyodor Dostoevsky',
+];
+const ascendingReleaseDates = [...releaseDates].sort();
+const alphabeticalAuthors = [...authors].sort();
+// console.log(`${ascendingReleaseDates}\n${alphabeticalAuthors}`);
