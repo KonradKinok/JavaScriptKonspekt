@@ -622,3 +622,75 @@ const authors = [
 const ascendingReleaseDates = [...releaseDates].sort();
 const alphabeticalAuthors = [...authors].sort();
 // console.log(`${ascendingReleaseDates}\n${alphabeticalAuthors}`);
+
+// 39. Metoda sort()
+const releaseDates39 = [2016, 1967, 2008, 1984, 1973, 2012, 1997];
+
+const ascendingReleaseDates39 = [...releaseDates39].sort((a, b) => a - b);
+const descendingReleaseDates = [...releaseDates39].sort((a, b) => b - a);
+// console.log(`${ascendingReleaseDates39}\n${descendingReleaseDates}`);
+
+// 40. Metoda sort()=> a.localeCompare(b));
+const authors40 = [
+  'Tanith Lee',
+  'Bernard Cornwell',
+  'Robert Sheckley',
+  'Fyodor Dostoevsky',
+  'Howard Lovecraft',
+];
+const authorsInAlphabetOrder = [...authors40].sort((a, b) =>
+  a.localeCompare(b)
+);
+const authorsInReversedOrder = [...authors40].sort((a, b) =>
+  b.localeCompare(a)
+);
+// console.log(`${authorsInAlphabetOrder}\n${authorsInReversedOrder}`);
+
+// 41. Metoda sort()obiekt
+const books41 = [
+  {
+    title: 'The Last Kingdom',
+    author: 'Bernard Cornwell',
+    rating: 8.38,
+  },
+  {
+    title: 'Beside Still Waters',
+    author: 'Robert Sheckley',
+    rating: 8.51,
+  },
+  {
+    title: 'The Dream of a Ridiculous Man',
+    author: 'Fyodor Dostoevsky',
+    rating: 7.75,
+  },
+  {
+    title: 'Redder Than Blood',
+    author: 'Tanith Lee',
+    rating: 7.94,
+  },
+  {
+    title: 'Enemy of God',
+    author: 'Bernard Cornwell',
+    rating: 8.67,
+  },
+];
+
+const sortedByAuthorName = [...books41].sort((firstBook, secondBook) =>
+  firstBook.author.localeCompare(secondBook.author)
+);
+
+const sortedByReversedAuthorName = [...books41].sort((firstBook, secondBook) =>
+  secondBook.author.localeCompare(firstBook.author)
+);
+
+const sortedByAscendingRating = [...books41].sort(
+  (firstBook, secondBook) => firstBook.rating - secondBook.rating
+);
+
+const sortedByDescentingRating = [...books41].sort(
+  (firstBook, secondBook) => secondBook.rating - firstBook.rating
+);
+// console.log(sortedByAuthorName);
+// console.log(sortedByReversedAuthorName);
+
+// 42. Metoda sort()obiekt
