@@ -253,7 +253,7 @@ const books16 = [
 ];
 const genres = books16.flatMap((book)=>book.genres);
 // console.log(genres);
-//17. 18. Metoda map() 22. 23. 24.Metoda filter() 25. Metoda flatMap() filter() 26. 27. Metoda filter() 29. Metoda find() 31. Metoda every() 33. Metoda some() 36. 37. Metoda reduce(callback, initialValue) - obiekt
+//17. 18. Metoda map() 22. 23. 24.Metoda filter() 25. Metoda flatMap() filter() 26. 27. Metoda filter() 29. Metoda find() 31. Metoda every() 33. Metoda some() 36. 37. Metoda reduce(callback, initialValue) - obiekt 42.43.44 Metoda sort()obiekt 46. Metoda .filter.map.sort()
 const users = [
     {
         name: "Moore Hensley",
@@ -719,7 +719,7 @@ const authorsInReversedOrder = [
     ...authors40
 ].sort((a, b)=>b.localeCompare(a));
 // console.log(`${authorsInAlphabetOrder}\n${authorsInReversedOrder}`);
-// 41. Metoda sort()obiekt
+// 41. Metoda sort() localeCompare obiekt
 const books41 = [
     {
         title: "The Last Kingdom",
@@ -758,8 +758,93 @@ const sortedByAscendingRating = [
 ].sort((firstBook, secondBook)=>firstBook.rating - secondBook.rating);
 const sortedByDescentingRating = [
     ...books41
-].sort((firstBook, secondBook)=>secondBook.rating - firstBook.rating); // console.log(sortedByAuthorName);
- // console.log(sortedByReversedAuthorName);
- // 42. Metoda sort()obiekt
+].sort((firstBook, secondBook)=>secondBook.rating - firstBook.rating);
+// console.log(sortedByAuthorName);
+// console.log(sortedByReversedAuthorName);
+// 42. Metoda sort()obiekt
+const sortByAscendingBalance = (users)=>{
+    const newTabUsers = [
+        ...users
+    ].sort((firstUser, secondUser)=>firstUser.balance - secondUser.balance);
+    return newTabUsers;
+};
+// console.log(sortByAscendingBalance(users));
+// 43. Metoda sort()obiekt
+const sortByDescendingFriendCount = (users)=>{
+    const newTabUsers = [
+        ...users
+    ].sort((firstUser, secondUser)=>secondUser.friends.length - firstUser.friends.length);
+    return newTabUsers;
+};
+// console.log(sortByDescendingFriendCount(users));
+// 44. Metoda sort() localeCompare obiekt
+const sortByName = (users)=>{
+    const sortedByUsersName = [
+        ...users
+    ].sort((firstUser, secondUser)=>firstUser.name.localeCompare(secondUser.name));
+    return sortedByUsersName;
+};
+// console.log(sortByName(users));
+// 45. Metoda sort()
+const books45 = [
+    {
+        title: "The Last Kingdom",
+        author: "Bernard Cornwell",
+        rating: 8.38
+    },
+    {
+        title: "Beside Still Waters",
+        author: "Robert Sheckley",
+        rating: 8.51
+    },
+    {
+        title: "The Dream of a Ridiculous Man",
+        author: "Fyodor Dostoevsky",
+        rating: 7.75
+    },
+    {
+        title: "Redder Than Blood",
+        author: "Tanith Lee",
+        rating: 7.94
+    },
+    {
+        title: "The Dreams in the Witch House",
+        author: "Howard Lovecraft",
+        rating: 8.67
+    }
+];
+const MIN_BOOK_RATING = 8;
+const names = books45.filter((book)=>book.rating > MIN_BOOK_RATING).map((book)=>book.author).sort((firstBook, secondBook)=>firstBook.localeCompare(secondBook));
+// console.log(names); //["Bernard Cornwell", "Howard Lovecraft", "Robert Sheckley"]
+// 45. Metoda .filter.map.sort()
+const getNamesSortedByFriendCount = (users)=>{
+    const names = users.filter((book)=>book.rating > MIN_BOOK_RATING).map((book)=>book.author).sort((firstBook, secondBook)=>firstBook.localeCompare(secondBook));
+    return names;
+};
+// console.log(getNamesSortedByFriendCount(users));
+// 46. Metoda .filter.map.sort()
+const getNamesSortedByFriendCount46 = (users)=>{
+    const names = [
+        ...users
+    ].sort((firstUser, secondUser)=>firstUser.friends.length - secondUser.friends.length).map((user)=>user.name);
+    return names;
+};
+// console.log(getNamesSortedByFriendCount46(users));
+// 47. Metoda .filter.map.sort()
+const getSortedFriends = (users)=>{
+    const names = users.flatMap((user)=>user.friends).filter((friend, index, array)=>array.indexOf(friend) === index).sort((firstFriend, secondFriend)=>firstFriend.localeCompare(secondFriend));
+    return names;
+};
+// console.log(getSortedFriends(users));
+// 48. Metoda .filter.map.sort()
+const getTotalBalanceByGender = (users, gender)=>{
+    const totalBalance = [
+        ...users
+    ].filter((user)=>user.gender === gender).reduce((total, user)=>{
+        return total + user.balance;
+    }, 0);
+    return totalBalance;
+};
+console.log(`M\u{119}\u{17C}czy\u{17A}ni: ${getTotalBalanceByGender(users, "male")}\nKobiety: ${getTotalBalanceByGender(users, "female")}`);
 
 //# sourceMappingURL=index.789541b4.js.map

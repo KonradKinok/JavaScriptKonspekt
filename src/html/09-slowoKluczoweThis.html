@@ -63,7 +63,9 @@
             </a>
           </li>
           <li>
-            <a class="link current-page" href="../html/08-metodyTablic.html"
+            <a
+              class="link current-page"
+              href="../html/09-slowoKluczoweThis.html"
               >09. Słowo kluczowe this
             </a>
           </li>
@@ -75,8 +77,433 @@
       <section class="text">
         <article>
           <h1>Moduł5 - Zajęcia 9 - Słowo kluczowe this</h1>
+          <h2>Kontekst wykonania funkcji</h2>
+          <p>
+            Można śmiało powiedzieć, że słowo kluczowe this jest jednym z
+            najbardziej mylących pojęć JavaScript na początku nauki.
+            Początkujący często używają this przez metodę prób i błędów, dopóki
+            skrypt nie zadziała.
+          </p>
+          <p>Kontekst w JavaScript jest jak kontekst w zdaniu:</p>
+          <ul class="unnumbered-list-container">
+            <li>
+              Maciej biegnie szybko, ponieważ Maciej próbuje złapać pociąg.
+            </li>
+            <li>Maciej biegnie szybko, ponieważ on próbuje złapać pociąg.</li>
+          </ul>
+          <p>
+            Drugie zdanie jest bardziej lakoniczne. Podmiotem zdania jest Maciej
+            i możemy powiedzieć, że kontekstem zdania jest Maciej, ponieważ to
+            on jest w centrum uwagi w tym konkretnym zdaniu. Nawet zaimek "kto"
+            odnosi się do Macieja.
+          </p>
+          <p>
+            W ten sam sposób obiekt może być bieżącym kontekstem wykonywania
+            funkcji.
+          </p>
+          <pre>
+            // Maciej biegnie szybko, ponieważ Maciej próbuje złapać pociąg.
+            const maciej = {
+              username: "Maciej",
+              showName() {
+                console.log(maciej.username);
+              },
+            };
+            maciej.showName();
+          </pre>
+          <p>
+            Odwołanie do właściwości obiektu wewnątrz metod przy użyciu nazwy
+            samego obiektu jest podobne do używania Maciej zamiast on.
+          </p>
+          <p>
+            Zastrzeżone słowo kluczowe this może być użyte wewnątrz funkcji.
+            Podczas wykonywania funkcji w this dostępne jest odwołanie do
+            obiektu, w kontekście którego została wywołana. W ten sposób w ciele
+            funkcji możemy uzyskać dostęp do właściwości i metod tego obiektu.
+          </p>
+          <pre>
+            // Maciej biegnie szybko, ponieważ on (this) próbuje złapać pociąg.
+            const maciej = {
+              username: "Maciej",
+              showName() {
+                console.log(this.username);
+              },
+            };
+            maciej.showName();
+          </pre>
+          <p>Spójrzmy na przykład z kolekcją książek.</p>
+          <pre>
+            const bookShelf = {
+              authors: ["Bernard Cornwell", "Robert Sheckley"],
+              getAuthors() {
+                return this.authors;
+              },
+              addAuthor(authorName) {
+                this.authors.push(authorName);
+              },
+            };
+
+            console.log(bookShelf.getAuthors());// ["Bernard Cornwell", "Robert Sheckley"]
+            bookShelf.addAuthor("Tanith Lee");
+            console.log(bookShelf.getAuthors());// ["Bernard Cornwell", "Robert Sheckley", "Tanith Lee"]
+          </pre>
+          <p>
+            Metody getAuthors i addAuthor to funkcje (metody obiektowe), które
+            są wywoływane w kontekście obiektu bookShelf. Podczas ich
+            wykonywania do this zapisywane jest odwołanie do obiektu bookShelf i
+            możemy przy pomocy this odwołać się do jego właściwości i metod.
+          </p>
+        </article>
+      </section>
+      <!-- section2 -->
+      <section class="text">
+        <article>
+          <h2>Zasady definiowania this</h2>
+          <p>
+            Warto nauczyć się tylko jednej głównej zasady definiowania this -
+            wartość kontekstu wewnątrz funkcji (nie strzałkowej) będzie
+            określana nie w momencie jej utworzenia, ale w momencie wywołania.
+            Oznacza to, że wartość this jest określana przez sposób wywołania
+            funkcji, a nie przez miejsce, w którym została zadeklarowana.
+          </p>
+        </article>
+        <article>
+          <h3>this w zasięgu globalnym</h3>
+          <p>
+            W zasięgu globalnym, jeśli skrypt nie jest wykonywany w trybie
+            ścisłym, this odnosi się do obiektu window. W trybie ścisłym wartość
+            this, w zasięgu globalnym to undefined.
+          </p>
+          <pre>
+            function foo() {
+              console.log(this);
+            }
+            foo();// window bez "use strict" i undefined z "use strict"
+          </pre>
+        </article>
+        <article>
+          <h3>this w metodzie obiektu</h3>
+          <p>
+            Jeśli funkcja została wywołana jako metoda obiektu, to kontekst
+            będzie odnosił się do obiektu, którego częścią jest metoda.
+          </p>
+          <pre>
+            const maciej = {
+              username: "Maciej",
+              showThis() {
+                console.log(this);
+              },
+              showName() {
+                console.log(this.username);
+              },
+            };
+
+            maciej.showThis();// {username: "Maciej", showThis: ƒ, showName: ƒ}
+            maciej.showName();// 'Maciej'
+          </pre>
+          <p>
+            Spójrzmy na bardziej złożony przykład, aby lepiej zrozumieć tę
+            zasadę.
+          </p>
+          <ul class="unnumbered-list-container">
+            <li>
+              Najpierw utwórzmy funkcję w zasięgu globalnym i wywołajmy ją.
+            </li>
+            <li>
+              Następnie przypiszmy ją do właściwości obiektu i wywołajmy jako
+              metodę tego obiektu.
+            </li>
+          </ul>
+          <pre>
+            function showThis() {
+              console.log("this in showThis: ", this);
+            }
+
+            // Wywołujemy w kontekście globalnym
+            showThis();// this in showThis: Window
+
+            const user = {
+              username: "Mango",
+            };
+
+            // Zapisujemy link do funkcji do właściwości obiektu
+            // Zauważ, że to nie jest wywołanie - nie ma ()
+            user.showContext = showThis;
+
+            // Wywołaj funkcję w kontekście obiektu
+            // this wskaże na bieżący obiekt, w kontekście
+            // którego odbywa się wywołanie, a nie na obiekt globalny.
+            user.showContext();
+            // this in showThis as show Context: {username: "Mango", showContext: ƒ}
+          </pre>
+        </article>
+        <article>
+          <h3>this w funkcjach callback</h3>
+          <p>
+            Podczas przekazywania metod obiektowych jako funkcji wywołania
+            zwrotnego kontekst nie jest zachowywany. Wywołanie zwrotne to
+            odwołanie do metody, które jest przypisywane jako wartość parametru
+            wywoływanego bez udziału obiektu.
+          </p>
+          <pre>
+            const customer = {
+              firstName: "Jacob",
+              lastName: "Mercer",
+              getFullName() {
+                return `${this.firstName} ${this.lastName}`;
+              },
+            };
+
+            function getMessage(callback) {
+              // callback() to wywołanie metody getFullName bez obiektu
+              console.log(`Przetwarzanie żądania od ${callback()}.`);
+            }
+            getMessage(customer.getFullName);// Wystąpi błąd podczas wywoływania funkcji
+          </pre>
+          <p>
+            Rozwiązanie tego problemu zostanie omówione w części poświęconej
+            metodzie bind() i metodom obiektowym.
+          </p>
+        </article>
+        <article>
+          <h3>this w funkcjach strzałkowych</h3>
+          <p>
+            Funkcje strzałkowe nie mają własnego this. W przeciwieństwie do
+            zwykłych funkcji, nie możesz zmienić wartości this wewnątrz funkcji
+            strzałkowej po jej deklaracji.
+          </p>
+          <p>
+            Kontekst wewnątrz funkcji strzałkowej jest określony przez miejsce
+            jej deklaracji, a nie wywołanie i odwołuje się do kontekstu funkcji
+            nadrzędnej.
+          </p>
+          <p>
+            Funkcje strzałkowe również ignorują obecność trybu ścisłego. Jeśli
+            strzałka pamięta globalny kontekst, this będzie zawierało
+            odniesienie do window niezależnie od tego, czy skrypt jest
+            wykonywany w trybie ścisłym, czy nie.
+          </p>
+          <pre>
+            const showThis = () => {
+              console.log("this in showThis: ", this);
+            };
+
+            showThis();// this in showThis: window
+
+            const user = {
+              username: "Mango",
+            };
+            user.showContext = showThis;
+
+            user.showContext();// this in showThis: window
+          </pre>
+          <p>
+            Ograniczając funkcje strzałkowe do stałego kontekstu this, silniki
+            JavaScript mogą je lepiej optymalizować, w przeciwieństwie do
+            zwykłych funkcji, w których wartość this można zmienić.
+          </p>
+          <p>
+            Poniższy przykład nie jest bardzo praktyczny, ale pokazuje, jak
+            działa kontekst funkcji strzałkowych. Wartość kontekstu jest
+            pobierana z zakresu nadrzędnego.
+          </p>
+          <pre>
+            const hotel = {
+              username: "Resort hotel",
+              showThis() {
+                const foo = () => {
+                  // Funkcja strzałkowa zapamiętuje kontekst podczas deklaracji,
+                  // z zasięgu nadrzędnego
+                  console.log("this in foo: ", this);
+                };
+
+                foo();
+                console.log("this in showThis: ", this);
+              },
+            };
+
+            hotel.showThis();
+            // this in foo: {username: 'Resort hotel', showThis: ƒ}
+            // this in showThis: {username: 'Resort hotel',showThis: ƒ}
+          </pre>
+        </article>
+      </section>
+      <!-- section3 -->
+      <section class="text">
+        <article>
+          <h2>Metody funkcyjne</h2>
+          <p>
+            Zdarzają się sytuacje, w których funkcję trzeba wywołać w kontekście
+            obiektu, a funkcja nie jest jego metodą. Aby to zrobić, funkcje
+            posiadają metodycall, apply i bind.
+          </p>
+        </article>
+        <article>
+          <h3>Metoda call()</h3>
+          <p>
+            Metoda call wywoła funkcję foo, a dzięki podanym argumentom, this
+            będzie zawierało odwołanie do obiektu obj, a także przekazane
+            zostaną argumenty arg1, arg2 itd.
+          </p>
+          <pre>
+            foo.call(obj, arg1, arg2, ...)
+          </pre>
+          <p>Pokażmy powyższy zapis w praktyce</p>
+          <pre>
+            function greetGuest(greeting) {
+              console.log(`${greeting}, ${this.username}.`);
+            }
+
+            const mango = {
+              username: "Mango",
+            };
+            const poly = {
+              username: "Poly",
+            };
+
+            greetGuest.call(mango, "Witaj");// Witaj, Mango.
+            greetGuest.call(poly, "Witaj");// Witaj, Poly.
+          </pre>
+        </article>
+        <article>
+          <h3>Metoda apply</h3>
+          <p>
+            Metoda apply jest analogiczna do metody call z tą różnicą, że
+            składnia przekazywania argumentów wymaga tablicy z argumentami,
+            nawet jeśli istnieje tylko jeden argument.
+          </p>
+          <pre>
+            foo.call(obj, arg1, arg2, ...)
+            foo.apply(obj, [arg1, arg2, ...])
+          </pre>
+          <p>
+            Metoda apply wywoła funkcję foo, a dzięki podanym argumentom, this
+            miało zawierało odwołanie do obiektu obj, a także przekazane zostaną
+            elementy tablicy jako osobne argumenty arg1, arg2 itd.
+          </p>
+          <pre>
+            function greetGuest(greeting) {
+              console.log(`${greeting}, ${this.username}.`);
+            }
+
+            const mango = {
+              username: "Mango",
+            };
+            const poly = {
+              username: "Poly",
+            };
+
+            greetGuest.apply(mango, ["Witaj"]);// Witaj, Mango.
+            greetGuest.apply(poly, ["Witaj"]);// Witaj, Poly.
+          </pre>
+        </article>
+        <article>
+          <h3>Metoda bind()</h3>
+          <p>
+            Metody call i apply wywołują funkcję "na miejscu", czyli
+            natychmiast. Ale w przypadku funkcji callback, gdy konieczne jest
+            nie natychmiastowe wywołanie funkcji, ale przekazanie do niej linku
+            z kontekstem do powiązania, stosowana jest metoda bind.
+          </p>
+          <pre>
+            foo.bind(obj, arg1, arg2, ...)
+          </pre>
+          <p>
+            Metoda bind tworzy i zwraca kopię funkcji foo z powiązanym
+            kontekstem obj i ewentualnie z argumentami arg1, arg2 itd. Kopia
+            funkcji może być przekazana gdziekolwiek i wywołana, kiedy tylko
+            chcesz.
+          </p>
+          <p>Zobaczmy to w praktyce:</p>
+          <pre>
+            function greet(clientName) {
+              return `${clientName}, witaj w «${this.service}».`;
+            }
+
+            const steam = {
+              service: "Steam",
+            };
+            const steamGreeter = greet.bind(steam);
+            steamGreeter("Mango");// "Mango, witaj w «Steam»."
+
+            const gmail = {
+              service: "Gmail",
+            };
+
+            const gmailGreeter = greet.bind(gmail);
+            gmailGreeter("Poly");// "Poly, witaj w «Gmail»."
+          </pre>
+        </article>
+        <article>
+          <h3>bind() i metody obiektowe</h3>
+          <p>
+            Jak już wspomnieliśmy, podczas przekazywania metod obiektowych jako
+            funkcji callback, kontekst nie jest zachowywany. Callback to
+            odwołanie do metody, które jest przypisywane jako wartość parametru
+            wywoływanego bez kontekstu obiektu
+          </p>
+          <pre>
+            const customer = {
+              firstName: "Jacob",
+              lastName: "Mercer",
+              getFullName() {
+                return `${this.firstName} ${this.lastName}`;
+              },
+            };
+
+            function makeMessage(callback) {
+              // callback() to wywołanie metody getFullName bez obiektu
+              console.log(`Przetwarzanie żądania od ${callback()}.`);
+            }
+
+            makeMessage(customer.getFullName);// Wystąpi błąd podczas wywoływania funkcji
+          </pre>
+          <p>
+            W trybie ścisłym, wartość this w metodzie getFullName, wywołanej
+            jako funkcja wywołania zwrotnego callback(), będzie undefined.
+            Podczas odwołania do właściwości firstName i lastName wystąpi błąd,
+            ponieważ undefined nie jest obiektem.
+          </p>
+          <p>
+            Bez trybu strict kod również nie zadziała, ponieważ this w tym
+            kontekście będzie referencją do obiektu window więc otrzymamy
+            niepoprawny komunikat i jednocześnie trudny do odnalezienia błąd w
+            naszym kodzie.
+          </p>
+          <p>
+            Metoda bind służy do wiązania kontekstu podczas przekazywania metod
+            obiektów jako funkcji wywołania zwrotnego. Przekażmy przez wywołanie
+            zwrotne nie oryginalną metodę getFullName, ale jej kopię z
+            przypisanym kontekstem do obiektu customer.
+          </p>
+          <pre>
+            // ❌ Źle!
+            makeMessage(customer.getFullName);// Wystąpi błąd podczas wywoływania funkcji
+
+            // ✅ Dobrze :)
+            makeMessage(customer.getFullName.bind(customer));// Przetwarzamy żądanie od Jacob Mercer.
+          </pre>
         </article>
       </section>
     </main>
+    <footer class="container footer">
+      <div class="contener-shadow-text2">
+        <h2>Footer</h2>
+        <div class="display-footer">
+          <a
+            class="link-footer"
+            href=""
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <img src="../images/footer/konikMaly24x24Squoosh.png" alt="logo" />
+          </a>
+          <div class="display-footer2">
+            <p class="footer-selection">All rights reserved &copy;</p>
+            <p>Konrad</p>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
