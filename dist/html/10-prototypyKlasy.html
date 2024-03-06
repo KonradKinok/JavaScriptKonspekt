@@ -708,6 +708,157 @@
         </article>
         <article>
           <h3>Dziedziczenie klas</h3>
+          <p>
+            Słowo kluczowe extends pozwala na implementację dziedziczenia klas,
+            gdy jedna klasa (potomna, pochodna) dziedziczy właściwości i metody
+            innej klasy (rodzica).
+          </p>
+          <pre>
+            class Child extends Parent {
+              // ...
+            }
+          </pre>
+          <p>
+            W wyrażeniu class Child extends Parent klasa potomna Child
+            dziedziczy (rozszerza się) po klasie rodzicielskiej Parent.
+          </p>
+          <p>
+            Oznacza to, że możemy zadeklarować klasę bazową przechowującą ogólne
+            charakterystyki i metody dla grupy klas pochodnych, które dziedziczą
+            właściwości i metody rodzica, ale także dodają własne, unikalne.
+          </p>
+          <p>
+            Weźmy przykład aplikacji która ma użytkowników o różnych rolach -
+            administratora, autora artykułów, menedżera treści itp. Każdy typ
+            użytkownika ma zestaw wspólnych cech, takich jak e-mail i hasło, ale
+            także kilka unikalnych.
+          </p>
+          <p>
+            Po utworzeniu niezależnych klas dla każdego typu użytkownika
+            otrzymamy duplikację wspólnych właściwości i metod, a jeśli zajdzie
+            potrzeba zmiany np. nazwy właściwości, będziemy musieli
+            refaktoryzować wszystkie klasy, jest to niewygodne, pracochłonne i
+            może łatwo doprowadzić do powstania błędów.
+          </p>
+          <p>
+            Zamiast tego możesz utworzyć ogólną klasę User, która będzie
+            przechowywać zestaw wspólnych właściwości i metod, a następnie
+            utworzyć klasy dla każdego typu użytkownika, które dziedziczą ten
+            zestaw po klasie User. Jeśli konieczna jest zmiana czegoś ogólnego,
+            wystarczy zmienić tylko kod klasy User.
+          </p>
+          <pre>
+            class User {
+              #email;
+
+              constructor(email) {
+                this.#email = email;
+              }
+
+              get email() {
+                return this.#email;
+              }
+
+              set email(newEmail) {
+                this.#email = newEmail;
+              }
+            }
+
+            class ContentEditor extends User {
+              // Ciało klasy ContentEditor
+            }
+
+            const editor = new ContentEditor("mango@mail.com");
+            console.log(editor);// ContentEditor { email: "mango@mail.com" }
+            console.log(editor.email);// "mango@mail.com"
+          </pre>
+          <p>
+            Klasa ContentEditor dziedziczy po klasie User jej konstruktor,
+            getter i setter email, a także właściwość publiczną o tej samej
+            nazwie. Należy pamiętać, że klasa potomna nie dziedziczy prywatnych
+            właściwości i metod po klasie nadrzędnej.
+          </p>
+        </article>
+        <article>
+          <h3>Konstruktor klasy potomnej</h3>
+          <p>
+            Coś co powinniśmy zawsze zrobić w konstruktorze klasy potomnej to
+            wywołać funkcję specjalną super(argumenty) - jest to alias
+            konstruktora klasy nadrzędnej. W przeciwnym razie podczas próby
+            uzyskania dostępu do this w konstruktorze klasy potomnej wystąpi
+            błąd. Podczas wywoływania konstruktora klasy nadrzędnej przekazujemy
+            wymagane argumenty, aby zainicjować właściwości.
+          </p>
+          <pre>
+            class User {
+              #email;
+
+              constructor(email) {
+                this.#email = email;
+              }
+
+              get email() {
+                return this.#email;
+              }
+
+              set email(newEmail) {
+                this.#email = newEmail;
+              }
+            }
+
+            class ContentEditor extends User {
+              constructor({ email, posts }) {
+                // Wywołanie konstruktora klasy nadrzędnej User
+                super(email);
+                this.posts = posts;
+              }
+            }
+
+            const editor = new ContentEditor({ email: "mango@mail.com", posts: [] });
+            console.log(editor);// { email: 'mango@mail.com', posts: [] }
+            console.log(editor.email);// 'mango@mail.com'
+          </pre>
+        </article>
+        <article>
+          <h3>Metody klasy potomnej</h3>
+          <p>
+            W klasie potomnej można zadeklarować metody, które będą dostępne
+            tylko dla jej instancji.
+          </p>
+          <pre>
+            class User {
+              #email;
+
+              constructor(email) {
+                this.#email = email;
+              }
+
+              get email() {
+                return this.#email;  
+              }
+
+              set email(newEmail) {
+                this.#email = newEmail;
+              }
+            }
+
+            class ContentEditor extends User {
+              constructor({ email, posts }) {
+                super(email);
+                this.posts = posts;
+              }
+
+              addPost(post) {
+                this.posts.push(post);
+              }
+            }
+
+            const editor = new ContentEditor({ email: "mango@mail.com", posts: [] });
+            console.log(editor);// ContentEditor { email: 'mango@mail.com', posts: [] }
+            console.log(editor.email);// 'mango@mail.com'
+            editor.addPost("post-1");
+            console.log(editor.posts);// ['post-1']
+          </pre>
         </article>
       </section>
     </main>
