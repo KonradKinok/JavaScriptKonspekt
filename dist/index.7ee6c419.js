@@ -218,14 +218,14 @@ class StringBuilder {
     // return this.value;
     }
 }
-const builder = new StringBuilder(".");
-console.log(builder.getValue()); // "."
-builder.padStart("^");
-console.log(builder.getValue()); // "^."
-builder.padEnd("^");
-console.log(builder.getValue()); // "^.^"
-builder.padBoth("=");
-console.log(builder.getValue()); // "=^.^="
+// const builder = new StringBuilder('.');
+// console.log(builder.getValue()); // "."
+// builder.padStart('^');
+// console.log(builder.getValue()); // "^."
+// builder.padEnd('^');
+// console.log(builder.getValue()); // "^.^"
+// builder.padBoth('=');
+// console.log(builder.getValue()); // "=^.^="
 //12. deklaracja klasa  prywatne właściwości
 class Car12 {
     #brand;
@@ -262,12 +262,155 @@ class Storage13 {
     removeItem(itemToRemove) {
         this.#items = this.#items.filter((item)=>item !== itemToRemove);
     }
-} // const storage = new Storage13(['Nanitoids', 'Prolonger', 'Antigravitator']);
- // console.log(storage);
- // console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator"]
- // storage.addItem('Droid');
- // console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator", "Droid"]
- // storage.removeItem('Prolonger');
- // console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
+}
+// const storage = new Storage13(['Nanitoids', 'Prolonger', 'Antigravitator']);
+// console.log(storage);
+// console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator"]
+// storage.addItem('Droid');
+// console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator", "Droid"]
+// storage.removeItem('Prolonger');
+// console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
+//14. klasa  prywatne właściwości
+class StringBuilder14 {
+    #value;
+    constructor(initialValue){
+        this.#value = initialValue;
+    }
+    getValue() {
+        return this.#value;
+    }
+    padEnd(str) {
+        this.#value += str;
+    }
+    padStart(str) {
+        this.#value = str + this.#value;
+    }
+    padBoth(str) {
+        this.padStart(str);
+        this.padEnd(str);
+    }
+}
+// const builder14 = new StringBuilder14('.');
+// console.log(builder14.getValue()); // "."
+// builder14.padStart('^');
+// console.log(builder14.getValue()); // "^."
+// builder14.padEnd('^');
+// console.log(builder14.getValue()); // "^.^"
+// builder14.padBoth('=');
+// console.log(builder14.getValue()); // "=^.^="
+//15. klasa  Gettery i settery
+class Car15 {
+    #brand;
+    #model;
+    #price;
+    constructor({ brand, model, price }){
+        this.#brand = brand;
+        this.#model = model;
+        this.#price = price;
+    }
+    get brand() {
+        return this.#brand;
+    }
+    set brand(newBrand) {
+        this.#brand = newBrand;
+    }
+    get model() {
+        return this.#model;
+    }
+    set model(newModel) {
+        this.#model = newModel;
+    }
+    get price() {
+        return this.#price;
+    }
+    set price(newPrice) {
+        this.#price = newPrice;
+    }
+}
+//16. klasa  Static
+class Car16 {
+    #price;
+    static MAX_PRICE = 50000;
+    constructor({ price }){
+        this.#price = price;
+    }
+    get price() {
+        return this.#price;
+    }
+    set price(newPrice) {
+        if (newPrice <= Car16.MAX_PRICE) this.#price = newPrice;
+    }
+}
+// const audi = new Car16({ price: 35000 });
+// console.log(audi.price); // 35000
+// audi.price = 49000;
+// console.log(audi.price); // 49000
+// audi.price = 51000;
+// console.log(audi.price); // 49000
+// console.log(Car16.MAX_PRICE); // 50000
+//17. klasa  Static
+class Car17 {
+    static #MAX_PRICE = 50000;
+    static checkPrice(price) {
+        if (price <= Car17.#MAX_PRICE) return "Success! Price is within acceptable limits";
+        return "Error! Price exceeds the maximum";
+    }
+    constructor({ price }){
+        this.price = price;
+    }
+}
+const audi = new Car17({
+    price: 36000
+});
+const bmw = new Car17({
+    price: 64000
+});
+// console.log(Car17.checkPrice(audi.price)); // "Success! Price is within acceptable limits"
+// console.log(Car17.checkPrice(bmw.price)); // "Error! Price exceeds the maximum"
+//18. klasa  extends
+class User18 {
+    constructor(email){
+        this.email = email;
+    }
+    get email() {
+        return this.email;
+    }
+    set email(newEmail) {
+        this.email = newEmail;
+    }
+}
+class Admin extends User18 {
+    static AccessLevel = {
+        BASIC: "basic",
+        SUPERUSER: "superuser"
+    };
+}
+// console.log(Admin.AccessLevel.BASIC);
+//19. klasa  extends
+class User {
+    email;
+    constructor(email){
+        this.email = email;
+    }
+    get email() {
+        return this.email;
+    }
+    set email(newEmail) {
+        this.email = newEmail;
+    }
+}
+class Admin extends User {
+    // Change code below this line
+    static AccessLevel = {
+        BASIC: "basic",
+        SUPERUSER: "superuser"
+    };
+}
+const mango = new Admin({
+    email: "mango@mail.com",
+    accessLevel: Admin.AccessLevel.SUPERUSER
+});
+console.log(mango.email); // "mango@mail.com"
+console.log(mango.accessLevel); // "superuser"
 
 //# sourceMappingURL=index.7ee6c419.js.map
