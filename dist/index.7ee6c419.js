@@ -387,7 +387,7 @@ class Admin extends User18 {
 }
 // console.log(Admin.AccessLevel.BASIC);
 //19. klasa  extends
-class User {
+class User19 {
     email;
     constructor(email){
         this.email = email;
@@ -399,18 +399,63 @@ class User {
         this.email = newEmail;
     }
 }
-class Admin extends User {
+class Admin19 extends User19 {
     // Change code below this line
     static AccessLevel = {
         BASIC: "basic",
         SUPERUSER: "superuser"
     };
+    constructor({ email, accessLevel }){
+        super(email);
+        this.accessLevel = accessLevel;
+    }
 }
-const mango = new Admin({
+const mango = new Admin19({
+    email: "mango@mail.com",
+    accessLevel: Admin19.AccessLevel.SUPERUSER
+});
+// console.log(mango.email); // "mango@mail.com"
+// console.log(mango.accessLevel); // "superuser"
+//20. klasa  extends
+class User20 {
+    email;
+    constructor(email){
+        this.email = email;
+    }
+    get email() {
+        return this.email;
+    }
+    set email(newEmail) {
+        this.email = newEmail;
+    }
+}
+class Admin20 extends User20 {
+    // Change code below this line
+    blacklistedEmails = [];
+    static AccessLevel = {
+        BASIC: "basic",
+        SUPERUSER: "superuser"
+    };
+    constructor({ email, accessLevel }){
+        super(email);
+        this.accessLevel = accessLevel;
+    }
+    blacklist(email) {
+        this.blacklistedEmails.push(email);
+    }
+    isBlacklisted(email) {
+        return this.blacklistedEmails.includes(email);
+    }
+}
+const mango20 = new Admin20({
     email: "mango@mail.com",
     accessLevel: Admin.AccessLevel.SUPERUSER
 });
-console.log(mango.email); // "mango@mail.com"
-console.log(mango.accessLevel); // "superuser"
+console.log(mango20.email); // "mango@mail.com"
+console.log(mango20.accessLevel); // "superuser"
+mango20.blacklist("poly@mail.com");
+console.log(mango20.blacklistedEmails); // ["poly@mail.com"]
+console.log(mango20.isBlacklisted("mango@mail.com")); // false
+console.log(mango20.isBlacklisted("poly@mail.com")); // true
 
 //# sourceMappingURL=index.7ee6c419.js.map
