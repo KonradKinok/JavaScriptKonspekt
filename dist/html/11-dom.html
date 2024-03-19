@@ -103,6 +103,78 @@
             nie tylko.
           </p>
         </article>
+        <article>
+          <h2>Dokument HTML i DOM</h2>
+          <p>
+            Zgodnie z modelem DOM każdy tag tworzy osobny element (węzeł), każdy
+            fragment tekstu - element tekstowy. Dokument HTML to drzewo
+            hierarchiczne, w którym każdy element (z wyjątkiem "korzeniowego"
+            root) ma tylko jednego rodzica, czyli element, w którym się
+            znajduje. To drzewo składa się z zagnieżdżonej struktury tagów i
+            elementów tekstowych.
+          </p>
+          <div class="section1-img-container">
+            <img src="/dom-tree.98be22fd.png" alt="">
+          </div>
+          <p>
+            Aby wyświetlić dokument HTML, przeglądarka najpierw konwertuje go do
+            formatu, który rozumie — DOM. Silnik przeglądarki posiada specjalny
+            kod - HTML parser, który służy do konwersji HTML do DOM.
+          </p>
+          <p>
+            W HTML zagnieżdżenie definiuje relację rodzic-dziecko między
+            elementami. W DOM obiekty są połączone w drzewiastą strukturę
+            danych, fiksując te relacje.
+          </p>
+          <p>
+            Przeglądarka buduje DOM stopniowo, gdy tylko pojawią się pierwsze
+            linijki, zaczyna parsować kod HTML, dodając węzły do struktury
+            drzewa.
+          </p>
+          <div class="section1-img-container">
+            <img src="/html-parser.70441e8a.gif" alt="">
+          </div>
+          <p>
+            Po utworzeniu drzewa DOM możesz znaleźć w nim element za pomocą
+            JavaScript i wykonać na nim pewne akcje, ponieważ każdy element
+            stanowi obiekt i ma interfejs z wieloma właściwościami i metodami.
+          </p>
+          <div class="section1-img-container">
+            <img src="/js-engine.ee7e7616.gif" alt="">
+          </div>
+        </article>
+        <article>
+          <h2>Drzewo DOM</h2>
+          <p>
+            Renderujemy drzewo dokumentów HTML za pomocą usługi generator drzewa
+            DOM.
+          </p>
+          <div class="section1-img-container">
+            <img src="/drzewoDom.a0069f2e.jpg" alt="">
+          </div>
+          <div class="section1-img-container">
+            <img src="/live-dom-tree.49f904a9.png" alt="">
+          </div>
+          <p>To drzewo ma dwa rodzaje węzłów.</p>
+          <ul class="unnumbered-list-container">
+            <li>
+              Węzły elementów (element node) są tworzone przez znaczniki,
+              oczywiście niektóre elementy są zagnieżdżane w innych. Tylko one
+              tworzą strukturę drzewa.
+            </li>
+            <li>
+              Węzły tekstowe (text node) - utworzone przez tekst wewnątrz
+              elementów. Węzeł tekstowy zawiera tylko tekst i nie może mieć
+              dzieci, to znaczy zawsze znajduje się na najniższym poziomie
+              hierarchii. Spacje i podziały wierszy to także węzły tekstowe.
+            </li>
+          </ul>
+          <p>
+            Są wyjątki od tej reguły: spacje przed head są ignorowane, a treść
+            po body nie tworzy elementu, ponieważ przeglądarka kończy DOM wraz z
+            końcem body.
+          </p>
+        </article>
       </section>
     </main>
     <footer class="container footer">
