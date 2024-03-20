@@ -176,6 +176,227 @@
           </p>
         </article>
       </section>
+      <!-- section2 -->
+      <section class="text">
+        <article>
+          <h2>Poruszanie się po drzewie DOM</h2>
+          <p>
+            DOM daje szerokie możliwości pracy z elementami i jego zawartością,
+            ale aby to zrobić, musisz najpierw uzyskać do niego dostęp. Dostęp
+            do DOM zaczyna się od obiektu document, z którego można dostać się
+            do wszystkich zagnieżdżonych elementów DOM
+          </p>
+          <p>
+            document jest częścią globalnego obiektu window, który jest zawsze
+            dostępny w skrypcie, gdy jest wykonywany w przeglądarce. Podobnie
+            jak alert, console.log, prompt i wiele innych.
+          </p>
+          <p>
+            Elementy drzewa DOM są ze sobą hierarchicznie powiązane. Terminy
+            przodek (ancestor), potomek (descendant), rodzic (parent), dziecko
+            (child) i sąsiad (sibling) są używane do opisu relacji.
+          </p>
+          <ul class="unnumbered-list-container">
+            <li>Najwyższy element nazywa się korzeniem (root node).</li>
+            <li>Każdy element, poza korzeniem, ma tylko jednego rodzica.</li>
+            <li>Element może mieć tyle dzieci, ile chcesz.</li>
+            <li>
+              Sąsiedzi to elementy ze wspólnym rodzicem i nie zagnieżdżone w
+              sobie.
+            </li>
+            <li>
+              Elementy potomne (dzieci) — elementy, które leżą bezpośrednio
+              wewnątrz bieżącego elementu (pierwsze zagnieżdżenie).
+            </li>
+            <li>
+              Potomkowie - wszystkie elementy, które leżą wewnątrz obecnego,
+              wraz z ich dziećmi, dziećmi ich dzieci i tak dalej. To znaczy całe
+              "pod-drzewo".
+            </li>
+          </ul>
+          <div class="section2-img-container">
+            <img src="/dom-traversal.cf920add.png" alt="">
+          </div>
+          <p>
+            Elementy mają następujące właściwości umożliwiające poruszanie się
+            po tej hierarchii.
+          </p>
+          <ul class="unnumbered-list-container">
+            <li>elem.parentNode - wybierze rodzica elem.</li>
+            <li>
+              elem.childNodes - pseudotablica, przechowująca wszystkie elementy
+              potomne, w tym tekstowe.
+            </li>
+            <li>
+              elem.children - pseudotablica, przechowuje tylko węzły potomne,
+              czyli odpowiadające znacznikom.
+            </li>
+            <li>
+              elem.firstChild - wybierze pierwszy element potomny wewnątrz elem,
+              w tym węzły tekstowe.
+            </li>
+            <li>
+              elem.firstElementChild - wybierze pierwszy węzeł potomny wewnątrz
+              elem.
+            </li>
+            <li>
+              elem.lastChild - wybierze ostatni element potomny wewnątrz elem, w
+              tym węzły tekstowe.
+            </li>
+            <li>
+              elem.lastElementChild - wybierze ostatni węzeł potomny wewnątrz
+              elem.
+            </li>
+            <li>
+              elem.previousElementSibling - wybierze element "po lewej stronie"
+              od elem (jego poprzedniego sąsiada).
+            </li>
+            <li>
+              elem.nextElementSibling - wybierze węzeł "po prawej stronie" od
+              elem (jego następnego sąsiada).
+            </li>
+          </ul>
+          <pre>
+            console.log(document);
+
+            const body = document.body;
+            console.log(body);
+
+            const list = document.querySelector(".list");
+            console.log(list);
+
+            const firstListItem = list.firstElementChild;
+            console.log(firstListItem);
+
+            const lastListItem = list.lastElementChild;
+            console.log(lastListItem);
+
+            const listItems = list.children;
+            console.log(listItems);
+          </pre>
+          <p>
+            Kolekcje DOM, takie jak childNodes i children są pseudotablicami
+            (NodeList) i nie posiadają większości metod tablicowych.
+          </p>
+        </article>
+      </section>
+      <!-- section3 -->
+      <section class="text">
+        <article>
+          <h2>Wyszukiwanie elementów</h2>
+          <p>
+            Już wiemy, że element DOM to obiekt z właściwościami i metodami.
+            Czas nauczyć się, jak szybko znaleźć element za pomocą dowolnego
+            selektora CSS. Grupa metod elem.querySelector* to nowoczesny
+            standard wyszukiwania elementów. Pozwalają znaleźć element lub grupę
+            elementów za pomocą selektora CSS o dowolnej złożoności.
+          </p>
+          <p>
+            Najczęściej w miejscu elem znajdziemy po prostu document dzięki
+            czemu szukamy elementów na całej stronie.
+          </p>
+          <pre>
+            element.querySelector(selector);
+          </pre>
+          <p>
+            Stosuje się, gdy trzeba znaleźć tylko jeden, najczęściej unikalny
+            element na przykład po atrybucie id.
+          </p>
+          <ul class="unnumbered-list-container">
+            <li>
+              Zwraca pierwszy element znaleziony w element, który pasuje do
+              selektora CSS znajdującego się w zmiennej selector.
+            </li>
+            <li>Jeśli nic nie zostanie znalezione, zwróci null.</li>
+          </ul>
+          <pre>
+            element.querySelectorAll(selector);
+          </pre>
+          <p>
+            Jest używany, gdy konieczne jest znalezienie kolekcji elementów,
+            czyli uzyskanie tablicy odniesień do elementów z tym samym
+            selektorem. Przykładem będą wszystkie elementy na liście z klasą
+            menu-item.
+          </p>
+          <ul class="unnumbered-list-container">
+            <li>
+              Zwraca pseudotablicę wszystkich elementów wewnątrz elementu
+              element, które spełniają wymagania selektora CSS selector.
+            </li>
+            <li>Jeśli nic nie zostanie znalezione, zwróci pustą tablicę.</li>
+          </ul>
+          <p>
+            Otwórz ten przykład w osobnym oknie i zobacz logi w konsoli
+            programisty.
+          </p>
+          <ul id="menu" class="menu">
+            <li class="menu-item">home</li>
+            <li class="menu-item">about</li>
+            <li class="menu-item">gallery</li>
+            <li>blog</li>
+          </ul>
+        </article>
+      </section>
+      <!-- section4 -->
+      <section class="text">
+        <article>
+          <h2>Właściwości i atrybuty</h2>
+          <p>
+            Podczas utworzenia drzewa DOM niektóre standardowe atrybuty HTML
+            stają się właściwościami elementów. Przyjrzyjmy się kilku
+            powszechnie używanym właściwościom.
+          </p>
+          <ul class="unnumbered-list-container">
+            <li>
+              value - zawiera aktualną wartość elementów formularza. (string)
+            </li>
+            <li>
+              checked - przechowuje stan pola wyboru lub przycisku radiowego.
+              (boolean)
+            </li>
+            <li>
+              name - przechowuje wartość określoną w atrybucie HTML name.
+              (string)
+            </li>
+            <li>src - ścieżka do obrazu znacznika <img>. (string)</li>
+          </ul>
+          <p>Przykład:</p>
+          <pre>
+            const image = document.querySelector('.image');
+            console.log(image.src); // https://picsum.photos/id/9/320/240
+            console.log(image.alt); // A laptop
+
+            image.src = 'https://picsum.photos/id/13/640/480';
+            image.alt = 'River bank';
+          </pre>
+          <img class="image" src="https://picsum.photos/id/9/320/240" alt="A laptop" width="300">
+        </article>
+        <article>
+          <h3>Właściwość textContent</h3>
+          <p>
+            elem.textContent zwraca zawartość tekstową wewnątrz elementu.
+            Dostępna jest do odczytu i zapisu. Bez względu na to, co zostanie
+            przekazane do textContent, dane będą zawsze zapisywane jako tekst.
+          </p>
+          <p>Przykład:</p>
+          <pre>
+            const textEl = document.querySelector('.article-text');
+            console.log(textEl.textContent); // text inside p.article-text
+
+            const titleEl = document.querySelector('.article-title');
+            titleEl.textContent = 'Welcome to Bahamas!';
+          </pre>
+          <article class="article">
+            <h2 class="article-title">Welcome to Hawaii!</h2>
+            <p class="article-text">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
+              quaerat nemo veritatis quasi eius eum aliquid, nobis dolore nisi,
+              magnam eaque iusto, necessitatibus atque laborum quam tempora
+              ducimus dicta ipsam.
+            </p>
+          </article>
+        </article>
+      </section>
     </main>
     <footer class="container footer">
       <div class="contener-shadow-text2">
@@ -191,5 +412,7 @@
         </div>
       </div>
     </footer>
+    <!-- SKRYPTY JS -->
+    <script defer="" src="/index.6e6d2d0f.js"></script>
   <script src="/11-dom.25cc42f7.js"></script></body>
 </html>
