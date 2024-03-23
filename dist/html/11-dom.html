@@ -396,6 +396,595 @@
             </p>
           </article>
         </article>
+        <article>
+          <h3>Właściwość classList</h3>
+          <p>
+            Właściwość classList przechowuje obiekt z metodami pracy z klasami
+            elementu (tymi które wykorzystujemy do stylowania w CSS).
+          </p>
+          <ul class="unnumbered-list-container">
+            <li>
+              elem.classList.contains(cls) - zwraca true lub false w zależności
+              od tego, czy element ma klasę cls.
+            </li>
+            <li>
+              elem.classList.add(cls) - dodaje klasę cls do listy klas
+              elementów.
+            </li>
+            <li>
+              elem.classList.remove(cls) - usuwa klasę cls z listy klas
+              elementów.
+            </li>
+            <li>
+              elem.classList.toggle(cls) - jeśli nie ma klasy cls to dodaje ją,
+              jeśli jest to ją usuwa.
+            </li>
+            <li>
+              elem.classList.replace(oldClass, newClass) - zastępuje istniejącą
+              klasę oldClass podaną newClass.
+            </li>
+          </ul>
+          <p class="example">Przykład -------------------------------</p>
+          <pre>
+            const link = document.querySelector(".link");
+            console.log(link.classList);
+
+            const hasActiveClass = link.classList.contains("is-active");
+            console.log(`hasActiveClass - ${hasActiveClass}`);
+
+            link.classList.add("special");
+            console.log(link.classList);
+
+            link.classList.remove("is-active");
+            console.log(link.classList);
+
+            link.classList.toggle("is-active");
+            console.log(link.classList);
+
+            link.classList.replace("special", "regular");
+            console.log(link.classList);
+          </pre>
+          <a class="section4-link section4-is-active" href="">A random link</a>
+          <p class="example">PrzykładEND -------------------------------</p>
+        </article>
+        <article>
+          <h3>Właściwość style</h3>
+          <p>
+            Służy do odczytywania i zmiany stylów wbudowanych (inline). Zwraca
+            obiekt CSSStyleDeclaration, który zawiera listę wszystkich
+            właściwości określonych tylko w stylach wbudowanych elementu, (a nie
+            wszystkie reguły CSS dla elementu). W tym obiekcie właściwości są
+            zapisywane w camelCase, to znaczy background-color staje się
+            element.style.backgroundColor itd.
+          </p>
+          <pre>
+            const button = document.querySelector(".btn");
+
+            button.style.backgroundColor = "teal";
+            button.style.fontSize = "24px";
+            button.style.textAlign = "center";
+
+            console.log(button.style);// inline styles object
+          </pre>
+          <p>
+            W praktyce stylizowanie elementów odbywa się poprzez dodawanie klas
+            CSS. Właściwość style służy do dodawania pewnego rodzaju stylów
+            dynamicznych, na przykład podczas animacji. W innych przypadkach
+            używanie jej nie będzie dobrą praktyką i utrudni nam stylowanie.
+            Zawsze starajmy się najpierw rozwiązać stylowanie poprzez klasy.
+          </p>
+        </article>
+        <article>
+          <h3>Atrybuty</h3>
+          <p>
+            Elementom DOM odpowiadają tagi HTML, które mają często atrybuty
+            tekstowe. Jeśli atrybut nie posiada swojej własnej określonej
+            właściwości (jak value dla pól input) to dostęp do atrybutów
+            uzyskuje się przy użyciu standardowych metod. Te metody operują na
+            wartości, która jest w HTML.
+          </p>
+          <ul class="unnumbered-list-container">
+            <li>
+              elem.hasAttribute(name) - sprawdza obecność atrybutu o nazwie
+              name, zwraca true lub false.
+            </li>
+            <li>
+              elem.getAttribute(name) - pobiera wartość atrybutu i zwraca ją.
+            </li>
+            <li>elem.setAttribute(name, value) - ustawia atrybut.</li>
+            <li>elem.removeAttribute(name) - usuwa atrybut.</li>
+            <li>
+              elem.attributes - właściwość, zwraca obiekt ze wszystkimi
+              atrybutami elementu.
+            </li>
+          </ul>
+          <p class="example">Przykład -------------------------------</p>
+          <pre>
+            const image = document.querySelector(".image");
+            console.log(image.attributes); // NamedNodeMap {0: class, 1: src, 2: alt, length: 3}
+            console.log(image.hasAttribute("src")); // true
+            console.log(image.getAttribute("alt")); // "Rocks and waterfall"
+            image.setAttribute("alt", "Amazing nature");
+            console.log(image.getAttribute("alt")); // Amazing nature
+          </pre>
+          <img class="section4-image" src="https://picsum.photos/id/15/320/240" alt="Rocks and waterfall" width="300">
+          <p class="example">PrzykładEND -------------------------------</p>
+        </article>
+        <article>
+          <h3>Atrybuty data</h3>
+          <p>
+            Umożliwia dodanie dowolnego atrybutu do tagu i uzyskanie jego
+            wartości w JavaScript. Możliwość ta jest wykorzystywana w celu
+            uproszczenia pisania kodu, na przykład powiązania danych i
+            znaczników za pomocą unikalnego identyfikatora, wskazania rodzaju
+            akcji na przyciskach itp.
+          </p>
+          <div class="section4-img-container">
+            <img src="/section4AtrybutyData.474d4f43.jpg" alt="">
+          </div>
+          <p>
+            Do pobrania wartości właściwości data-atrybutu używana jest
+            właściwość dataset, po której znajduje się nazwa atrybutu. Oznacza
+            to, że data- jest odrzucane, a reszta nazwy jest zapisywana jako
+            nazwa właściwości obiektu.
+          </p>
+          <pre>
+            const saveBtn = document.querySelector('button[data-action="save"]');
+            console.log(saveBtn.dataset.action);// "save"
+
+            const closeBtn = document.querySelector('button[data-action="close"]');
+            console.log(closeBtn.dataset.action);// "close"
+          </pre>
+          <p class="example">Przykład -------------------------------</p>
+          <pre>
+            const saveBtn = document.querySelector('.editor button[data-action="save"]');
+            const closeBtn = document.querySelector('.editor button[data-action="close"]');
+
+            console.log(saveBtn.dataset.action); //save
+            console.log(closeBtn.dataset.action); //close
+          </pre>
+          <div class="editor">
+            <p>
+              Donec id justo. Praesent porttitor, nulla vitae posuere iaculis,
+              arcu nisl dignissim dolor, a pretium mi sem ut ipsum. Curabitur
+              suscipit suscipit tellus. Phasellus gravida semper nisi.
+            </p>
+            <div class="actions">
+              <button type="button" class="btn" data-action="save">
+                Save text
+              </button>
+              <button type="button" class="btn" data-action="close">
+                Close editor
+              </button>
+            </div>
+          </div>
+          <p class="example">PrzykładEND -------------------------------</p>
+        </article>
+      </section>
+      <!-- section5 -->
+      <section class="text">
+        <article>
+          <h2>Tworzenie i usuwanie elementów</h2>
+          <p>
+            DOM API pozwala nie tylko wybierać lub modyfikować już istniejące,
+            ale także usuwać i tworzyć nowe elementy, a następnie dodawać je do
+            dokumentu.
+          </p>
+        </article>
+        <article>
+          <h3>Tworzenie</h3>
+          <pre>
+            document.createElement(tagName);
+          </pre>
+          <p>
+            Tworzy element o nazwie tagName i zwraca link do niego jako wynik
+            wykonania metody. tagName to string wskazujący typ tworzonego
+            elementu. Element jest tworzony w pamięci, nie ma go jeszcze w DOM.
+          </p>
+          <pre>
+            const heading = document.createElement("h1");
+            console.log(heading);// h1>/h1>
+            heading.textContent = "This is a heading";
+            console.log(heading);// h1>This is a heading/h1>
+            const image = document.createElement("img");
+            image.src = "https://placeimg.com/640/480/nature";
+            image.alt = "Nature";
+            console.log(image);// img src="https://placeimg.com/640/480/nature" alt="Nature" />
+          </pre>
+        </article>
+        <article>
+          <h3>Dodawanie</h3>
+          <p>
+            Aby utworzony element został wyświetlony na stronie, musi zostać
+            dodany do już istniejącego elementu w drzewie DOM. Powiedzmy, że
+            dodajemy go do jakiegoś elementu w zmiennej element, możemy
+            skorzystać z następujących metod:
+          </p>
+          <ul class="unnumbered-list-container">
+            <li>
+              element.append(el1, el2, ...) - dodaje jeden lub więcej elementów
+              pod wszystkimi dziećmi elementu element (czyli na jego "końcu").
+            </li>
+            <li>
+              element.prepend(el1, el2, ...) - dodaje jeden lub więcej elementów
+              przed wszystkimi dziećmi elementu element (czyli na jego
+              początku).
+            </li>
+            <li>
+              element.after(el1, el2, ...) - dodaje jeden lub więcej elementów
+              po elemencie element.
+            </li>
+            <li>
+              element.before(el1, el2, ...) - dodaje jeden lub więcej elementów
+              przed elementem element.
+            </li>
+          </ul>
+          <p>
+            We wszystkich tych metodach el1 i el2 to elementy stworzone np. przy
+            użyciu document.createElement() lub stringi w dowolnej kombinacji i
+            ilości. Stringi są dodawane jako węzły tekstowe.
+          </p>
+          <p class="example">Przykład -------------------------------</p>
+          <pre>
+            const list = document.querySelector(".usernames");
+
+            // Adds an item to the end of the list
+            const lastItem = document.createElement("li");
+            lastItem.textContent = "Poly";
+            list.append(lastItem);
+
+            // Adds an item to the beginning of the list
+            const firstItem = document.createElement("li");
+            firstItem.textContent = "Ajax";
+            list.prepend(firstItem);
+
+            // Adds a title before the list
+            const title = document.createElement("h2");
+            title.textContent = "USERNAMES";
+            list.before(title);
+
+            // Adds a paragraph after the list
+            const text = document.createElement("p");
+            text.textContent =
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum tenetur assumenda fugiat maxime, soluta
+             aspernatur quasi nihil in asperiores ad distinctio illo et debitis error iure voluptate numquam maiores
+              nisi. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum tenetur assumenda fugiat maxime,
+               soluta aspernatur quasi nihil in asperiores ad distinctio illo et debitis error iure voluptate numquam
+                maiores nisi!";
+            list.after(text);
+          </pre>
+          <div class="section5-container">
+            <ul class="section5-usernames">
+              <li>Mango</li>
+            </ul>
+          </div>
+          <p class="example">PrzykładEND -------------------------------</p>
+          <p>
+            Jeżeli wstawiany element znajduje się już w DOM, to jest usuwany ze
+            starego miejsca i dodawany do nowego. Wynika to z zasady, że jeden i
+            ten sam element nie może znajdować się jednocześnie w dwóch
+            miejscach.
+          </p>
+        </article>
+        <article>
+          <h3>Usuwanie</h3>
+          <pre>
+            elem.remove();
+          </pre>
+          <p>
+            Aby usunąć element, użyj metody remove(). Znajduje się ona na samym
+            elemencie elem, który należy usunąć.
+          </p>
+          <p class="example">Przykład -------------------------------</p>
+          <pre>
+            const text = document.querySelector('.text');
+            text.remove();
+          </pre>
+          <article class="article">
+            <h2 class="title">Article title</h2>
+            <p class="section5-text">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore,
+              ipsa quibusdam! Praesentium accusantium fugiat distinctio quidem
+              minima fugit eos, veniam, nam laboriosam deleniti nisi qui neque
+              explicabo perspiciatis, consectetur non.
+            </p>
+            <a class="link" href="">Read more</a>
+          </article>
+          <p class="example">PrzykładEND -------------------------------</p>
+        </article>
+        <article>
+          <h3>Optymalizacja drzewa DOM</h3>
+          <p>
+            Nowoczesne przeglądarki próbują zoptymalizować proces renderowania
+            strony bez interwencji programisty. Każda zmiana drzewa DOM
+            pozostaje jednak kosztowną operacją, dlatego trzeba starać się
+            zminimalizować liczbę wywołań DOM.
+          </p>
+          <p>
+            Repaint - występuje, gdy zmiany wpłynęły na style, które wpływają na
+            wygląd elementu, ale nie na geometrię. Na przykład opacity,
+            background-color, visibility i outline. Przeglądarka ponownie
+            renderuje element, uwzględniając nowy styl. Sprawdzana jest również
+            widoczność innych elementów, jeden lub więcej może być ukrytych pod
+            zmienionym wyglądem.
+          </p>
+          <p>
+            Reflow - występuje, gdy zmiany wpływają na treść, strukturę
+            dokumentu, położenie elementów. Pozycjonowanie i wymiary są
+            przeliczane, co prowadzi do przerysowania części lub całości
+            dokumentu. Zmiana rozmiaru jednego kontenera nadrzędnego wpłynie na
+            wszystkie jego dzieci i przodków. Ma znacznie większy wpływ na
+            wydajność niż repaint
+          </p>
+          <p>
+            Wszystkie powyższe operacje blokują przeglądarkę. Strona nie może
+            wykonywać żadnych innych operacji, gdy trwa reflow lub repaint.
+            Przyczynami mogą być:
+          </p>
+          <ul class="unnumbered-list-container">
+            <li>
+              Manipulacje drzewa DOM (dodawanie, usuwanie, zmiana, przestawianie
+              elementów)
+            </li>
+            <li>Zmiana treści, m.in. tekstu w polach formularza</li>
+            <li>Obliczanie lub modyfikacja właściwości CSS</li>
+            <li>Dodawanie i usuwanie arkuszy stylów</li>
+            <li>Manipulacja z atrybutem class</li>
+            <li>
+              Manipulacje z oknem przeglądarki (zmiana rozmiaru, przewijanie)
+            </li>
+            <li>Aktywacja pseudoklas (na przykład :hover)</li>
+          </ul>
+        </article>
+      </section>
+      <!-- section6 -->
+      <section class="text">
+        <!-- article1 -->
+        <article>
+          <h1>Właściwość innerHTML</h1>
+          <p>
+            Innym sposobem tworzenia elementów DOM i umieszczania ich w drzewie
+            jest użycie stringów zawierających tagi HTML i pozwolenie
+            przeglądarce na wykonanie całej ciężkiej pracy. Takie podejście ma
+            swoje plusy i minusy.
+          </p>
+        </article>
+        <!-- article2 -->
+        <article>
+          <h2>Czytanie</h2>
+          <p>
+            Właściwość innerHTML przechowuje zawartość elementu, w tym
+            znaczniki, jako stringi. Zwracana wartość jest zawsze prawidłowym
+            kodem HTML.
+          </p>
+          <p class="example">Przykład -------------------------------</p>
+          <pre>
+            const article = document.querySelector(".article");
+            console.log(article.innerHTML);
+
+            const title = document.querySelector(".article .title");
+            console.log(title.innerHTML);
+
+            const text = document.querySelector(".article .text");
+            console.log(text.innerHTML);
+
+            const link = document.querySelector(".article .link");
+            console.log(link.innerHTML);
+          </pre>
+          <article class="section6-article">
+            <h2 class="section6-title">Article title</h2>
+            <p class="section6-text">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore,
+              ipsa quibusdam! <strong>Praesentium</strong> accusantium fugiat
+              distinctio quidem minima fugit eos, veniam, nam laboriosam
+              deleniti nisi qui neque explicabo perspiciatis, consectetur non.
+            </p>
+            <a class="section6-link" href="">Read more</a>
+          </article>
+          <p class="example">PrzykładEND -------------------------------</p>
+        </article>
+        <!-- article3 -->
+        <article>
+          <h2>Zmiana</h2>
+          <p>
+            Właściwość innerHTML może służyć zarówno do odczytu jak i zapisu.
+            Jeśli zapiszesz do niej ciąg ze znacznikami HTML, to przeglądarka
+            podczas parsowania stringa zamieni je na odpowiednie elementy i doda
+            je do drzewa DOM.
+          </p>
+          <p class="example">Przykład -------------------------------</p>
+          <pre>
+           const title = document.querySelector(".article .title");
+           title.innerHTML = 'New and span class="accent">improved/span> title';
+          </pre>
+          <article class="section6Zmiana-article">
+            <h2 class="section6Zmiana-title">Article title</h2>
+            <p class="section6Zmiana-text">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore,
+              ipsa quibusdam! <strong>Praesentium</strong> accusantium fugiat
+              distinctio quidem minima fugit eos, veniam, nam laboriosam
+              deleniti nisi qui neque explicabo perspiciatis, consectetur non.
+            </p>
+            <a class="section6Zmiana-link" href="">Read more</a>
+          </article>
+          <p class="example">PrzykładEND -------------------------------</p>
+          <p>
+            Jeśli napiszesz pusty ciąg do właściwości innerHTML zawartość
+            elementu zostanie wyczyszczona. To łatwy i szybki sposób na
+            usunięcie całej zawartości.
+          </p>
+          <p>
+            Dzięki takiemu podejściu, w przeciwieństwie do
+            document.createElement(), nie otrzymujemy odniesienia do utworzonego
+            elementu DOM. To pierwszy krok w kierunku tworzenia szablonów -
+            tworzenia dużej ilości tego samego typu znaczników z różnymi danymi
+            zgodnie z predefiniowanym szablonem. Na przykład jak na liście
+            produktów sklepu internetowego itp.
+          </p>
+          <p>
+            Jednolite (szablonowe) znaczniki są tworzone z tablicy danych.
+            Podejście polega na iteracji po tablicy i skomponowaniu jednego
+            wiersza ze znacznikami HTML, który następnie zapisujemy w innerHTML
+            elementu.
+          </p>
+          <p class="example">Przykład -------------------------------</p>
+          <pre>
+            const technologies = ["HTML", "CSS", "JavaScript", "React", "Node"];
+            const list = document.querySelector(".list");
+
+            const markup = technologies
+            .map((technology) => `li class="list-item">${technology}/li>`)
+            .join("");
+
+            // Check the console, you'll see a single string with HTML tags
+            console.log(markup);
+
+            // Adding all the markup in one operation
+            list.innerHTML = markup;
+          </pre>
+          <section>
+            <h2>Popular technologies</h2>
+            <ul class="section6list"></ul>
+          </section>
+          <p class="example">PrzykładEND -------------------------------</p>
+        </article>
+        <!-- article4 -->
+        <article>
+          <h2>Dodanie</h2>
+          <p>
+            Zmiana elem.innerHTML całkowicie usunie i ponownie utworzy
+            wszystkich potomków elementu elem. Jeśli element nie jest początkowo
+            pusty, wystąpią dodatkowe koszty serializacji istniejących
+            znaczników, co źle wpłynie na optymalizację.
+          </p>
+          <p class="example">Przykład -------------------------------</p>
+          <pre>
+            const article = document.querySelector(".article");
+            const htmlString = `p class="article-text">Nullam quis ante. Vestibulum dapibus nunc ac augue.
+             In consectetuer turpis ut velit./p>   
+            a class="link" href="#">Read more.../a>`;
+
+            // Replace += with = operator. See the difference? 
+            // Article title is lost because we overwrite element content.
+            article.innerHTML += htmlString;
+          </pre>
+          <article class="section6article4-article">
+            <h2>Article title</h2>
+          </article>
+          <p class="example">PrzykładEND -------------------------------</p>
+          <p>
+            Użyj właściwości elem.innerHTML do dodania elementu tylko wtedy, gdy
+            element elem jest pusty lub jeśli chcesz całkowicie zastąpić jego
+            zawartość.
+          </p>
+        </article>
+      </section>
+      <!-- section7 -->
+      <section class="text">
+        <!-- article1 -->
+        <article>
+          <h2>Metoda insertAdjacentHTML()</h2>
+          <p>
+            Nowoczesna metoda dodawania ciągu znaków z tagami HTML przed, po lub
+            wewnątrz elementu. Rozwiązuje problem innerHTML z ponownym
+            serializowaniem zawartości elementu podczas dodawania znaczników do
+            istniejących.
+          </p>
+          <pre>
+            elem.insertAdjacentHTML(position, string);
+          </pre>
+          <p>
+            Argument position to ciąg znaków, pozycja względem elementu elem.
+            Przyjmuje jedną z czterech wartości.
+          </p>
+          <div class="section7-img-container">
+            <img src="/insert-adjacent.219a600f.png" alt="">
+          </div>
+          <ul class="unnumbered-list-container">
+            <li>"beforebegin" - przed elem</li>
+            <li>"afterbegin" - wewnątrz elem, przed wszystkimi dziećmi</li>
+            <li>beforeend" - wewnątrz elem, po wszystkich dzieciach</li>
+            <li>afterend" - po elem</li>
+          </ul>
+          <p class="example">Przykład -------------------------------</p>
+          <pre>
+            const list = document.querySelector(".list");
+
+            const newTechnologies = ["React", "TypeScript", "Node.js"];
+            const markup = newTechnologies
+            .map((technology) => `li class="list-item new">${technology}/li>`)
+            .join("");
+
+            list.insertAdjacentHTML("beforeend", markup);
+            list.insertAdjacentHTML("beforebegin", "h2>Popular technologies/h2>");
+          </pre>
+          <ul class="section7article1-list">
+            <li class="section7article1-list-item">HTML</li>
+            <li class="section7article1-list-item">CSS</li>
+            <li class="section7article1-list-item">JavaScript</li>
+          </ul>
+          <p class="example">PrzykładEND -------------------------------</p>
+          <p>
+            "beforebegin" i "afterend" działają tylko wtedy, gdy elem jest już w
+            drzewie DOM.
+          </p>
+        </article>
+      </section>
+      <!-- section8 -->
+      <section class="text">
+        <!-- article1 -->
+        <article>
+          <h2>Łączenie skryptów</h2>
+          <p>
+            Załadowanie i wykonanie skryptu określonego w znaczniku script bez
+            żadnych atrybutów zablokuje przetwarzanie dokumentu HTML i
+            utworzenie DOM. To powoduje problemy.
+          </p>
+          <pre>
+            script src="path-to-script.js">/script>
+          </pre>
+          <p>
+            Gdy przeglądarka napotka taki znacznik, przetwarzanie dokumentu HTML
+            zostaje wstrzymane i rozpoczyna się pobieranie pliku skryptu
+            określonego w atrybucie src. Po załadowaniu skrypt jest wykonywany,
+            a dopiero potem wznawiane jest przetwarzanie HTML. Nazywamy to
+            skryptem "blokującym".
+          </p>
+          <p>
+            Atrybuty defer i async zostały wprowadzone, aby dać programistom
+            większą kontrolę nad tym, jak ładować skrypty i kiedy je wykonywać.
+          </p>
+        </article>
+        <!-- article2 -->
+        <article>
+          <h2>Atrybut defer</h2>
+          <pre>
+            script defer src="path-to-script.js">/script>
+          </pre>
+          <p>
+            Atrybut defer mówi przeglądarce, aby załadować plik skryptu w tle,
+            równolegle z przetwarzaniem dokumentu HTML i tworzeniem DOM. Skrypt
+            zostanie jednak wykonany dopiero po przetworzeniu dokumentu HTML i
+            utworzeniu DOM. Takie skrypty nie blokują utworzenia drzewa DOM i
+            gwarantują wykonanie w kolejności, w jakiej zostały określone w
+            dokumencie HTML, a na dodatek gwarantują, że DOM jest już dla nas
+            dostępny.
+          </p>
+        </article>
+        <!-- article3 -->
+        <article>
+          <h2>Atrybut async</h2>
+          <pre>
+            script async src="path-to-script.js">/script>
+          </pre>
+          <p>
+            Załadowanie skryptu z atrybutem async nie blokuje utworzenia DOM,
+            ale jest wykonywane natychmiast po zakończeniu ładowania. Oznacza
+            to, że takie skrypty mogą blokować utworzenie DOM i są wykonywane w
+            dowolnej kolejności co sprawia, że są trudniejsze do prawidłowego
+            zaprojektowania.
+          </p>
+        </article>
       </section>
     </main>
     <footer class="container footer">
@@ -413,6 +1002,6 @@
       </div>
     </footer>
     <!-- SKRYPTY JS -->
-    <script defer="" src="/index.6e6d2d0f.js"></script>
+    <script defer="" src="/html/11-dom.6e6d2d0f.js"></script>
   <script src="/11-dom.25cc42f7.js"></script></body>
 </html>

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.min.css">
+    <!-- <style type="text/css">	@import url(./styles/stylStartowy.css);	</style> -->
+    <link rel="stylesheet" href="/index.7643dd02.css">
+    <link rel="stylesheet" href="/html/12-zdarzenia.601107c2.css">
+    <title>DOM</title>
+  </head>
+  <body class="body-container">
+    <header class="menu-sticky">
+      <nav class="nav-container">
+        <!-- Nawigacja do innych stron -->
+        <ul class="nav-list-container">
+          <li>
+            <a class="link" href="/index.html">Menu</a>
+          </li>
+          <li>
+            <a class="link" href="/html/01-zajeciaWprowadzajace.html">01. Zmienne i typy
+            </a>
+          </li>
+          <li>
+            <a class="link" href="/html/02-rozgalezieniaCykle.html">02. Rozgałęzienia i cykle
+            </a>
+          </li>
+          <li>
+            <a class="link" href="/html/03-tablice.html">03. Tablice </a>
+          </li>
+          <li>
+            <a class="link" href="/html/04-funkcje.html">04. Funkcje </a>
+          </li>
+          <li>
+            <a class="link" href="/html/05-obiekty.html">05. Obiekty </a>
+          </li>
+          <li>
+            <a class="link" href="/html/06-operacjeSpreadRest.html">06. Operacje spread/rest
+            </a>
+          </li>
+          <li>
+            <a class="link" href="/html/07-callbackFunkcjeStrzalkowe.html">07. Callback i funkcje strzałkowe
+            </a>
+          </li>
+          <li>
+            <a class="link" href="/html/08-metodyTablic.html">08. Metody tablic
+            </a>
+          </li>
+          <li>
+            <a class="link" href="/html/09-slowoKluczoweThis.html">09. Słowo kluczowe this
+            </a>
+          </li>
+          <li>
+            <a class="link" href="/html/10-prototypyKlasy.html">10. Prototypy i klasy
+            </a>
+          </li>
+          <li>
+            <a class="link" href="/html/11-dom.html">11. DOM </a>
+          </li>
+          <li>
+            <a class="link current-page" href="/html/12-zdarzenia.html">12. Zdarzenia
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main-container">
+      <!-- section1 -->
+      <section id="section1" class="text">
+        <article id="article1">
+          <h1>Moduł6 - Zajęcia 12 - Zdarzenia</h1>
+          <h2>Zdarzenia</h2>
+          <p>
+            Zdarzenie (event) to sygnał z przeglądarki, że coś się wydarzyło na
+            stronie internetowej. Zdarzenia umożliwiają reagowanie na działania
+            użytkownika i wykonywanie kodu związanego z określonym zdarzeniem.
+            Istnieje wiele źródeł zdarzeń: mysz, klawiatura, elementy
+            formularzy, ładowanie obrazu, lokalny schowek, zmiana etapu animacji
+            CSS lub przejścia, zmiana rozmiaru okna i wiele innych.
+          </p>
+          <p>
+            Jedna akcja może wywołać wiele zdarzeń. Na przykład kliknięcie
+            wywołuje najpierw mousedown, następnie mouseup i click. W przypadku,
+            gdy jedna akcja generuje kilka zdarzeń, ich kolejność jest ustalona.
+            Oznacza to, że ich obsługa będzie wywoływana (w tym przypadku)
+            zawsze w kolejności mousedown → mouseup → click
+          </p>
+          <p>
+            Element musi posiadać detektor zdarzeń (event handler) aby móc
+            reagować na działania użytkownika. To znaczy że musimy zdefiniować
+            funkcję, która zostanie wywołana, gdy tylko wystąpi zdarzenie.
+          </p>
+        </article>
+        <article id="article2">
+          <h3>Metoda addEventListener()</h3>
+          <p>Dodaje detektor zdarzeń do elementu.</p>
+          <pre>
+            element.addEventListener(event, handler, options);
+          </pre>
+          <ul class="unnumbered-list-container">
+            <li>
+              event - nazwa zdarzenia, jedna z góry określonych wartości, np.
+              "click"
+            </li>
+            <li>
+              handler - funkcja wywołania zwrotnego, która zostanie wywołana po
+              wystąpieniu zdarzenia
+            </li>
+            <li>options - opcjonalny obiekt z zaawansowanymi opcjami.</li>
+          </ul>
+          <pre>
+            const button = document.querySelector(".my-button");
+
+                button.addEventListener("click", () => {
+                    console.log("Button was clicked");
+                });
+          </pre>
+          <p>
+            W przypadku wywołania zwrotnego możesz (i najlepiej tak zrobić) użyć
+            oddzielnej funkcji i przekazać do niej link. Osobno zdefiniowana
+            funkcja poprawi czytelność kodu i będzie re-używalna dla różnych
+            elementów.
+          </p>
+          <pre>
+            const button = document.querySelector(".my-button");
+
+            const handleClick = () => {
+                console.log("Button was clicked");
+            };
+
+            button.addEventListener("click", handleClick);
+          </pre>
+          <p>
+            Jeden element może mieć dowolną liczbę funkcji które obsługują
+            zdarzenia, nawet zdarzenia tego samego typu. Funkcje wywołania
+            zwrotnego będą wywoływane w kolejności ich wystąpienia w kodzie.
+          </p>
+          <p class="example">Przykład -------------------------------</p>
+          <pre>
+            const singleBtn = document.querySelector("#single");
+
+            const handleClick = () => {
+                console.log("click event listener callback");
+            };
+
+            singleBtn.addEventListener("click", handleClick);
+
+            // ===============================================
+            const multiBtn = document.querySelector("#multiple");
+
+            const firstCallback = () => {
+                console.log("First callback!");
+            };
+            const secondCallback = () => {
+                console.log("Second callback!");
+            };
+            const thirdCallback = () => {
+                console.log("Third callback!");
+            };
+
+            multiBtn.addEventListener("click", firstCallback);
+            multiBtn.addEventListener("click", secondCallback);
+            multiBtn.addEventListener("click", thirdCallback);
+          </pre>
+          <button id="single" class="btn">SINGLE CALLBACK</button>
+          <hr>
+          <button id="multiple" class="btn">MULTIPLE CALLBACKS</button>
+          <p class="example">PrzykładEND -------------------------------</p>
+        </article>
+        <article id="article3">
+          <h3>Metoda removeEventListener()</h3>
+          <p>
+            Usuwa detektor zdarzeń z elementu. Argumenty są takie same jak w
+            metodzie addEventListener().
+          </p>
+          <pre>
+            element.removeEventListener(event, handler, options);
+          </pre>
+          <p>
+            Aby usunąć event handler, musisz przekazać link dokładnie do tej
+            funkcji zwrotnej, która została przypisana w addEventListener().
+            Dlatego w tym przypadku do wywołań zwrotnych wykorzystywana jest
+            osobna funkcja przekazywana przez nazwę (link).
+          </p>
+          <p>
+            Musimy to zrobić ponieważ jak już wspomnieliśmy, jeden element na
+            ten sam typ wydarzenia może mieć różne handlers więc musimy jakoś
+            odróżnić który powinien zostać usunięty.
+          </p>
+          <p class="example">Przykład -------------------------------</p>
+          <pre>
+            const addListenerBtn = document.querySelector('.js-add');
+            const removeListenerBtn = document.querySelector('.js-remove');
+            const btn = document.querySelector(".target-btn");
+
+            const handleClick = () => {
+                console.log("click event listener callback");
+            };
+
+            addListenerBtn.addEventListener("click", () => {
+                btn.addEventListener("click", handleClick);
+                console.log("click event listener was added to btn");
+            });
+
+            removeListenerBtn.addEventListener("click", () => {
+                btn.removeEventListener("click", handleClick);
+                console.log("click event listener was removed from btn");
+            });
+          </pre>
+          <button class="section1article3-btn js-add">Add Listener</button>
+          <button class="section1article3-btn js-remove">
+            Remove Listener
+          </button>
+          <hr>
+          <button class="section1article3-btn target-btn">Click me</button>
+          <p class="example">PrzykładEND -------------------------------</p>
+        </article>
+        <article id="article4">
+          <h3>Słowo kluczowe this</h3>
+          <p>
+            Jeśli wywołanie zwrotne to funkcja, która używa this, domyślnie
+            kontekst wewnątrz niej będzie odnosić się do elementu DOM, na którym
+            "założony" jest detektor zdarzeń.
+          </p>
+          <pre>
+            const mango = {
+                username: "Mango",
+                showUsername() {
+                    console.log(this);
+                    console.log(`My username is: ${this.username}`);
+                },
+            };
+
+            const btn = document.querySelector(".js-btn");
+
+            // ✅ Działa
+            mango.showUsername();
+
+            // ❌ this będzie się odnosić do button, jeśli będziemy używać showUsername jako callback
+            btn.addEventListener("click", mango.showUsername);// nie działa
+
+            // ✅ Nie zapomnij dołączyć kontekstu metod obiektowych
+            btn.addEventListener("click", mango.showUsername.bind(mango));
+          </pre>
+        </article>
+      </section>
+      <!-- section2 -->
+      <section id="section2" class="text">
+        <article id="article1">
+          <h2>Obiekt zdarzenia</h2>
+          <p>
+            Aby prawidłowo obsłużyć zdarzenie, czasami nie wystarczy wiedzieć
+            tylko to, że jest to kliknięcie lub naciśnięcie klawisza, mogą być
+            potrzebne szczegóły. Na przykład bieżąca wartość pola tekstowego,
+            element w którym wystąpiło zdarzenie, wbudowane metody i nie tylko.
+          </p>
+          <p>
+            Każde zdarzenie to obiekt, który zawiera informacje o szczegółach
+            zdarzenia i jest automatycznie przekazywany jako pierwszy argument
+            do funkcji obsługującej zdarzenie. Wszystkie zdarzenia pochodzą od
+            klasy bazowej Event.
+          </p>
+          <pre>
+            const handleClick = event => {
+                console.log(event);
+            };
+
+            button.addEventListener("click", handleClick);
+          </pre>
+          <p>
+            Parametr event to obiekt zdarzenia, który jest automatycznie
+            przekazywany jako pierwszy argument podczas wywoływania funkcji
+            zwrotnej. Możemy go nazwać jak chcemy, ale według konwencji jest
+            deklarowany jako e, evt lub event.
+          </p>
+          <p>Niektóre właściwości obiektu zdarzenia:</p>
+          <ul class="unnumbered-list-container">
+            <li>event.type - typ zdarzenia.</li>
+            <li>
+              event.currentTarget - element, na którym wykonywana jest procedura
+              obsługi zdarzenia.
+            </li>
+          </ul>
+          <p class="example">Przykład -------------------------------</p>
+          <pre>
+            const button = document.querySelector(".btn");
+
+            const handleClick = (event) => {
+                console.log("event: ", event);
+                console.log("event type: ", event.type);
+                console.log("currentTarget: ", event.currentTarget);
+            };
+            button.addEventListener("click", handleClick); 
+          </pre>
+          <button type="button" class="section2article1-btn">Click me</button>
+          <p class="example">PrzykładEND -------------------------------</p>
+        </article>
+        <article id="article2">
+          <h3>Domyślne działania przeglądarki</h3>
+          <p>
+            Niektóre zdarzenia uruchamiają domyślne event handlery przeglądarki
+            w odpowiedzi na określony typ zdarzenia. Na przykład kliknięcie w
+            link inicjuje przejście na nowy adres podany w href, a wysłanie
+            formularza powoduje ponowne załadowanie strony. W większości
+            przypadków to zachowanie jest dla nas niepożądane i należy je
+            zmienić.
+          </p>
+          <p>
+            Aby skasować domyślne działanie przeglądarki na obiekcie zdarzenia,
+            istnieje standardowa metoda dla event - preventDefault().
+          </p>
+          <p class="example">Przykład -------------------------------</p>
+          <pre>
+            const form = document.querySelector(".register-form");
+
+            form.addEventListener("submit", (event) => {
+                event.preventDefault();
+                const {
+                    elements: { username, password }
+                } = event.currentTarget;
+                console.log(username.value, password.value);
+            });
+          </pre>
+          <form class="register-form" autocomplete="off">
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
+            <button type="submit">Register</button>
+          </form>
+          <p class="example">PrzykładEND -------------------------------</p>
+        </article>
+      </section>
+      <!-- section3 -->
+      <section id="section3" class="text">
+        <article id="article1">
+          <h2>Zdarzenia związane z klawiaturą</h2>
+          <p>
+            Istnieją dwa główne zdarzenia klawiatury: keydown i keyup. W
+            przeciwieństwie do innych, zdarzenia klawiatury są przetwarzane w
+            dokumencie, a nie w określonym elemencie. Obiekty zdarzeń klawiatury
+            pochodzą z klasy bazowej KeyboardEvent.
+          </p>
+          <pre>
+            document.addEventListener("keydown", event => {
+                console.log("Keydown: ", event);
+            });
+
+            document.addEventListener("keyup", event => {
+                console.log("Keyup: ", event);
+            });
+          </pre>
+          <p>
+            Po naciśnięciu klawisza najpierw wydarza się keydown, a po
+            puszczeniu - keyup. W praktyce, na ogół obsługiwane jest tylko
+            zdarzenie keydown, ponieważ jest ono bardziej responsywne na akcję
+            użytkownika niż keyup, czyli użytkownik wcześniej zobaczy wynik
+            naciśnięcia klawisza. Zdarzenia keydown i keyup są uruchamiane po
+            naciśnięciu dowolnego klawisza, w tym klawiszy Ctrl, Shift, Alt,
+            Escape i inne.
+          </p>
+          <p>
+            Kiedyś istniało inne zdarzenie związane z klawiaturą o nazwie
+            keypress. Wiele postów na forach i blogach może nadal z niego
+            korzystać, ale bądź ostrożny - jest przestarzałe, a wsparcie w
+            nowych przeglądarkach może zakończyć się w dowolnym momencie.
+          </p>
+        </article>
+        <article id="article2">
+          <h3>Właściwości key i code</h3>
+          <p>
+            Właściwość key zwraca znak wygenerowany przez naciśnięcie klawisza,
+            biorąc pod uwagę stan klawiszy modyfikujących, takich jak Shift, a
+            także bieżący język. Właściwość code zwraca kod fizycznego klawisza
+            na klawiaturze i nie zmienia się w zależności od ustawienia
+            klawiatury użytkownika.
+          </p>
+          <pre>
+            document.addEventListener("keydown", event => {
+                console.log("key: ", event.key);
+                console.log("code: ", event.code);
+            });
+          </pre>
+          <p>
+            Ustaw focus na okno przykładu, klikając je myszą, śledzenie zdarzeń
+            klawiatury będzie na elemencie document. Wpisz coś na klawiaturze i
+            zobacz wynik.
+          </p>
+          <p class="example">Przykład -------------------------------</p>
+          <pre>
+            const clearLogBtn = document.querySelector(".js-clear");
+            const logList = document.querySelector(".log-list");
+            let keypressCounter = 1;
+
+            console.log(clearLogBtn)
+            document.addEventListener("keydown", logMessage);
+            document.addEventListener("keyup", logMessage);
+            clearLogBtn.addEventListener("click", reset);
+
+            function logMessage({ type, key, code }) 
+                const markup = `div class="log-item">
+                span class="chip">${keypressCounter}/span>
+                ul>
+                    li>b>Event/b>: ${type}/li>
+                    li>b>Key/b>: ${key}/li>
+                    li>b>Code/b>: ${code}/li>
+                /ul>  
+                /div>`;
+
+                logList.insertAdjacentHTML("afterbegin", markup);
+                if (type === "keyup") {
+                    incrementKeypressCounter();
+                }
+            }
+
+            function reset() {
+                keypressCounter = 1;
+                logList.innerHTML = "";
+            }
+
+            function incrementKeypressCounter() {
+                keypressCounter += 1;
+            }
+          </pre>
+          <button type="button" class="js-clear">Clear output</button>
+          <div class="log-list"></div>
+          <p class="example">PrzykładEND -------------------------------</p>
+        </article>
+      </section>
+    </main>
+    <footer class="container footer">
+      <div class="contener-shadow-text2">
+        <h2>Footer</h2>
+        <div class="display-footer">
+          <a class="link-footer" href="" target="_blank" rel="noreferrer noopener">
+            <img src="/konikMaly24x24Squoosh.b1d18e80.png" alt="logo">
+          </a>
+          <div class="display-footer2">
+            <p class="footer-selection">All rights reserved &copy;</p>
+            <p>Konrad</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- SKRYPTY JS -->
+    <script defer="" src="/html/12-zdarzenia.570597eb.js"></script>
+  <script src="/12-zdarzenia.5e4b53aa.js"></script></body>
+</html>
