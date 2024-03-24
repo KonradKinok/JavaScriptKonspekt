@@ -133,4 +133,23 @@ button {
   display: inline-flex;
 }
 
+.form-s4a1 {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+.p-s4a3 {
+  overflow-wrap: anywhere;
+}
+
+.text-input-s4a3 {
+  font: inherit;
+  letter-spacing: inherit;
+  width: 100%;
+  max-width: 320px;
+  padding: 8px;
+}
+
 /*# sourceMappingURL=12-zdarzenia.601107c2.css.map */

@@ -77,5 +77,51 @@ function reset() {
 function incrementKeypressCounter() {
     keypressCounter += 1;
 }
+// section4 article1 Zdarzenie submit
+const registerForm = document.querySelector(".form-s4a1");
+registerForm.addEventListener("submit", handleSubmit);
+function handleSubmit(event) {
+    event.preventDefault();
+    const form = event.target;
+    const login = form.elements.login.value;
+    const password = form.elements.password.value;
+    if (login === "" || password === "") return console.log("Please fill in all the fields!");
+    console.log(`Login: ${login}, Password: ${password}`);
+    form.reset();
+}
+// section4 article2 Zdarzenie change
+const select = document.querySelector(".pizza-select-s4a2");
+const textOutput = document.querySelector(".text-output-s4a2");
+const valueOutput = document.querySelector(".value-output-s4a2");
+select.addEventListener("change", setOutput);
+function setOutput(event) {
+    const selectedOptionValue = event.currentTarget.value;
+    const selectedOptionIndex = event.currentTarget.selectedIndex;
+    const selectedOptionText = event.currentTarget.options[selectedOptionIndex].text;
+    textOutput.textContent = selectedOptionText;
+    valueOutput.textContent = selectedOptionValue;
+}
+// section4 article3 Zdarzenie input
+const textInput = document.querySelector(".text-input-s4a3");
+const output = document.querySelector(".output-s4a3");
+textInput.addEventListener("input", (event)=>{
+    output.textContent = event.currentTarget.value;
+});
+// section4 articlea Zdarzenie focus i blur
+const textInput_s4a4 = document.querySelector(".text-input-s4a4");
+const setFocusBtn = document.querySelector('[data-action="set"]');
+const removeFocusBtn = document.querySelector('[data-action="remove"]');
+setFocusBtn.addEventListener("click", ()=>{
+    textInput_s4a4.focus();
+});
+removeFocusBtn.addEventListener("click", ()=>{
+    textInput_s4a4.blur();
+});
+textInput_s4a4.addEventListener("focus", ()=>{
+    textInput_s4a4.value = "This input has focus";
+});
+textInput_s4a4.addEventListener("blur", ()=>{
+    textInput_s4a4.value = "";
+});
 
 //# sourceMappingURL=12-zdarzenia.570597eb.js.map
