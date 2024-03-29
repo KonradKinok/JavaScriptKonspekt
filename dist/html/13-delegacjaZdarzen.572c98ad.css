@@ -1,0 +1,166 @@
+.text {
+  color: #fff;
+  padding: 20px 20px 40px;
+  font-size: 18px;
+}
+
+.text p {
+  padding: 5px 0;
+}
+
+span {
+  color: #fff;
+}
+
+h2, h3 {
+  margin-top: 10px;
+}
+
+.unnumbered-list-container {
+  list-style: square inside;
+}
+
+.numbered-list-container {
+  list-style: decimal inside;
+}
+
+.example {
+  color: #ff0;
+}
+
+.grow_up-img {
+  transition: width 2s, height 2s, transform 2s;
+}
+
+.grow_up-img:hover {
+  width: 50%;
+  height: 50%;
+}
+
+.menu-sticky {
+  text-align: center;
+  text-transform: uppercase;
+  z-index: 9000;
+  width: 100%;
+  margin: 0;
+  position: sticky;
+  top: -1px;
+  box-shadow: 0 2px 4px -1px #0003, 0 4px 5px #00000024, 0 1px 10px #0000001f;
+}
+
+.nav-list-container {
+  background: none;
+  flex-wrap: wrap;
+  justify-content: start;
+  gap: 0 5px;
+  padding: 10px 30px 20px;
+  display: flex;
+}
+
+.nav-list-container a {
+  background: beige;
+  gap: 10px;
+  margin: 10px auto;
+  padding: 10px;
+  font-size: 14px;
+  display: flex;
+  position: relative;
+  box-shadow: 0 2px 1px -1px #0003, 0 1px 1px #00000024, 0 1px 3px #0000001f;
+}
+
+.nav-list-container a:hover {
+  color: #000;
+  background: #6d0ee9;
+}
+
+.current-page:after {
+  content: "";
+  background-color: #b94bb9;
+  border-radius: 2px;
+  width: 100%;
+  height: 4px;
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+}
+
+.body-container {
+  width: 1280px;
+  margin: 0 auto;
+}
+
+.main-container {
+  background-image: linear-gradient(#6d0ee9, #301212);
+}
+
+.section1-img-container, .section2-img-container {
+  border: 2px solid #000;
+  border-radius: 15px;
+  width: 350px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.section2-example-theory {
+  display: flex;
+}
+
+.section2-example-practice {
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+}
+
+.section2-parent, .section2-child, .section2-descendant {
+  color: #fff;
+  text-transform: uppercase;
+  border: 4px solid #212121;
+  border-radius: 8px;
+  width: 60%;
+  margin: 16px;
+  padding: 16px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.section2-parent {
+  background-color: #673ab7;
+}
+
+.section2-child {
+  background-color: #448aff;
+}
+
+.section2-descendant {
+  background-color: #ff9800;
+}
+
+.output-s2a5 {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.color-palette-s2a5 {
+  grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+  gap: 4px;
+  display: grid;
+}
+
+.color-palette-s2a5 .item-s2a5 {
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  transition: transform .25s ease-in-out;
+}
+
+.color-palette-s2a5 .item-s2a5:hover {
+  transform: scale(1.5);
+}
+
+/*# sourceMappingURL=13-delegacjaZdarzen.572c98ad.css.map */

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;700&family=Roboto:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.min.css"
+    />
+    <!-- <style type="text/css">	@import url(./styles/stylStartowy.css);	</style> -->
+    <link rel="stylesheet" href="../styles/stylStartowy.scss" />
+    <link rel="stylesheet" href="../styles/13-delegacjaZdarzen.scss" />
+    <title>Delegacja zdarzeń</title>
+  </head>
+  <body class="body-container">
+    <header class="menu-sticky">
+      <nav class="nav-container">
+        <!-- Nawigacja do innych stron -->
+        <ul id="main-menu" class="nav-list-container"></ul>
+      </nav>
+    </header>
+    <main class="main-container">
+      <!-- section1 -->
+      <section id="section1" class="text">
+        <article id="article1">
+          <h1>Moduł7 - Zajęcia 13 - Delegacja zdarzeń</h1>
+          <h2>Propagacja zdarzenia</h2>
+          <p>
+            Propagacja zdarzenia (event propagation) to termin opisujący cykl
+            życia zdarzenia, który obejmuje trzy etapy: przechwytywanie,
+            celowanie i bąbelkowanie (bubbling phase). W praktyce najczęściej
+            wykorzystywana jest tylko faza bąbelkowania.
+          </p>
+          <div class="section1-img-container">
+            <img src="../images/main/event-flow.png" alt="" />
+          </div>
+          <p>
+            Kiedy wydarzenie ma miejsce, przechodzi przez trzy obowiązkowe fazy:
+          </p>
+          <ul class="unnumbered-list-container">
+            <li>
+              Capturing phase (przechwytywanie) - zdarzenie rozpoczyna swój cykl
+              życia w window i "opada" (przechodzi przez wszystkie elementy
+              przodków) do najgłębszego elementu docelowego, na którym nastąpiła
+              akcja, np. kliknięcie.
+            </li>
+            <li>
+              Target phase (celowanie) - zdarzenie dotarło do elementu
+              docelowego. Ten etap obejmuje tylko powiadomienie elementu, że
+              dana akcja została na nim wykonana.
+            </li>
+            <li>
+              Bubbling phase (bąbelkowanie) - ostatnia faza, w której zdarzenie
+              bąbelkuje od najgłębszego, docelowego elementu, przez wszystkie
+              elementy przodków, aż do window.
+            </li>
+          </ul>
+          <p>
+            Propagacja jest często niewłaściwie używana jako synonim etapu
+            bąbelkowania. Różnica między tymi pojęciami polega na tym, że
+            propagację możemy kontrolować na poziomie kodu, ale bąbęlkowanie
+            zawsze odbywa się z dołu (innermost element) do góry (outermost
+            element).
+          </p>
+        </article>
+      </section>
+      <!-- section2 -->
+      <section id="section2" class="text">
+        <article id="article1">
+          <h2>Bąbelkowanie (bulgotanie) zdarzenia</h2>
+          <p>
+            Gdy wystąpi zdarzenie, procedury obsługi są najpierw wywoływane na
+            najgłębiej zagnieżdżonym elemencie, następnie na jego rodzicu,
+            następnie na przodu o poziom wyżej i tak dalej, w górę łańcucha
+            zagnieżdżenia. Proces ten nazywa się bąbelkowaniem (event bubbling),
+            ponieważ zdarzenia podobnie jak bąbelki powietrza idą w górę, od
+            wewnętrznego elementu, przez wszystkich przodków aż do window
+          </p>
+
+          <div class="section2-img-container">
+            <img src="../images/main/event-bubbling.png" alt="" />
+          </div>
+          <p>
+            Spójrzmy na przykład, aby było bardziej zrozumiałe. Weźmy trzy
+            zagnieżdżone znaczniki "div" z obsługą kliknięcia na każdym z nich.
+          </p>
+          <p>
+            Bąbelkowanie sprawia, że kliknięcie na element #descendant wywoła
+            obsługę kliknięcia, jeśli taka istnieje, najpierw na samym
+            #descendant, potem na elemencie #child, potem na elemencie #parent i
+            tak dalej w górę łańcucha przodków aż do window
+          </p>
+          <p>
+            Dlatego, jeśli w powyższym przykładzie klikniemy na #descendant,
+            zostanie sekwencyjnie wyświetlony alert dla descendant → child →
+            parent.
+          </p>
+          <p class="example">Przykład -------------------------------</p>
+          <div class="section2-example-theory">
+            <div class="">
+              <img
+                src="../images/main/babelkowaniePrzyklad.jpg"
+                alt=""
+                width="350px"
+              />
+            </div>
+            <pre>
+            JavaScript:
+            const parent = document.querySelector('#section2-parent');
+            const child = document.querySelector('#section2-child');
+            const descendant = document.querySelector('#section2-descendant');
+
+            let parentCount = 0;
+            let childCount = 0;
+            let descendantCount = 0;
+
+            parent.addEventListener('click', () => {
+              parentCount++;
+              parent.firstChild.textContent = `PARENT kliknięcie ${parentCount}`;
+            });
+
+            child.addEventListener('click', () => {
+              childCount++;
+              child.firstChild.textContent = `CHILD kliknięcie ${childCount}`;
+            });
+
+            descendant.addEventListener('click', () => {
+              descendantCount++;
+              descendant.firstChild.textContent = `DESCENDANT kliknięcie ${descendantCount}`;
+            });
+          </pre
+            >
+          </div>
+          <div class="section2-example-practice">
+            <div id="section2-parent" class="section2-parent">
+              Parent
+              <div id="section2-child" class="section2-child">
+                Child
+                <div id="section2-descendant" class="section2-descendant">
+                  Descendant
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="example">PrzykładEND -------------------------------</p>
+          <p>
+            Bąbelkują prawie wszystkie zdarzenia, natomiast zdarzenia focus i
+            blur nie bąbelkują, więc istnieją ich "bąbelkujące" odpowiedniki -
+            focusin i focusout.
+          </p>
+        </article>
+        <article id="article2">
+          <h2>Właściwość event.target</h2>
+          <p>
+            Niezależnie od tego, gdzie złapaliśmy zdarzenie podczas jego
+            bąbelkowania, zawsze możesz dowiedzieć się, gdzie dokładnie
+            nastąpiło zdarzenie. Najgłębszy element, który wywołuje zdarzenie,
+            nazywa się elementem docelowym lub źródłowym i jest dostępny jako
+            event.target.
+          </p>
+          <ul class="unnumbered-list-container">
+            <li>
+              event.target to odwołanie do elementu "źródłowego", na którym
+              wystąpiło zdarzenie, pozostaje więc niezmienne podczas procesu
+              bąbelkowania.
+            </li>
+            <li>
+              event.currentTarget to odwołanie do bieżącego elementu, do którego
+              dotarło bąbelkowanie, a więc tego na którym aktualnie działa
+              procedura obsługi zdarzeń.
+            </li>
+          </ul>
+          <p>
+            Jeśli detektor zdarzeń jest zarejestrowany na najwyższym elemencie,
+            "przechwyci" wszystkie kliknięcia wewnątrz, ponieważ zdarzenia będą
+            bąbelkować do tego elementu. Otwórz konsolę w przykładzie i kliknij,
+            event.target jest zawsze oryginalnym (i najgłębszym) klikniętym
+            elementem, a event.currentTarget zmienia się.
+          </p>
+          <p class="example">Przykład -------------------------------</p>
+          <div class="section2-example-theory">
+            <div class="">
+              <img src="../images/main/event.target.jpg" alt="" width="450px" />
+            </div>
+            <pre>
+            JavaScript:
+            const parent_s1a2 = document.querySelector('#section2a2-parent');
+            const list_s1a2 = document.querySelector('#section2a2-list');
+            parent_s1a2.addEventListener('click', event => {
+              const eventTargetlistItem = document.createElement('li');
+              eventTargetlistItem.classList.add('item');
+              eventTargetlistItem.textContent = 
+              `event.target: ${event.target.firstChild.textContent} 
+              event.currentTarget: ${event.currentTarget.firstChild.textContent}`;
+              list_s1a2.append(eventTargetlistItem);
+            });
+          </pre
+            >
+          </div>
+          <div class="section2-example-practice">
+            <div id="section2a2-parent" class="section2-parent">
+              Parent
+              <div id="section2a2-child" class="section2-child">
+                Child
+                <div id="section2a2-descendant" class="section2-descendant">
+                  Descendant
+                </div>
+              </div>
+            </div>
+            <ul id="section2a2-list" class="unnumbered-list-container"></ul>
+          </div>
+          <p class="example">PrzykładEND -------------------------------</p>
+        </article>
+        <article id="article3">
+          <h2>Zatrzymanie bąbelkowania</h2>
+          <p>
+            Zazwyczaj zdarzenie będzie bąbelkować do góry do elementu window,
+            wywołując wszelkie procedury obsługi na swojej drodze. Każda
+            pośrednia funkcja obsługi może zdecydować, że zdarzenie zostało już
+            całkowicie obsłużone i zatrzymać propagację poprzez wywołanie metody
+            stopPropagation().
+          </p>
+          <p class="example">Przykład -------------------------------</p>
+          <div class="section2-example-theory">
+            <div class="grow_up-img">
+              <img src="../images/main/event.target.jpg" alt="" width="350px" />
+            </div>
+            <pre>
+            JavaScript:
+            const parent_s2a3 = document.querySelector('#section2a3-parent');
+            const child_s2a3 = document.querySelector('#section2a3-child');
+            const descendant_s2a3 = document.querySelector('#section2a3-descendant');
+
+            parent_s2a3.addEventListener('click', () => {
+              alert(
+              'Parent click handler. This alert will not appear when clicking on Descendant, 
+              the event will not reach here!'
+              );
+            });
+
+            child_s2a3.addEventListener('click', () => {
+              alert(
+              'Child click handler. This alert will not appear when clicking on Descendant, 
+              the event will not reach here!'
+              );
+            });
+
+            descendant_s2a3.addEventListener('click', event => {
+              event.stopPropagation();
+              alert('Descendant click handler');
+            });
+          </pre
+            >
+          </div>
+          <div class="section2-example-practice">
+            <div id="section2a3-parent" class="section2-parent">
+              Parent
+              <div id="section2a3-child" class="section2-child">
+                Child
+                <div id="section2a3-descendant" class="section2-descendant">
+                  Descendant
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="example">PrzykładEND -------------------------------</p>
+          <p>
+            Jeśli element ma kilka procedur obsługi dla jednego zdarzenia, to
+            nawet przy zatrzymaniu propagacji wszystkie zostaną wykonane.
+            Oznacza to, że metoda stopPropagation() zapobiega jedynie dalszemu
+            postępowi zdarzenia na poziom wyżej.
+          </p>
+          <p>
+            Jeśli chcesz całkowicie zatrzymać przetwarzanie zdarzenia w
+            "równoległych" procedurach , użyj metody stopImmediatePropagation().
+            Zapobiegnie ona nie tylko bąbelkowaniu, ale także zatrzyma
+            przetwarzanie zdarzeń w bieżącym elemencie.
+          </p>
+          <p>
+            Nie zatrzymuj bąbelkowania bez potrzeby. Zatrzymanie bąbelkowania
+            tworzy własne pułapki, które należy następnie ominąć. Na przykład
+            narzędzia analityczne używają bąbelkowania do śledzenia zdarzeń na
+            stronie.
+          </p>
+        </article>
+        <article id="article4">
+          <h2>Delegowanie zdarzeń</h2>
+          <p>
+            Bąbelkowanie pozwala na zaimplementowanie jednego z najbardziej
+            przydatnych podejść - delegowania zdarzeń (event delegation). Polega
+            ono na tym, że jeśli istnieje grupa elementów, których zdarzenia
+            muszą być przetwarzane w ten sam sposób, to do ich wspólnego przodka
+            dodawany jest jeden handler, zamiast dodawania handlera do każdego
+            elementu. Używając właściwości event.target, możesz uzyskać
+            odwołanie do elementu docelowego, dowiedzieć się, na którym potomku
+            wystąpiło zdarzenie i odpowiednio je obsłużyć.
+          </p>
+          <p>
+            Spójrzmy na delegację na przykładzie. Utwórzmy element &lt;div>,
+            dodajmy do niego dowolną liczbę przycisków, na przykład 100, i
+            zarejestrujmy każdy z nich za pomocą detektora zdarzeń kliknięcia z
+            funkcją handleButtonClick.
+          </p>
+          <div class="section2-img-container grow_up-img">
+            <img src="../images/main/before-delegation.png" alt="" />
+          </div>
+          <p>
+            Problem polega na tym, że mamy 100 słuchaczy zdarzeń. Wszystkie
+            wskazują na tę samą funkcję, ale samych handlerów jest 100. Co jeśli
+            przeniesiemy wszystkich słuchaczy do wspólnego przodka, elementu
+            &lt;div>?
+          </p>
+          <div class="section2-img-container grow_up-img">
+            <img src="../images/main/after-delegation.png" alt="" />
+          </div>
+          <p>
+            Teraz jest tylko jeden handler do obsługi zdarzeń kliknięcia, a
+            przeglądarka nie musi przechowywać w pamięci 100 różnych słuchaczy.
+            Delegowanie sprowadza się więc do trzech prostych kroków.
+          </p>
+          <ol class="numbered-list-container">
+            <li>Określ wspólnego przodka grupy elementów śledzenia zdarzeń.</li>
+            <li>
+              Zarejestruj na elemencie nadrzędnym procedurę obsługi zdarzeń,
+              którą chcemy przechwycić z grupy elementów.
+            </li>
+            <li>
+              W procedurze obsługi użyj event.target, aby wybrać element
+              docelowy.
+            </li>
+          </ol>
+          <p>
+            Takie podejście upraszcza inicjowanie słuchaczy elementów tego
+            samego typu. Możesz dodawać, usuwać lub modyfikować elementy bez
+            ręcznego dodawania lub usuwania procedur obsługi zdarzeń.
+          </p>
+        </article>
+        <article id="article5">
+          <h2>Paleta kolorów</h2>
+          <p>
+            Stworzymy paletę kolorów z możliwością wyboru koloru poprzez
+            kliknięcie i wyświetlenie wybranego koloru. Zamiast przypisywać
+            handler do każdego elementu palety, których może być bardzo dużo,
+            "doczepimy" jednego słuchacza na wspólnym przodku div.color-palette.
+            W obsłudze zdarzenia kliknięcia używamy event.target, aby pobrać
+            element, na którym wystąpiło zdarzenie i powiązany z nim kolor,
+            który będziemy przechowywać w atrybucie data-color.
+          </p>
+          <p class="example">Przykład -------------------------------</p>
+          <div class="section2a5-container">
+            <p class="output-s2a5">Selected color: -</p>
+            <div class="color-palette-s2a5"></div>
+          </div>
+          <p class="example">PrzykładEND -------------------------------</p>
+          <p>
+            Pamiętaj, aby sprawdzić cel kliknięcia, żeby zdecydowanie był to
+            przycisk, nie chcemy przetwarzać kliknięć w element kontenera. Aby
+            sprawdzić typ elementu, użyj właściwości nodeName.
+          </p>
+        </article>
+      </section>
+    </main>
+    <footer class="container footer">
+      <div class="contener-shadow-text2">
+        <h2>Footer</h2>
+        <div class="display-footer">
+          <a
+            class="link-footer"
+            href=""
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <img src="../images/footer/konikMaly24x24Squoosh.png" alt="logo" />
+          </a>
+          <div class="display-footer2">
+            <p class="footer-selection">All rights reserved &copy;</p>
+            <p>Konrad</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- SKRYPTY JS -->
+    <script defer src="../scripts/menu.mjs"></script>
+    <script defer src="../scripts/13.mjs"></script>
+  </body>
+</html>
