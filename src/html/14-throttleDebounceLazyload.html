@@ -32,6 +32,605 @@
       <section id="section1" class="text">
         <article id="article1">
           <h1>Moduł7 - Zajęcia 14 - Throttle Debounce Lazyload</h1>
+          <h2>Throttle i Debounce</h2>
+          <p>
+            Dość często musimy poradzić sobie ze zmianą rozmiaru okna,
+            przewijaniem, ruchem myszy lub wprowadzaniem tekstu przez
+            użytkownika. Obsługa tych zdarzeń może polegać na sortowaniu
+            kolekcji i renderowanie wyników, animowaniu elementu, manipulowania
+            drzewem DOM i tak dalej. Wszystko to poprawia UX (user experience),
+            ale niestety bardzo obciąża przeglądarkę ze względu na to, że
+            funkcje do obsługi tych zdarzeń są uruchamiane zbyt często. Takie
+            wydarzenia są nieformalnie nazywane «chatty events», ponieważ są
+            właśnie "gadatliwe".
+          </p>
+          <p>
+            Dla przykładu, jeśli do przewijania strony dodasz słuchacza zdarzeń,
+            to podczas przewijania strony rolką myszki / touchpadem możesz
+            wywołać około 30 zdarzeń na sekundę. Powolne przewijanie (swipe) w
+            smartfonie może wywołać do 100 zdarzeń na sekundę. Jeśli procedura
+            obsługi zdarzeń przewijania wykonuje intensywne obliczenia i inne
+            manipulacje DOM, wystąpią wtedy problemy z wydajnością. Nawet
+            pozornie "lekkie" funkcje będą katastrofalnie powolne, jeśli
+            wywołamy je 100 razy niemalże naraz.
+          </p>
+          <p class="example">Przykład -------------------------------</p>
+          <div id="example-theory-s1a1" class="example-theory">
+            <pre class="example-theory-pre">
+JavaScript:
+const output = document.querySelector(".output");
+let scrollEventCounter = 0;
+
+document.addEventListener("scroll", () => {
+  scrollEventCounter += 1;
+  output.textContent = scrollEventCounter;
+});
+            </pre>
+          </div>
+          <br />
+          <div id="example-practice-s1a1" class="example-practice-s1a1">
+            <p class="cta-s1a1">Scroll me</p>
+            <div class="event-counter-s1a1">
+              <div class="box-s1a1">
+                <p>Number of scroll events</p>
+                <span class="output-s1a1">0</span>
+              </div>
+            </div>
+          </div>
+          <p class="example">PrzykładEND -------------------------------</p>
+          <p>
+            Throttle i Debounce to dwa podobne podejścia, ale różnią się nieco
+            szczegółami swojego zachowania. Throttle jak i debounce pozwolą nam
+            kontrolować, ile razy wykona się funkcja w danym czasie. Będziemy
+            korzystać z ich implementacji w bibliotece
+            <a href="https://lodash.com/">Lodash</a>.
+          </p>
+        </article>
+        <article id="article2">
+          <h2>Podłączanie biblioteki</h2>
+          <p>
+            CDN (Content Delivery Network) to rozproszona geograficznie
+            infrastruktura sieciowa, która zapewnia szybkie dostarczanie treści
+            użytkownikom usług i witryn internetowych. Serwery wchodzące w skład
+            CDN są rozmieszczone geograficznie w taki sposób, aby zminimalizować
+            czas odpowiedzi użytkowników serwisu/usługi.
+          </p>
+          <p>
+            Dodatkowo, jeśli użytkownik trafił wcześniej na inną stronę
+            korzystającą z tego samego linka do danej biblioteki, to ma już
+            załadowany plik w pamięci przeglądarki i nasza strona załaduje się
+            jeszcze szybciej - w przypadku popularnych bibliotek zdarza się to
+            całkiem często.
+          </p>
+          <p>
+            Podłączmy więc bibliotekę
+            <a href="https://lodash.com/">Lodash</a> do projektu przez CDN. W
+            tym celu skorzystajmy z usługi
+            <a href="https://cdnjs.com/libraries/lodash.js">cdnjs.com</a> i
+            dodajmy link do skryptu biblioteki na końcu dokumentu HTML, jak
+            pokazano w przykładzie.
+          </p>
+          <pre>
+  script async src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
+  integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+  >/script></pre
+          >
+          <p>
+            Możemy teraz uzyskać dostęp do biblioteki w naszym skrypcie. Przy
+            łączeniu bibliotek przez CDN, do obiektu window dodawana jest
+            właściwość, która przechowuje to, co zapewnia biblioteka. Nazwa tej
+            właściwości jest unikalna dla biblioteki i jest opisana w jej
+            dokumentacji. Dla Lodash jest to znak podkreślenia _. Do sprawdzenia
+            czy biblioteka jest poprawnie załadowana, używamy prostej metody
+            add, która dodaje do siebie dwie liczby.
+          </p>
+          <pre>
+            const result = _.add(2, 3);
+            console.log(result); // 5
+          </pre>
+        </article>
+        <article id="article3">
+          <h2>Throttle</h2>
+          <p>
+            Technika throttle kontroluje, ile razy funkcja może być wywołana w
+            określonym czasie. Oznacza to, że pozwala na wywołanie funkcji nie
+            więcej niż raz w ciągu N milisekund, zapewniając jej regularne i
+            niezbyt częste wykonywanie.
+          </p>
+          <div class="section1-img-container grow_up-img">
+            <img src="../images/main/throttle.png" alt="" />
+          </div>
+          <p>
+            Używając throttle nie mamy kontroli nad tym, jak często przeglądarka
+            uruchamia zdarzenia. Po prostu przejmujemy kontrolę nad tym, jak
+            często wykonywana jest funkcja obsługi zdarzeń, niezależnie od tego
+            ile wywołań się pojawi.
+          </p>
+          <pre>
+            document.addEventListener(
+              "scroll",
+              _.throttle(() => {
+                console.log("Scroll handler call every 300ms");
+              }, 300)
+            );
+          </pre>
+          <p>
+            Implementacja z biblioteki Lodash oczekuje, że funkcja będzie
+            przekazana jako pierwszy argument, a ilość milisekund odstępu jako
+            drugi. Zwraca nową funkcję, którą możemy przekazać do nasłuchiwacza
+            zdarzeń.
+          </p>
+          <p class="example">Przykład -------------------------------</p>
+          <div id="example-theory-s1a3" class="example-theory">
+            <pre class="example-theory-pre">
+const vanillaOutput = document.querySelector('.output-s1a3.vanilla-s1a3');
+const throttledOutput = document.querySelector('.output-s1a3.throttled-s1a3');
+const eventCounter = {
+  vanilla: 0,
+  throttled: 0,
+};
+
+document.addEventListener('scroll', () => {
+  eventCounter.vanilla += 1;
+  vanillaOutput.textContent = eventCounter.vanilla;
+});
+
+document.addEventListener(
+  'scroll',
+  _.throttle(() => {
+    eventCounter.throttled += 1;
+    throttledOutput.textContent = eventCounter.throttled;
+  }, 300)
+);
+            </pre>
+          </div>
+          <div id="example-practice-s1a3" class="example-practice-s1a3">
+            <p class="cta-s1a3">Scroll me</p>
+            <div class="event-counter-s1a3">
+              <div class="box-s1a3">
+                <p>No timing function</p>
+                <span class="output-s1a3 vanilla-s1a3">0</span>
+              </div>
+              <div class="box-s1a3">
+                <p>Throttled</p>
+                <span class="output-s1a3 throttled-s1a3">0</span>
+              </div>
+            </div>
+          </div>
+          <p class="example">PrzykładEND -------------------------------</p>
+        </article>
+        <article id="article4">
+          <h2>Debounce</h2>
+          <p>
+            Technika debounce zapewnia, że funkcja zostanie wywołana tylko
+            wtedy, gdy między zdarzeniami nastąpi przerwa wynosząca N
+            milisekund. W poniższym przykładzie, gdy użytkownik przewija stronę,
+            funkcja nie zostanie wywołana, ale gdy tylko przestanie przewijać,
+            funkcja zostanie wywołana po 300 milisekundach przerwy od ostatniego
+            wywołania funkcji. Jeśli przewijanie zostanie wznowione wcześniej
+            niż 300 milisekund od poprzedniego wywołania, funkcja nie zostanie
+            wywołana.
+          </p>
+          <div class="section1-img-container grow_up-img">
+            <img src="../images/main/trailing-debounce.png" alt="" />
+          </div>
+          <p>
+            Używając debounce nie kontrolujemy, jak często przeglądarka będzie
+            generować zdarzenia, a jedynie przejmujemy kontrolę nad
+            częstotliwością wykonywania funkcji obsługi zdarzeń.
+          </p>
+          <pre>
+            document.addEventListener(
+              "scroll",
+              _.debounce(() => {
+                console.log("Scroll handler call after 300ms pause");
+              }, 300)
+            );
+          </pre>
+          <p>
+            Implementacja z biblioteki Lodash oczekuje funkcji jako pierwszego
+            argumentu i liczby milisekund jako drugiego. Zwraca nową funkcję,
+            którą możemy przekazać do nasłuchiwacza zdarzeń.
+          </p>
+          <p class="example">Przykład -------------------------------</p>
+          <div id="example-theory-s1a4" class="example-theory">
+            <pre class="example-theory-pre">
+const vanillaOutput_s1a4 = document.querySelector('.output-s1a4.vanilla-s1a4');
+const throttledOutput_s1a4 = document.querySelector(
+  '.output-s1a4.throttled-s1a4'
+);
+const debouncedOutput_s1a4 = document.querySelector(
+  '.output-s1a4.debounced-s1a4'
+);
+const eventCounter_s1a4 = {
+  vanilla: 0,
+  throttled: 0,
+  debounced: 0,
+};
+
+document.addEventListener('scroll', () => {
+  eventCounter_s1a4.vanilla += 1;
+  vanillaOutput_s1a4.textContent = eventCounter.vanilla;
+});
+
+document.addEventListener(
+  'scroll',
+  _.throttle(() => {
+    eventCounter_s1a4.throttled += 1;
+    throttledOutput_s1a4.textContent = eventCounter_s1a4.throttled;
+  }, 300)
+);
+
+document.addEventListener(
+  'scroll',
+  _.debounce(() => {
+    eventCounter_s1a4.debounced += 1;
+    debouncedOutput_s1a4.textContent = eventCounter_s1a4.debounced;
+  }, 300)
+);
+            </pre>
+          </div>
+          <div id="example-practice-s1a4" class="example-practice-s1a4">
+            <p class="cta-s1a4">Scroll me</p>
+            <div class="event-counter-s1a4">
+              <div class="box-s1a4">
+                <p>No timing function</p>
+                <span class="output-s1a4 vanilla-s1a4">0</span>
+              </div>
+              <div class="box-s1a4">
+                <p>Throttled</p>
+                <span class="output-s1a4 throttled-s1a4">0</span>
+              </div>
+              <div class="box-s1a4">
+                <p>Debounced</p>
+                <span class="output-s1a4 debounced-s1a4">0</span>
+              </div>
+            </div>
+          </div>
+          <p class="example">PrzykładEND -------------------------------</p>
+        </article>
+        <article id="article5">
+          <h2>Tryby metody debounce</h2>
+          <p>
+            Domyślnie metoda debounce działa w trybie, w którym funkcja jest
+            wywoływana w ciągu N milisekund po przerwie między "strumieniami"
+            zdarzeń. Ten tryb nazywa się trailing edge (na końcu).
+          </p>
+          <p>
+            Są jednak zadania, w których funkcję trzeba wywołać natychmiast po
+            wystąpieniu pierwszego zdarzenia w strumieniu, a następnie
+            zignorować wszystkie kolejne zdarzenia, aż do odpowiednio długiej
+            przerwy między nimi, na przykład 300 milisekund. To zachowanie jest
+            powtarzane na początku następnego strumienia zdarzeń. Ten tryb
+            nazywa się leading edge (na początku).
+          </p>
+          <div class="section1-img-container grow_up-img">
+            <img src="../images/main/leading-debounce.png" alt="" />
+          </div>
+          <p>
+            Do metody debounce biblioteki Lodash można przekazać opcjonalny
+            trzeci argument — obiekt parametru, który ma dwie właściwości
+            leading (domyślnie false) i trailing (domyślnie true). Ustawienia te
+            zmieniają tryb i wskazują, czy funkcja ma działać na początku
+            strumienia zdarzeń, czy na końcu po przerwie.
+          </p>
+          <pre>
+            document.addEventListener(
+              "scroll",
+              _.debounce(
+              () => {
+                console.log("Scroll handler call on every event stream start");
+              },
+              300,
+              {
+                leading: true,
+                trailing: false,
+              }
+              )
+              );
+          </pre>
+          <p>
+            W praktyce tryb leading może być wykorzystany np. wtedy, gdy
+            konieczne jest wykonanie funkcji wysłania żądania do serwera przy
+            pierwszym kliknięciu przycisku, a następnie ignorowanie wszystkich
+            kolejnych kliknięć aż do odpowiednio długiej pauzy na przykład w
+            celu uniknięcia odruchowe dwukliku użytkownika. Przykład
+            implementuje debounce w obu trybach dla zdarzenia scroll.
+          </p>
+          <p class="example">Przykład -------------------------------</p>
+          <div id="example-theory-s1a5" class="example-theory">
+            <pre class="example-theory-pre">
+const vanillaOutput_s1a5 = document.querySelector('.output-s1a5.vanilla-s1a5');
+const throttledOutput_s1a5 = document.querySelector(
+  '.output-s1a5.throttled-s1a5'
+);
+const trailingOutput_s1a5 = document.querySelector(
+  '.output-s1a5.trailing-s1a5'
+);
+const leadingOutput_s1a5 = document.querySelector('.output-s1a5.leading-s1a5');
+const eventCounter_s1a5 = {
+  vanilla: 0,
+  throttled: 0,
+  trailing: 0,
+  leading: 0,
+};
+
+// Trailing debounce
+document.addEventListener(
+  'scroll',
+  _.debounce(() => {
+    eventCounter_s1a5.trailing += 1;
+    trailingOutput_s1a5.textContent = eventCounter_s1a5.trailing;
+  }, 300)
+);
+
+// Leading debounce
+document.addEventListener(
+  'scroll',
+  _.debounce(
+    () => {
+      eventCounter_s1a5.leading += 1;
+      leadingOutput_s1a5.textContent = eventCounter_s1a5.leading;
+    },
+    300,
+    { trailing: false, leading: true }
+  )
+);
+
+document.addEventListener('scroll', () => {
+  eventCounter_s1a5.vanilla += 1;
+  vanillaOutput_s1a5.textContent = eventCounter_s1a5.vanilla;
+});
+
+document.addEventListener(
+  'scroll',
+  _.throttle(() => {
+    eventCounter_s1a5.throttled += 1;
+    throttledOutput_s1a5.textContent = eventCounter_s1a5.throttled;
+  }, 300)
+);
+            </pre>
+          </div>
+          <div id="example-practice-s1a5" class="example-practice-s1a5">
+            <p class="cta-s1a5">Scroll me</p>
+            <div class="container-s1a5">
+              <div class="box-s1a5">
+                <p>No timing function</p>
+                <span class="output-s1a5 vanilla-s1a5">0</span>
+              </div>
+              <div class="box-s1a5">
+                <p>Throttled</p>
+                <span class="output-s1a5 throttled-s1a5">0</span>
+              </div>
+              <div class="box-s1a5">
+                <p>Trailing debounce</p>
+                <span class="output-s1a5 trailing-s1a5">0</span>
+              </div>
+              <div class="box-s1a5">
+                <p>Leading debounce</p>
+                <span class="output-s1a5 leading-s1a5">0</span>
+              </div>
+            </div>
+          </div>
+          <p class="example">PrzykładEND -------------------------------</p>
+        </article>
+      </section>
+      <!-- section2 -->
+      <section id="section2" class="text">
+        <article id="article1">
+          <h2>Leniwe ładowanie</h2>
+          <p>
+            Strony internetowe zawierają często dużą liczbę obrazów, które
+            zwiększają rozmiar stron i dramatycznie wpływają na szybkość ich
+            ładowania. Większość obrazów znajduje się poza pierwszą widoczną
+            sekcją (below the fold), więc użytkownik zobaczy je dopiero po
+            przewinięciu strony w dół. Oznacza to, że ładuje się coś, czego
+            użytkownik może nigdy nie zobaczyć. Poświęcisz więc na to czas
+            ładowania strony a często stracisz uwagę użytkowników i pozycję w
+            wyszukiwarkach, ponieważ jedni i drudzy wybierają chętniej szybko
+            ładujące się strony. Pobieranie niekrytycznych treści powoduje
+            również marnowanie baterii urządzeń mobilnych, ograniczonego
+            transferu danych komórkowych i innych zasobów systemowych.
+          </p>
+
+          <div class="section1-img-container grow_up-img">
+            <img src="../images/main/page-fold.png" alt="" />
+          </div>
+          <p>
+            Terminy "above the fold" i "below the fold" pochodzą z czasów
+            "offline". Jeśli kiedykolwiek kupiłeś gazetę w kiosku, zwykle była
+            złożona ona na pół, aby przechodnie mogli zobaczyć tylko górną
+            połowę pierwszej strony. Jeśli nie spodoba im się to, co widzą,
+            przejdą obok i sprzedaż spadnie. Podobnie w dzisiejszych czasach
+            ważne jest, aby najciekawsze treści umieszczać na górze strony i
+            ładować je maksymalnie szybko.
+          </p>
+          <p>
+            Leniwe ładowanie (lazy-loading) to technika, która opóźnia ładowanie
+            niekrytycznych zasobów podczas ładowania strony. Zamiast tego te
+            niekrytyczne zasoby są ładowane tylko wtedy, gdy są potrzebne.
+            Zmniejsza to początkowy rozmiar zasobów, które należy załadować, aby
+            wyświetlić stronę. Zużycie zasobów systemowych oraz czas jej
+            ładowania i późniejszego renderowania są w taki sposób mniejsze.
+            Wszystko to ma pozytywny wpływ na wydajność.
+          </p>
+          <p>
+            Prawdopodobnie widziałeś już leniwe ładowanie w akcji. Wygląda to
+            mniej więcej tak:
+          </p>
+          <ul class="unnumbered-list-container">
+            <li>
+              Wchodzisz na stronę i zaczynasz ją przewijać czytając treść.
+            </li>
+            <li>
+              W pewnym momencie przewiniesz odpowiednio daleko w dół i zobaczysz
+              "zaślepkę" czyli pusty zastępczy obraz, lub wersję w niewielkiej
+              rozdzielczości.
+            </li>
+            <li>
+              Zaślepka zostaje nagle zastąpiona prawdziwym obrazem lub jego
+              pełnowymiarową wersją.
+            </li>
+          </ul>
+        </article>
+        <article id="article2">
+          <h2>Atrybut loading</h2>
+          <p>
+            Wcześniej programiści musieli polegać tylko na możliwościach
+            JavaScript. Nowoczesne przeglądarki potrafią to zrobić bez
+            JavaScript, ale niestety nie jest wspierane to jeszcze we wszystkich
+            z nich. Atrybut HTML loading znacznika "img" jest obsługiwany
+            natywnie we wszystkich nowoczesnych przeglądarkach z wyjątkiem
+            Safari (choć obsługa pojawia się w jej wersji beta co pozwala mieć
+            nadzieję na wprowadzenie kompatybilności) i pozwala przeglądarce
+            opóźniać ładowanie obrazów poza ekranem, dopóki użytkownik nie
+            przewinie tak, że pojawią się w jego widoku (viewport).
+          </p>
+          <pre>
+            img src="my-image.jpg" loading="lazy" alt="Image description" />
+          </pre>
+          <p>Atrybut obsługuje trzy wartości:</p>
+          <ul class="unnumbered-list-container">
+            <li>lazy - przeglądarka wykona leniwe ładowanie obrazu.</li>
+            <li>
+              eager - obraz zostanie załadowany tak szybko, jak to możliwe,
+              czyli bez leniwego ładowania.
+            </li>
+            <li>
+              auto - przeglądarka sama określa, czy wykonać leniwe ładowanie,
+              czy nie, na bazie informacji które posiada między innymi o
+              preferencjach użytkownika, jakości połączenia i tak dalej.
+              Domyślna wartość.
+            </li>
+          </ul>
+          <p>
+            Nie możemy rozpoznać ani zmienić zachowania i mechanizmu określania
+            leniwego ładowania obrazu przez przeglądarkę. Najważniejsze jest to,
+            że przeglądarka załaduje takie obrazy na krótko przed ich wejściem
+            do pola widoku.
+          </p>
+          <p>
+            Otwórz kartę Network w narzędziach programistycznych i wybierz filtr
+            Img, aby wyświetlić tylko ładowanie obrazów. Następnie przewiń
+            przykład i zobacz, jak ładowane są obrazy kotów znajdujące się poza
+            widokiem. Przeglądarki obsługujące atrybut loading ładują obrazy z
+            opóźnieniem, podczas gdy przeglądarki bez obsługi ładują wszystkie
+            obrazy jednocześnie.
+          </p>
+        </article>
+        <article id="article3">
+          <h2>Biblioteka lazysizes</h2>
+          <p>
+            Aby zapewnić wysoką kompatybilność, czyli wsparcie dla starszych
+            przeglądarek lub takich, które nie obsługują jeszcze atrybutu
+            loading natywnie, możesz użyć kilku istniejących bibliotek
+            JavaScript. Najpopularniejsze to
+            <a href="https://afarkas.github.io/lazysizes/index.html"
+              >lazysizes</a
+            >,
+            <a href="https://www.andreaverlicchi.eu/vanilla-lazyload/"
+              >vanilla-lazyload</a
+            >
+            i <a href="https://apoorv.pro/lozad.js/">lozad.js</a>. Wybór
+            biblioteki sprowadza się do tego, jaki zestaw dostarczanych funkcji
+            oferuje i osobistych preferencji programisty. Przyjrzymy się
+            bibliotece
+            <a href="https://afarkas.github.io/lazysizes/index.html"
+              >lazysizes</a
+            >.
+          </p>
+          <p>
+            Obsługa natywna jest ogólnie lepsza i bardziej wydajna niż
+            korzystanie z bibliotek, ale one gwarantują działanie we wszystkich
+            przeglądarkach i mogą zapewnić zaawansowane możliwości leniwego
+            ładowania, które nie są jeszcze ustandaryzowane.
+          </p>
+          <p>
+            Pierwszą rzeczą do zrobienia jest podłączenie biblioteki do projektu
+            za pomocą usługi cdnjs.com. Tag z linkiem do skryptu jest dodawany
+            na końcu "body", tak jak zrobiliśmy to dla biblioteki Lodash.
+          </p>
+          <pre>
+            !-- Lazysizes library script file --
+  script
+    src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"
+    integrity="sha512-q583ppKrCRc7N5O0n2nzUiJ+suUv7Et1JGels4bXOaMFQcamPk9HjdUknZuuFjBNs7tsMuadge5k9RzdmO+1GQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  >/script>
+          </pre>
+          <p>
+            Biblioteka lazysizes jest inicjowana samoczynnie po załadowaniu na
+            stronę. Oznacza to, że dla podstawowego użycia, w JavaScript nie
+            musisz nic robić. Pełna lista możliwości biblioteki znajduje się w
+            <a href="https://afarkas.github.io/lazysizes/index.html"
+              >dokumentacji</a
+            >.
+          </p>
+          <p>
+            Biblioteka lazysizes jest inicjowana samoczynnie po załadowaniu na
+            stronę. Oznacza to, że dla podstawowego użycia, w JavaScript nie
+            musisz nic robić. Pełna lista możliwości biblioteki znajduje się w
+            dokumentacji.
+          </p>
+          <p>
+            Dla wszystkich obrazów, które mają być ładowane leniwie, ustawiamy
+            klasę lazyload i zastępujemy atrybut src atrybutem data-src.
+            Biblioteka lazysizes potrzebuje tego do poprawnego działania.
+          </p>
+          <pre>
+            img class="lazyload" data-src="path/to/my-image.jpg" alt="Generic alt" />
+          </pre>
+          <p>
+            Podczas wczytywania obrazu możesz wyświetlić symbol zastępczy
+            niskiej jakości. Ta technika nazywa się LQIP (Low Quality Image
+            Placeholder). Istnieje wiele opcji implementacji LQIP, ale na
+            początek wystarczy pokazać jeden standardowy symbol zastępczy
+            zamiast wszystkich obrazów. Aby to zrobić, dodaj atrybut src,
+            którego wartością będzie za każdym razem link do tego samego obrazu
+            zastępczego.
+          </p>
+          <pre>
+            img
+            class="lazyload"
+            src="path/to/lqip-placeholder.jpg"
+            data-src="path/to/my-image.jpg"
+            alt="Generic alt"
+            />
+          </pre>
+          <p>
+            Po pełnym załadowaniu obrazu biblioteka lazysizes dodaje do elementu
+            klasę lazyloaded. Można to wykorzystać do zastosowania efektów CSS w
+            momencie ładowania obrazu.
+          </p>
+          <pre>
+            .blur-up {
+              filter: blur(5px);
+              transition: filter 400ms;
+            }
+
+            .blur-up.lazyloaded {
+              filter: blur(0);
+            }
+          </pre>
+          <p>
+            Po zadeklarowaniu stylów dodaj klasę blur-up do znaczników "img".
+          </p>
+          <pre>
+            img
+            class="lazyload blur-up"
+            src="path/to/lqip-placeholder.jpg"
+            data-src="path/to/my-image.jpg"
+            alt="Generic alt"
+            />
+          </pre>
+          <p>
+            Zastosujmy wszystkie te kroki na przykładzie, dodając wsparcie
+            leniwego ładowania obrazów na naszej stronie o kotach. Teraz nawet
+            Safari leniwie załaduje obrazy.
+          </p>
         </article>
       </section>
     </main>
@@ -55,7 +654,22 @@
       </div>
     </footer>
     <!-- SKRYPTY JS -->
+
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
+      integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"
+      integrity="sha512-q583ppKrCRc7N5O0n2nzUiJ+suUv7Et1JGels4bXOaMFQcamPk9HjdUknZuuFjBNs7tsMuadge5k9RzdmO+1GQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script defer src="../scripts/menu.mjs"></script>
-    <script defer src="../scripts/14.mjs"></script>
+    <script type="module" defer src="../scripts/14.mjs"></script>
   </body>
 </html>
