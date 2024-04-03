@@ -61,6 +61,10 @@ const menuItem = [
     {
         name: "14. Throttle Debounce Lazyload",
         link: "../html/14-throttleDebounceLazyload.html"
+    },
+    {
+        name: "15. Modu\u0142owo\u015B\u0107 kodu",
+        link: "../html/15-modulowoscKodu.html"
     }
 ];
 menuItem.forEach((element)=>{

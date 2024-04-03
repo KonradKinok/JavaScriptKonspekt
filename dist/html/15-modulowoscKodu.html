@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.min.css">
+    <!-- <style type="text/css">	@import url(./styles/stylStartowy.css);	</style> -->
+    <link rel="stylesheet" href="/index.7643dd02.css">
+    <link rel="stylesheet" href="/html/15-modulowoscKodu.d64dc3ea.css">
+    <title>Modułowość kodu</title>
+  </head>
+  <body class="body-container">
+    <header class="menu-sticky">
+      <nav class="nav-container">
+        <!-- Nawigacja do innych stron -->
+        <ul id="main-menu" class="nav-list-container"></ul>
+      </nav>
+    </header>
+    <main class="main-container">
+      <!-- section1 -->
+      <section id="section1" class="text">
+        <article id="article1">
+          <h1>Moduł8 - Zajęcia 15 - Modułowość kodu</h1>
+          <h2>Section1 Article1: Node.js</h2>
+          <p>
+            Node.js to lekkie i wydajne środowisko uruchomieniowe dla
+            JavaScript. Umożliwia pisanie aplikacji i narzędzi serwerowych o
+            wysokiej wydajności. Node.js jest zbudowany na silniku JavaScript V8
+            i napisany jest w C++.
+          </p>
+          <p>
+            Początkowo Node.js został stworzony jako środowisko po stronie
+            serwera dla frontendowych aplikacji, ale programiści zaczęli go
+            używać do tworzenia narzędzi pomagających zautomatyzować również
+            lokalne zadania takie jak kompilowanie SCSS. W rezultacie nowy
+            ekosystem narzędzi, który pojawił się wokół Node.js, doprowadził do
+            ogromnych zmian w rozwoju front-endu.
+          </p>
+        </article>
+        <article id="article2">
+          <h2>Section1 Article2: Instalacja</h2>
+          <p>
+            Aby zainstalować najnowszą stabilną wersję, przejdź do
+            <a class="link" href="https://nodejs.org/en/">strony oficjalnej</a>,
+            pobierz instalator LTS (Latest Stable Version) i postępuj zgodnie z
+            instrukcjami. Istnieją instalatory dla wszystkich popularnych
+            systemów operacyjnych - Windows, MacOS i Linux.
+          </p>
+          <p>
+            Użytkownicy systemu Windows powinni zaznaczyć odpowiednie pola
+            wyboru, aby zainstalować wszystkie dodatkowe narzędzia z wyjątkiem
+            Chocolatey. Spowodowałoby to zainstalowanie Pythona i wszelkiego
+            rodzaju narzędzi pomocniczych i kompilatorów.
+          </p>
+          <p>
+            Po instalacji, polecenie node będzie dostępne w terminalu. Aby
+            sprawdzić, czy instalacja się powiodła, sprawdź wersję, uruchamiając
+            w konsoli/terminalu polecenie node z flagą version.
+          </p>
+          <p>
+            Jeśli miałeś wcześniej otwarte okno konsoli pamiętaj aby je wyłączyć
+            i włączyć z powrotem po instalacji, inaczej komenda może nie być
+            dostępna pomimo prawidłowej instalacji.
+          </p>
+          <pre>
+            node --version
+          </pre>
+        </article>
+        <article id="article3">
+          <h2>Section1 Article3: JavaScript poza przeglądarką</h2>
+          <p>
+            Node.js umożliwia uruchamianie kodu JavaScript poza przeglądarką.
+            Otwórz dowolny terminal i wykonaj polecenie node, uruchomi się REPL
+            (read-eval-print loop) - interaktywne środowisko uruchomieniowe kodu
+            JS. Użyjmy go do wyprowadzenia czegoś do konsoli.
+          </p>
+          <div class="section1-img-container grow_up-img">
+            <img src="/node-log.169df521.png" alt="">
+          </div>
+          <p>
+            Aby wyjść z REPL, naciśnij kombinację Ctrl + C w systemie Windows
+            lub Control + C na MacOS.
+          </p>
+          <p>
+            Teraz stwórzmy folder node-tut, a w nim plik index.js z kodem, który
+            napisaliśmy w REPL. Aby uruchomić ten plik, musisz otworzyć terminal
+            i przejść do folderu node-tut, który zawiera index.js o treści:
+          </p>
+          <pre>
+            // index.js
+            const message = "NodeJS in amazing!";
+            console.log(message);
+          </pre>
+          <p>
+            Teraz w konsoli uruchom plik za pomocą polecenia node index.js i
+            uzyskasz ten sam wynik - wyświetlenie stringa bezpośrednio w
+            terminalu (już nie w przeglądarkowej konsoli).
+          </p>
+          <div class="section1-img-container grow_up-img">
+            <img src="/node-run.b44d2701.png" alt="">
+          </div>
+          <p>
+            To jest najważniejsza funkcjonalność Node.js - możliwość wykonywania
+            JavaScript poza przeglądarką. W ten sposób możesz pisać całe
+            aplikacje, na przykład serwer back-end lub oprogramowanie
+            narzędziowe niezależne od przeglądarki. Więcej o Node dowiesz się na
+            ostatnim module naszego kursu.
+          </p>
+        </article>
+      </section>
+      <!-- section2 -->
+      <section id="section2" class="text">
+        <article id="article1">
+          <h2>Section2 Article1: Menedżer pakietów npm</h2>
+          <p>
+            Aby korzystać z całego bogactwa narzędzi (lub pakietów) dla Node.js
+            potrzebujemy możliwości ich instalacji i zarządzania nimi. W tym
+            celu powstał NPM (node package manager) - manager pakietów Node.js.
+            Instaluje on wymagane pakiety i zapewnia przyjazny dla użytkownika
+            interfejs do pracy z nimi.
+          </p>
+          <p>NPM składa się z trzech głównych elementów:</p>
+          <ul class="unnumbered-list-containe">
+            <li></li>
+              Strona <a class="link" href="https://www.npmjs.com/">npmjs.com</a> - służy do
+              wyszukiwania i zapoznania się z dokumentacją pakietu.
+            
+            <li>Interfejs wiersza poleceń (CLI) - program uruchamiany z terminala, udostępnia zestaw poleceń do pracy z rejestrem i pakietami. Umożliwia tworzenie skryptów również uruchamianych w terminalu.</li>
+            <li>Rejestr pakietów (registry) - duża publiczna baza danych narzędzi programistycznych (pakietów).</li>
+          </ul>
+          <p>Pakiet / paczka (package)  - to mała biblioteka JavaScript, która rozwiązuje konkretny problem. Pakiety są pisane przez programistów i udostępniane społeczności. Takie podejście ułatwia życie, ponieważ nie trzeba wymyślać koła na nowo, wszystkie "koła" od dawna stoją na półkach rejestru i są gotowe do użycia. </p>
+          <p>Pakiety abstrahują implementację funkcjonalności, zapewniając programiście przyjazny dla użytkownika interfejs. Dzięki temu kod jest czystszy, bardziej czytelny i łatwiejszy w utrzymaniu.</p>
+          <p>Poniżej wymienimy główne polecenia które będziemy używać i szczegółowo opisywać.</p>
+          <ul class="unnumbered-list-containe">
+            <li>npm init - inicjuje npm w projekcie i tworzy plik package.json</li>
+            <li>npm install - instaluje wszystkie zależności wymienione w package.json</li>
+            <li>npm list --depth=0 - wyświetla w terminalu listę lokalnie zainstalowanych pakietów wraz z numerami ich wersji (bez ich zależności)</li>
+            <li>npm install [package-name] - zainstaluje pakiet lokalnie w folderze node_modules i zaktualizuje package.json</li>
+            <li>npm uninstall [package-name] - odinstaluje pakiet zainstalowany lokalnie i zaktualizuje package.json</li>
+            <li>npm start i npm test - uruchomi skrypt start lub test, zdefiniowany w w package.json</li>
+            <li>npm run [custom-script] - uruchomi niestandardowy skrypt zdefiniowany w package.json</li>
+            <li>npm outdated - używany do wyszukiwania aktualizacji, programowego wykrywania niekompatybilnych wersji i wyświetlania listy dostępnych aktualizacji</li>
+            <li>npm update - zaktualizuje wszystkie pakiety do maksymalnej dozwolonej wersji</li>
+            <p><a class="link" href="https://docs.npmjs.com/">Dokumentacja NPM</a></p>
+          </ul>
+        </article>
+        <article id="article2">
+            <h2>Section2 Article2: Inicjowanie projektu</h2>
+            <p>Każdy projekt rozpoczyna się od stworzenia pliku package.json - śledzi on zależności, zawiera informacje o naszym projekcie, umożliwia pisanie skryptów npm oraz może służyć jako instrukcja przy tworzeniu nowego projektu na podstawie gotowych ustawień. Możesz utworzyć plik package.json za pomocą polecenia npm init w terminalu, inicjując w ten sposób projekt w bieżącym folderze.</p>
+            <pre>
+                npm init
+            </pre>
+            <p>Zostaniesz poproszony o podanie nazwy projektu, wersji, opisu itp. Możesz po prostu naciskać Enter, aż plik package.json zostanie utworzony i umieszczony w folderze projektu. Aby nie naciskać Enter, pomijając puste pola, użyj polecenia init z flagą --yes. Flaga to dodatkowe ustawienie polecenia.</p>
+            <pre>
+                npm init --yes
+            </pre>
+            <p>Większość flag ma alias, czyli skrót. Aliasem dla flagi --yes jest -y, więc polecenia npm init --yes i npm init -y robią to samo. Zwróć uwagę na ilość myślników, ma ona znaczenie i zarówno flaga --y jak i -yes nie zadziałają.</p>
+            <p>package.json zostanie wygenerowany z wartościami domyślnymi. Aby ustawić na przykład dane autora projektu po wygenerowaniu package.json, w terminalu uruchom po kolei następujące polecenia, wstawiając swoje imię oraz e-mail.</p>
+            <pre>
+                npm config set init.author.name "YOUR_NAME"
+                npm config set init.author.email "YOUR_EMAIL"
+            </pre>
+            <div class="section1-img-container grow_up-img">
+            <img src="/npm-init.ef6d44bc.png" alt="">
+          </div>
+          <p>Możesz edytować plik package.json ręcznie lub ponownie uruchomić npm init. Jeśli otworzysz package.json w edytorze, będzie to wyglądało mniej więcej tak. Są tam metadane dotyczące projektu.</p>
+          <pre>
+            package.json
+            {
+                "name": "node-tut",
+                "version": "1.0.0",
+                "main": "index.js",
+                "scripts": {
+                    "test": "echo \"Error: no test specified\" && exit 1"
+                },
+                "author": "Alexander Repeta mycoolemail@mail.com>",
+                "license": "ISC",
+                "keywords": [],
+                "description": ""
+            }
+          </pre>
+        </article>
+        <article id="article3">
+            <h2>Section2 Article3: Skrypty npm</h2>
+            <p>Skrypty umożliwiają uruchamianie zainstalowanych pakietów i zautomatyzowanie pewnych działań. Za pomocą skryptów npm można tworzyć systemy budowania całych projektów. Zautomatyzujmy uruchamianie index.js. W tym celu w pliku package.json we właściwości scripts dodaj skrypt startowy start.</p>
+            <pre>
+                package.json
+                {
+                    "scripts": {
+                        "start": "node index.js"
+                    }
+                }
+            </pre>
+            <p>Teraz możemy go uruchomić w terminalu za pomocą polecenia npm start.</p>
+            <div class="section1-img-container grow_up-img">
+            <img src="/npm-start.7f30e95b.png" alt="">
+          </div>
+          <p>Jeśli utworzysz skrypt o nazwie innej niż start lub test, należy uruchamiać go poprzez npm run nazwa-skryptu - nie zapomnij słowa kluczowego run. </p>
+          <p>Zapoznaj się z dokumentacja<a class="link" href="https://docs.npmjs.com/cli/v10/using-npm/scripts"> How npm handles the "scripts" field</a>.</p>
+        </article>
+        <article id="article4">
+            <h2>Section2 Article4: Instalacja pakietów</h2>
+            <p>Jedną z możliwości oferowanych przez npm jest instalacja pakietów, które są odnajdywane w rejestrze i rozpakowywane do folderu node_modules w katalogu głównym projektu. Po utworzeniu pliku package.json możesz dodawać zależności do projektu.</p>
+            
+            <p>Zależność to pakiet npm używany podczas programowania. Są to wszelkiego rodzaju narzędzia i biblioteki. Zainstaluj bibliotekę <a class="link" href="https://www.npmjs.com/package/validator">validator.js</a> która służy do walidacji stringów, na przykład wprowadzonych przez użytkownika danych w polach formularzy. </p>
+            <pre>
+                npm install validator
+            </pre>
+            <p>NPM pobrał validator i umieścił go w node_modules - folderze, który będzie zawierał wszystkie zewnętrzne zależności.</p>
+            <p>Nie dodawaj folderu node_modules do systemu kontroli wersji, wszyscy programiści będą mogli po prostu zainstalować pakiety na bazie pliku package.json, nie ma więc potrzeby dodawania setek albo i tysięcy plików z folderu node_modules. </p>
+            <p>Jeśli używasz Git, pamiętaj o dodaniu folderu node_modules do pliku .gitignore.</p>
+            <p>Zwróć uwagę, że wygenerowany plik package-lock.json jest dziennikiem wersji drzewa zależności projektu. Zapewnia, że zespół programistów używa dokładnie tej samej wersji wszystkich zależności. NPM automatycznie aktualizuje go podczas dodawania, usuwania i aktualizowania pakietów.</p>
+            <p>Po instalacji w package.json, w obiekcie dependencies pojawiła się nowa zależność. Oznacza to, że validator wersji 11.1.0 został zainstalowany jako zależność i jest gotowy do użycia w naszym projekcie. Pakiety są stale aktualizowane, więc Twoja wersja może być wyższa. </p>
+            <pre>
+                package.json
+                {
+                    "dependencies": {
+                        "validator": "^11.1.0"
+                    }
+                }
+            </pre>
+            <p>Aby uzyskać interfejs pakietu w kodzie Node.js, musisz wywołać funkcję require("nazwa-modułu"), przekazując jej nazwę modułu (bez ścieżki) jako argument - nazywamy to ścieżką bezwzględną. Ścieżka nie jest potrzebna, ponieważ domyślnie moduł będzie wyszukiwany w folderze node_modules. W wyniku wykonania funkcji require zwrócony zostanie interfejs modułu - obiekt z metodami lub po prostu funkcja, w zależności od pakietu. </p>
+            <pre>
+                index.js
+                const validator = require("validator");
+
+                const validateEmail = email => {
+                    return validator.isEmail(email);
+                };
+
+                console.log(
+                "Is mango@mail.com a valid email?: ",
+                validateEmail("mango@mail.com")
+                );
+
+                console.log(
+                "Is Mangozedog.com a valid email?: ",
+                validateEmail("Mangozedog.com")
+                );
+            </pre>
+            <p>Wykonując npm start w terminalu, otrzymujemy.</p>
+            <pre>
+                Is mango@mail.com a valid email?: true
+                Is Mangozedog.com a valid email?: false
+            </pre>
+        </article>
+        <article id="article5">
+            <h2>Section2 Article5: Usuwanie pakietów</h2>
+            <p>Załóżmy, że wersja validator zainstalowana w poprzednim przykładzie powoduje problemy ze zgodnością. Możemy usunąć ten pakiet i zainstalować starszą wersję.</p>
+            <pre>
+                npm uninstall validator
+            </pre>
+        </article>
+        <article id="article6">
+            <h2>Section2 Article6: Instalacja określonej wersji pakietu</h2>
+            <p>Teraz zainstalujmy poprawną wersję validator. W poleceniu instalacji numer wersji jest określony po symbolu </p>
+        </article>
+      </section>
+    </main>
+    <footer class="container footer">
+      <div class="contener-shadow-text2">
+        <h2>Footer</h2>
+        <div class="display-footer">
+          <a class="link-footer" href="" target="_blank" rel="noreferrer noopener">
+            <img src="/konikMaly24x24Squoosh.b1d18e80.png" alt="logo">
+          </a>
+          <div class="display-footer2">
+            <p class="footer-selection">All rights reserved &copy;</p>
+            <p>Konrad</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- SKRYPTY JS -->
+
+    <script defer="" src="/html/13-delegacjaZdarzen.1cba540e.js"></script>
+    <script defer="" src="/html/15-modulowoscKodu.b0eef612.js"></script>
+  </body>
+</html>
