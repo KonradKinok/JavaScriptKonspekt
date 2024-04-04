@@ -435,6 +435,424 @@
             zainstalować najnowsze wersje.
           </p>
         </article>
+        <article id="article7">
+          <h2>Section2 Article7: Rodzaje zależności</h2>
+          <p>
+            Wyobraź sobie ciasto, do jego przygotowania szef kuchni potrzebuje
+            produktów, z przepisu. Poza nimi, do gotowania przydadzą się również
+            narzędzia takie jak miski, łyżki, łopatki itp. W samej kuchni muszą
+            stanąć stoły, piekarniki, lodówki itp. - to wszystko razem służy do
+            przygotowania każdej potrawy, wspólne narzędzia, które są w kuchni.
+          </p>
+          <p>
+            Podobnie jest z zależnościami projektowymi - niektóre zostaną
+            wykorzystane w powstałym produkcie, inne potrzebne są tylko na
+            etapie rozwoju projektu, a są też takie, które trzeba wykorzystać
+            niezależnie od projektu.
+          </p>
+          <p>Dlatego polecenia npm install i npm uninstall mają trzy flagi.</p>
+          <ul class="unnumbered-list-container">
+            <li>
+              -save - wskazuje, że dodawana jest zależność, która zostanie
+              włączona do produktu końcowego. Pakiet zostanie zainstalowany
+              lokalnie w folderze node_modules, a wpis zostanie dodany do pola
+              dependencies w package.json
+            </li>
+            <li>
+              -save-dev - wskazuje, że dodano zależność programistyczną. Pakiet
+              zostanie zainstalowany lokalnie w folderze node_modules, a wpis
+              zostanie dodany do pola devDependencies w package.json. Oznacza
+              to, że w wersji produkcyjnej na serwerze ta zależność nie musi być
+              instalowana.
+            </li>
+            <li>
+              -global - wskazuje, że dodawana jest globalna zależność, czyli
+              narzędzie dostępne dla każdego projektu we wszystkich folderach.
+              Pakiet zostanie zainstalowany globalnie (w systemie).
+            </li>
+          </ul>
+          <ul class="unnumbered-list-container">
+            <li>Jeśli pominiesz flagę, domyślnie zostanie użyty -save.</li>
+            <li>
+              Podczas odinstalowywania pakietu należy podać poprawną flagę, tak
+              samo jak podczas instalacji.
+            </li>
+            <li>
+              Nie instaluj pakietów globalnie, jeśli pracujesz nad projektem z
+              innymi programistami.
+            </li>
+          </ul>
+        </article>
+        <article id="article8">
+          <h2>Section2 Article8: Zarządzanie wersjami pakietów</h2>
+          <p>
+            Z pakietami powiązany jest numer wersji. Numery wersji są zgodne ze
+            standardem <a href="https://semver.org/">SemVer</a>.
+          </p>
+          <p>Biorąc pod uwagę numer wersji MAJOR.MINOR.PATCH, zwiększ:</p>
+          <ul class="unnumbered-list-container">
+            <li>
+              Wersja MAJOR w przypadku wprowadzenia niezgodnych zmian w
+              interfejsie API
+            </li>
+            <li>
+              Wersja MINOR, jeśli dodasz funkcjonalność w sposób kompatybilny
+              wstecz
+            </li>
+            <li>
+              Wersja PATCH, gdy wprowadzasz poprawki błędów zgodne z poprzednimi
+              wersjami
+            </li>
+          </ul>
+          <p>
+            Dodatkowe etykiety metadanych wersji wstępnej i kompilacji są
+            dostępne jako rozszerzenia formatu MAJOR.MINOR.PATCH.
+          </p>
+          <ul class="unnumbered-list-container">
+            <li>
+              npm outdated - używany do wyszukiwania aktualizacji, programowego
+              wykrywania kompatybilnych wersji.
+            </li>
+            <li>
+              npm update - zaktualizuje wszystkie pakiety do maksymalnej
+              dozwolonej wersji.
+            </li>
+            <li>npm update [nazwa-pakietu] - zaktualizuje określony pakiet</li>
+          </ul>
+          <p>
+            Jeśli nie ufasz maszynom lub chcesz instalować określone wersje
+            pakietów, możesz otworzyć package.json i ręcznie zmienić wersje
+            pakietów, a następnie uruchomić npm install.
+          </p>
+        </article>
+        <article id="article9">
+          <h2>Section2 Article9: Zarządzanie pamięcią podręczną</h2>
+          <p>
+            Po zainstalowaniu pakietu, npm zapisuje jego kopię w pamięci
+            podręcznej, więc przy następnej instalacji nie trzeba ponownie
+            pobierać go z Internetu. Pamięć podręczna jest przechowywana w
+            folderze .npm twojego katalogu domowego.
+          </p>
+          <p>
+            Z biegiem czasu folder ten zaśmieca się starymi pakietami i czasami
+            warto go wyczyścić, nie musimy tego robić zbyt często (kilka razy w
+            roku). Buforowanie jest przydatne, ponieważ skraca czas instalacji
+            już używanych pakietów.
+          </p>
+          <p>Aby wyczyścić ten folder uruchom w dowolnym miejscu polecenie:</p>
+          <pre>
+            npm cache clean
+          </pre>
+        </article>
+      </section>
+      <!-- section3 -->
+      <section id="section3" class="text">
+        <article id="article1">
+          <h2>Section3 Article1: Modułowość kodu</h2>
+          <p>
+            Koncepcja modułów jako sposobu organizowania kodu istnieje od dawna.
+            Wraz z rozwojem projektu i jego bazy kodu, programiści starają się
+            rozbić go na pliki, z których każdy opisuje odrębną funkcjonalność.
+          </p>
+          <p>
+            Kod modułowy pomaga w organizacji, utrzymaniu, testowaniu i, co
+            najważniejsze, zarządzaniu zależnościami. Najważniejszymi zaletami
+            modułów są:
+          </p>
+          <ul class="unnumbered-list-container">
+            <li>łatwość utrzymania,</li>
+            <li>odrębne przestrzenie nazw</li>
+            <li>
+              możliwość łatwego ponownego wykorzystania kodu (reusability).
+            </li>
+          </ul>
+          <p>
+            Łatwość utrzymania - dobrze zaprojektowany moduł ma na celu
+            zminimalizowanie zależności od innych części kodu. Pozwoli to na
+            rozszerzenie funkcjonalności aplikacji bez obaw o zakłócenie pracy
+            jako całości. Aktualizacja pojedynczego modułu jest znacznie
+            łatwiejsza, jeśli jest on samowystarczalny i niezależny od innych.
+          </p>
+          <p>
+            Przestrzeń nazw - zmienne, które nie znajdują się w zakresie funkcji
+            lub klasy, są globalne. Zwykle powoduje to zanieczyszczenie
+            przestrzeni nazw, gdzie całkowicie niepowiązany kod współdzieli
+            zmienne globalne. Moduły unikają zanieczyszczenia przestrzeni nazw,
+            tworząc osobny zakres dla zmiennych.
+          </p>
+          <p>
+            Ponowne wykorzystanie - gdyby wszyscy programiści kopiowali gotowy
+            kod do nowych projektów, zmieniając go tylko nieco tak, aby pasował
+            do specyfiki projektu, byłaby to oczywiście ogromna strata czasu.
+            Znacznie lepiej jest mieć moduł, który może być wielokrotnie używany
+            niezależnie od środowiska w którym jest on dołączony jako zależność.
+          </p>
+        </article>
+        <article id="article2">
+          <h2>Section3 Article2: Budowanie modułów</h2>
+          <p>
+            Budowanie modułów to proces łączenia grup modułów i ich zależności w
+            jeden lub grupę plików.
+          </p>
+          <p>
+            Zazwyczaj kod jest podzielony na foldery i pliki, dodatkowo często
+            potrzebujemy podłączyć zewnętrzne biblioteki. W rezultacie każdy z
+            tych plików musi być zawarty w głównym pliku HTML w znaczniku
+            "script", który jest następnie ładowany przez przeglądarkę.
+          </p>
+          <p>
+            Posiadanie oddzielnych tagów "script" dla każdego pliku oznacza, że
+            przeglądarka będzie pobierać każdy plik osobno, co negatywnie wpływa
+            na szybkość ładowania strony. Aby obejść ten problem, pliki są
+            łączone w jeden lub parę plików w celu zmniejszenia liczby żądań.
+            Powstaje jednak problem zarządzania zależnościami między modułami.
+          </p>
+          <p>
+            Jeśli używasz systemów modułowych, takich jak CommonJS czy ESM,
+            musisz użyć narzędzia do przekształcenia ich w uporządkowany,
+            zrozumiały dla przeglądarki kod. W tym miejscu do gry wchodzi
+            Webpack i inne narzędzia typu bundles.
+          </p>
+        </article>
+        <article id="article3">
+          <h2>Section3 Article3: ECMAScript Modules (ESM)</h2>
+          <p>
+            Do niedawna język JavaScript nie miał wbudowanego systemu
+            modułowego. ESM mają zwartą deklaratywną składnię i możliwość
+            asynchronicznego ładowania. Moduł ES to fragment kodu JS
+            wielokrotnego użytku, który eksportuje określone obiekty,
+            udostępniając je innym modułom.
+          </p>
+          <p>Zobaczmy na przykład:</p>
+          <pre>
+            greeter.js
+            const helloMessage = "hello!";
+            const goodbyeMessage = "goodbye!";
+
+            export const hello = () => helloMessage;
+            export const goodbye = () => goodbyeMessage;
+            
+
+            index.js
+            import { hello, goodbye } from "./greeter";
+
+            console.log(hello()); // "hello!"
+            console.log(goodbye()); // "goodbye!"
+          </pre>
+          <p>
+            Każdy plik JS przechowuje kod w unikalnym kontekście modułu i
+            importuje potrzebne mu zależności oraz eksportuje to, co ma być
+            zaimportowane przez inne moduły które będą go wykorzystywać.
+            Operacje eksportu/importu są realizowane przez konstrukcje import i
+            export. Takie podejście ma dwie oczywiste zalety — unikanie
+            zanieczyszczenia globalnej przestrzeni nazw i jawne określanie
+            zależności.
+          </p>
+          <p>
+            Nowy system modułów różni się od istniejącego CommonJS i innych,
+            przede wszystkim tym, że jest standardem. Oznacza to, że z czasem
+            będzie w pełni obsługiwany przez przeglądarki natywnie, bez
+            dodatkowych konieczności dodatkowych narzędzi. Niestety obsługa w
+            przeglądarkach nie jest obecnie kompletna, więc ESM są używane w
+            połączeniu z narzędziami do tworzenia modułów, takimi jak
+            <a class="link" href="https://webpack.js.org/">Webpack</a>,
+            <a class="link" href="https://parceljs.org/">Parcel</a> i inne.
+          </p>
+          <p>
+            ESM zostały zaprojektowane uwzględniając analizę statyczną. Oznacza
+            to, że podczas importowania modułów import jest przetwarzany w
+            czasie kompilacji, czyli przed uruchomieniem skryptu. Pozwala to na
+            usunięcie eksportów, które nie są używane przez inne moduły przed
+            uruchomieniem skryptu, co może prowadzić do znacznych oszczędności
+            na wadze pliku JS, zmniejszając obciążenie przeglądarki. Nazywa się
+            to tree shaking i jest wykonywane przez bundlery automatycznie
+            podczas budowania kodu JS.
+          </p>
+        </article>
+        <article id="article4">
+          <h2>Section3 Article4: Named export</h2>
+          <p>
+            Moduł może eksportować kilka encji, które różnią się nazwami i są
+            nazywane nazwanymi eksportami. Aby zaimportować je do innego modułu,
+            musimy znać nazwy eksportowanych encji, które chcemy zaimportować.
+          </p>
+          <p>
+            Pierwszym sposobem jest użycie słowa kluczowego export przed
+            wszystkimi encjami, które mają zostać wyeksportowane. Zostaną one
+            dodane jako właściwości do eksportowanego obiektu. Podczas importu
+            destrukturyzujemy właściwości z importowanego obiektu.
+          </p>
+          <pre>
+            my-module.js
+            const sqrt = Math.sqrt;
+            export const square = x => x * x;
+            export const diag = (x, y) => sqrt(square(x) + square(y));
+
+
+            main.js
+            import { square, diag } from "./path/to/my-module";
+
+            console.log(square(11)); // 121
+            console.log(diag(4, 3)); // 5
+          </pre>
+          <p>
+            Drugim sposobem jest jawne określenie obiektu z właściwościami do
+            eksportu.
+          </p>
+          <pre>
+            my-module.js
+            const sqrt = Math.sqrt;
+            const square = x => x * x;
+            const diag = (x, y) => sqrt(square(x) + square(y));
+            export { square, diag };
+
+
+            main.js
+            import { square, diag } from "./path/to/myModule";
+
+            console.log(square(11)); // 121
+            console.log(diag(4, 3)); // 5
+          </pre>
+          <p>
+            Poniższa składnia importuje wszystkie eksporty modułu jako obiekt o
+            określonej nazwie. Nazywamy to namespace import.
+          </p>
+          <pre>
+            main.js
+            import * as myModule from "./path/to/my-module";
+
+            console.log(myModule.square(11)); // 121
+            console.log(myModule.diag(4, 3)); // 5
+          </pre>
+        </article>
+        <article id="article5">
+          <h2>Section3 Article5: Default export</h2>
+          <p>
+            Często moduł eksportuje tylko jedną encję, taki eksport jest wygodny
+            do importu. Domyślny eksport to najważniejsza wartość eksportowana,
+            która może być dowolnego typu, może to być: zmienna, funkcja, klasa
+            itp.
+          </p>
+          <pre>
+            my-func.js
+            export default function myFunc() {
+              // ...
+            }
+
+
+            my-class.js
+            export default class MyClass {
+              // ...
+            }
+
+
+            main.js
+            import myFunc from "./path/to/my-func";
+            import MyClass from "./path/to/my-class";
+
+            myFunc();
+            const inst = new MyClass();
+          </pre>
+          <p>
+            Użyj nazwanych eksportów, gdy musisz wyeksportować wiele encji, a
+            eksport domyślny, gdy musisz wyeksportować tylko jedną. Chociaż
+            możliwe jest użycie domyślnych i nazwanych eksportów w tym samym
+            pliku, dobrą praktyką jest wybranie tylko jednego stylu eksportu dla
+            każdego modułu.
+          </p>
+        </article>
+      </section>
+      <!-- section4 -->
+      <section id="section4" class="text">
+        <article id="article1">
+          <h2>Section4 Article1: Wprowadzenie do Webpack</h2>
+          <p>
+            <a href="https://webpack.js.org/">Webpack</a> to konstruktor modułów
+            JS, manager zależności modułów, który analizuje drzewo zależności i
+            tworzy jeden lub więcej plików wynikowych zawierających całą bazę
+            kodu projektu. Ustawia kolejność łączenia modułów, łączy,
+            minifikuje, pakuje i wiele więcej.
+          </p>
+          <div class="section4-img-container grow_up-img">
+            <img src="../images/main/dependency-graph.png" alt="" />
+          </div>
+          <p>
+            Webpack stał się jednym z najważniejszych narzędzi do tworzenia
+            stron internetowych. Przede wszystkim jest managerem zależności
+            modułów aplikacji i bundlerem plików JS, ale może przekształcać
+            wszystkie zasoby (HTML i CSS, SASS itp.), optymalizować obrazy,
+            kompilować szablony, uruchamiać lokalny serwer WWW do programowania
+            i wiele więcej.
+          </p>
+        </article>
+        <article id="article2">
+          <h2>Section4 Article2: Zasada działania</h2>
+          <p>
+            Załóżmy, że mamy aplikację, która potrafi wykonać dwa proste zadania
+            matematyczne: sumować i mnożyć. Zdecydowaliśmy podzielić te funkcje
+            na osobne pliki (moduły), aby uprościć obsługę bazy kodu. Następnie
+            skrypty w index.html będą podłączone w poniższej kolejności.
+          </p>
+          <pre>
+            index.html
+            script src="sum.js">/script>
+            script src="multiply.js">/script>
+            script src="index.js">/script>
+          </pre>
+          <p>
+            Załóżmy, że kod z sum.js jest używany w multiply.js i index.js, a
+            kod z multiply.js jest używany tylko w index.js. Pokażmy hierarchię
+            zależności na prostym diagramie.
+          </p>
+          <div class="section4-img-container grow_up-img">
+            <img src="../images/main/dependencies.png" alt="" />
+          </div>
+          <p>
+            Jeśli popełnisz błąd w kolejności łączenia skryptów w index.html, to
+            znaczy, jeśli index.js jest dołączony przed innymi zależnościami lub
+            jeśli sum.js jest dodawany po multiply.js - wystąpią błędy. Teraz
+            wyobraź sobie, że skalujemy to do prawdziwej, w pełni działającej
+            aplikacji - mogą istnieć setki zależności. Utrzymanie porządku
+            podłączeń byłoby koszmarem.
+          </p>
+          <p>
+            Webpack konwertuje zależności na moduły i łączy je w jeden lub
+            więcej plików. Każdy moduł będzie miał prywatną przestrzeń nazw i
+            podłączy się we właściwym czasie, we właściwej kolejności.
+          </p>
+          <div class="section4-img-container grow_up-img">
+            <img src="../images/main/bundle.png" alt="" />
+          </div>
+          <p>
+            Starszą alternatywą dla Webpack jest Gulp który nadal zajmuje
+            należne mu miejsce w zestawie narzędzi dla programistów, a w
+            niektórych projektach funkcjonalność Webpack nie jest potrzebna,
+            chociaż może działać w połączeniu z Gulp. Pomimo tego, że krzywa
+            uczenia się może być wyższa (zwłaszcza przy bardziej złożonych
+            ustawieniach), Webpack jest niezbędny, jeśli używasz nowoczesnych
+            bibliotek i frameworków do programowania, takich jak React, Vue,
+            Angular itd.
+          </p>
+        </article>
+        <article id="article3">
+          <h2>Section4 Article3: Ustawienie</h2>
+          <p>
+            Skorzystaj z poniższych linków, aby uzyskać wyczerpujące tutoriale z
+            objaśnieniami krok po kroku, jak skonfigurować Webpack.
+          </p>
+          <ul>
+            <li>
+              <a href="https://www.taniarascia.com/how-to-use-webpack/"
+                >How to set up webpack 5 from scratch</a
+              >
+            </li>
+            <li>
+              <a href="https://webpack.js.org/concepts/"
+                >Dokumentacja Webpack</a
+              >
+            </li>
+          </ul>
+        </article>
       </section>
     </main>
     <footer class="container footer">
