@@ -67,6 +67,10 @@ const menuItem = [
     name: '15. Modułowość kodu',
     link: '../html/15-modulowoscKodu.html',
   },
+  {
+    name: '16. Web storage',
+    link: '../html/16-webStorage.html',
+  },
 ];
 
 menuItem.forEach(element => {

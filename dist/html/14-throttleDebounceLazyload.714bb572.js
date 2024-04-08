@@ -671,6 +671,8 @@ parcelHelpers.defineInteropFlag(exports);
  * @param {string} tagDivAndIdExampleTheory
  * @param {string} tagDivAndIdExamplePractice
  */ parcelHelpers.export(exports, "htmlTagViewExample", ()=>htmlTagViewExample);
+parcelHelpers.export(exports, "save", ()=>save);
+parcelHelpers.export(exports, "load", ()=>load);
 "use strict";
 function htmlTagViewExample(tagDivAndIdExampleTheory, tagDivAndIdExamplePractice, className = "example-theory-pre") {
     const example_theory = document.querySelector(tagDivAndIdExampleTheory);
@@ -680,6 +682,22 @@ function htmlTagViewExample(tagDivAndIdExampleTheory, tagDivAndIdExamplePractice
     phrase.textContent = "HTML:" + example_practice.innerHTML;
     example_theory.prepend(phrase);
 }
+const save = (key, value)=>{
+    try {
+        const serializedState = JSON.stringify(value);
+        localStorage.setItem(key, serializedState);
+    } catch (error) {
+        console.error("Set state error: ", error.message);
+    }
+};
+const load = (key)=>{
+    try {
+        const serializedState = localStorage.getItem(key);
+        return serializedState === null ? undefined : JSON.parse(serializedState);
+    } catch (error) {
+        console.error("Get state error: ", error.message);
+    }
+};
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {

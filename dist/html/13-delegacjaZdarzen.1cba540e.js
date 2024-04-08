@@ -65,6 +65,10 @@ const menuItem = [
     {
         name: "15. Modu\u0142owo\u015B\u0107 kodu",
         link: "../html/15-modulowoscKodu.html"
+    },
+    {
+        name: "16. Web storage",
+        link: "../html/16-webStorage.html"
     }
 ];
 menuItem.forEach((element)=>{
