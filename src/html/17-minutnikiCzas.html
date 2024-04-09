@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;700&family=Roboto:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.min.css"
+    />
+    <!-- <style type="text/css">	@import url(./styles/stylStartowy.css);	</style> -->
+    <link rel="stylesheet" href="../styles/stylStartowy.scss" />
+    <link rel="stylesheet" href="../styles/17-minutnikiCzas.scss" />
+    <title>Minutniki i czas</title>
+  </head>
+  <body class="body-container">
+    <header class="menu-sticky">
+      <nav class="nav-container">
+        <!-- Nawigacja do innych stron -->
+        <ul id="main-menu" class="nav-list-container"></ul>
+      </nav>
+    </header>
+    <main class="main-container">
+      <!-- section1 -->
+      <section id="section1" class="text">
+        <article id="article1">
+          <h1>Moduł8 - Zajęcia 17 - Minutniki i czas</h1>
+          <h2>Minutniki i czas</h2>
+          <p>
+            Cały kod JavaScript jest wykonywany przez procesor komputera. Kod,
+            który do tej pory napisaliśmy, był synchroniczny, czyli zajmował
+            procesor przez cały czas jego wykonywania. Przez to na przykład
+            szybkość pętli do iteracji po tablicy zależy od szybkości procesora.
+          </p>
+          <p>
+            Istnieją operacje, które wchodzą w interakcję ze światem
+            zewnętrznym. Przykładem będzie wymiana danych z serwerem przez sieć,
+            co jest znacznie wolniejsze niż pobieranie ich z pamięci. Jeżeli
+            takie operacje są przetwarzane synchronicznie, procesor musiałby
+            czekać bezczynnie, podczas gdy żądanie sieciowe do serwera jest w
+            toku, zamiast wykonywać inne instrukcje.
+          </p>
+          <p>
+            Kod synchroniczny jest wykonywany sekwencyjnie, każda instrukcja
+            czeka na wykonanie poprzedniej. Gdy wywołujesz funkcję, która
+            wykonuje długotrwałą akcję, zatrzymujesz program na cały czas jego
+            wykonywania. Oznacza to, że w modelu programowania synchronicznego
+            wszystko dzieje się po kolei.
+          </p>
+          <p>
+            Wyobraź sobie kolejkę za biletami na dworcu. Nie możesz zacząć
+            kupować biletu, dopóki nie kupi go osoba przed tobą. Również osoby
+            stojące za tobą nie mogą zacząć kupować biletów, dopóki Ty nie
+            kupisz swojego.
+          </p>
+          <p>
+            W kodzie asynchronicznym wiele operacji może być wykonywanych
+            jednocześnie. W tym modelu, żądanie sieciowe do serwera nie zatrzyma
+            programu, będzie on kontynuował wykonywanie innych operacji. Po
+            zakończeniu działania żądania program jest o tym informowany i
+            uzyskuje dostęp do wyniku (np. danych z serwera).
+          </p>
+          <p>
+            Wyobraź sobie obiad w restauracji. Ty i inni goście zamawiacie
+            jedzenie. Nie musisz czekać, aż im przyniosą jedzenie przed
+            złożeniem swojego zamówienia. Podobnie inni odwiedzający nie muszą
+            czekać, aż otrzymasz danie i zjesz, zanim będą mogli zamówić. Każdy
+            otrzyma swoje danie, gdy tylko zostanie przygotowane.
+          </p>
+          <p>
+            Rozważmy różnicę w przykładzie, w którym program wysyła do serwera
+            dwa żądania sieciowe, a następnie przetwarza ich wynik. Operacje 1 i
+            2 to funkcje, które wysyłają żądania do serwera, a 3,4 i 5 to
+            dowolny inny synchroniczny kod, który znasz.
+          </p>
+          <div class="section1-img-container grow_up-img">
+            <img src="../images/main/sync-vs-async.png" alt="" />
+          </div>
+          <p>
+            W modelu synchronicznym wszystko jest jasne i efekt jest raczej
+            smutny - wszystkie operacje blokują wykonanie kolejnych aż do ich
+            zakończenia. Jeśli operacje 3-5 przetwarzają kliknięcia użytkownika,
+            interfejs po prostu zawiesi się, dopóki wyniki żądań 1-2 nie zostaną
+            zakończone i przetworzone
+          </p>
+          <p>
+            Załóżmy, że użytkownik opublikował komentarz (co realizuje się przez
+            żądanie sieciowe) i jednocześnie chciał otworzyć pasek boczny z
+            najnowszymi wiadomościami. Po kliknięciu wyślij komentarz, interfejs
+            zawiesi się i nie będzie reagował na jego działania, dopóki wynik
+            wysłania komentarza nie nadejdzie z serwera. Oczywiście jest to
+            niedopuszczalne.
+          </p>
+          <p>
+            W modelu asynchronicznym rozpoczęcie żądania sieciowego powoduje
+            rozwidlenie, czyli uruchomienie żądania i wynikiem jego
+            przetworzenia są różne akcje. Podczas wykonywania żądania program
+            kontynuuje działanie i wykonuje inny kod. Gdy żądanie sieciowe
+            zostanie zakończone, program może rozpocząć przetwarzanie jego
+            wyniku, gdy tylko będzie wolny. Oznacza to, że użytkownik
+            opublikował komentarz i mógł od razu otworzyć pasek boczny z
+            najnowszymi wiadomościami, nie czekając na odpowiedź z serwera.
+          </p>
+          <p>
+            W jednostce czasu można wykonać tylko jedną operację, ponieważ
+            JavaScript jest jednowątkowy. Programowanie asynchroniczne jest
+            osiągane przez odroczone wywołania funkcji, w których inicjowanie
+            operacji asynchronicznej i przetwarzanie jej wyniku to różne akcje.
+          </p>
+        </article>
+        <article id="article2">
+          <h3>Kod asynchroniczny</h3>
+          <p>
+            W kodzie synchronicznym kolejna instrukcja nie może rozpocząć
+            wykonywania, dopóki nie zostanie wykonana poprzednia. Oznacza to, że
+            instrukcje są przetwarzane sekwencyjnie.
+          </p>
+          <pre>
+            console.log("First log");
+            console.log("Second log");
+            console.log("Third log");
+          </pre>
+          <p>
+            Poniższy kod jest asynchroniczny. Z funkcją setTimeout() zapoznamy
+            się później. Teraz musimy wiedzieć tylko to, że przyjmuje dwa
+            parametry: funkcję wywołania zwrotnego, która zostanie wywołana po N
+            milisekund co przekażemy jako drugi argument.
+          </p>
+          <pre>
+            // Will run first
+            console.log("First log");
+
+            setTimeout(() => {
+                // Will run last, after 2000 milliseconds
+                console.log("Second log");
+            }, 2000);
+
+            // Will run second
+            console.log("Third log");
+          </pre>
+          <p>
+            Funkcja setTimeout() wykonuje się synchronicznie i rejestruje
+            odroczone wywołanie przekazanej funkcji wywołania zwrotnego, która
+            zostanie wywołana asynchronicznie po określonym czasie.
+          </p>
+        </article>
+        <article id="article3">
+          <h2>Wielowątkowość</h2>
+          <p>
+            Nie myl asynchroniczności i wielowątkowości (współbieżności) - to
+            różne modele programowania. Podamy prostą analogię, która może
+            rozjaśnić różnicę. Wyobraź sobie, że jesteś szefem kuchni w
+            restauracji i masz zamówienie na kawę i tosty.
+          </p>
+          <ul class="unnumbered-list-container">
+            <li>
+              Podejście synchroniczne jednostrumieniowe - najpierw
+              przygotowujesz kawę, następnie tosty i podajesz, a potem sprzątasz
+              w kuchni.
+            </li>
+            <li>
+              Asynchroniczne podejście jednowątkowe - zaczynasz robić kawę i
+              ustawiasz minutnik, następnie zaczynasz robić tosty i ustawiasz
+              minutnik w ten sam sposób. Podczas przygotowywania kawy i tostów
+              sprzątasz kuchnię. Kiedy dzwoni minutnik, zdejmujesz kawę z ognia,
+              wyjmujesz tosty i podajesz.
+            </li>
+            <li>
+              Podejście wielowątkowe (współbieżność) - zatrudniasz dwóch
+              asystentów, jednego do parzenia kawy i drugiego do robienia
+              tostów. Teraz masz problem z zarządzaniem asystentami (wątkami),
+              aby nie kolidowali ze sobą w kuchni podczas dzielenia się
+              zasobami.
+            </li>
+          </ul>
+          <p>
+            W asynchronicznych procesach jednowątkowych istnieje harmonogram
+            zadań, w którym niektóre zadania zależą od wyników innych. Po
+            zakończeniu każdego zadania wywoływany jest kod w celu przetworzenia
+            jego wyniku. Potrzebujesz jednak tylko jednego pracownika do
+            wykonania wszystkich zadań, a nie jednego pracownika na jedno
+            zadanie.
+          </p>
+        </article>
+      </section>
+      <!-- section2 -->
+      <section id="section2" class="text">
+        <article id="article1">
+          <h2>Liczniki czasu</h2>
+          <p>
+            Wewnętrzny harmonogram czasowy przeglądarki umożliwia odroczenie
+            wywołania funkcji na określony czas. Istnieją metody które pozwalają
+            kontrolować, kiedy i jak często funkcja jest wywoływana. Timery są
+            zaimplementowane w przeglądarce, a nie wbudowane w język i są
+            dostępne w globalnym obiekcie window.
+          </p>
+        </article>
+        <article id="article2">
+          <h2>Limit czasu</h2>
+          <p>
+            Metoda setTimeout() umożliwia zaplanowanie uruchomienia funkcji po
+            określonym czasie (N milisekund).
+          </p>
+          <pre>
+            const timerId = setTimeout(callback, delay, arg1, arg2, ...);
+          </pre>
+          <ul class="unnumbered-list-container">
+            <li>callback - funkcja, której wykonanie należy zaplanować.</li>
+            <li>
+              delay - czas w milisekundach, po którym funkcja callback zostanie
+              jednorazowo wywołana.
+            </li>
+          </ul>
+          <p>
+            Dodatkowe argumenty (arg1, arg2 itd.) zostaną przekazane do funkcji
+            wywołania zwrotnego w czasie wywołania. Zwraca numeryczny
+            identyfikator utworzonego timera, który służy do jego usunięcia.
+          </p>
+          <p class="example">Przykład -------------------------------</p>
+          <div id="example-theory-s2a2" class="example-theory">
+            <pre class="example-theory-pre">
+const exampleResults = document.querySelector('div.example-results-s2a2');
+const button = document.querySelector('button.btn-s2a2');
+let phrase;
+const onClick = () => {
+  if (!exampleResults.querySelector('pre')) {
+    phrase = document.createElement('pre');
+  }
+
+  const timerId = setTimeout(() => {
+    phrase.textContent += `I love async JS!\n`;
+    exampleResults.prepend(phrase);
+  }, 2000);
+
+  phrase.textContent += `timerId: ${timerId}\t`;
+  exampleResults.prepend(phrase);
+};
+
+button.addEventListener('click', onClick);
+            </pre>
+          </div>
+          <div id="example-practice-s2a2" class="example-practice-s2a2">
+            <button type="button" class="btn-s2a2">Click me</button>
+          </div>
+          <div class="example-results-s2a2"></div>
+          <p class="example">PrzykładEND -------------------------------</p>
+          <p>
+            Jeśli z jakiegoś powodu musimy anulować wywołanie funkcji zanim
+            upłynie zdefiniowany czas, możemy użyć metody clearTimeout(id),
+            która przyjmuje identyfikator timera i czyści go (usuwa).
+          </p>
+          <pre>
+            const greet = () => {
+                console.log("Hello!");
+            };
+            const timerId = setTimeout(greet, 3000);
+            clearTimeout(timerId);
+          </pre>
+          <p>
+            Ponieważ wywołaliśmy clearTimeout(), co zostanie wykonane przed
+            wywołaniem funkcji greet(), timer z timerId zostanie usunięty, a
+            oczekujące wywołanie greet() zostanie wyrejestrowane. Z tego powodu
+            nic nie zostanie wyprowadzone na konsolę.
+          </p>
+        </article>
+        <article id="article3">
+          <h2>Interwał</h2>
+          <p>
+            Metoda setInterval() to prosty sposób na powtarzanie tego samego
+            kodu w kółko co określoną ilość czasu. Składnia i parametry są takie
+            same jak setTimeout(). W przeciwieństwie do setTimeout(), interwał
+            wykona funkcję nie raz, ale regularnie powtarza ją po określonym
+            przedziale czasu. Możesz zatrzymać wykonywanie, wywołując metodę
+            clearInterval(id).
+          </p>
+          <pre>
+            const timerId = setInterval(callback, delay, arg1, arg2, ...);
+          </pre>
+          <p class="example">Przykład -------------------------------</p>
+          <p>
+            Po kliknięciu przycisku „Start" rozpoczniemy interwał i co sekundę
+            będziemy wyprowadzać string do konsoli. Używamy Math.random(), aby
+            ciągi były różne. Klikając przycisk „Stop", wywołamy clearInterval()
+            i przekażemy identyfikator interwału, który ma zostać zatrzymany.
+          </p>
+          <div id="example-theory-s2a3" class="example-theory">
+            <pre class="example-theory-pre">
+const exampleResults_s2a3 = document.querySelector('div.example-results-s2a3');
+const startBtn_s2a3 = document.querySelector('button.js-start-s2a3');
+const stopBtn_s2a3 = document.querySelector('button.js-stop-s2a3');
+let timerId_s2a3 = null;
+let phrase_s2a3;
+if (!exampleResults_s2a3.querySelector('pre')) {
+  phrase_s2a3 = document.createElement('pre');
+}
+startBtn_s2a3.addEventListener('click', () => {
+  timerId_s2a3 = setInterval(() => {
+    phrase_s2a3.textContent += `I love async JS!  ${Math.random()}\n`;
+    exampleResults_s2a3.prepend(phrase_s2a3);
+  }, 1000);
+});
+
+stopBtn_s2a3.addEventListener('click', () => {
+  clearInterval(timerId_s2a3);
+  phrase_s2a3.textContent += `Interval with id ${timerId_s2a3} has stopped!\n`;
+  exampleResults_s2a3.prepend(phrase_s2a3);
+});
+            </pre>
+          </div>
+          <div id="example-practice-s2a3" class="example-practice-s2a3">
+            <button class="btn-s2a3 js-start-s2a3">Start</button>
+            <button class="btn-s2a3 js-stop-s2a3">Stop</button>
+          </div>
+          <div class="example-results-s2a3"></div>
+          <p class="example">PrzykładEND -------------------------------</p>
+        </article>
+        <article id="article4">
+          <h2>Częstotliwość uruchomienia licznika</h2>
+          <p>
+            Licznik przeglądarki ma najmniejsze możliwe opóźnienie. W
+            nowoczesnych przeglądarkach waha się od około 0 do 4 milisekund. W
+            starszych przeglądarkach opóźnienie może być dłuższe, do 15
+            milisekund. Zgodnie ze standardem minimalne opóźnienie wynosi 4
+            milisekundy, więc nie ma różnicy między setTimeout(callback, 1) i
+            setTimeout(callback, 4).
+          </p>
+          <p>
+            Timer może uruchamiać się rzadziej niż określono w parametrze delay,
+            ponieważ jeśli obciążenie procesora jest zbyt duże, niektóre
+            uruchomienia funkcji interwałowych zostaną pominięte. Przeglądarki
+            nadal wykonują timeouts i intervals, nawet gdy karta przeglądarki
+            jest nieaktywna, ale zmniejszają częstotliwość uruchomienia licznika
+          </p>
+        </article>
+      </section>
+      <!-- section3 -->
+      <section id="section3" class="text">
+        <article id="article1">
+          <h2>Section3 Article1: Data i czas</h2>
+          <p>
+            Klasa Date abstrahuje większość pracy bezpośrednio z datami. Pozwala
+            nam to reprezentować momenty w czasie jako obiekty i manipulować
+            nimi za pomocą predefiniowanych metod. Korzystając z możliwości
+            klasy Date można tworzyć zegary, liczniki, kalendarze i inne
+            interaktywne elementy interfejsu związane z datami i godzinami.
+          </p>
+        </article>
+        <article id="article2">
+          <h2>Tworzenie daty</h2>
+          <p>
+            Instancja obiektu Date to obiekt reprezentujący określony punkt w
+            czasie. Utworzenie daty bez argumentów zwraca obiekt przechowujący
+            datę i dokładny czas w momencie jej inicjalizacji, czyli wtedy kiedy
+            wyrażenie zostanie zinterpretowane. W przeglądarce podczas konwersji
+            do string obiekt zwraca wynik wywołania metody toString(), więc w
+            pierwszym logu otrzymujemy ciąg, a nie obiekt.
+          </p>
+          <pre>
+            const date = new Date();
+
+            console.log(date);
+            // "Fri Jun 18 2021 15:01:35 GMT+0300 (Eastern European Summer Time)"
+
+            console.log(date.toString());
+            // "Fri Jun 18 2021 15:01:35 GMT+0300 (Eastern European Summer Time)"
+          </pre>
+        </article>
+        <article id="article3">
+          <h2>Ustawienie daty</h2>
+          <p>
+            Podczas tworzenia instancji klasy Date możesz ustawić datę z ciągu
+            lub liczby. Ciąg może opisywać samą datę lub datę, godzinę minutę
+            itd.
+          </p>
+          <pre>
+            const teamMeetingDate = new Date("March 16, 2030");
+            console.log(teamMeetingDate);
+            // "Mon Mar 16 2030 00:00:00 GMT+0200 (Eastern European Standard Time)"
+
+            const preciseTeamMeetingDate = new Date("March 16, 2030 14:25:00");
+            console.log(preciseTeamMeetingDate);
+            // "Mon Mar 16 2030 14:25:00 GMT+0200 (Eastern European Standard Time)"
+          </pre>
+          <p>
+            Ustawienie czasu poprzez podaniestring wewnętrznie wywołuje metodę
+            Date.parse(), która konwertuje ciąg na liczbę - liczbę milisekund.
+            Format przesyłanego ciągu jest bardzo elastyczny. Na przykład możesz
+            pominąć zero dla dni i miesięcy. Spójrzmy na kilka przykładów, które
+            zostaną poprawnie zinterpretowane..
+          </p>
+          <pre>
+            new Date("2030-03-16");
+            new Date("2030-03");
+            new Date("2018");
+            new Date("03/16/2030");
+            new Date("2030/03/16");
+            new Date("2030/3/16");
+            new Date("March 16, 2030");
+            new Date("March 16, 2030 14:25:00");
+            new Date("2030-03-16 14:25:00");
+            new Date("2030-03-16T14:25:00");
+            new Date("16 March 2030");
+          </pre>
+          <p>
+            Innym sposobem tworzenia nowych obiektów jest przekazanie siedmiu
+            argumentów o typie number opisujących po kolei:
+          </p>
+          <ul class="unnumbered-list-container">
+            <li>rok</li>
+            <li>miesiąc (zaczynając od 0)</li>
+            <li>dzień</li>
+            <li>godzinę</li>
+            <li>minutę,</li>
+            <li>sekundę</li>
+            <li>milisekundę</li>
+          </ul>
+          <p>Wymagane są tylko pierwsze trzy.</p>
+          <pre>
+            const date = new Date(2030, 2, 16, 14, 25, 0, 0);
+            console.log(date);
+            // Sat Mar 16 2030 14:25:00 GMT+0200 (Eastern European Standard Time)
+          </pre>
+        </article>
+        <article id="article4">
+          <h2>Metody</h2>
+          <p>
+            Instancja klasy Date ma wiele metod do odczytywania i zapisywania
+            wartości daty i czasu. Metody zwracają lub przypisują rok, miesiąc,
+            dzień miesiąca lub tygodnia, godzinę, minutę, sekundę i milisekundę
+            dla każdej instancji. Dane te mogą być prezentowane w postaci string
+            na podstawie lokalnego kalendarza lub języka.
+          </p>
+          <h3>Gettery</h3>
+          <p>
+            Gettery służą do odczytywania całej daty lub pojedynczej części.
+            Przy użyciu w przeglądarce zwracana wartość zależy od aktualnej
+            strefy czasowej ustawionej na komputerze użytkownika.
+          </p>
+        </article>
+      </section>
+    </main>
+    <footer class="container footer">
+      <div class="contener-shadow-text2">
+        <h2>Footer</h2>
+        <div class="display-footer">
+          <a
+            class="link-footer"
+            href=""
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <img src="../images/footer/konikMaly24x24Squoosh.png" alt="logo" />
+          </a>
+          <div class="display-footer2">
+            <p class="footer-selection">All rights reserved &copy;</p>
+            <p>Konrad</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- SKRYPTY JS -->
+    <script defer src="../scripts/menu.mjs"></script>
+    <script defer src="../scripts/17.mjs" type="module"></script>
+  </body>
+</html>

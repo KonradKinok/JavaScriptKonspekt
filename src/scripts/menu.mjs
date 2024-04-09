@@ -71,6 +71,10 @@ const menuItem = [
     name: '16. Web storage',
     link: '../html/16-webStorage.html',
   },
+  {
+    name: '17. Minutniki i czas',
+    link: '../html/17-minutnikiCzas.html',
+  },
 ];
 
 menuItem.forEach(element => {

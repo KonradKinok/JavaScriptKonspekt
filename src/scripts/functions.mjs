@@ -19,9 +19,9 @@ export function htmlTagViewExample(
 }
 
 /**
- *localStorage save
- * @param {*} key
- * @param {*} value
+ *LocalStorage save
+ * @param {string} key
+ * @param {object} value
  */
 export const save = (key, value) => {
   try {
