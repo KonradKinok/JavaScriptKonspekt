@@ -73,6 +73,10 @@ const menuItem = [
     {
         name: "17. Minutniki i czas",
         link: "../html/17-minutnikiCzas.html"
+    },
+    {
+        name: "18. Promise",
+        link: "../html/18-promise.html"
     }
 ];
 menuItem.forEach((element)=>{

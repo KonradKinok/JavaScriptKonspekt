@@ -31,7 +31,7 @@
       <!-- section1 -->
       <section id="section1" class="text">
         <article id="article1">
-          <h1>Moduł8 - Zajęcia 17 - Minutniki i czas</h1>
+          <h1>Moduł9 - Zajęcia 17 - Minutniki i czas</h1>
           <h2>Minutniki i czas</h2>
           <p>
             Cały kod JavaScript jest wykonywany przez procesor komputera. Kod,
@@ -443,6 +443,186 @@ stopBtn_s2a3.addEventListener('click', () => {
             Przy użyciu w przeglądarce zwracana wartość zależy od aktualnej
             strefy czasowej ustawionej na komputerze użytkownika.
           </p>
+          <div id="container-getDate-s2a4">
+            <pre>
+              const date = new Date();
+              date  Wyświetla:  </pre
+            >
+            <pre>
+              
+              // Zwraca dzień miesiąca od 1 do 31
+              date.getDate();  Wyświetla:  </pre
+            >
+            <pre>
+              
+              // Zwraca dzień tygodnia od 0 do 6
+              date.getDay();  Wyświetla:  </pre
+            >
+            <pre>
+              
+              // Zwraca miesiąc od 0 do 11
+              date.getMonth();  Wyświetla:  </pre
+            >
+            <pre>
+              
+              // Zwraca rok z 4 cyfr
+              date.getFullYear();  Wyświetla:  </pre
+            >
+            <pre>
+              
+              // Zwraca godzinę
+              date.getHours();  Wyświetla:  </pre
+            >
+            <pre>
+              
+              // Zwraca minuty
+              date.getMinutes();  Wyświetla:  </pre
+            >
+            <pre>
+              
+              // Zwraca sekundy
+              date.getSeconds();  Wyświetla:  </pre
+            >
+            <pre>
+              
+              // Zwraca milisekundy
+              date.getMilliseconds();  Wyświetla:  </pre
+            >
+          </div>
+          <p>
+            Istnieją równoważne wersje tych metod, które zwracają wartości w
+            formacie UTC (Coordinated Universal Time), a nie dostosowane do
+            bieżącej strefy czasowej użytkownika.
+          </p>
+          <div id="container-getDateUtc-s2a4">
+            <pre>
+              const date = new Date();
+              date  Wyświetla:  </pre
+            >
+            <pre>
+              
+              // Zwraca dzień miesiąca od 1 do 31
+              date.getUTCDate();  Wyświetla:  </pre
+            >
+            <pre>
+              
+              // Zwraca dzień tygodnia od 0 do 6
+              date.getUTCDay();  Wyświetla:  </pre
+            >
+            <pre>
+              
+              // Zwraca miesiąc od 0 do 11
+              date.getUTCMonth();  Wyświetla:  </pre
+            >
+            <pre>
+              
+              // Zwraca rok z 4 cyfr
+              date.getUTCFullYear();  Wyświetla:  </pre
+            >
+            <pre>
+              
+              // Zwraca godzinę
+              date.getUTCHours();  Wyświetla:  </pre
+            >
+            <pre>
+              
+              // Zwraca minuty
+              date.getUTCMinutes();  Wyświetla:  </pre
+            >
+            <pre>
+              
+              // Zwraca sekundy
+              date.getUTCSeconds();  Wyświetla:  </pre
+            >
+            <pre>
+              
+              // Zwraca milisekundy
+              date.getUTCMilliseconds();  Wyświetla:  </pre
+            >
+          </div>
+        </article>
+        <article id="article5">
+          <h3>Settery</h3>
+          <p>
+            Wszystko, co można odczytać, można również nadpisać, metody zapisu
+            są również nazywane tak jak gettery, ale zaczynają się od
+            przedrostka set. Ponadto wszystkie metody mają swój odpowiednik w
+            UTC.
+          </p>
+          <div id="container-setDateUtc-s2a5">
+            <pre>
+              const date = new Date("March 16, 2030 14:25:00");
+              date  Wyświetla:  </pre
+            >
+            <pre>
+              
+              date.setMinutes(50);
+              date  Wyświetla:  </pre
+            >
+            <pre>
+              
+              date.setFullYear(2040, 4, 8);
+              date  Wyświetla:  </pre
+            >
+          </div>
+        </article>
+        <article id="article6">
+          <h2>Formatowanie daty</h2>
+          <p>
+            Obiekt daty może być reprezentowany w różnych formatach ciągów i
+            liczb. Jest na to kilka metod. Na przykład toString(),
+            toDateString() i toTimeString() zwracają standardową reprezentację
+            ciągu, nie zakodowaną na stałe w standardzie, ale zależną od
+            przeglądarki. Jedynym wymaganiem jest czytelność dla człowieka.
+            Metoda toString() zwraca całą datę, a toDateString() i
+            toTimeString() - odpowiednio tylko datę i godzinę.
+          </p>
+          <div id="container-dateFormat-s2a6">
+            <pre>
+              const date = new Date();
+              date  Wyświetla:  </pre
+            >
+            <pre>
+              
+              date.toString();
+              Wyświetla:  </pre
+            >
+            <pre>
+              
+              date.toTimeString();
+              Wyświetla:  </pre
+            >
+            <pre>
+              
+              date.toLocaleTimeString();
+              Wyświetla:  </pre
+            >
+            <pre>
+              
+              date.toUTCString();
+              Wyświetla:  </pre
+            >
+            <pre>
+              
+              date.toDateString();
+              Wyświetla:  </pre
+            >
+            <pre>
+              
+              date.toISOString();
+              Wyświetla:  </pre
+            >
+            <pre>
+              
+              date.toLocaleString();
+              Wyświetla:  </pre
+            >
+            <pre>
+              
+              date.getTime();
+              Wyświetla:  </pre
+            >
+          </div>
         </article>
       </section>
     </main>
