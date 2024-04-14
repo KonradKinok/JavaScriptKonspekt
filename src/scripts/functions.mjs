@@ -45,3 +45,15 @@ export const load = key => {
     console.error('Get state error: ', error.message);
   }
 };
+
+/**getRandomElement
+ *
+ * @param {Array} array
+ * @returns
+ */
+export function getRandomElement(array) {
+  // Generuj losowy indeks od 0 do array.length - 1
+  const randomIndex = Math.floor(Math.random() * array.length);
+  // Zwróć wybrany element
+  return array[randomIndex];
+}

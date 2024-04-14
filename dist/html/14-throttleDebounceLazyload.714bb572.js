@@ -673,6 +673,11 @@ parcelHelpers.defineInteropFlag(exports);
  */ parcelHelpers.export(exports, "htmlTagViewExample", ()=>htmlTagViewExample);
 parcelHelpers.export(exports, "save", ()=>save);
 parcelHelpers.export(exports, "load", ()=>load);
+/**getRandomElement
+ *
+ * @param {Array} array
+ * @returns
+ */ parcelHelpers.export(exports, "getRandomElement", ()=>getRandomElement);
 "use strict";
 function htmlTagViewExample(tagDivAndIdExampleTheory, tagDivAndIdExamplePractice, className = "example-theory-pre") {
     const example_theory = document.querySelector(tagDivAndIdExampleTheory);
@@ -698,6 +703,12 @@ const load = (key)=>{
         console.error("Get state error: ", error.message);
     }
 };
+function getRandomElement(array) {
+    // Generuj losowy indeks od 0 do array.length - 1
+    const randomIndex = Math.floor(Math.random() * array.length);
+    // Zwróć wybrany element
+    return array[randomIndex];
+}
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {

@@ -29,10 +29,20 @@ img {
   display: block;
 }
 
-button {
+.button {
+  color: #fff;
+  font-size: inherit;
   cursor: pointer;
+  background-color: #2196f3;
   border: none;
   border-radius: 4px;
+  margin: 0 auto;
+  padding: 12px 32px;
+  display: flex;
+}
+
+.button:hover, .button:focus {
+  background-color: #1976d2;
 }
 
 ul, ol {

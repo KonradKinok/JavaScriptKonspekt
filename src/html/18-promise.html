@@ -146,10 +146,449 @@
                     }
                 }, 2000);
             });
+            
           </pre>
+          <button id="btn-s1a2" class="btn-s1a2" type="button" data-start>
+            Start
+          </button>
         </article>
-        <article id="irticle3">
+        <article id="article3">
           <h2>Metoda then()</h2>
+          <p>
+            Kod, który musi zrobić coś asynchronicznie, tworzy obietnicę i ją
+            zwraca. Kod zewnętrzny, po otrzymaniu obietnicy, dodaje do niej
+            programy obsługi. Po zakończeniu procesu kod asynchroniczny
+            umieszcza obietnicę w stanie fulfilled lub rejected a procedury
+            obsługi w kodzie zewnętrznym są wywoływane automatycznie.
+          </p>
+          <p>
+            Po utworzeniu obietnicy jej wynik jest przetwarzany w funkcjach
+            wywołania zwrotnego. Kod pisze się tak, jakbyśmy myśleli o tym, co
+            może się stać, jeśli obietnica zostanie spełniona, czy nie, bez
+            zastanawiania się nad ramami czasowymi.
+          </p>
+          <p>
+            Metoda then() przyjmuje dwa argumenty - funkcje wywołania zwrotnego,
+            które będą wywoływane, gdy obietnica zmieni stan. Jako argumenty
+            otrzymają wynik obietnicy, wartość lub błąd.
+          </p>
+          <pre>
+            promise.then(onResolve, onReject)
+          </pre>
+          <ul class="unnumbered-list-container">
+            <li>
+              onResolve(value) - zostanie wywołana po pomyślnym wykonaniu
+              obietnicy i otrzyma jej wynik jako argument.
+            </li>
+            <li>
+              onReject(error) - zostanie wywołany, po wykonaniu obietnicy z
+              błędem i otrzyma ją jako argument.
+            </li>
+          </ul>
+          <div class="section1-img-container grow_up-img">
+            <img src="../images/main/method-then.png" alt="" />
+          </div>
+          <p>
+            W tym przykładzie funkcja wywołania zwrotnego onResolve zostanie
+            wywołana po dwóch sekundach, jeśli obietnica się powiedzie, a
+            onReject również zostanie wywołana dwie sekundy później, jeśli
+            obietnica się nie powiedzie.
+          </p>
+          <pre>
+              // Change value of isSuccess variable to call resolve or reject
+              const isSuccess = true;
+
+              const promise = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                  if (isSuccess) {
+                    resolve("Success! Value passed to resolve function");
+                  } else {
+                    reject("Error! Error passed to reject function");
+                  }
+                }, 2000);
+              });
+
+              // Will run first
+              console.log("Before promise.then()");
+
+              // Registering promise callbacks
+              promise.then(
+              // onResolve will run third or not at all
+              value => {
+                console.log("onResolve call inside promise.then()");
+                console.log(value); // "Success! Value passed to resolve function"
+              },
+
+              // onReject will run third or not at all
+              error => {
+                console.log("onReject call inside promise.then()");
+                console.log(error); // "Error! Error passed to reject function"
+              }
+              );
+
+              // Will run second
+              console.log("After promise.then()");
+            </pre
+          >
+          <button id="btn-s1a3" class="btn-s1a3" type="button" data-start>
+            Start
+          </button>
+          <p>
+            Jeśli funkcje onResolve i onReject zawierają złożoną logikę, dla
+            wygody są one deklarowane jako funkcje zewnętrzne i przekazywane do
+            metody then() przez samą nazwę.
+          </p>
+        </article>
+        <article id="article4">
+          <h2>Metoda catch()</h2>
+          <p>
+            W praktyce w metodzie then() obsługuje się tylko pomyślne wykonanie
+            obietnicy (pierwszy argument), a błąd jej wykonania w specjalnej
+            metodzie catch() służacej do „wyłapania" błędów.
+          </p>
+          <div class="section1-img-container grow_up-img">
+            <img src="../images/main/method-catch.png" alt="" />
+          </div>
+          <pre>
+            promise.catch(error => {
+              // Promise rejected
+            });
+          </pre>
+          <p>
+            Podana funkcja callback zostanie wywołana po wykonaniu obietnicy z
+            błędem i otrzyma ją jako argument.
+          </p>
+          <pre>
+            // Change value of isSuccess variable to call resolve or reject
+            const isSuccess = true;
+
+            const promise = new Promise((resolve, reject) => {
+              setTimeout(() => {
+                if (isSuccess) {
+                  resolve("Success! Value passed to resolve function");
+                } else {
+                  reject("Error! Error passed to reject function");
+                }
+              }, 2000);
+            });
+
+            promise
+            .then(value => {
+              console.log(value);
+            })
+            .catch(error => {
+              console.log(error);
+            });
+          </pre>
+          <button id="btn-s1a4" class="button" type="button" data-start>
+            Start
+          </button>
+        </article>
+        <article id="article5">
+          <h2>Metoda finally()</h2>
+          <p>
+            Ta metoda może być przydatna, jeśli musisz wykonać kod po
+            rozwiązaniu obietnicy (fulfilled lub rejected), niezależnie od
+            wyniku. Unika powielania kodu w procedurach obsługi then() i
+            catch().
+          </p>
+          <div class="section1-img-container grow_up-img">
+            <img src="../images/main/method-finally.png" alt="" />
+          </div>
+          <pre>
+            promise.finally(() => {
+              // Promise fulfilled or rejected
+            });
+          </pre>
+          <p>
+            Funkcja callback nie otrzyma żadnych argumentów, ponieważ nie można
+            określić, czy obietnica została spełniona, czy odrzucona. Tutaj
+            zostanie wykonany kod, który w każdym przypadku należy uruchomić.
+          </p>
+          <pre>
+            // Change value of isSuccess variable to call resolve or reject
+            const isSuccess = true;
+
+            const promise = new Promise((resolve, reject) => {
+              setTimeout(() => {
+                if (isSuccess) {
+                  resolve("Success! Value passed to resolve function");
+                } else {
+                  reject("Error! Error passed to reject function");
+                }
+              }, 2000);
+            });
+
+            promise
+            .then(value => console.log(value)) // "Success! Value passed to resolve function"
+            .catch(error => console.log(error)) // "Error! Error passed to reject function"
+            .finally(() => console.log("Promise settled")); // "Promise settled"
+          </pre>
+          <button id="btn-s1a5" class="button" type="button" data-start>
+            Start
+          </button>
+        </article>
+        <article id="article6">
+          <h2>Łańcuchy obietnic</h2>
+          <p>
+            Metoda then() zwraca w wyniku swojego wykonania kolejną obietnicę,
+            której wartością będzie to, co zwróci jej funkcja wywołania
+            zwrotnego onResolve. Pozwala to na budowanie asynchronicznych
+            łańcuchów obietnic.
+          </p>
+          <div class="section1-img-container grow_up-img">
+            <img src="../images/main/promise-chain.png" alt="" />
+          </div>
+          <p>
+            Ponieważ metoda then() zwraca obietnicę, może minąć trochę czasu
+            zanim zostanie wykonana, więc reszta łańcucha będzie czekać. Jeśli
+            błąd wystąpi gdziekolwiek w łańcuchu, wykonanie wszystkich kolejnych
+            operacji then() jest anulowane, a kontrola przekazywana jest do
+            metody catch(). Dlatego catch() znajduje się na końcu łańcucha
+            obietnic.
+          </p>
+          <pre>
+            const promise = new Promise((resolve, reject) => {
+              setTimeout(() => {
+                resolve(5);
+              }, 2000);
+            });
+
+            promise
+            .then(value => {
+              console.log(value); // 5
+              return value * 2;
+            })
+            .then(value => {
+              console.log(value); // 10
+              return value * 3;
+            })
+            .then(value => {
+              console.log(value); // 30
+            })
+            .catch(error => {
+              console.log(error);
+            })
+            .finally(() => {
+              console.log("Final task");
+            });
+          </pre>
+          <button id="btn-s1a6" class="button" type="button" data-start>
+            Start
+          </button>
+        </article>
+        <article id="article7">
+          <h2>"Promisification" funkcji</h2>
+          <p>
+            Wyobraźmy sobie, że mamy funkcję asynchroniczną, która wykonuje
+            jakąś operację asynchroniczną, na przykład żądanie do serwera. Aby
+            przetworzyć wynik, należy ją zaprojektować tak, aby oczekiwała na
+            dwa możliwe wywołania zwrotne - na udane żądanie i na błąd.
+          </p>
+          <pre>
+            const fetchUserFromServer = (username, onSuccess, onError) => {
+              console.log(`Fetching data for ${username}`);
+
+              setTimeout(() => {
+                // Change value of isSuccess variable to simulate request status
+                const isSuccess = true;
+
+                if (isSuccess) {
+                  onSuccess("success value");
+                } else {
+                  onError("error");
+                }
+              }, 2000);
+            };
+
+            const onFetchSuccess = user => {
+              console.log(user);
+            };
+
+            const onFetchError = error => {
+              console.error(error);
+            };
+
+            fetchUserFromServer("Mango", onFetchSuccess, onFetchError);
+          </pre>
+          <button id="btn-s1a7" class="button" type="button" data-start>
+            Start
+          </button>
+          <p>
+            Teraz funkcja fetchUserFromServer() wie zbyt dużo o kodzie, który
+            będzie wykorzystywał wynik jej pracy. Oczekuje ona wywołań zwrotnych
+            i jest odpowiedzialna za wywołania pod pewnymi warunkami. Oznacza
+            to, że przekazujemy coś wewnątrz funkcji (callbacki) i mamy
+            nadzieję, że będzie działać poprawnie - to może doprowadzić do
+            niezbyt czystego kodu.
+          </p>
+          <p>
+            Lepiej, jeśli funkcja nie dba o kod, który użyje jej wyniku. Ona po
+            prostu wykonuje jakąś operację i zwraca wynik swojej pracy do
+            zewnętrznego kodu. Aby zwrócić wynik operacji asynchronicznej, z
+            funkcji musi zostać zwrócona obietnica. "Promisification" to
+            przekształcenie funkcji z wywołaniami zwrotnymi tak, aby nie
+            przyjmowała wywołań zwrotnych, ale jedynie zwracała obietnicę.
+          </p>
+          <pre>
+            const fetchUserFromServer = username => {
+              return new Promise((resolve, reject) => {
+                console.log(`Fetching data for ${username}`);
+
+                setTimeout(() => {
+                  // Change value of isSuccess variable to simulate request status
+                  const isSuccess = true;
+
+                  if (isSuccess) {
+                    resolve("success value");
+                  } else {
+                    reject("error");
+                  }
+                }, 2000);
+              });
+            };
+
+            fetchUserFromServer("Mango")
+            .then(user => console.log(user))
+            .catch(error => console.error(error));
+          </pre>
+          <button id="btn-s1a8" class="button" type="button" data-start>
+            Start
+          </button>
+          <p>
+            Większość nowoczesnych bibliotek opiera się na obietnicach. Podczas
+            wywoływania metody dla operacji asynchronicznej jej wynik jest
+            dostępny jako obietnica, do której można dołączyć procedury obsługi
+            w metodach then() i catch().
+          </p>
+        </article>
+      </section>
+      <!-- section2 -->
+      <section id="section2" class="text">
+        <article id="article1">
+          <h2>Metody klasy Promise</h2>
+          <p>
+            Są zadania, w których musisz pracować z całą kolekcją obietnic.
+            Czasem wtedy musimy poczekać, aż wszystkie zostaną wykonane, a
+            dopiero potem przetworzyć ich wyniki, a w czasem wystarczy poczekać
+            na wykonanie którejkolwiek z nich, ignorując resztę itp. W tych
+            przypadkach klasa Promise ma statyczne metody do pracy z jedną
+            obietnicą lub grupą obietnic.
+          </p>
+        </article>
+        <article id="article2">
+          <p>Promise.all()</p>
+          <p>
+            Przyjmuje tablicę obietnic, czeka na ich spełnienie i zwraca wspólną
+            obietnicę. Jeśli wszystkie obietnice z tablicy się powiodą, zwrócona
+            obietnica przejdzie do stanu fulfilled, a jej wartością będzie
+            tablica wyników realizacji każdej przekazanej obietnicy. Jeżeli
+            chociaż jedna z obietnic zostanie odrzucona, to zwrócona obietnica
+            przejdzie do stanu rejected, a jej wartością będzie napotkany błąd
+            wyrzucony przez odrzuconą obietnicę.
+          </p>
+          <pre>
+            Promise.all([promise1, promise2, promise3, ...])
+          </pre>
+          <p>
+            Napiszmy funkcję, która pobiera tekst dla resolve() i opóźnienie w
+            milisekundach, a w wyniku jej wykonania zwraca obietnicę. Następnie
+            stworzymy dwie obietnice z różnymi czasami opóźnienia.
+          </p>
+          <pre>
+            const makePromise = (text, delay) => {
+              return new Promise(resolve => {
+                setTimeout(() => resolve(text), delay);
+              });
+            };
+
+            const promiseA = makePromise("promiseA value", 1000);
+            const promiseB = makePromise("promiseB value", 3000);
+
+            Promise.all([promiseA, promiseB])
+            .then(value => console.log(value)) //["promiseA value", "promiseB value"]
+            .catch(error => console.log(error));
+          </pre>
+          <button id="btn-s2a2" class="button" type="button" data-start>
+            Start
+          </button>
+          <p>
+            Wywołanie zwrotne metody then() zostanie wywołane po trzech
+            sekundach, czyli po spełnieniu “dłuższej” obietnicy promiseB.
+            Obietnica promiseA zostanie wykonana w ciągu jednej sekundy i jej
+            wynik będzie po prostu czekać. Jeśli którakolwiek z obietnic
+            zostanie odrzucona, wywołana zostanie funkcja zwrotna metody
+            catch().
+          </p>
+        </article>
+        <article id="article3">
+          <h2>Promise.race()</h2>
+          <p>
+            Zwraca spełnioną lub odrzuconą obietnicę, w zależności od wyniku, z
+            jakim zakończy wynikiem się „najszybsza" z przesyłanych obietnic, z
+            wartością lub powodem jej odrzucenia.
+          </p>
+          <pre>
+            Promise.race([promise1, promise2, promise3, ...])
+          </pre>
+          <p>
+            Gdy przynajmniej jedna obietnica z tablicy zostanie spełniona lub
+            odrzucona, zwrócona obietnica przejdzie w stan resolved lub
+            rejected, a cała reszta zostanie odrzucona.
+          </p>
+          <pre>
+            const makePromise = (text, delay) => {
+              return new Promise(resolve => {
+                setTimeout(() => resolve(text), delay);
+              });
+            };
+
+            const promiseA = makePromise("promiseA value", 1000);
+            const promiseB = makePromise("promiseB value", 3000);
+
+            Promise.race([promiseA, promiseB])
+            .then(value => console.log(value)) // "promiseA value"
+            .catch(error => console.log(error));
+          </pre>
+          <button id="btn-s2a3" class="button" type="button" data-start>
+            Start
+          </button>
+          <p>
+            Wywołanie zwrotne metody then() lub catch() zostanie wywołane
+            sekundę później po wywołaniu metody ponieważ wtedy promiseA zwraca
+            wynik. Druga obietnica promiseB zostanie zignorowana.
+          </p>
+          <p>
+            W praktyce race() jest metodą niemalże nieużywaną w codziennych
+            zadaniach programistycznych.
+          </p>
+        </article>
+        <article id="article4">
+          <h2>Promise.resolve() i Promise.reject()</h2>
+          <p>
+            Statyczne metody do tworzenia natychmiastowyo udanych lub
+            odrzuconych obietnic. Działają w taki sam sposób, jak new Promise()
+            z wyjątkiem tego, że można określić ich opóźnienie, ale mają krótszą
+            składnię.
+          </p>
+          <pre>
+            // Fulfilled promise
+            new Promise(resolve => resolve("success value")).then(value =>
+            console.log(value)
+            );
+
+            Promise.resolve("success value").then(value => console.log(value));
+
+            // Rejected promise
+            new Promise((resolve, reject) => reject("error")).catch(error =>
+            console.error(error)
+            );
+
+            Promise.reject("error").catch(error => console.error(error));
+          </pre>
+          <button id="btn-s2a4" class="button" type="button" data-start>
+            Start
+          </button>
         </article>
       </section>
     </main>
