@@ -589,6 +589,118 @@
           <button id="btn-s2a4" class="button" type="button" data-start>
             Start
           </button>
+          <p>
+            Te metody są używane podczas "promisification" funkcji, gdy trzeba
+            zbudować łańcuch obietnic, a początkowa wartość już istnieje.
+            Zrefaktorujmy następujący kod.
+          </p>
+          <pre>
+            const makeGreeting = guestName => {
+              if (guestName === "" || guestName === undefined) {
+                return {
+                  success: false,
+                  message: "Guest name must not be empty",
+                };
+              }
+
+              return {
+                success: true,
+                message: `Welcome ${guestName}`,
+              };
+            };
+
+            const result = makeGreeting("Mango");
+
+            if (result.success) {
+              console.log(result.message);
+            } else {
+              console.error(result.message);
+            }
+          </pre>
+          <div class="container-s2a4">
+            <label class="label-s2a4">
+              <span class="label-text-s2a4">Username</span>
+              <input
+                id="input-s2a4"
+                type="text"
+                class="input-s2a4"
+                name="username"
+                placeholder="Jacob Mercer"
+              />
+            </label>
+            <button id="btn-s2a4a" class="button" type="button" data-start>
+              Start
+            </button>
+          </div>
+          <p>
+            Wykorzystując wywołania zwrotne, nie ma potrzeby zwracania złożonych
+            obiektów ze statusem operacji i sprawdzania go w kodzie zewnętrznym.
+          </p>
+          <pre>
+              const makeGreeting = (guestName, onSuccess, onError) => {
+                if (guestName === "" || guestName === undefined) {
+                  return onError("Guest name must not be empty");
+                }
+                onSuccess(`Welcome ${guestName}`);
+              };
+
+              makeGreeting(
+              "Mango",
+              greeting => console.log(greeting),
+              error => console.error(error)
+              );
+            </pre
+          >
+          <p>
+            Ostatnim krokiem jest "promisification" funkcji makeGreeting(), w
+            celu całkowitego usunięcia jej zależności od kodu zewnętrznego.
+          </p>
+          <pre>
+            const makeGreeting = guestName => {
+              if (guestName === "" || guestName === undefined) {
+                return Promise.reject("Guest name must not be empty");
+              }
+
+              return Promise.resolve(`Welcome ${guestName}`);
+            };
+
+            makeGreeting("Mango")
+            .then(greeting => console.log(greeting))
+            .catch(error => console.error(error));
+          </pre>
+        </article>
+      </section>
+      <!-- section3 -->
+      <section id="section3" class="text">
+        <article id="article1">
+          <h2>Pętla zdarzeń</h2>
+          <p>
+            W tej sekcji znajdziesz linki do dodatkowych materiałów dotyczących
+            pętli zdarzeń w JavaScript - mechanizmu wykonywania kodu
+            synchronicznego i asynchronicznego.
+          </p>
+          <ul class="unnumbered-list-container">
+            <li>
+              <a
+                class="link"
+                href="https://www.youtube.com/watch?v=8aGhZQkoFbQ&feature=youtu.be"
+                >What the heck is the event loop anyway? | Philip Roberts
+                (video)</a
+              >
+            </li>
+            <li>
+              <a class="link" href="https://www.youtube.com/watch?v=cCOL7MC4Pl0"
+                >Jake Archibald: In The Loop (video)</a
+              >
+            </li>
+            <li>
+              <a
+                class="link"
+                href="https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/"
+                >Tasks, microtasks, queues and schedules (article)</a
+              >
+            </li>
+          </ul>
         </article>
       </section>
     </main>

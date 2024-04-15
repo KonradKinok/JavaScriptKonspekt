@@ -37,6 +37,7 @@ h3 {
     display: flex;
     gap: 40px;
     justify-content: space-between;
+    margin-bottom:20px;
 }
 
 .example-theory-pre {
@@ -127,89 +128,60 @@ h3 {
 
 // section1
 .section1-img-container {
-    width: 550px;
+    width: 350px;
     margin: 0 auto;
     overflow: hidden;
     border: 2px solid black;
     border-radius: 15px;
 }
-.section1-grow_up-img {
+
+
+// section2 article 2
+.table-s2a2 {
+    border-collapse: separate;
+}
+
+.schedule-borderColapse {
+    border-collapse: collapse;
+}
+
+.table-s2a2 th,
+.table-s2a2 td {
+    padding: 8px;
+    border: 1px solid #840606;
+}
+
+.table-body-s2a2>tr:hover {
+    background-color: rgb(94, 19, 6);
+    color: white;
+    cursor: pointer;
+}
+
+// section2 article 4
+.section2-img-container {
+    width: 750px;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 2px solid black;
+    border-radius: 15px;
+}
+
+.grow_up-img-s2a4 {
     transition: width 2s, height 2s, transform 2s;
 }
-.section1-grow_up-img:hover {
-    width: 70%;
-    height: 70%;
+
+.grow_up-img-s2a4:hover {
+    width: 100%;
+    height: 100%;
 }
 
-// section1 article2
-.btn-s1a2 {
-    display: flex;
-    padding: 12px 32px;
-    border: none;
-    border-radius: 4px;
-    background-color: #2196f3;
-    color: #fff;
-    font-size: inherit;
-    cursor: pointer;
+// section3 article 5
+.example-practice-s3a5 {
+    border: 2px dashed #f0e3e3;
+    padding: 10px;
+    overflow: auto;
+    height: 100px;
+    width: 300px;
     margin: 0 auto;
+
 }
-
-.btn-s1a2:hover,
-.btn-s1a2:focus {
-    background-color: #1976d2;
-}
-
-// section1 article3
-.btn-s1a3 {
-    display: flex;
-    padding: 12px 32px;
-    border: none;
-    border-radius: 4px;
-    background-color: #2196f3;
-    color: #fff;
-    font-size: inherit;
-    cursor: pointer;
-    margin: 0 auto;
-}
-
-.btn-s1a3:hover,
-.btn-s1a3:focus {
-    background-color: #1976d2;
-}
-
-// section2 article4
-.container-s2a4 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.label-s2a4 {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 16px;
-}
-
-.label-text-s2a4 {
-    margin-bottom: 4px;
-}
-
-.input-s2a4 {
-    padding: 8px;
-    border: 1px solid orange;
-    border-radius: 4px;
-    font-family: inherit;
-    font-size: 16px;
-    outline: none;
-    min-width: 400px;
-}
-
-.input-s2a4:placeholder-shown {
-    border-color: blue;
-}
-
-.input-s2a4::placeholder {
-    color: #9e9e9e;
-}
-
-

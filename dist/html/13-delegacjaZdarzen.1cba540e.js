@@ -77,6 +77,10 @@ const menuItem = [
     {
         name: "18. Promise",
         link: "../html/18-promise.html"
+    },
+    {
+        name: "19. Zapytania HTTP",
+        link: "../html/19-zapytaniaHttp.html"
     }
 ];
 menuItem.forEach((element)=>{

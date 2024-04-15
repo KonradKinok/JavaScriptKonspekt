@@ -311,3 +311,36 @@ btn_s2a4.addEventListener('click', () => {
 
   Promise.reject('S2A4: error').catch(error => console.error(error));
 });
+
+// section2 article4a
+const input_s2a4a = document.querySelector('input#input-s2a4');
+const btn_s2a4a = document.querySelector('button#btn-s2a4a');
+
+const makeGreeting = guestName => {
+  if (guestName === '' || guestName === undefined) {
+    return {
+      success: false,
+      message: 'Guest name must not be empty',
+    };
+  }
+
+  return {
+    success: true,
+    message: `Welcome ${guestName}`,
+  };
+};
+
+const username = input_s2a4a.value;
+const result = makeGreeting(username);
+
+btn_s2a4a.addEventListener('click', () => {
+  if (result.success) {
+    Notify.success(`S2A4a: ${result.message}`, {
+      ...optionsNotify,
+    });
+  } else {
+    Notify.failure(`S2A4a: ${result.message}`, {
+      ...optionsNotify,
+    });
+  }
+});

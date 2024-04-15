@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;700&family=Roboto:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.min.css"
+    />
+    <!-- <style type="text/css">	@import url(./styles/stylStartowy.css);	</style> -->
+    <link rel="stylesheet" href="../styles/stylStartowy.scss" />
+    <link rel="stylesheet" href="../styles/19-zapytaniaHttp.scss" />
+    <title>Zapytania HTTP</title>
+  </head>
+  <body class="body-container">
+    <header class="menu-sticky">
+      <nav class="nav-container">
+        <!-- Nawigacja do innych stron -->
+        <ul id="main-menu" class="nav-list-container"></ul>
+      </nav>
+    </header>
+    <main class="main-container">
+      <!-- section1 -->
+      <section id="section1" class="text">
+        <article id="article1">
+          <h1>Moduł9 - Zajęcia 19 - Zapytania HTTP</h1>
+          <h2>Protokół HTTP</h2>
+          <p>
+            Zanim użytkownik zobaczy na ekranie zawartość strony, przeglądarka
+            wysyła do serwera żądanie otrzymania tej właśnie treści. Plik HTML,
+            obrazy, style i skrypty pochodzą z serwera za pośrednictwem
+            protokołu HTTP - zestawu reguł i konwencji wykorzystywanych podczas
+            przesyłania danych przez sieć.
+          </p>
+          <div class="section1-img-container grow_up-img">
+            <img src="../images/main/client-server.png" alt="" />
+          </div>
+          <p>
+            HyperText Transfer Protocol (protokół przesyłania hipertekstu) jest
+            szeroko rozpowszechnionym protokołem przesyłania różnych typów
+            zasobów internetowych: html, css, javascript, obrazów, audio i wideo
+            itp.
+          </p>
+          <p>
+            HTTP bazuje na strukturze klient-serwer oraz modelu
+            żądanie-odpowiedź, w którym aplikacja kliencka inicjuje połączenie,
+            tworzy żądanie i wysyła je do serwera, po czym serwer przetwarza to
+            żądanie, generuje odpowiedź i odsyła ją do klienta. Komunikacja
+            między nimi odbywa się poprzez szereg naprzemiennych żądań HTTP i
+            odpowiedzi HTTP.
+          </p>
+          <div class="section1-img-container grow_up-img">
+            <img src="../images/main/request-response.png" alt="" />
+          </div>
+          <p>Żądanie odbywa się w kilku etapach:</p>
+          <ul class="unnumbered-list-container">
+            <li>
+              Zapytanie DNS - wyszukiwanie najbliższego serwera DNS, aby
+              przetłumaczyć adres (na przykład google.com) na jego numeryczną
+              reprezentację, adres IP (74.125.87.99).
+            </li>
+            <li>
+              Połączenie - nawiązanie połączenia z serwerem z wykorzystaniem
+              otrzymanego adresu IP.
+            </li>
+            <li>
+              Wysyłanie danych - przekazywanie pakietów od klienta do serwera.
+            </li>
+            <li>
+              Oczekiwanie na odpowiedź - oczekiwanie na dotarcie pakietów danych
+              do serwera, serwer je przetworzy i odpowiedź wróci.
+            </li>
+            <li>
+              Odbieranie danych - pakiety dotarły, możesz odbierać z nich dane.
+            </li>
+          </ul>
+        </article>
+        <article id="article2">
+          <h2>Protokół HTTPS</h2>
+          <p>
+            HyperText Transfer Protocol Secure to dodatek do protokołu HTTP, w
+            którym wszystkie wiadomości między klientem a serwerem są szyfrowane
+            w celu zwiększenia bezpieczeństwa. Zapewnia ochronę przed atakami
+            podsłuchowymi. Dane są przesyłane protokołami kryptograficznymi SSL
+            lub TLS.
+          </p>
+          <div class="section1-img-container grow_up-img">
+            <img src="../images/main/http-vs-https.png" alt="" />
+          </div>
+          <p>
+            Podczas komunikacji przez zwykłe połączenie HTTP wszystkie dane są
+            przesyłane w postaci tekstu i mogą być odczytane przez każdego, kto
+            uzyskał dostęp do połączenia między klientem a serwerem. Jeśli
+            użytkownicy robią zakupy online i wypełniają formularz zamówienia
+            zawierający informacje o karcie kredytowej, ich dane finansowe są
+            znacznie łatwiejsze do kradzieży, jeśli są przesyłane jako tekst.
+            Dzięki HTTPS dane zostaną zaszyfrowane i haker nie będzie mógł ich
+            odszyfrować, ponieważ odszyfrowanie wymaga dostępu do klucza
+            prywatnego przechowywanego na serwerze.
+          </p>
+          <p>
+            Protokół HTTPS zapewnia, że informacje o klientach, takie jak numery
+            kart kredytowych, są szyfrowane i nie można ich przechwycić w formie
+            odszyfrowanej. Odwiedzający mogą potwierdzić, że strona jest
+            bezpieczna, patrząc na ikonę po lewej stronie paska adresu,
+            zabezpieczone połączenia są oznaczone ikoną kłódki.
+          </p>
+        </article>
+        <article id="article3">
+          <h2>Dodatkowe materiały</h2>
+          <ul class="unnumbered-list-container">
+            <li>
+              <a
+                class="link"
+                href="https://www.youtube.com/watch?v=72snZctFFtA&feature=youtu.be"
+                >DNS explained</a
+              >
+            </li>
+            <li>
+              <a
+                class="link"
+                href="https://www.youtube.com/playlist?list=PLzdnOPI1iJNfMRZm5DDxco3UdsFegvuB7"
+                >How The Internet Works</a
+              >
+            </li>
+            <li>
+              <a
+                class="link"
+                href="https://www.youtube.com/watch?v=AEaKrq3SpW8&list=PL8dPuuaLjXtNlUrzyH5r6jN9ulIgZBpdo"
+                >The Internet: Crash Course Computer Science #29</a
+              >
+            </li>
+            <li>
+              <a
+                class="link"
+                href="https://www.youtube.com/watch?v=guvsH5OFizE&list=PL8dPuuaLjXtNlUrzyH5r6jN9ulIgZBpdo"
+                >The World Wide Web: Crash Course Computer Science #30</a
+              >
+            </li>
+          </ul>
+        </article>
+      </section>
+      <!-- section2 -->
+      <section id="section2" class="text">
+        <article id="article1">
+          <h2>REST API</h2>
+          <p>
+            Serwer to komputer ze specjalnym oprogramowaniem. Backend to program
+            znajdujący się na serwerze, który może przetwarzać przychodzące
+            żądania HTTP i posiada zestaw gotowych akcji dla określonych żądań.
+          </p>
+          <div class="section1-img-container grow_up-img">
+            <img src="../images/main/rest-api.png" alt="" />
+          </div>
+          <p>
+            API (interfejs programowania aplikacji) - zestaw dobrze
+            zdefiniowanych reguł komunikacji pomiędzy różnymi komponentami
+            oprogramowania. Interfejs opisuje, o co możesz poprosić program i
+            jaki będzie wynik.
+          </p>
+          <p>
+            REST (representational state transfer) - to styl architektury
+            backendu oparty na zestawie zasad opisujących sposób definiowania i
+            adresowania zasobów sieciowych.
+          </p>
+          <p>
+            REST API - backend zbudowany na zasadzie REST. Służy jako warstwa
+            między aplikacją internetową a bazą danych. Posiada standardowy
+            interfejs dostępu do zasobów. Działa jak strona internetowa,
+            wysyłamy żądanie HTTP od klienta do serwera i w odpowiedzi zamiast
+            strony HTML otrzymujemy dane w formacie JSON.
+          </p>
+        </article>
+        <article id="article2">
+          <h2>Format żądania</h2>
+          <p>
+            Usługa REST wymaga od klienta złożenia żądania dodania, pobrania lub
+            zmodyfikowania danych. Żądanie może składać się z następujących
+            części.
+          </p>
+          <table class="table-s2a2">
+            <thead>
+              <tr>
+                <th>Entry</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class="table-body-s2a2">
+              <tr>
+                <td>Metoda HTTP</td>
+                <td>Określa, jaką operację wykonać.</td>
+              </tr>
+              <tr>
+                <td>Nagłówki HTTP</td>
+                <td>
+                  Umożliwia klientowi przesyłanie informacji serwisowych
+                  dotyczących żądania.
+                </td>
+              </tr>
+              <tr>
+                <td>Ścieżka</td>
+                <td>
+                  Ścieżka do zasobu. Dostępne ścieżki są opisane w dokumentacji
+                  backendu.
+                </td>
+              </tr>
+              <tr>
+                <td>Ciało</td>
+                <td>Blok żądania zawierający dane.</td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+        <article id="article3">
+          <h2>Metody HTTP</h2>
+          <p>Istnieje kilka podstawowych metod HTTP do pracy z usługą REST.</p>
+          <table class="table-s2a2">
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class="table-body-s2a2">
+              <tr>
+                <td>POST</td>
+                <td>Utwórz nowy zasób</td>
+              </tr>
+              <tr>
+                <td>GET</td>
+                <td>Uzyskaj zestaw zasobów lub jeden zasób</td>
+              </tr>
+              <tr>
+                <td>PUT</td>
+                <td>Zaktualizuj istniejący lub utwórz nowy zasób</td>
+              </tr>
+              <tr>
+                <td>PATCH</td>
+                <td>Zaktualizuj istniejący zasób</td>
+              </tr>
+              <tr>
+                <td>DELETE</td>
+                <td>Usuń zasób</td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+        <article id="article4">
+          <h2>Nagłówki HTTP</h2>
+          <p>
+            Nagłówki zawierają informacje serwisowe związane z treścią żądania.
+            Na przykład typ treści, którą klient może przetworzyć w odpowiedzi z
+            serwera (nagłówek Accept) lub opisujący typ zasobu, który klient
+            wysyła do serwera lub serwer wysyła do klienta (nagłówek
+            Content-Type).
+          </p>
+          <pre>
+                Accept: text/html
+                Content-Type: application/json
+            </pre
+          >
+          <p>
+            Typy MIME - opcje typów treści. Używane do wskazania treści żądania
+            i odpowiedzi, składają się z typu i podtypu oddzielonych ukośnikiem
+            /. Na przykład plik tekstowy zawierający HTML zostanie opisany jako
+            typ text/html. Jeśli plik zawiera CSS, zostanie opisany jako
+            text/css. Dane JSON będą opisane jako application/json. Jeśli klient
+            oczekuje text/css, ale odbiera application/json, nie będzie w stanie
+            rozpoznać i przetworzyć treści odpowiedzi.
+          </p>
+        </article>
+        <article id="article5">
+          <h2>Ścieżki</h2>
+          <p>
+            Żądania muszą zawierać ścieżkę do zasobu, na którym wykonywana jest
+            operacja. Dostępne ścieżki (punkty końcowe, zasoby) są opisane w
+            dokumentacji backendu.
+          </p>
+          <pre>
+            GET https://bookstore.com/api/orders
+            Accept: application/json
+          </pre>
+          <p>
+            Taka ścieżka wyraźnie wskazuje zasób, nawet jeśli nigdy wcześniej go
+            nie widziałeś, ponieważ jest hierarchiczny i opisowy. Realizujemy
+            żądanie pobrania zbioru zamówień.
+          </p>
+          <p>
+            W celu uzyskania jednego elementu kolekcji do zasobu dodawany jest
+            jego identyfikator. Rozważmy żądanie odczytania jednego zamówienia o
+            identyfikatorze 289.
+          </p>
+          <pre>
+            GET https://bookstore.com/api/orders/289
+            Accept: application/json
+          </pre>
+          <p>
+            Ostatnia część ścieżki nazywana jest parametrem dynamicznym i jest
+            opisana w dokumentacji jako /zasób/:parametr. Zasób pozostaje
+            niezmieniony, jest to ścieżka do całej kolekcji, a wartość parametru
+            zmienia się dla każdego z jej elementów.
+          </p>
+        </article>
+        <article id="article6">
+          <h2>Kody odpowiedzi</h2>
+          <p>
+            Serwer wysyła odpowiedź na żądanie klienta, która zawiera kod
+            statusu informujący klienta o wyniku operacji. Kody podzielone są na
+            grupy.
+          </p>
+          <table class="table-s2a2">
+            <thead>
+              <tr>
+                <th>Group</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class="table-body-s2a2">
+              <tr>
+                <td>1XX</td>
+                <td>W celach informacyjnych</td>
+              </tr>
+              <tr>
+                <td>2XX</td>
+                <td>Kody sukcesu</td>
+              </tr>
+              <tr>
+                <td>3XX</td>
+                <td>Opisują wszystko związane z przekierowaniem (redirect)</td>
+              </tr>
+              <tr>
+                <td>4XX</td>
+                <td>Wskazują błędy po stronie klientów</td>
+              </tr>
+              <tr>
+                <td>5XX</td>
+                <td>Wskazują błędy po stronie serwera</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            Nie trzeba pamiętać wszystkich kodów z każdej grupy, wystarczy znać
+            te najczęstsze. Resztę można zawsze znaleźć w odniesienie do kodów
+            HTTP.
+          </p>
+          <table class="table-s2a2">
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class="table-body-s2a2">
+              <tr>
+                <td>200 (OK)</td>
+                <td>Standardowa odpowiedź na udane żądania HTTP.</td>
+              </tr>
+              <tr>
+                <td>201 (Created)</td>
+                <td>
+                  Standardowa odpowiedź na żądanie HTTP, które zakończyło się
+                  pomyślnym utworzeniem zasobu.
+                </td>
+              </tr>
+              <tr>
+                <td>400 (Bad Request)</td>
+                <td>
+                  Nie można przetworzyć żądania z powodu nieprawidłowej składni
+                  żądania lub innego błędu klienta.
+                </td>
+              </tr>
+              <tr>
+                <td>401 (Unauthorized)</td>
+                <td>
+                  Aby uzyskać dostęp do zasobu, wymagana jest autoryzacja.
+                </td>
+              </tr>
+              <tr>
+                <td>403 (Forbidden)</td>
+                <td>Klient nie ma uprawnień dostępu do tego zasobu.</td>
+              </tr>
+              <tr>
+                <td>404 (Not Found)</td>
+                <td>
+                  W tej chwili nie znaleziono zasobu. Być może został usunięty
+                  lub jeszcze nie istnieje.
+                </td>
+              </tr>
+              <tr>
+                <td>500 (Internal Server Error)</td>
+                <td>
+                  Ogólna odpowiedź na nieoczekiwaną awarię serwera, chyba że
+                  dostępne są bardziej szczegółowe informacje.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+        <article id="article7">
+          <h2>Żądanie-Odpowiedź</h2>
+          <p>
+            Załóżmy, że mamy aplikację, która umożliwia przeglądanie, tworzenie,
+            edytowanie i usuwanie klientów i zamówień z małej księgarni z
+            backendem hostowanym pod adresem bookstore.com/api. Wykorzystując
+            zdobytą wiedzę, za pomocą pseudokodu opisujemy proces
+            żądanie-odpowiedź do backendu.
+          </p>
+          <p>
+            Jeśli chcemy uzyskać dane o wszystkich klientach, żądanie GET będzie
+            wyglądać tak.
+          </p>
+          <pre>
+            GET bookstore.com/api/customers
+            Accept: application/json
+          </pre>
+          <p>Na co serwer wyśle nam taką odpowiedź.</p>
+          <pre>
+            Status: 200 OK
+            Content-Type: application/json
+            Body: dane JSON dla wszystkich klientów
+          </pre>
+          <p>
+            Aby otrzymać dane jednego klienta, wskazujemy jego identyfikator,
+            określając żądanie GET.
+          </p>
+          <pre>
+            GET bookstore.com/api/customers/289
+            Accept: application/json
+          </pre>
+          <p>Na co serwer wyśle nam taką odpowiedź.</p>
+          <pre>
+            Status: 200 OK
+            Content-Type: application/json
+            Body: dane JSON o kliencie
+          </pre>
+          <p>W celu dodania nowego klienta wykonujemy żądanie POST.</p>
+          <pre>
+            POST bookstore.com/api/customers
+            Content-Type: application/json
+            Body: { "username": "Mango", "email": "mango@gmail.com" }
+          </pre>
+          <p>
+            Serwer dodaje unikalny identyfikator i jako wynik zwraca cały
+            obiekt.
+          </p>
+          <pre>
+            Status: 201 Created
+            Content-type: application/json
+            Body: { "id": 18674, "username": "Mango", "email": "mango@gmail.com" }
+          </pre>
+        </article>
+      </section>
+      <!-- section3 -->
+      <section id="section3" class="text">
+        <article id="article1">
+          <h2>AJAX</h2>
+          <p>
+            AJAX (Asynchronous JavaScript and XML) - metoda ściągania lub
+            wysyłania danych, a następnie aktualizowania interfejsu o te dane,
+            bez konieczności przeładowywania strony. Skraca to czas odpowiedzi i
+            sprawia, że strona internetowa jest bardziej interaktywna. Proces
+            ten można zobaczyć na przykładzie ładowania danych.
+          </p>
+          <ol class="numbered-list-container">
+            <li>
+              Na stronie internetowej ma miejsce zdarzenie (strona ładuje się,
+              kliknięty jest przycisk "Pokaż więcej", przesyłany formularz
+              itp.).
+            </li>
+            <li>
+              Na kliencie za pomocą JavaScript w odpowiedzi na to zdarzenie
+              zostanie wykonana funkcja do pracy z serwerem, na którym tworzone
+              i wysyłane jest żądanie HTTP.
+            </li>
+            <li>
+              Serwer odbiera i przetwarza żądanie HTTP, odsyłając w odpowiedzi
+              dane w formacie JSON.
+            </li>
+            <li>
+              Na kliencie za pomocą JavaScript przetwarzana jest odpowiedź z
+              serwera, odczytywane są dane i aktualizowany interfejs.
+            </li>
+          </ol>
+          <p>
+            Mimo to, że w nazwie technologii występuje XML, we współczesnej
+            sieci został zastąpiony przez JSON, a nazwę pozostawiono w hołdzie
+            pamięci. AJAX oznacza dowolną komunikację z serwerem bez
+            przeładowywania strony.
+          </p>
+        </article>
+        <article id="article2">
+          <h2>Fetch API</h2>
+          <p>
+            Zbudowany w przeglądarce interfejs dostępny w obiekcie window, który
+            zawiera zestaw właściwości i metod do wysyłania, odbierania i
+            przetwarzania zasobów z serwera. Metoda fetch() zapewnia nowoczesny
+            interfejs do wysyłania żądań do serwera i jest zbudowana na
+            obietnicach.
+          </p>
+          <pre>
+            fetch(url, options)
+          </pre>
+          <ul class="unnumbered-list-container">
+            <li>
+              url - ścieżka do danych na backendzie, które należy pobrać,
+              utworzyć lub zmodyfikować. Wymagany argument.
+            </li>
+            <li>
+              options - obiekt ustawień żądania: metoda (domyślnie GET),
+              nagłówki, ciało itp. Argument opcjonalny.
+            </li>
+          </ul>
+          <p>
+            Będziemy robić żądania do
+            <a class="link" href="https://jsonplaceholder.typicode.com/"
+              >JSONPlaceholder API</a
+            >
+            - publicznego API REST do szybkiego prototypowania, który zapewnia
+            kolekcję fałszywych użytkowników w zasobie /users.
+          </p>
+          <pre>
+            fetch("https://jsonplaceholder.typicode.com/users")
+            .then(response => {
+                // Response handling
+            })
+            .then(data => {
+                // Data handling
+            })
+            .catch(error => {
+                // Error handling
+            });
+          </pre>
+        </article>
+        <article id="article3">
+          <h2>Sprawdzanie odpowiedzi</h2>
+          <p>
+            Wartość obietnicy, która zwraca metodę fetch(), to obiekt z
+            informacją serwisową o stanie odpowiedzi serwera. Instancja klasy
+            Response wyposażona w różne metody i właściwości. W zależności od
+            typu odbieranej zawartości używana jest inna metoda konwersji treści
+            odpowiedzi na dane.
+          </p>
+          <ul class="unnumbered-list-container">
+            <li>json() - parsuje dane w formacie JSON.</li>
+            <li>
+              text() - analizuje dane w formacie zwykłego tekstu, na przykład
+              .csv (dane tabelaryczne).
+            </li>
+            <li>
+              blob() - analizuje dane opisujące plik, takie jak obraz, audio lub
+              wideo.
+            </li>
+          </ul>
+          <p>
+            Pierwsza metoda then() sprawdza status odpowiedzi i konwertuje dane
+            do prawidłowego formatu lub jawnie zgłasza błąd, żeby obsłużyć
+            nieudane żądanie HTTP w bloku catch().
+          </p>
+          <pre>
+            fetch("https://jsonplaceholder.typicode.com/users")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(response.status);
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Data handling
+            })
+            .catch(error => {
+                // Error handling
+            });
+          </pre>
+          <p>
+            Jest to konieczne, aby fetch() poprawnie zareagowała na status kod
+            404, który technicznie nie jest błędem, ale nie jest pomyślnym
+            wynikiem dla klienta.
+          </p>
+        </article>
+        <article id="article4">
+          <h2>Karta Network</h2>
+          <p>
+            W narzędziach programistycznych karta Network wyświetla wszystkie
+            żądania HTTP wykonywane na stronie. Wybranie filtra XHR, spowoduje
+            pozostawienie tylko żądań do backendu. Po kliknięciu przycisku w
+            przykładzie, po chwili żądanie zostanie wyświetlone na liście.
+            Wybierając go, możesz wyświetlić informacje służbowe i treść
+            odpowiedzi na podkartach Headers, Preview i Response.
+          </p>
+          <div class="section2-img-container grow_up-img-s2a4">
+            <img src="../images/main/network-tab.jpg" alt="" />
+          </div>
+        </article>
+        <article id="article5">
+          <h2>Praca z publicznym REST API</h2>
+          <p>
+            Każdy backend jest wyjątkowy, są ich tysiące. Z drugiej strony API
+            REST są zbudowane na standardowej architekturze. Oznacza to, że
+            możesz zrozumieć zasadę ich działania, po czym wystarczy zapoznać
+            się z dokumentacją backendu, którego potrzebujesz.
+          </p>
+          <p>
+            Kontynuujemy pracę z
+            <a class="link" href="https://jsonplaceholder.typicode.com/"
+              >JSONPlaceholder API</a
+            >. Z dokumentacji pobieramy adres URL zasobu, aby zażądać informacji
+            o zbiorze fałszywych użytkowników
+          </p>
+          <pre>
+            https://jsonplaceholder.typicode.com/users
+          </pre>
+          <p>Ta ścieżka składa się z następujących części:</p>
+          <ul class="unnumbered-list-container">
+            <li>
+              https://jsonplaceholder.typicode.com - to punkt końcowy,
+              podstawowy adres URL, punkt wejścia API.
+            </li>
+            <li>/users - zasób, do którego uzyskujemy dostęp.</li>
+          </ul>
+          <p>
+            Klikając przycisk "Fetch users" wykonamy żądanie GET i na podstawie
+            otrzymanych danych renderujemy listę użytkowników.
+          </p>
+          <p class="example">Przykład -------------------------------</p>
+          <div id="example-theory-s3a5" class="example-theory">
+            <pre class="example-theory-pre">
+JavaScript:                
+const fetchUsersBtn = document.querySelector(".btn");
+const userList = document.querySelector(".user-list");
+
+fetchUsersBtn.addEventListener("click", () => {
+  fetchUsers()
+    .then((users) => renderUsers(users))
+    .catch((error) => console.log(error));
+});
+
+function fetchUsers() {
+  return fetch("https://jsonplaceholder.typicode.com/users").then(
+    (response) => {
+      if (!response.ok) {
+        throw new Error(response.status);
+      }
+      return response.json();
+    }
+  );
+}
+
+function renderUsers(users) {
+  const markup = users
+    .map((user) => {
+      return `&lt;li>
+          &lt;p>&lt;b>Name&lt;/b>: ${user.name}&lt;/p>
+          &lt;p>&lt;b>Email&lt;/b>: ${user.email}&lt;/p>
+          &lt;p>&lt;b>Company&lt;/b>: ${user.company.name}&lt;/p>
+        &lt;/li>`;
+    })
+    .join("");
+  userList.insertAdjacentHTML("beforeend", markup);
+}
+            </pre>
+          </div>
+          <div id="example-practice-s3a5" class="example-practice-s3a5">
+            <button id="btn-s3a5" type="button" class="button">
+              Fetch users
+            </button>
+          </div>
+          <div id="example-results-s3a5">
+            <ul id="user-list-s3a5" class="user-list"></ul>
+          </div>
+          <p class="example">PrzykładEND -------------------------------</p>
+          <p>
+            Zauważ, że funkcja fetchUsers() zwraca obietnicę, więc do wyniku
+            wywołania dodajemy łańcuch metodthen() i catch().
+          </p>
+        </article>
+        <article id="article6">
+          <h2>Błąd początkującego</h2>
+          <p>
+            rzyjrzyjmy się częstym błędom podczas pracy z kodem asynchronicznym
+            - próbie użycia danych żądania HTTP poza wywołaniem zwrotnym metody
+            then(). Początkujący próbuje zapisać „wynik fetch" do zmiennej
+            zewnętrznej i użyć jej w dalszej części kodu natychmiast po
+            wywołaniu metody fetch().
+          </p>
+          <pre>
+            let globalVariable; // undefined
+
+            // Initializing data fetching
+            fetch("https://jsonplaceholder.typicode.com/users")
+            .then(response => response.json())
+            .then(users => {
+                console.log("users inside then callback: ", users);
+
+                // Writing the result to a global variable
+                globalVariable = users;
+
+                // Everything is ok here, the data is in the variable
+                console.log("globalVariable inside fetch callback: ", globalVariable);
+            });
+
+            // No async data here
+            console.log("globalVariable outside fetch: ", globalVariable); // undefined
+          </pre>
+          <p>
+            Poza wywołaniem zwrotnym metody then() nie ma danych, ponieważ
+            ostatni console.log() zostanie wykonany przed nadejściem odpowiedzi
+            z serwera. W tym czasie zmienna globalVariable nadal zawiera
+            undefined. Wartość spełnionej obietnicy jest dostępna tylko w
+            wywołaniu zwrotnym metody then().
+          </p>
+        </article>
+        <article id="article7">
+          <h2>Parametry ciągu zapytania</h2>
+          <p>
+            Parametry zapytania pozwalają określić dodatkowe kryteria dla
+            backendu. Na przykład, ile elementów kolekcji chcemy otrzymać w
+            żądaniu, być może musimy dodać sortowanie po jakiejś właściwości
+            obiektu, ograniczyć wybór itp. Lista parametrów zapytania, ich nazwy
+            i możliwe wartości zależą od backendu i są opisane w dokumentacji.
+          </p>
+          <p>
+            Znak ? wskazuje początek parametrów zapytania. Każdy parametr jest
+            parą nazwa=wartość. Znak & jest używany do wskazania znaczącego
+            „AND", oddzielając parametry w ciągu zapytania.
+          </p>
+          <pre>
+            const url = "https://jsonplaceholder.typicode.com/users?_limit=7&_sort=name";
+          </pre>
+          <p>
+            Takie żądanie GET zwróci tablicę siedmiu użytkowników (w sumie 10)
+            posortowanych według nazwy (pole name) w kolejności alfabetycznej.
+            Podkreślenia w nazwach parametrów są specyficzne dla tego backendu,
+            nie jest to jakiś standard.
+          </p>
+        </article>
+      </section>
+    </main>
+    <footer class="container footer">
+      <div class="contener-shadow-text2">
+        <h2>Footer</h2>
+        <div class="display-footer">
+          <a
+            class="link-footer"
+            href=""
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <img src="../images/footer/konikMaly24x24Squoosh.png" alt="logo" />
+          </a>
+          <div class="display-footer2">
+            <p class="footer-selection">All rights reserved &copy;</p>
+            <p>Konrad</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- SKRYPTY JS -->
+    <script defer src="../scripts/menu.mjs"></script>
+    <script defer src="../scripts/19.mjs" type="module"></script>
+  </body>
+</html>

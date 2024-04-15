@@ -684,7 +684,8 @@ function htmlTagViewExample(tagDivAndIdExampleTheory, tagDivAndIdExamplePractice
     const example_practice = document.querySelector(tagDivAndIdExamplePractice);
     const phrase = document.createElement("pre");
     phrase.classList.add(className);
-    phrase.textContent = "HTML:" + example_practice.innerHTML;
+    // phrase.textContent = 'HTML:' + example_practice.innerHTML;
+    phrase.innerText = `'HTML: ${example_practice.innerHTML}`;
     example_theory.prepend(phrase);
 }
 const save = (key, value)=>{
