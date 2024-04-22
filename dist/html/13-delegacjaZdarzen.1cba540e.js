@@ -81,6 +81,14 @@ const menuItem = [
     {
         name: "19. Zapytania HTTP",
         link: "../html/19-zapytaniaHttp.html"
+    },
+    {
+        name: "20. Paginacja",
+        link: "../html/20-paginacja.html"
+    },
+    {
+        name: "21. CRUD",
+        link: "../html/21-crud.html"
     }
 ];
 menuItem.forEach((element)=>{

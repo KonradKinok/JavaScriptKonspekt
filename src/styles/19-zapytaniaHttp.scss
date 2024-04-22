@@ -194,3 +194,21 @@ h3 {
     width: 300px;
     margin: 0 auto;
 }
+
+// section4 article1
+.section4-img-container {
+    width: 350px;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 2px solid black;
+    border-radius: 15px;
+}
+
+.grow_up-img-s4a1 {
+    transition: width 2s, height 2s, transform 2s;
+}
+
+.grow_up-img-s4a1:hover {
+    width: 80%;
+    // height: 100%;
+}

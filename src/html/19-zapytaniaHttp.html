@@ -31,7 +31,7 @@
       <!-- section1 -->
       <section id="section1" class="text">
         <article id="article1">
-          <h1>Moduł9 - Zajęcia 19 - Zapytania HTTP</h1>
+          <h1>Moduł10 - Zajęcia 19 - Zapytania HTTP</h1>
           <h2>Protokół HTTP</h2>
           <p>
             Zanim użytkownik zobaczy na ekranie zawartość strony, przeglądarka
@@ -925,6 +925,68 @@ function renderUsers_s3a8(users) {
             Nowoczesne przeglądarki domyślnie dodają wiele nagłówków, w
             zależności od operacji i treści żądania, więc nie ma potrzeby
             jawnego określania standardowych nagłówków.
+          </p>
+        </article>
+      </section>
+      <!-- section4 -->
+      <section id="section4" class="text">
+        <article id="article1">
+          <h2>Żądania międzydomenowe</h2>
+          <p>
+            Domyślnie żądanie HTTP można wykonać tylko w bieżącej witrynie.
+            Podczas próby wysłania żądania do innej domeny, portu lub protokołu,
+            czyli wykonania żądania międzydomenowego, przeglądarka wyświetla
+            błąd. Odbywa się to ze względów bezpieczeństwa, a uprawnienia są
+            konfigurowane na backendzie. Jeśli backend nie obsługuje żądań
+            międzydomenowych, programista front-end nie będzie mógł nic z tym
+            zrobić w swoim kodzie.
+          </p>
+          <p>
+            Ta polityka przeglądarki nazywa się CORS i oznacza Cross-Origin
+            Resource Sharing, gdzie Origin to domena, port lub protokół.
+            Dosłowne tłumaczenie brzmi jak „współdzielenie zasobów między
+            różnymi źródłami".
+          </p>
+          <p>
+            Z każdym żądaniem przeglądarka sama dodaje nagłówek HTTP Origin,
+            który wskazuje adres strony internetowej, która chce wysłać żądanie
+            HTTP. Na przykład, jeśli wysyłamy żądanie fetch ze strony
+            https://my-site.com/about do https://my-api.com/users, nagłówki będą
+            wyglądać następująco.
+          </p>
+          <pre>
+            GET /users
+            Host: my-api.com
+            Origin: https://my-site.com
+          </pre>
+          <p>
+            Serwer sprawdza nagłówek Origin i, jeśli obsługuje żądania
+            międzydomenowe, dodaje do odpowiedzi specjalny nagłówek HTTP
+            Access-Control-Allow-Origin.
+          </p>
+          <pre>
+            # Private API
+            Access-Control-Allow-Origin: https://my-site.com
+
+            # Public API
+            Access-Control-Allow-Origin: *
+          </pre>
+          <p>
+            Wartością tego nagłówka będzie rozwiązane źródło (Origin). W naszym
+            przypadku powinna to być jedna strona https://my-site.com, jeśli
+            backend jest prywatny, lub znak specjalny *, jeśli backend jest
+            publiczny, umożliwia wysyłanie żądań do każdego.
+          </p>
+          <div class="section4-img-container grow_up-img-s4a1">
+            <img src="../images/main/cors.png" alt="" />
+          </div>
+          <p>
+            Oznacza to, że przeglądarka jest rodzajem pośrednika między kodem
+            JavaScript a backendem. Dodaje nagłówek Origin z poprawną wartością
+            do każdego żądania i sprawdza nagłówek Access-Control-Allow-Origin w
+            odpowiedzi. Jeśli nagłówek jest obecny i jego wartość jest zgodna,
+            oryginalne żądanie zostanie wykonane, a kod JavaScript otrzyma swój
+            wynik, w przeciwnym razie wystąpi błąd CORS.
           </p>
         </article>
       </section>
