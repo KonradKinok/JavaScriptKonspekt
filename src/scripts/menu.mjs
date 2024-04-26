@@ -91,6 +91,10 @@ const menuItem = [
     name: '21. CRUD',
     link: '../html/21-crud.html',
   },
+  {
+    name: '22. Składnia async/await',
+    link: '../html/22-skladniaAsyncAwait.html',
+  },
 ];
 
 menuItem.forEach(element => {

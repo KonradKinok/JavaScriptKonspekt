@@ -268,6 +268,188 @@ function renderPosts_s1a3(postAdd) {
             i który element chcemy zaktualizować. Backend po otrzymaniu żądania
             przetworzy je i zwróci w odpowiedzi zaktualizowany zasób.
           </p>
+          <p class="example">Przykład -------------------------------</p>
+          <div id="example-theory-s1a4" class="example-theory">
+            <pre class="example-theory-pre">
+const form_s1a4 = document.querySelector('form#form-s1a4');
+const postsList_s1a4 = document.querySelector('ul#user-list-s1a4');
+
+function getOptionsToUrl_s1a4(id, body) {
+  const postToAdd = {
+    id,
+    body,
+  };
+
+  const options = {
+    method: 'PATCH',
+    body: JSON.stringify(postToAdd),
+    headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+  };
+  return options;
+}
+
+form_s1a4.addEventListener('submit', event => {
+  event.preventDefault();
+  const {
+    elements: { input_id_s1a4, input_body_s1a4 },
+  } = event.currentTarget;
+  console.log(input_id_s1a4.value, input_body_s1a4.value);
+  const options = getOptionsToUrl_s1a4(
+    input_id_s1a4.value,
+    input_body_s1a4.value
+  );
+  fetch(
+    `https://jsonplaceholder.typicode.com/posts/${input_id_s1a4.value}`,
+    options
+  )
+    .then(response => response.json())
+    .then(post => {
+      console.log(post);
+      renderPosts_s1a4(post);
+    })
+    .catch(error => Notify.failure(`${error}`, optionsNotify));
+});
+
+function renderPosts_s1a4(patchAdd) {
+  const { id, title, body } = patchAdd;
+  const markup = `&ltli >
+          &ltp>&ltb>Method POST:&lt/b>&lt/p>
+          &ltp>&ltb>Post id&lt/b>: ${id}&lt/p>
+          &ltp>&ltb>Post title&lt/b>: ${title}&lt/p>
+          &ltp>&ltb>Post body&lt/b>: ${body}&lt/p>
+        &lt/li>`;
+  postsList_s1a4.innerHTML = markup;
+}
+            </pre>
+          </div>
+          <div id="example-practice-s1a4" class="example-practice-s1a4">
+            <form action="" id="form-s1a4" class="form-s1a4">
+              <label for="input_id_s1a4" class="label-s1a4">Id: </label>
+              <input
+                type="number"
+                placeholder="1"
+                name="input_id_s1a4"
+                class="input-author-s1a4"
+                value="1"
+              />
+              <label for="input_body_s1a4" class="label-s1a4">Body: </label>
+              <input
+                type="text"
+                placeholder="CRUD is awesome"
+                name="input_body_s1a4"
+                value="CRUD is awesome"
+              />
+              <button id="btn-s1a4" type="submit" class="button">
+                PATCH post
+              </button>
+            </form>
+          </div>
+          <div id="example-results-s1a4">
+            <ul id="user-list-s1a4" class="user-list"></ul>
+          </div>
+          <p class="example">PrzykładEND -------------------------------</p>
+          <p>
+            W odpowiedzi, jeśli wszystko będzie dobrze, otrzymamy zaktualizowany
+            obiekt.
+          </p>
+          <pre>
+            {
+              id: 1,
+              author: 'Mango',
+              content: 'CRUD is really awesome',
+            }
+          </pre>
+          <p>
+            Wedle konwencji, metoda PATCH zastępuje tylko wartości przekazane w
+            treści żądania właściwości w istniejącym zasobie - czyli aktualizuje
+            go częściowo. Metoda PUT z kolei całkowicie zastępuje zasób lub
+            tworzy go, jeśli jeszcze nie istnieje.
+          </p>
+        </article>
+        <article id="article5">
+          <h2>S1A5: Usuwanie</h2>
+          <p>
+            Metoda DELETE służy do usuwania istniejących danych. Metoda fetch()
+            powinna wysłać do serwera żądanie DELETE bez treści. Ścieżka
+            wskazuje, w której kolekcji i który element chcemy usunąć. Backend
+            po otrzymaniu żądania przetworzy je, usunie zasób z kolekcji i
+            zwróci status wyniku w odpowiedzi - czasami zobaczymy tu status 204
+            czyli operacja przebiegła pomyślnie, ale nie ma dla nas żadnej
+            odpowiedzi (co ma sens ponieważ zasób już nie istnieje)
+          </p>
+          <p class="example">Przykład -------------------------------</p>
+          <div id="example-theory-s1a5" class="example-theory">
+            <pre class="example-theory-pre">
+const form_s1a5 = document.querySelector('form#form-s1a5');
+const postsList_s1a5 = document.querySelector('ul#user-list-s1a5');
+
+function getOptionsToUrl_s1a5(id) {
+  const postToDelete = {
+    id,
+  };
+
+  const options = {
+    method: 'DELETE',
+    body: JSON.stringify(postToDelete),
+    headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+  };
+  return options;
+}
+
+form_s1a5.addEventListener('submit', event => {
+  event.preventDefault();
+  const {
+    elements: { input_id_s1a5 },
+  } = event.currentTarget;
+  console.log(input_id_s1a5.value);
+  const options = getOptionsToUrl_s1a5(input_id_s1a5.value);
+  fetch(
+    `https://jsonplaceholder.typicode.com/posts/${input_id_s1a5.value}`,
+    options
+  )
+    .then(response => response.json())
+    .then(post => {
+      console.log(post);
+      renderPosts_s1a5(post);
+    })
+    .catch(error => Notify.failure(`${error}`, optionsNotify));
+});
+
+function renderPosts_s1a5(postDelete) {
+  const { id, title, body } = postDelete;
+  const markup = `&ltli >
+          &ltp>&ltb>Method POST:&lt/b>&lt/p>
+          &ltp>&ltb>Post id&lt/b>: ${id}&lt/p>
+          &ltp>&ltb>Post title&lt/b>: ${title}&lt/p>
+          &ltp>&ltb>Post body&lt/b>: ${body}&lt/p>
+        &lt/li>`;
+  postsList_s1a5.innerHTML = markup;
+}
+            </pre>
+          </div>
+          <div id="example-practice-s1a5" class="example-practice-s1a5">
+            <form action="" id="form-s1a5" class="form-s1a5">
+              <label for="input_id_s1a5" class="label-s1a5">Id: </label>
+              <input
+                type="number"
+                placeholder="1"
+                name="input_id_s1a5"
+                class="input-author-s1a5"
+                value="1"
+              />
+              <button id="btn-s1a5" type="submit" class="button">
+                DELETE post
+              </button>
+            </form>
+          </div>
+          <div id="example-results-s1a5">
+            <ul id="user-list-s1a5" class="user-list"></ul>
+          </div>
+          <p class="example">PrzykładEND -------------------------------</p>
         </article>
       </section>
     </main>

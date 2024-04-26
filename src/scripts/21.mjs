@@ -35,7 +35,6 @@ function renderPosts_s1a2(posts) {
   postsList_s1a2.innerHTML = markup;
 }
 
-//section1 article3
 //section1 articule3
 mainMethods.htmlTagViewExample(
   'div#example-theory-s1a3',
@@ -89,4 +88,116 @@ function renderPosts_s1a3(postAdd) {
           <p><b>Author id</b>: ${id}</p>
         </li>`;
   postsList_s1a3.innerHTML = markup;
+}
+
+//section1 articule4
+mainMethods.htmlTagViewExample(
+  'div#example-theory-s1a4',
+  'div#example-practice-s1a4'
+);
+
+const form_s1a4 = document.querySelector('form#form-s1a4');
+const postsList_s1a4 = document.querySelector('ul#user-list-s1a4');
+
+function getOptionsToUrl_s1a4(id, body) {
+  const postToAdd = {
+    id,
+    body,
+  };
+
+  const options = {
+    method: 'PATCH',
+    body: JSON.stringify(postToAdd),
+    headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+  };
+  return options;
+}
+
+form_s1a4.addEventListener('submit', event => {
+  event.preventDefault();
+  const {
+    elements: { input_id_s1a4, input_body_s1a4 },
+  } = event.currentTarget;
+  console.log(input_id_s1a4.value, input_body_s1a4.value);
+  const options = getOptionsToUrl_s1a4(
+    input_id_s1a4.value,
+    input_body_s1a4.value
+  );
+  fetch(
+    `https://jsonplaceholder.typicode.com/posts/${input_id_s1a4.value}`,
+    options
+  )
+    .then(response => response.json())
+    .then(post => {
+      console.log(post);
+      renderPosts_s1a4(post);
+    })
+    .catch(error => Notify.failure(`${error}`, optionsNotify));
+});
+
+function renderPosts_s1a4(patchAdd) {
+  const { id, title, body } = patchAdd;
+  const markup = `<li >
+          <p><b>Method POST:</b></p>
+          <p><b>Post id</b>: ${id}</p>
+          <p><b>Post title</b>: ${title}</p>
+          <p><b>Post body</b>: ${body}</p>
+        </li>`;
+  postsList_s1a4.innerHTML = markup;
+}
+
+//section1 articule5
+mainMethods.htmlTagViewExample(
+  'div#example-theory-s1a5',
+  'div#example-practice-s1a5'
+);
+
+const form_s1a5 = document.querySelector('form#form-s1a5');
+const postsList_s1a5 = document.querySelector('ul#user-list-s1a5');
+
+function getOptionsToUrl_s1a5(id) {
+  const postToDelete = {
+    id,
+  };
+
+  const options = {
+    method: 'DELETE',
+    body: JSON.stringify(postToDelete),
+    headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+  };
+  return options;
+}
+
+form_s1a5.addEventListener('submit', event => {
+  event.preventDefault();
+  const {
+    elements: { input_id_s1a5 },
+  } = event.currentTarget;
+  console.log(input_id_s1a5.value);
+  const options = getOptionsToUrl_s1a5(input_id_s1a5.value);
+  fetch(
+    `https://jsonplaceholder.typicode.com/posts/${input_id_s1a5.value}`,
+    options
+  )
+    .then(response => response.json())
+    .then(post => {
+      console.log(post);
+      renderPosts_s1a5(post);
+    })
+    .catch(error => Notify.failure(`${error}`, optionsNotify));
+});
+
+function renderPosts_s1a5(postDelete) {
+  const { id, title, body } = postDelete;
+  const markup = `<li >
+          <p><b>Method POST:</b></p>
+          <p><b>Post id</b>: ${id}</p>
+          <p><b>Post title</b>: ${title}</p>
+          <p><b>Post body</b>: ${body}</p>
+        </li>`;
+  postsList_s1a5.innerHTML = markup;
 }

@@ -89,6 +89,10 @@ const menuItem = [
     {
         name: "21. CRUD",
         link: "../html/21-crud.html"
+    },
+    {
+        name: "22. Sk\u0142adnia async/await",
+        link: "../html/22-skladniaAsyncAwait.html"
     }
 ];
 menuItem.forEach((element)=>{

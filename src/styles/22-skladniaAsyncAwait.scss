@@ -135,41 +135,6 @@ h3 {
     border-radius: 15px;
 }
 
-
-// section1 article 1
-.table-s1a1 {
-    border-collapse: separate;
-}
-
-.schedule-borderColapse {
-    border-collapse: collapse;
-}
-
-.table-s1a1 th,
-.table-s1a1 td {
-    padding: 8px;
-    border: 1px solid #840606;
-}
-
-.table-body-s1a1>tr:hover {
-    background-color: rgb(94, 19, 6);
-    color: white;
-    cursor: pointer;
-}
-
-// section1 article2
-.example-practice-s1a2 {
-    border: 2px dashed #f0e3e3;
-    padding: 10px;
-    overflow: auto;
-    width: 300px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
 // section1 article3
 .example-practice-s1a3 {
     border: 2px dashed #f0e3e3;
@@ -183,45 +148,7 @@ h3 {
     gap: 10px;
 }
 
-.form-s1a3{
-    display: flex;
-    flex-flow: column nowrap;
-    gap:10px;
-}
-
-// section1 article4
-.example-practice-s1a4 {
-    border: 2px dashed #f0e3e3;
-    padding: 10px;
-    overflow: auto;
-    width: 800px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.form-s1a4 {
-    display: flex;
-    flex-flow: column nowrap;
-    gap: 10px;
-}
-
-// section1 article5
-.example-practice-s1a5 {
-    border: 2px dashed #f0e3e3;
-    padding: 10px;
-    overflow: auto;
-    width: 800px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.form-s1a5 {
+.form-s1a3 {
     display: flex;
     flex-flow: column nowrap;
     gap: 10px;
