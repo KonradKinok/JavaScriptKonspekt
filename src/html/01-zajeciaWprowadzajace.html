@@ -16,6 +16,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.min.css"
     />
     <!-- <style type="text/css">	@import url(./styles/stylStartowy.css);	</style> -->
+    <link rel="stylesheet" href="../styles/patternButton.scss" />
     <link rel="stylesheet" href="../styles/stylStartowy.scss" />
     <link rel="stylesheet" href="../styles/01-zajeciaWprowadzajace.scss" />
     <title>Zmienne i typy</title>
@@ -24,26 +25,7 @@
     <header class="menu-sticky">
       <nav class="nav-container">
         <!-- Nawigacja do innych stron -->
-        <ul class="nav-list-container">
-          <li>
-            <a class="link" href="../index.html">Menu</a>
-          </li>
-          <li>
-            <a
-              class="link current-page"
-              href="../html/01-zajeciaWprowadzajace.html"
-              >01. Zmienne i typy
-            </a>
-          </li>
-          <li>
-            <a class="link" href="../html/02-rozgalezieniaCykle.html"
-              >02. Rozgałęzienia i cykle
-            </a>
-          </li>
-          <li>
-            <a class="link" href="../html/03-tablice.html">03. Tablice </a>
-          </li>
-        </ul>
+        <ul id="main-menu" class="nav-list-container"></ul>
       </nav>
     </header>
     <main class="main-container">
@@ -148,7 +130,7 @@
           <p class="text-p">
             Na dzień dzisiejszy wykorzystując JavaScript można tworzyć:
           </p>
-          <ul>
+          <ul class="unnumbered-list-container">
             <li>
               aplikacje webowe, wykorzystując frameworki takie jak React, Vue,
               Angular i inne
@@ -375,11 +357,12 @@
           <h3>Właściwość</h3>
           <p>
             Każdy z nas ma właściwości: wzrost, wagę, kolor oczu, czyli opisowe
-            cechy. Dane kodzie źródłowym również mają właściwości, na przykład,
-            wiersz tekstu ma właściwość - jego długość. Składnia odwoływania się
-            do właściwości jest bardzo prosta - używamy kropki i podajemy nazwę
-            właściwości (zdefiniowaną w standardzie JavaScriptu i do której
-            wartość zostaje przypisana automatycznie bez naszej ingerencji).
+            cechy. Dane w kodzie źródłowym również mają właściwości, na
+            przykład, wiersz tekstu ma właściwość - jego długość. Składnia
+            odwoływania się do właściwości jest bardzo prosta - używamy kropki i
+            podajemy nazwę właściwości (zdefiniowaną w standardzie JavaScriptu i
+            do której wartość zostaje przypisana automatycznie bez naszej
+            ingerencji).
           </p>
           <p>essence.nazwa_właściwości</p>
           <p>
@@ -779,6 +762,53 @@
             const isComing = confirm("Please confirm hotel reservation");
             console.log(isComing); // true lub false
           </pre>
+          <p class="example">Przykład -------------------------------</p>
+
+          <div id="example-theory-s1a2" class="example-theory">
+            <pre class="example-theory-pre">
+const btn_s1a2 = document.querySelector('button#btn-s1a2');
+const postsList_s1a2 = document.querySelector('ul#user-list-s1a2');
+
+btn_s1a2.addEventListener('click', ev => {
+  fetch('https://jsonplaceholder.typicode.com/posts')
+    .then(response => response.json())
+    .then(posts => {
+      renderPosts_s1a2(posts);
+    })
+    .catch(error => Notify.failure(`${error}`, optionsNotify));
+});
+
+function renderPosts_s1a2(posts) {
+  postsList_s1a2.innerHTML = null;
+  const markup = posts
+    .map(({ id, title, body, userId }, index) => {
+      return `&ltli >
+          &lth2 class="post-title">${index + 1}. ${title.slice(0, 30)}&lt/h2>
+          &ltp>&ltb>Post id&lt/b>: ${id}&lt/p>
+          &ltp>&ltb>Author id&lt/b>: ${userId}&lt/p>
+          &ltp>${body}&lt/p>
+        &lt/li>`;
+    })
+    .join('');
+  postsList_s1a2.innerHTML = markup;
+}
+            </pre>
+            <pre class="example-theory-pre">
+fetch("https://jsonplaceholder.typicode.com/posts")
+  .then(response => response.json())
+  .then(posts => console.log(posts))
+  .catch(error => console.log(error));
+          </pre
+            >
+          </div>
+          <div id="example-practice-s1a2" class="example-practice-s1a2">
+            <label for="input-s1a2" class="label-s1a2">Fetch all posts</label>
+            <button class="button a" type="button">Aqua button</button>
+          </div>
+          <div id="example-results-s1a2">
+            <ul id="user-list-s1a2" class="user-list"></ul>
+          </div>
+          <p class="example">PrzykładEND -------------------------------</p>
           <p>
             prompt() - pokazuje okno modalne z polem do wprowadzenia i przyciski
             Ok i Cancel. Przy kliknięciu Ok, rezultatem będzie to, co wprowadził
@@ -1509,24 +1539,24 @@
         </div>
       </section>
     </main>
-    <footer class="container footer">
-      <div class="contener-shadow-text2">
-        <h2>Footer</h2>
-        <div class="display-footer">
-          <a
-            class="link-footer"
-            href=""
-            target="_blank"
-            rel="noreferrer noopener"
-          >
-            <img src="../images/footer/konikMaly24x24Squoosh.png" alt="logo" />
-          </a>
-          <div class="display-footer2">
-            <p class="footer-selection">All rights reserved &copy;</p>
-            <p>Konrad</p>
-          </div>
-        </div>
+    <footer class="footer hidden">
+      <div class="footer-logo">
+        <img
+          src="../images/footer/konikMaly24x24Squoosh.png"
+          alt="logoImage"
+          width="24"
+        />
+        <img src="../images/footer/3KLogo.png" alt="logoText" />
+      </div>
+      <div id="footer-title">
+        <p></p>
+      </div>
+      <div class="footer-date">
+        <p>03.05.2024r.</p>
       </div>
     </footer>
+    <!-- SKRYPTY JS -->
+    <script defer src="../scripts/menu.mjs"></script>
+    <script defer src="../scripts/01.mjs"></script>
   </body>
 </html>

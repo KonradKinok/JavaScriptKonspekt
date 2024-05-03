@@ -101,10 +101,13 @@ menuItem.forEach((element)=>{
     linkItem.href = element.link;
     linkItem.textContent = element.name;
     linkItem.classList.add("link");
-    if (title.textContent === element.name.slice(4)) linkItem.classList.add("current-page");
+    if (title.textContent === element.name.slice(4)) {
+        linkItem.classList.add("current-page");
+        const footerTitle = document.querySelector("div#footer-title");
+        footerTitle.textContent = element.name;
+    }
     listItem.appendChild(linkItem);
     list.appendChild(listItem);
-//   list.append(listItem);
 });
 
 //# sourceMappingURL=13-delegacjaZdarzen.1cba540e.js.map

@@ -103,13 +103,13 @@ menuItem.forEach(element => {
 
   linkItem.href = element.link;
   linkItem.textContent = element.name;
-  linkItem.classList.add('link');
+  // linkItem.classList.add('link');
   if (title.textContent === element.name.slice(4)) {
     linkItem.classList.add('current-page');
+    const footerTitle = document.querySelector('div#footer-title');
+    footerTitle.textContent = element.name;
   }
 
   listItem.appendChild(linkItem);
   list.appendChild(listItem);
-
-  //   list.append(listItem);
 });
