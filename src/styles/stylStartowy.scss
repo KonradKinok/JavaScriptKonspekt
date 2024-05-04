@@ -51,22 +51,22 @@ img {
     height: auto;
 }
 
-.button {
-    display: flex;
-    padding: 12px 32px;
-    border: none;
-    border-radius: 4px;
-    background-color: #2196f3;
-    color: #fff;
-    font-size: inherit;
-    cursor: pointer;
-    margin: 0 auto;
-}
+// .button {
+//     display: flex;
+//     padding: 12px 32px;
+//     border: none;
+//     border-radius: 4px;
+//     background-color: #2196f3;
+//     color: #fff;
+//     font-size: inherit;
+//     cursor: pointer;
+//     margin: 0 auto;
+// }
 
-.button:hover,
-.button:focus {
-    background-color: #1976d2;
-}
+// .button:hover,
+// .button:focus {
+//     background-color: #1976d2;
+// }
 
 ul,
 ol {
@@ -77,15 +77,13 @@ ol {
 
 span {
     font-weight: 600;
+    color: #fff;
 }
 
 a{
     text-decoration: none;
 }
-.main-container a {
-    color: var(--main-link-forecolor);
-    transition: color 750ms cubic-bezier(0.4, 0, 0.2, 1);
-}
+
 
 .main-container a:hover {
     color: var(--main-link-hover-forecolor);
@@ -104,7 +102,63 @@ body {
     margin: 0 auto;
 }
 
+.text {
+    color: #fff;
+    font-size: 18px;
+    padding: 20px 20px 40px;
+}
 
+.text p {
+    padding: 5px 0;
+}
+
+h2,
+h3 {
+    margin-top: 10px;
+}
+
+.unnumbered-list-container {
+    list-style: square inside none;
+}
+
+.numbered-list-container {
+    list-style: decimal inside none;
+}
+
+.example {
+    color: yellow;
+}
+
+.example-theory {
+    display: flex;
+    gap: 40px;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.example-theory-pre {
+    display: flex;
+    max-width: 600px;
+    overflow: auto;
+    border: 2px dashed #f0e3e3;
+    padding: 5px;
+}
+
+.example-practice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.grow_up-img-s1a8,
+.grow_up-img {
+    transition: width 2s, height 2s, transform 2s;
+}
+
+.grow_up-img:hover {
+    width: 50%;
+    height: 50%;
+}
  
 // Menu    
 .menu-sticky {
@@ -163,6 +217,11 @@ body {
 // Main
 .main-container {
     background-image: linear-gradient(to bottom, var(--main-container-top-backcolor), var(--main-container-bottom-backcolor));
+}
+
+.main-container a {
+    color: var(--main-link-forecolor);
+    transition: color 750ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 // Footer

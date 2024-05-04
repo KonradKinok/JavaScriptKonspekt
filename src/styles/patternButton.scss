@@ -1,12 +1,7 @@
+//Aqua Button
 @import url(https://fonts.googleapis.com/css?family=Inter);
 
-// * {
-//     border-style: solid;
-//     border-width: 0;
-//     box-sizing: border-box;
-// }
-
-button {
+.aqua-button{
     -webkit-appearance: none;
     appearance: none;
     vertical-align: middle;
@@ -19,45 +14,22 @@ button {
     text-align: inherit;
     text-transform: inherit;
     -webkit-tap-highlight-color: transparent;
-}
-
-:focus {
-    outline-style: solid;
-    outline-color: transparent;
-}
-
-// body {
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     min-height: 100vh;
-//     background-color: #eeeff3;
-//     background-image: linear-gradient(to bottom, #dbe6f2, #bed8f2);
-//     font-family: "SF Pro", "Inter", system-ui, sans-serif;
-// }
-
-.button {
     margin: 3px;
     cursor: pointer;
-}
-
-
-
-.button.b {
-    position: relative;
-    border: 1px solid #0360df;
+    color: #fff;
+    text-shadow: 0 1px 1px #115be7;
+    background-color: #570909;
+    background-image: radial-gradient(75% 50% at 50% 0, #f4feff, #0000), radial-gradient(75% 35% at 50% 80%, #260209, #0000);
+    border: 1px solid #150808;
     border-radius: 50px;
     padding: 12px 16px;
-    background-color: #0360df;
-    background-image: radial-gradient(75% 50% at 50% 0%, #f4feff, transparent), radial-gradient(75% 35% at 50% 80%, #8de3fc, transparent);
-    box-shadow: inset 0 -2px 4px 1px rgba(17, 110, 231, 0.6), inset 0 -4px 4px 1px #8de3fc, inset 0 0 2px 1px rgba(255, 255, 255, 0.2), 0 1px 4px 1px rgba(17, 110, 231, 0.2), 0 1px 4px 1px rgba(0, 0, 0, 0.1);
-    color: #fff;
-    text-shadow: 0 1px 1px #116ee7;
     transition-property: border-color, transform, background-color;
-    transition-duration: 0.2s;
+    transition-duration: .2s;
+    position: relative;
+    box-shadow: inset 0 -2px 4px 1px #0009, inset 0 -4px 4px 1px #201112, inset 0 0 2px 1px #fff3, 0 1px 4px 1px #20191933, 0 1px 4px 1px #0000001a;
 }
 
-.button.b::after {
+.aqua-button::after {
     content: "";
     position: absolute;
     top: 1px;
@@ -70,12 +42,12 @@ button {
     opacity: 0.75;
 }
 
-.button.b:hover {
+.aqua-button:hover {
     transform: scale(1.04);
 }
 
-.button.b:active {
-    border-color: #0048d5;
+.aqua-button:active {
+    border-color: #4f2525;
     transform: scale(0.96);
-    background-color: #0048d5;
+    background-color: #4f2525;
 }

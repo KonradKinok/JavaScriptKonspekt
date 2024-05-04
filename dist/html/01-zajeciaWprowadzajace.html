@@ -750,49 +750,32 @@
             console.log(isComing); // true lub false
           </pre>
           <p class="example">Przykład -------------------------------</p>
-
-          <div id="example-theory-s1a2" class="example-theory">
+          <div id="example-theory-s21" class="example-theory">
             <pre class="example-theory-pre">
-const btn_s1a2 = document.querySelector('button#btn-s1a2');
-const postsList_s1a2 = document.querySelector('ul#user-list-s1a2');
+const button_s21 = document.querySelector('button#button-s21');
+const postsList_s21 = document.querySelector('ul#user-list-s21');
 
-btn_s1a2.addEventListener('click', ev => {
-  fetch('https://jsonplaceholder.typicode.com/posts')
-    .then(response => response.json())
-    .then(posts => {
-      renderPosts_s1a2(posts);
-    })
-    .catch(error => Notify.failure(`${error}`, optionsNotify));
+button_s21.addEventListener('click', ev => {
+  const isComing = confirm('Please confirm hotel reservation');
+  renderHtml_s21(isComing);
 });
 
-function renderPosts_s1a2(posts) {
-  postsList_s1a2.innerHTML = null;
-  const markup = posts
-    .map(({ id, title, body, userId }, index) => {
-      return `&ltli >
-          &lth2 class="post-title">${index + 1}. ${title.slice(0, 30)}&lt/h2>
-          &ltp>&ltb>Post id&lt/b>: ${id}&lt/p>
-          &ltp>&ltb>Author id&lt/b>: ${userId}&lt/p>
-          &ltp>${body}&lt/p>
+function renderHtml_s21(isComing) {
+  const markup = `&ltli >
+          &ltp>&ltb>Method confirm:&lt/b>&lt/p>
+          &ltp>isComing: ${isComing}&lt/p>
         &lt/li>`;
-    })
-    .join('');
-  postsList_s1a2.innerHTML = markup;
+  postsList_s21.innerHTML = markup;
 }
-            </pre>
-            <pre class="example-theory-pre">
-fetch("https://jsonplaceholder.typicode.com/posts")
-  .then(response => response.json())
-  .then(posts => console.log(posts))
-  .catch(error => console.log(error));
           </pre>
           </div>
-          <div id="example-practice-s1a2" class="example-practice-s1a2">
-            <label for="input-s1a2" class="label-s1a2">Fetch all posts</label>
-            <button class="button a" type="button">Aqua button</button>
+          <div id="example-practice-s21" class="example-practice-s21">
+            <button id="button-s21" class="aqua-button" type="button">
+              Try: confirm
+            </button>
           </div>
-          <div id="example-results-s1a2">
-            <ul id="user-list-s1a2" class="user-list"></ul>
+          <div id="example-results-s21">
+            <ul id="user-list-s21" class="user-list"></ul>
           </div>
           <p class="example">PrzykładEND -------------------------------</p>
           <p>
@@ -817,6 +800,35 @@ fetch("https://jsonplaceholder.typicode.com/posts")
             console.log(typeof value); // "string"
             console.log(value); // "5"
           </pre>
+          <p class="example">Przykład -------------------------------</p>
+          <div id="example-theory-s21a" class="example-theory">
+            <pre class="example-theory-pre">
+const button_s21 = document.querySelector('button#button-s21');
+const postsList_s21 = document.querySelector('ul#user-list-s21');
+
+button_s21.addEventListener('click', ev => {
+  const isComing = confirm('Please confirm hotel reservation');
+  renderHtml_s21(isComing);
+});
+
+function renderHtml_s21(isComing) {
+  const markup = `&ltli >
+          &ltp>&ltb>Method confirm:&lt/b>&lt/p>
+          &ltp>isComing: ${isComing}&lt/p>
+        &lt/li>`;
+  postsList_s21.innerHTML = markup;
+}
+          </pre>
+          </div>
+          <div id="example-practice-s21a" class="example-practice-s21a">
+            <button id="button-s21a" class="aqua-button" type="button">
+              Try: prompt
+            </button>
+          </div>
+          <div id="example-results-s21a">
+            <ul id="user-list-s21a" class="user-list"></ul>
+          </div>
+          <p class="example">PrzykładEND -------------------------------</p>
         </div>
       </section>
       <!-- section22 -->
@@ -944,7 +956,7 @@ fetch("https://jsonplaceholder.typicode.com/posts")
       <!-- section25 -->
       <section>
         <div class="text">
-          <h2>"Section25: Konwersja do liczby</h2>
+          <h2>Section25: Konwersja do liczby</h2>
           <p>
             Wszystkie liczby w JavaScript, zarówno całkowite jak i
             zmiennoprzecinkowe mają typ Number.
@@ -961,8 +973,8 @@ fetch("https://jsonplaceholder.typicode.com/posts")
             przekształcenie w innych operatorach i funkcjach matematycznych.
           </p>
           <p>
-            Operację zmiany typu zmiennej na inny nazywamy też czasem
-            Cast,Rzutowaniem lub Parsowaniem
+            Operację zmiany typu zmiennej na inny nazywamy też czasem Cast,
+            Rzutowaniem lub Parsowaniem
           </p>
           <pre>
             const valueA = "5";
@@ -1026,7 +1038,7 @@ fetch("https://jsonplaceholder.typicode.com/posts")
           </ul>
           <p>
             Dla wszystkich wartości val oprócz NaN, przy przekazaniu w
-            Number.isNaN(val) zwrócone zostaniefalse. Ta metoda nie próbuje
+            Number.isNaN(val) zwrócone zostanie false. Ta metoda nie próbuje
             przekształcić val na liczbę, a po prostu sprawdza czy coś ma wartość
             NaN.
           </p>
@@ -1138,7 +1150,7 @@ fetch("https://jsonplaceholder.typicode.com/posts")
           <h2>Section30: Strings</h2>
           <p>
             Wiersz (String) - jest to indeksowany ciąg znaków, zawarty w
-            cudzysłów pojedynczy lub podwójny, ' lub "
+            cudzysłów pojedynczy lub podwójny, [ ' ] lub [ " ]
           </p>
           <pre>
             const username = "Mango";
@@ -1537,6 +1549,6 @@ fetch("https://jsonplaceholder.typicode.com/posts")
     </footer>
     <!-- SKRYPTY JS -->
     <script defer="" src="/html/01-zajeciaWprowadzajace.1cba540e.js"></script>
-    <script defer="" src="/html/01-zajeciaWprowadzajace.0de1d4d9.js"></script>
-  <script src="/01-zajeciaWprowadzajace.25c54d84.js"></script></body>
+    <script defer="" src="/html/01-zajeciaWprowadzajace.f2c33853.js"></script>
+  </body>
 </html>

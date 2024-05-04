@@ -1,5 +1,5 @@
 'use strict';
-
+import * as mainMethods from './functions.mjs';
 // let year = 2024;
 // console.log(`Rok przed zmianą: ${year}`);
 // year = 2020;
@@ -94,7 +94,7 @@ console.groupEnd();
 
 console.info('console.info');
 console.warn('console.warn');
-console.error('console.error');
+console.error('console.error example');
 
 console.log(
   '%c Auth ',
@@ -135,4 +135,45 @@ function getRandomElement(array) {
   const randomIndex = Math.floor(Math.random() * array.length);
   // Zwróć wybrany element
   return array[randomIndex];
+}
+
+// section21
+mainMethods.htmlTagViewExample(
+  'div#example-theory-s21',
+  'div#example-practice-s21'
+);
+const button_s21 = document.querySelector('button#button-s21');
+const postsList_s21 = document.querySelector('ul#user-list-s21');
+button_s21.addEventListener('click', ev => {
+  const isComing = confirm('Please confirm hotel reservation');
+  renderHtml_s21(isComing);
+});
+
+function renderHtml_s21(isComing) {
+  const markup = `<li >
+          <p><b>Method confirm:</b></p>
+          <p>isComing: ${isComing}</p>
+        </li>`;
+  postsList_s21.innerHTML = markup;
+}
+
+// section21
+mainMethods.htmlTagViewExample(
+  'div#example-theory-s21a',
+  'div#example-practice-s21a'
+);
+const button_s21a = document.querySelector('button#button-s21a');
+const postsList_s21a = document.querySelector('ul#user-list-s21a');
+button_s21a.addEventListener('click', ev => {
+  const value = prompt('Please enter a number! Przykładowy text');
+  renderHtml_s21a(value);
+});
+
+function renderHtml_s21a(value) {
+  const markup = `<li >
+          <p><b>Method prompt:</b></p>
+          <p>typeof value: ${typeof value}</p>
+          <p>value: ${value}</p>
+        </li>`;
+  postsList_s21a.innerHTML = markup;
 }

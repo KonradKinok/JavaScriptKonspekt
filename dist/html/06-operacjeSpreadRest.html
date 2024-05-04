@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.min.css">
     <!-- <style type="text/css">	@import url(./styles/stylStartowy.css);	</style> -->
+    <link rel="stylesheet" href="/html/01-zajeciaWprowadzajace.2ed1891a.css">
     <link rel="stylesheet" href="/index.7643dd02.css">
     <link rel="stylesheet" href="/html/06-operacjeSpreadRest.94e91cbc.css">
     <title>Operacje spread/rest</title>
@@ -18,48 +19,23 @@
     <header class="menu-sticky">
       <nav class="nav-container">
         <!-- Nawigacja do innych stron -->
-        <ul class="nav-list-container">
-          <li>
-            <a class="link" href="/index.html">Menu</a>
-          </li>
-          <li>
-            <a class="link" href="/html/01-zajeciaWprowadzajace.html">01. Zmienne i typy
-            </a>
-          </li>
-          <li>
-            <a class="link" href="/html/02-rozgalezieniaCykle.html">02. Rozgałęzienia i cykle
-            </a>
-          </li>
-          <li>
-            <a class="link" href="/html/03-tablice.html">03. Tablice </a>
-          </li>
-          <li>
-            <a class="link" href="/html/04-funkcje.html">04. Funkcje </a>
-          </li>
-          <li>
-            <a class="link" href="/html/05-obiekty.html">05. Obiekty </a>
-          </li>
-          <li>
-            <a class="link current-page" href="/html/06-operacjeSpreadRest.html">06. Operacje spread/rest
-            </a>
-          </li>
-        </ul>
+        <ul id="main-menu" class="nav-list-container"></ul>
       </nav>
     </header>
     <main class="main-container">
       <!-- section1 -->
       <section class="text">
-        <article>
+        <article id="article1">
           <h1>Moduł3 - Zajęcia 6 - Operacje spread/rest</h1>
-          <h2>Składnia spread i rest</h2>
+          <h2>Section1 Article1: Składnia spread i rest</h2>
           <p>
             Współczesny standard wprowadził nową składnię do pracy z
             iterowalnymi strukturami, takimi jak string, tablica czyli obiekt.
             Jego funkcjonalność i nazwa zależy od miejsca zastosowania.
           </p>
         </article>
-        <article>
-          <h3>spread: przekazywanie argumentów</h3>
+        <article id="article2">
+          <h3>Section1 Article2: spread: przekazywanie argumentów</h3>
           <p>
             Operacja ... (spread) umożliwia rozłożenie kolekcji elementów
             (tablicy, stringa lub obiektu) do miejsca, w którym oczekiwany jest
@@ -104,8 +80,8 @@
             oddzielne argumenty.
           </p>
         </article>
-        <article>
-          <h3>spread: tworzenie nowej tablicy</h3>
+        <article id="article3">
+          <h3>Section1 Article3: spread: tworzenie nowej tablicy</h3>
           <p>
             Operacja ... (spread) pozwala również na utworzenie kopii tablicy
             lub "sklejenie" dowolnej liczby tablic w jedną nową. Wcześniej
@@ -182,8 +158,8 @@
             console.log(fifth);// { propA: 5, propB: 20, propC: 15 }
           </pre>
         </article>
-        <article>
-          <h3>rest: zbiór wszystkich argumentów funkcji</h3>
+        <article id="article4">
+          <h3>Section1 Article4: rest: zbiór wszystkich argumentów funkcji</h3>
           <p>
             Operacja ... (rest) umożliwia zebranie grupy niezależnych elementów
             w nową kolekcję. Syntaktycznie jest to bliźniak operacji rozłożenia,
@@ -235,8 +211,8 @@
             (będącego słowem kluczowym więc nie możemy go tutaj wykorzystać).
           </p>
         </article>
-        <article>
-          <h3>rest: zbiór części argumentów funkcji</h3>
+        <article id="article5">
+          <h3>Section1 Article5: rest: zbiór części argumentów funkcji</h3>
           <p>
             Operacja ... (rest) umożliwia również zbiór do tablicy tylko części
             argumentów, poprzez zadeklarowanie zdefiniowanych parametrów przed
@@ -264,8 +240,8 @@
       </section>
       <!-- section2 -->
       <section class="text">
-        <article>
-          <h2>Destrukturyzacja obiektów</h2>
+        <article id="article1">
+          <h2>Section2 Article1: Destrukturyzacja obiektów</h2>
           <p>
             Podczas działania programów, dane przychodzą zazwyczaj w postaci
             tablic i obiektów, których wartości potrzebujemy zapisywać w
@@ -273,8 +249,8 @@
             standard udostępnia składnię przypisania destrukturyzującego.
           </p>
         </article>
-        <article>
-          <h3>Destrukturyzacja obiektów</h3>
+        <article id="article2">
+          <h3>Section2 Article2: Destrukturyzacja obiektów</h3>
           <p>
             Złożone dane są zawsze reprezentowane jako obiekt. Wielokrotne
             wywołania właściwości obiektu wizualnie zanieczyszczają kod.
@@ -664,19 +640,20 @@
         </article>
       </section>
     </main>
-    <footer class="container footer">
-      <div class="contener-shadow-text2">
-        <h2>Footer</h2>
-        <div class="display-footer">
-          <a class="link-footer" href="" target="_blank" rel="noreferrer noopener">
-            <img src="/konikMaly24x24Squoosh.b1d18e80.png" alt="logo">
-          </a>
-          <div class="display-footer2">
-            <p class="footer-selection">All rights reserved &copy;</p>
-            <p>Konrad</p>
-          </div>
-        </div>
+    <footer class="footer">
+      <div class="footer-logo">
+        <img src="/konikMaly24x24Squoosh.b1d18e80.png" alt="logoImage" width="24">
+        <img src="/3KLogo.3d63d982.png" alt="logoText">
+      </div>
+      <div id="footer-title">
+        <p></p>
+      </div>
+      <div class="footer-date">
+        <p>04.05.2024r.</p>
       </div>
     </footer>
-  <script src="/06-operacjeSpreadRest.4e2c10c0.js"></script></body>
+    <!-- SKRYPTY JS -->
+    <script defer="" src="/html/01-zajeciaWprowadzajace.1cba540e.js"></script>
+    <script defer="" src="/html/06-operacjeSpreadRest.1430ab6c.js"></script>
+  </body>
 </html>

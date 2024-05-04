@@ -1,3 +1,4 @@
+'use strict';
 //deklaracja obiektu
 const apartment = {
   imgUrl: 'https://via.placeholder.com/640x480',
@@ -584,4 +585,86 @@ const atTheOldToad41 = {
 // atTheOldToad41.addPotion({ name: 'Power potion', price: 270 });
 // console.log(atTheOldToad41.removePotion('Dragon breath'));
 atTheOldToad41.updatePotionName('Dragon breath', 'Polymorth');
-console.log(atTheOldToad41.getPotions());
+// console.log(atTheOldToad41.getPotions());
+
+// section2 article4
+
+const persons = [
+  {
+    firstName: 'Adam',
+    secondName: 'Bogota',
+    sex: 'man',
+    streetName: 'Piękna',
+    streetNumber: '8b/2',
+    zipCode: '22-800',
+    lacality: 'Wrocław',
+    dateOfBirth: new Date('1986 - 12 - 24'),
+    accountBalance: 156_000,
+    activeAccount: true,
+    phoneNumber: 325_346_543,
+    recentExpenses: [125, 2043, 468, 7843, 6775, 53432, 432, 4, 4325, 545436],
+  },
+  {
+    firstName: 'Anna',
+    secondName: 'Nowak',
+    sex: 'woman',
+    streetName: 'Widok',
+    streetNumber: '2',
+    zipCode: '32-660',
+    lacality: 'Poznań',
+    dateOfBirth: new Date(1945 - 6 - 14),
+    accountBalance: 2355_040,
+    activeAccount: false,
+    phoneNumber: 527_949_383,
+    recentExpenses: [
+      543, 345, 34563, 23554, 11323, 43632, 4378, 864, 7564, 45636,
+    ],
+  },
+  {
+    firstName: 'Karol',
+    secondName: 'Cevalo',
+    sex: 'man',
+    streetName: 'Eklerda',
+    streetNumber: '15',
+    zipCode: '40-066',
+    lacality: 'Świebodzin',
+    dateOfBirth: new Date(1977 - 6 - 1),
+    accountBalance: 335_156_000_000,
+    activeAccount: true,
+    phoneNumber: 456_041_479,
+    recentExpenses: [
+      12452, 173053, 423054, 1100765, 92, 24000, 7843, 17004, 500, 500,
+    ],
+  },
+];
+
+console.log(
+  '%c section2 article4 ',
+  'color: rgb(0, 0, 0); background-color: rgb(255, 255, 0)',
+  'Metoda Object.keys()'
+);
+const keys_s1a4 = Object.keys(persons[0]);
+console.table(keys_s1a4);
+
+console.group('object details');
+for (const key of keys_s1a4) {
+  console.log(key, typeof persons[0][key], persons[0][key]);
+}
+console.groupEnd();
+console.log('-----------------------------------------------');
+// section3 article1
+console.log(
+  '%c section3 article1 ',
+  'color: rgb(0, 0, 0); background-color: rgb(255, 255, 0)',
+  'pętla for...of'
+);
+const personNames = [];
+const recentExpenses = [];
+
+for (const person of persons) {
+  personNames.push(person.firstName);
+  recentExpenses.push(person.recentExpenses);
+}
+console.table(personNames);
+console.table(recentExpenses);
+console.log('-----------------------------------------------');

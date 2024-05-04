@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.min.css">
     <!-- <style type="text/css">	@import url(./styles/stylStartowy.css);	</style> -->
+    <link rel="stylesheet" href="/html/01-zajeciaWprowadzajace.2ed1891a.css">
     <link rel="stylesheet" href="/index.7643dd02.css">
     <link rel="stylesheet" href="/html/02-rozgalezieniaCykle.42daebc6.css">
     <title>Rozgałęzienia i cykle</title>
@@ -18,23 +19,13 @@
     <header class="menu-sticky">
       <nav class="nav-container">
         <!-- Nawigacja do innych stron -->
-        <ul class="nav-list-container">
-          <li>
-            <a class="link" href="/index.html">Menu</a>
-          </li>
-          <li>
-            <a class="link" href="/html/01-zajeciaWprowadzajace.html">01. Zmienne i typy</a>
-          </li>
-          <li>
-            <a class="link current-page" href="/html/02-rozgalezieniaCykle.html">02. Rozgałęzienia i cykle</a>
-          </li>
-        </ul>
+        <ul id="main-menu" class="nav-list-container"></ul>
       </nav>
     </header>
     <main class="main-container">
       <!-- section1 -->
-      <section>
-        <article class="text">
+      <section class="text">
+        <article>
           <h1>Moduł1 - Zajęcia2 - Rozgałęzienia i cykle</h1>
           <h2>Section1: Instrukcje warunkowe</h2>
           <p>
@@ -46,7 +37,7 @@
             (true lub false)
           </p>
         </article>
-        <article class="text">
+        <article>
           <h3>Instrukcja if</h3>
           <pre>
             if (warunek) {
@@ -120,7 +111,7 @@
             po instrukcji if
           </p>
         </article>
-        <article class="text">
+        <article>
           <h3>Instrukcja else...if</h3>
           <p>
             Konstrukcja if...else może sprawdzić i zareagować na wykonanie lub
@@ -157,8 +148,8 @@
         </article>
       </section>
       <!-- section2 -->
-      <section>
-        <article class="text">
+      <section class="text">
+        <article>
           <h2>Ternary operator</h2>
           <p>
             Operator trójargumentowy (czasem nazywamy warunkowym) jest używany
@@ -234,8 +225,8 @@
         </article>
       </section>
       <!-- section3 -->
-      <section>
-        <article class="text">
+      <section class="text">
+        <article>
           <h2>Section3: Instrukcja switch</h2>
           <p>
             W niektórych przypadkach możemy uniknąć trudności związanych z
@@ -325,9 +316,9 @@
         </article>
       </section>
       <!-- section4 -->
-      <section>
-        <article class="text">
-          <h2>Variable scope</h2>
+      <section class="text">
+        <article>
+          <h2>Section4: Variable scope</h2>
           <p>
             Zakres widoczności zmiennych (variable scope) - tak określamy
             dostępność zmiennych w określonym miejscu kodu.
@@ -446,8 +437,8 @@
         </article>
       </section>
       <!-- section5 -->
-      <section>
-        <article class="text">
+      <section class="text">
+        <article>
           <h2>Section5: Pętle</h2>
           <p>
             Typowym problemem dla programisty jest wykonanie tego samego kodu
@@ -483,7 +474,7 @@
             </li>
           </ul>
         </article>
-        <article class="text">
+        <article>
           <h3>Pętla while</h3>
           <p>
             Pętla z warunkiem wstępnym — pętla, która działa tak długo, aż nie
@@ -534,7 +525,7 @@
             }
           </pre>
         </article>
-        <article class="text">
+        <article>
           <h3>Pętla do...while</h3>
           <p>
             Pętla z warunkiem końcowym - pętla, w której warunek jest sprawdzany
@@ -571,7 +562,7 @@
             console.log("Hasło zostało wprowadzone: ", password);
           </pre>
         </article>
-        <article class="text">
+        <article>
           <h3>Pętla for</h3>
           <p>
             Pętla z licznikiem - pętla, w którym po każdej iteracji licznik
@@ -621,7 +612,7 @@
           </pre>
           <p>
             Możemy na przykład zadeklarować zmienną-licznik i, inicjalizujemy ją
-            z wartością0 i pętla ma być wykonywana tak długo, aż i <= 10, czyli
+            z wartością 0 i pętla ma być wykonywana tak długo, aż i <= 10, czyli
             warunek sprowadza się do true. Po każdej iteracji licznik jest
             zwiększany o 5.
           </p>
@@ -656,7 +647,7 @@
             // '4 % 3 = ' 1
           </pre>
         </article>
-        <article class="text">
+        <article>
           <h3>Operator break</h3>
           <p>
             Możemy w dowolnym momencie przerwać wykonanie pętli. Aby to zrobić
@@ -680,7 +671,7 @@
             console.log("wiadomość po pętli");
           </pre>
         </article>
-        <article class="text">
+        <article>
           <h3>Operator continue</h3>
           <p>
             Nie przerywa naszej pętli całkiem, jedynie aktualną iterację.
@@ -706,19 +697,20 @@
         </article>
       </section>
     </main>
-    <footer class="container footer">
-      <div class="contener-shadow-text2">
-        <h2>Footer</h2>
-        <div class="display-footer">
-          <a class="link-footer" href="" target="_blank" rel="noreferrer noopener">
-            <img src="/konikMaly24x24Squoosh.b1d18e80.png" alt="logo">
-          </a>
-          <div class="display-footer2">
-            <p class="footer-selection">All rights reserved &copy;</p>
-            <p>Konrad</p>
-          </div>
-        </div>
+    <footer class="footer">
+      <div class="footer-logo">
+        <img src="/konikMaly24x24Squoosh.b1d18e80.png" alt="logoImage" width="24">
+        <img src="/3KLogo.3d63d982.png" alt="logoText">
+      </div>
+      <div id="footer-title">
+        <p></p>
+      </div>
+      <div class="footer-date">
+        <p>04.05.2024r.</p>
       </div>
     </footer>
-  <script src="/02-rozgalezieniaCykle.8347d84e.js"></script></body>
+    <!-- SKRYPTY JS -->
+    <script defer="" src="/html/01-zajeciaWprowadzajace.1cba540e.js"></script>
+    <script defer="" src="/html/02-rozgalezieniaCykle.40540c3d.js"></script>
+  </body>
 </html>

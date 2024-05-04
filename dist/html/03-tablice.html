@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.min.css">
     <!-- <style type="text/css">	@import url(./styles/stylStartowy.css);	</style> -->
+    <link rel="stylesheet" href="/html/01-zajeciaWprowadzajace.2ed1891a.css">
     <link rel="stylesheet" href="/index.7643dd02.css">
     <link rel="stylesheet" href="/html/03-tablice.28b5a536.css">
     <title>Tablice</title>
@@ -18,23 +19,7 @@
     <header class="menu-sticky">
       <nav class="nav-container">
         <!-- Nawigacja do innych stron -->
-        <ul class="nav-list-container">
-          <li>
-            <a class="link" href="/index.html">Menu</a>
-          </li>
-          <li>
-            <a class="link" href="/html/01-zajeciaWprowadzajace.html">01. Zmienne i typy
-            </a>
-          </li>
-          <li>
-            <a class="link" href="/html/02-rozgalezieniaCykle.html">02. Rozgałęzienia i cykle
-            </a>
-          </li>
-          <li>
-            <a class="link current-page" href="/html/03-tablice.html">03. Tablice
-            </a>
-          </li>
-        </ul>
+        <ul id="main-menu" class="nav-list-container"></ul>
       </nav>
     </header>
     <main class="main-container">
@@ -389,9 +374,9 @@
       </section>
       <!-- section4 -->
       <section class="text">
-        <article>
-          <h1>Section4: Metody tablicowe</h1>
-          <h2>Metody split() i join()</h2>
+        <article id="article1">
+          <h2>Section4: Metody tablicowe</h2>
+          <h3>Metody split() i join()</h3>
           <p>
             Metoda split(delimiter) przekształca string w tablicę, dzieląc go
             przy użyciu separatora delimiter. Jeśli separator jest pustym
@@ -411,7 +396,7 @@
           <p>
             Metoda tablicowa join(delimiter) łączy elementy tablicy w string. W
             uzyskanym wierszu elementy będą oddzielone znakiem lub grupą znaków
-            określoną w delimiter. Jest to w odwrócenie działania metody
+            określoną w delimiter. Jest to odwrócenie działania metody
             split(delimiter).
           </p>
           <pre>
@@ -426,8 +411,8 @@
             z nim jak ze zwykłym stringiem.
           </p>
         </article>
-        <article>
-          <h2>Metoda indexOf()</h2>
+        <article id="article2">
+          <h3>Metoda indexOf()</h3>
           <p>
             indexOf(value) zwraca pierwszy indeks, pod którym znaleziono w
             tablicy element o wartości value lub liczbę -1, jeśli takiego
@@ -441,8 +426,8 @@
             console.log(clients.indexOf("Monkong"));// -1
           </pre>
         </article>
-        <article>
-          <h2>Metoda includes()</h2>
+        <article id="article3">
+          <h3>Metoda includes()</h3>
           <p>
             includes(value) sprawdza, czy w tablicy znajduje się element z
             wartością value i zwraca odpowiednio true lub false. Zakres użycia
@@ -455,7 +440,7 @@
             console.log(clients.includes("Poly"));// true
             console.log(clients.includes("Monkong"));// false
           </pre>
-          <h3>Sprawdzanie wielu warunków za pomocą includes()</h3>
+          <h4>Sprawdzanie wielu warunków za pomocą includes()</h4>
           <p>Na pierwszy rzut oka kod poniższego przykładu nie wygląda źle.</p>
           <pre>
             const fruit = "apple";
@@ -498,14 +483,14 @@
             }
           </pre>
         </article>
-        <article>
-          <h2>Metody push(), pop() , unshift() i shift()</h2>
+        <article id="article4">
+          <h3>Metody push(), pop() , unshift() i shift()</h3>
           <p>
             Dodają lub usuwają pierwszy lub ostatni element tablicy. Działają
             tylko ze skrajnymi elementami i każda z nich służy do konkretnego
             działania. Wszystkie te metody modyfikują oryginalną tablicę.
           </p>
-          <div class="section4-img-container">
+          <div class="section4-img-container grow_up-img">
             <img src="/arr-methods.22ca5411.jpg" alt="">
           </div>
           <p>
@@ -513,7 +498,7 @@
             bez konieczności określania indeksów dodawanych elementów. Zwraca
             długość tablicy po dodaniu elementów.
           </p>
-          <div class="section4-img-container">
+          <div class="section4-img-container grow_up-img">
             <img src="/push.921f3a14.png" alt="">
           </div>
           <pre>
@@ -542,7 +527,7 @@
             Metoda pop() usuwa ostatni element z tablicy i zwraca usunięty
             element. Jeśli tablica jest już pusta, metoda zwraca undefined.
           </p>
-          <div class="section4-img-container">
+          <div class="section4-img-container grow_up-img">
             <img src="/pop.7dbdf43a.png" alt="">
           </div>
           <pre>
@@ -568,8 +553,8 @@
             tablicy.
           </p>
         </article>
-        <article>
-          <h2>Metoda slice()</h2>
+        <article id="article5">
+          <h3>Metoda slice()</h3>
           <p>
             slice(begin, end) zwraca nową tablicę zawierającą kopię części
             oryginalnej tablicy bez jej modyfikowania. Kopia jest tworzona z
@@ -610,14 +595,14 @@
             console.log(clients.slice(-2));// ["Poly", "Kiwi"]
           </pre>
         </article>
-        <article>
-          <h2>Metoda splice()</h2>
+        <article id="article6">
+          <h3>Metoda splice()</h3>
           <p>
             Szwajcarski scyzoryk do pracy z tablicami, jeśli oryginalna tablica
             wymaga modyfikacji, ta metoda może usuwać, dodawać i zastępować
             elementy w dowolnym miejscu tablicy.
           </p>
-          <h3>Usuwanie</h3>
+          <h4>Usuwanie</h4>
           <p>Aby usunąć elementy z tablicy, musimy przekazać dwa argumenty.</p>
           <pre>
             splice(position, num)
@@ -649,14 +634,14 @@
           <p>
             Rysunek przedstawia wywołanie metody score.splice(0, 3) z przykładu.
           </p>
-          <div class="section4-img-container">
-            <img class="section4-container-img" src="/splice-remove.9367886c.png" alt="" width="350px">
+          <div class="section4-img-container grow_up-img">
+            <img src="/splice-remove.9367886c.png" alt="">
           </div>
           <p>
             W praktyce wartość zwracana (tablica usuniętych elementów) jest
             rzadko używana. Zazwyczaj wystarczy usunąć elementy z tablicy.
           </p>
-          <h3>Dodawanie</h3>
+          <h4>Dodawanie</h4>
           <p>
             Aby dodać jeden lub więcej elementów do tablicy, należy przekazać
             trzy lub więcej argumentów, a drugi z argumentów musi być równy
@@ -692,8 +677,8 @@
             Rysunek przedstawia wywołanie metody colors.splice(2, 0, 'purple') z
             przykładu.
           </p>
-          <div class="section4-img-container">
-            <img class="section4-container-img" src="/splice-insert.b1ae263d.png" alt="" width="350px">
+          <div class="section4-img-container grow_up-img">
+            <img src="/splice-insert.b1ae263d.png" alt="">
           </div>
           <p>
             Możesz dodać dowolną liczbę elementów, przekazując czwarty, piąty
@@ -704,7 +689,7 @@
             colors.splice(1, 0, "yellow", "pink");
             console.log(colors);// ["red", "yellow", "pink", "green", "blue"]
           </pre>
-          <h3>Zamiana</h3>
+          <h4>Zamiana</h4>
           <p>
             Zamiana to w kontekście metody splice operacja dodawania, gdzie
             wcześniej istniejące elementy są usuwane przed dodaniem nowych. Aby
@@ -746,8 +731,8 @@
             Rysunek przedstawia wywołanie metody languages.splice(1, 1,
             'Python') z przykładu.
           </p>
-          <div class="section4-img-container">
-            <img class="section4-container-img" src="/splice-replace.bfa2f733.png" alt="" width="350px">
+          <div class="section4-img-container grow_up-img">
+            <img src="/splice-replace.bfa2f733.png" alt="">
           </div>
           <h3>Metoda concat()</h3>
           <p>
@@ -771,19 +756,20 @@
         </article>
       </section>
     </main>
-    <footer class="container footer">
-      <div class="contener-shadow-text2">
-        <h2>Footer</h2>
-        <div class="display-footer">
-          <a class="link-footer" href="" target="_blank" rel="noreferrer noopener">
-            <img src="/konikMaly24x24Squoosh.b1d18e80.png" alt="logo">
-          </a>
-          <div class="display-footer2">
-            <p class="footer-selection">All rights reserved &copy;</p>
-            <p>Konrad</p>
-          </div>
-        </div>
+    <footer class="footer">
+      <div class="footer-logo">
+        <img src="/konikMaly24x24Squoosh.b1d18e80.png" alt="logoImage" width="24">
+        <img src="/3KLogo.3d63d982.png" alt="logoText">
+      </div>
+      <div id="footer-title">
+        <p></p>
+      </div>
+      <div class="footer-date">
+        <p>04.05.2024r.</p>
       </div>
     </footer>
-  <script src="/03-tablice.c9965066.js"></script></body>
+    <!-- SKRYPTY JS -->
+    <script defer="" src="/html/01-zajeciaWprowadzajace.1cba540e.js"></script>
+    <script defer="" src="/html/03-tablice.83fd5aea.js"></script>
+  </body>
 </html>

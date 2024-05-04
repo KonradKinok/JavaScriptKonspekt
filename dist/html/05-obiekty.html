@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.min.css">
     <!-- <style type="text/css">	@import url(./styles/stylStartowy.css);	</style> -->
+    <link rel="stylesheet" href="/html/01-zajeciaWprowadzajace.2ed1891a.css">
     <link rel="stylesheet" href="/index.7643dd02.css">
     <link rel="stylesheet" href="/html/05-obiekty.53aba341.css">
     <title>Obiekty</title>
@@ -18,35 +19,13 @@
     <header class="menu-sticky">
       <nav class="nav-container">
         <!-- Nawigacja do innych stron -->
-        <ul class="nav-list-container">
-          <li>
-            <a class="link" href="/index.html">Menu</a>
-          </li>
-          <li>
-            <a class="link" href="/html/01-zajeciaWprowadzajace.html">01. Zmienne i typy
-            </a>
-          </li>
-          <li>
-            <a class="link" href="/html/02-rozgalezieniaCykle.html">02. Rozgałęzienia i cykle
-            </a>
-          </li>
-          <li>
-            <a class="link" href="/html/03-tablice.html">03. Tablice </a>
-          </li>
-          <li>
-            <a class="link" href="/html/04-funkcje.html">04. Funkcje </a>
-          </li>
-          <li>
-            <a class="link current-page" href="/html/05-obiekty.html">05. Obiekty
-            </a>
-          </li>
-        </ul>
+        <ul id="main-menu" class="nav-list-container"></ul>
       </nav>
     </header>
     <main class="main-container">
       <!-- section1 -->
       <section class="text">
-        <article>
+        <article id="article1">
           <h1>Moduł3 - Zajęcia 5 - Obiekty</h1>
           <p>
             Obiekty to rodzaj danych pozwalający opisać i pogrupować cechy w
@@ -55,8 +34,8 @@
             zawierają terminy (właściwości) i ich definicje (wartości).
           </p>
         </article>
-        <article>
-          <h2>Tworzenie obiektu</h2>
+        <article id="article2">
+          <h2>Section1 Article2: Tworzenie obiektu</h2>
           <p>
             Aby zadeklarować obiekt używane są nawiasy klamrowe { } - literał
             obiektowy. Przypomina on nieco literał tablicowy [ ]
@@ -90,8 +69,8 @@
             </li>
           </ul>
         </article>
-        <article>
-          <h2>Właściwości zagnieżdżone</h2>
+        <article id="article3">
+          <h2>Section1 Article3: Właściwości zagnieżdżone</h2>
           <p>
             Wartość właściwości może być kolejnym obiektem w celu przechowywania
             dołączonych i pogrupowanych danych. Dla przykładu, statystyki
@@ -121,8 +100,10 @@
             obserwujących itp.
           </p>
         </article>
-        <article>
-          <h2>Odwołanie się do właściwości za pomocą kropki</h2>
+        <article id="article4">
+          <h2>
+            Section1 Article4: Odwołanie się do właściwości za pomocą kropki
+          </h2>
           <p>
             Pierwszym sposobem uzyskania dostępu do właściwości obiektu jest
             składnia object.propertyName. Odwołanie za pomocą kropki jest
@@ -158,8 +139,10 @@
             console.log(bookPrice);// undefined
           </pre>
         </article>
-        <article>
-          <h2>Odwołanie się do zagnieżdżonych właściwości</h2>
+        <article id="article5">
+          <h2>
+            Section1 Article5: Odwołanie się do zagnieżdżonych właściwości
+          </h2>
           <p>
             Aby uzyskać dostęp do zagnieżdżonych właściwości, używany jest
             łańcuch odwołań "przez kropki". Dla przykładu, jeśli chcesz uzyskać
@@ -214,8 +197,11 @@
             console.log(numberOfHobbies);// 3
           </pre>
         </article>
-        <article>
-          <h2>Odwołanie się do właściwości za pomocą nawiasów kwadratowych</h2>
+        <article id="article6">
+          <h2>
+            Section1 Article6: Odwołanie się do właściwości za pomocą nawiasów
+            kwadratowych
+          </h2>
           <p>
             Drugim sposobem uzyskania dostępu do właściwości obiektu jest użycie
             składni obiekt["nazwa właściwości"]. Ten sposób jest podobny do
@@ -258,8 +244,8 @@
             console.log(bookAuthor);// 'Bernard Cornwell'
           </pre>
         </article>
-        <article>
-          <h2>Zmiana wartości właściwości</h2>
+        <article id="article7">
+          <h2>Section1 Article7: Zmiana wartości właściwości</h2>
           <p>
             Po utworzeniu obiektu można zmienić wartość jego właściwości. Aby to
             zrobić, musisz odnieść się do nich poprzez nazwę, na przykład „przez
@@ -284,8 +270,8 @@
             console.log(book.genres);// ['historical prose', 'adventures', 'drama']
           </pre>
         </article>
-        <article>
-          <h2>Dodawanie właściwości</h2>
+        <article id="article8">
+          <h2>Section1 Article8: Dodawanie właściwości</h2>
           <p>
             Operacja dodawania nowej właściwości po utworzeniu obiektu nie różni
             się od zmiany wartości istniejącej właściwości. Jeśli podczas
@@ -312,8 +298,8 @@
             console.log(book.translations);// ['ua', 'ru']
           </pre>
         </article>
-        <article>
-          <h2>Shorthand Property</h2>
+        <article id="article9">
+          <h2>Section1 Article9: Shorthand Property</h2>
           <p>
             Czasami podczas tworzenia obiektu wartość właściwości musi zostać
             pobrana ze zmiennej lub parametru funkcji o tej samej nazwie którą
@@ -360,8 +346,8 @@
             efekt, jednak przykład drugi zawiera mniej kodu.
           </p>
         </article>
-        <article>
-          <h2>Computed properties</h2>
+        <article id="article10">
+          <h2>Section1 Article10: Computed properties</h2>
           <p>
             Zdarzają się sytuacje, w których podczas deklarowania obiektu
             konieczne jest dodanie właściwości o nazwie, której z góry nie
@@ -398,8 +384,8 @@
             console.log(user.name);// 'Henry Cibola'
           </pre>
         </article>
-        <article>
-          <h2>Metody obiektowe</h2>
+        <article id="article11">
+          <h2>Section1 Article11: Metody obiektowe</h2>
           <p>
             Do tej pory traktowaliśmy obiekty tylko jako magazyny powiązanych ze
             sobą właściwości, na przykład informacji o książce itp. Tego typu
@@ -448,8 +434,8 @@
             function addBook() {}
           </pre>
         </article>
-        <article>
-          <h2>Dostęp do właściwości obiektu w metodach</h2>
+        <article id="article12">
+          <h2>Section1 Article12: Dostęp do właściwości obiektu w metodach</h2>
           <p>
             Metody służą do pracy z właściwościami obiektów i ich zmiany. Aby
             uzyskać dostęp do obiektu, metoda która się w nim znajduje, nie
@@ -533,16 +519,16 @@
       </section>
       <!-- section2 -->
       <section class="text">
-        <article>
-          <h2>Iteracja po obiekcie</h2>
+        <article id="article1">
+          <h2>Section2 Article1: Iteracja po obiekcie</h2>
           <p>
             W przeciwieństwie do tablicy lub stringa, obiekt nie jest strukturą
             iterowalną, czyli nie możemy "przejśc" po nim za pomocą pętli for
             lub for...of.
           </p>
         </article>
-        <article>
-          <h3>Pętla for...in</h3>
+        <article id="article2">
+          <h3>Section2 Article2: Pętla for...in</h3>
           <p>
             Jednym ze sposobów do iteracji po obiektach jest specjalna pętla
             for...in, która iteruje po kluczach obiektu object. Jest ona podobna
@@ -575,8 +561,8 @@
             }
           </pre>
         </article>
-        <article>
-          <h3>Metoda hasOwnProperty()</h3>
+        <article id="article3">
+          <h3>Section2 Article3: Metoda hasOwnProperty()</h3>
           <p>
             Przeanalizujmy pojęcie własnych (own) i dziedziczonych (inherited)
             właściwości obiektu i nauczmy się poprawnie używać pętli for...in.
@@ -647,8 +633,8 @@
             }
           </pre>
         </article>
-        <article>
-          <h3>Metoda Object.keys()</h3>
+        <article id="article4">
+          <h3>Section2 Article4: Metoda Object.keys()</h3>
           <p>
             Wbudowana w JavaScript klasa Object posiada kilka przydatnych metod
             do pracy z obiektami. Pierwsza z nich to Object.keys(obj), która
@@ -691,8 +677,8 @@
             się do wartości właściwości z danym kluczem.
           </p>
         </article>
-        <article>
-          <h3>Metoda Object.values()</h3>
+        <article id="article5">
+          <h3>Section2 Article5: Metoda Object.values()</h3>
           <p>
             O ile metoda Object.keys(obj) zwraca tablicę kluczy własnych
             właściwości obiektu, to metoda Object.values(obj) zwraca tablicę
@@ -740,8 +726,8 @@
             console.log(total);// 20
           </pre>
         </article>
-        <article>
-          <h2>Metoda Object.entries()</h2>
+        <article id="article6">
+          <h2>Section2 Article6: Metoda Object.entries()</h2>
           <p>
             Metoda Object.entries(obj) zwraca tablicę w której każdy element
             będzie kolejną tablicą składającą się z dwóch elementów: nazwa
@@ -772,8 +758,8 @@
       </section>
       <!-- section3 -->
       <section class="text">
-        <article>
-          <h1>Tablica obiektów</h1>
+        <article id="article1">
+          <h2>Section3 Article1: Tablica obiektów</h2>
           <p>
             Standardowym zadaniem programisty będzie manipulowanie tablicą
             obiektów tego samego rodzaju. Oznacza to, że wszystkie obiekty w
@@ -847,19 +833,20 @@
         </article>
       </section>
     </main>
-    <footer class="container footer">
-      <div class="contener-shadow-text2">
-        <h2>Footer</h2>
-        <div class="display-footer">
-          <a class="link-footer" href="" target="_blank" rel="noreferrer noopener">
-            <img src="/konikMaly24x24Squoosh.b1d18e80.png" alt="logo">
-          </a>
-          <div class="display-footer2">
-            <p class="footer-selection">All rights reserved &copy;</p>
-            <p>Konrad</p>
-          </div>
-        </div>
+    <footer class="footer">
+      <div class="footer-logo">
+        <img src="/konikMaly24x24Squoosh.b1d18e80.png" alt="logoImage" width="24">
+        <img src="/3KLogo.3d63d982.png" alt="logoText">
+      </div>
+      <div id="footer-title">
+        <p></p>
+      </div>
+      <div class="footer-date">
+        <p>04.05.2024r.</p>
       </div>
     </footer>
-  <script src="/05-obiekty.f89c40ca.js"></script></body>
+    <!-- SKRYPTY JS -->
+    <script defer="" src="/html/01-zajeciaWprowadzajace.1cba540e.js"></script>
+    <script defer="" src="/html/05-obiekty.9ff12066.js"></script>
+  </body>
 </html>

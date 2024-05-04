@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.min.css">
     <!-- <style type="text/css">	@import url(./styles/stylStartowy.css);	</style> -->
+    <link rel="stylesheet" href="/html/01-zajeciaWprowadzajace.2ed1891a.css">
     <link rel="stylesheet" href="/index.7643dd02.css">
     <link rel="stylesheet" href="/html/04-funkcje.19969803.css">
     <title>Funkcje</title>
@@ -18,34 +19,15 @@
     <header class="menu-sticky">
       <nav class="nav-container">
         <!-- Nawigacja do innych stron -->
-        <ul class="nav-list-container">
-          <li>
-            <a class="link" href="/index.html">Menu</a>
-          </li>
-          <li>
-            <a class="link" href="/html/01-zajeciaWprowadzajace.html">01. Zmienne i typy
-            </a>
-          </li>
-          <li>
-            <a class="link" href="/html/02-rozgalezieniaCykle.html">02. Rozgałęzienia i cykle
-            </a>
-          </li>
-          <li>
-            <a class="link" href="/html/03-tablice.html">03. Tablice </a>
-          </li>
-          <li>
-            <a class="link current-page" href="/html/04-funkcje.html">04. Funkcje
-            </a>
-          </li>
-        </ul>
+        <ul id="main-menu" class="nav-list-container"></ul>
       </nav>
     </header>
     <main class="main-container">
       <!-- section1 -->
       <section class="text">
-        <article>
+        <article id="article1">
           <h1>Moduł2 - Zajęcia 4 - Funkcje</h1>
-          <h2>Funkcje</h2>
+          <h2>Section1 Article1: Funkcje</h2>
           <p>
             Funkcja to podprogram, niezależny fragment kodu przeznaczony do
             wielokrotnego wykonywania tego samego zestawu instrukcji dla różnych
@@ -61,8 +43,8 @@
             <img class="section1-img" src="/fn-basics.bca0ecd5.png" alt="">
           </div>
         </article>
-        <article>
-          <h2>Deklaracja funkcji</h2>
+        <article id="article2">
+          <h3>Section1 Article1: Deklaracja funkcji</h3>
           <pre>
             // 1. Deklaracja funkcji multiply
             function multiply() {
@@ -90,8 +72,8 @@
             okrągłych.
           </p>
         </article>
-        <article>
-          <h3>Parametry i argumenty</h3>
+        <article id="article3">
+          <h3>Section1 Article3: Parametry i argumenty</h3>
           <p>
             Przy deklaracji, w nawiasach okrągłych po nazwie funkcji znajdują
             się parametry - "zmienne", dla których wartości będziemy podawać
@@ -137,8 +119,8 @@
             undefined.
           </p>
         </article>
-        <article>
-          <h2>Zwracanie wartości</h2>
+        <article id="article4">
+          <h3>Section1 Article4: Zwracanie wartości</h3>
           <p>
             Operator return służy do zwrócenia wartości z ciała funkcji do
             miejsca gdzie zostaje ona wywołana. Kiedy interpreter napotka
@@ -172,8 +154,8 @@
             czytelność kodu.
           </p>
         </article>
-        <article>
-          <h2>Kolejność wykonywania kodu</h2>
+        <article id="article5">
+          <h3>Section1 Article5: Kolejność wykonywania kodu</h3>
           <p>
             Gdy interpreter napotka wywołanie funkcji (lub metody), wstrzymuje
             wykonywanie bieżącego kodu i rozpoczyna wykonywanie kodu
@@ -196,8 +178,8 @@
             // "Log po wywołaniu funkcji multiply"
           </pre>
         </article>
-        <article>
-          <h2>Domyślne wartości parametrów</h2>
+        <article id="article6">
+          <h3>Section1 Article6: Domyślne wartości parametrów</h3>
           <p>
             Czasami konieczne jest zadeklarowanie funkcji, której parametry będą
             miały wartości inne niż undefined, nawet jeśli nie przekazano do
@@ -222,8 +204,8 @@
             count();// countFrom = 0, countTo = 10, step = 1
           </pre>
         </article>
-        <article>
-          <h2>Pseudotablica arguments</h2>
+        <article id="article7">
+          <h3>Section1 Article7: Pseudotablica arguments</h3>
           <p>
             Dostęp do listy wszystkich argumentów podanych przy wywołaniu można
             uzyskać za pomocą specjalnej zmiennej arguments, która jest dostępna
@@ -255,8 +237,8 @@
             console.log(multiply(1, 2, 3, 4, 5));//  120
           </pre>
         </article>
-        <article>
-          <h2>Konwersja pseudotablicy</h2>
+        <article id="article8">
+          <h3>Section1 Article8: Konwersja pseudotablicy</h3>
           <p>
             Czasami pseudotablica musi zostać przekonwertowana na normalną
             tablicę, ponieważ pseudotablica nie ma metod tablicowych, takich jak
@@ -311,8 +293,8 @@
             a tutaj pokazano jedno z jej możliwych zastosowań.
           </p>
         </article>
-        <article>
-          <h2>Wzorzec "Early Return"</h2>
+        <article id="article9">
+          <h3>Section1 Article9: Wzorzec "Early Return"</h3>
           <p>
             Operator if...else jest głównym sposobem tworzenia rozgałęzień
             warunkowych. Czasami jednak złożone, zagnieżdżone warunki sprawiają,
@@ -395,8 +377,8 @@
             withdraw(100, 300);// "Operacja wypłaty zakończona"
           </pre>
         </article>
-        <article>
-          <h2>Wyrażenie funkcyjne</h2>
+        <article id="article10">
+          <h3>Section1 Article10: Wyrażenie funkcyjne</h3>
           <p>
             Wyrażenie funkcyjne (function expression) to deklaracja zmiennej,
             której wartością będzie funkcja. Jest to alternatywny sposób
@@ -455,8 +437,8 @@
       </section>
       <!-- section2 -->
       <section class="text">
-        <article>
-          <h2>Section2: Zakres</h2>
+        <article id="article1">
+          <h3>Section2 Article1: Zakres</h3>
           <p>
             Zakres (scope) to mechanizm określający dostępność zmiennych w
             wykonywanym kodzie.
@@ -471,8 +453,8 @@
             się w bieżącym scope lub scope chain
           </p>
         </article>
-        <article>
-          <h3>Zakres globalny</h3>
+        <article id="article2">
+          <h4>Section2 Article2: Zakres globalny</h4>
           <p>
             Zmienne zadeklarowane na najwyższym poziomie, to znaczy poza
             wszelkimi konstrukcjami, takimi jak if, while, for, oraz funkcje,
@@ -497,8 +479,8 @@
             }
           </pre>
         </article>
-        <article>
-          <h3>Zakres blokowy</h3>
+        <article id="article3">
+          <h4>Section2 Article3: Zakres blokowy</h4>
           <p>
             Zmienne zadeklarowane wewnątrz instrukcji if, for, funkcji i innych
             bloków kodu ujęte w nawiasy klamrowe {}, znajdują się w zakresie
@@ -555,8 +537,8 @@
             }
           </pre>
         </article>
-        <article>
-          <h3>Wyszukiwanie za pomocą scope chain</h3>
+        <article id="article4">
+          <h4>Section2 Article4: Wyszukiwanie za pomocą scope chain</h4>
           <p>
             Interpreter najpierw próbuje znaleźć zmienną w zakresie, w którym do
             niej się zwrócono. Jeśli nie ma takiej zmiennej w zakresie lokalnym,
@@ -569,8 +551,8 @@
       </section>
       <!-- section3 -->
       <section class="text">
-        <article>
-          <h2>Stos wywołań</h2>
+        <article id="article1">
+          <h2>Section3 Article1: Stos wywołań</h2>
           <p>
             Kiedy funkcja jest wywoływana, inne funkcje mogą być wywoływane w
             jej ciele, w tych funkcjach kolejne itd. JavaScript jest językiem
@@ -607,8 +589,8 @@
             tych funkcjach - odpowiada za to stos wywołań. (call stack).
           </p>
         </article>
-        <article>
-          <h3>Stos</h3>
+        <article id="article2">
+          <h3>Section3 Article2: Stos</h3>
           <p>
             Stos to struktura danych działająca na zasadzie LIFO
             (Last-In-First-Out), czyli ostatnie weszło, pierwsze wyszło.
@@ -626,8 +608,8 @@
             <img class="section3-img" src="/stack.7a1216ae.png" alt="">
           </div>
         </article>
-        <article>
-          <h3>Stos wywołań</h3>
+        <article id="article3">
+          <h3>Section3 Article3: Stos wywołań</h3>
           <p>
             Stos wywołań (call stack) to mechanizm śledzenia bieżącej
             lokalizacji interpretera w kodzie w którym wywoływane jest kilka
@@ -685,8 +667,8 @@
             <img class="section3-img-big" src="/call-stack.ace4e62d.png" alt="">
           </div>
         </article>
-        <article>
-          <h2>Przepełnienie stosu wywołań</h2>
+        <article id="article4">
+          <h2>Section3 Article4: Przepełnienie stosu wywołań</h2>
           <p>
             Stos wywołań nie jest nieograniczony, ma przydzieloną skończoną
             ilość pamięci. Czasami możesz zobaczyć błąd w konsoli "Uncaught
@@ -704,19 +686,20 @@
         </article>
       </section>
     </main>
-    <footer class="container footer">
-      <div class="contener-shadow-text2">
-        <h2>Footer</h2>
-        <div class="display-footer">
-          <a class="link-footer" href="" target="_blank" rel="noreferrer noopener">
-            <img src="/konikMaly24x24Squoosh.b1d18e80.png" alt="logo">
-          </a>
-          <div class="display-footer2">
-            <p class="footer-selection">All rights reserved &copy;</p>
-            <p>Konrad</p>
-          </div>
-        </div>
+    <footer class="footer">
+      <div class="footer-logo">
+        <img src="/konikMaly24x24Squoosh.b1d18e80.png" alt="logoImage" width="24">
+        <img src="/3KLogo.3d63d982.png" alt="logoText">
+      </div>
+      <div id="footer-title">
+        <p></p>
+      </div>
+      <div class="footer-date">
+        <p>04.05.2024r.</p>
       </div>
     </footer>
-  <script src="/04-funkcje.48eb2c96.js"></script></body>
+    <!-- SKRYPTY JS -->
+    <script defer="" src="/html/01-zajeciaWprowadzajace.1cba540e.js"></script>
+    <script defer="" src="/html/04-funkcje.7d9576e4.js"></script>
+  </body>
 </html>
