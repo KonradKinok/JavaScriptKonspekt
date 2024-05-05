@@ -15,7 +15,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.min.css"
     />
-    <!-- <style type="text/css">	@import url(./styles/stylStartowy.css);	</style> -->
+    <link rel="stylesheet" href="../styles/patternButton.scss" />
     <link rel="stylesheet" href="../styles/stylStartowy.scss" />
     <link rel="stylesheet" href="../styles/12-zdarzenia.scss" />
     <title>Zdarzenia</title>
@@ -24,63 +24,7 @@
     <header class="menu-sticky">
       <nav class="nav-container">
         <!-- Nawigacja do innych stron -->
-        <ul id="main-menu" class="nav-list-container">
-          <li>
-            <a class="link" href="../index.html">Menu</a>
-          </li>
-          <li>
-            <a class="link" href="../html/01-zajeciaWprowadzajace.html"
-              >01. Zmienne i typy
-            </a>
-          </li>
-          <li>
-            <a class="link" href="../html/02-rozgalezieniaCykle.html"
-              >02. Rozgałęzienia i cykle
-            </a>
-          </li>
-          <li>
-            <a class="link" href="../html/03-tablice.html">03. Tablice </a>
-          </li>
-          <li>
-            <a class="link" href="../html/04-funkcje.html">04. Funkcje </a>
-          </li>
-          <li>
-            <a class="link" href="../html/05-obiekty.html">05. Obiekty </a>
-          </li>
-          <li>
-            <a class="link" href="../html/06-operacjeSpreadRest.html"
-              >06. Operacje spread/rest
-            </a>
-          </li>
-          <li>
-            <a class="link" href="../html/07-callbackFunkcjeStrzalkowe.html"
-              >07. Callback i funkcje strzałkowe
-            </a>
-          </li>
-          <li>
-            <a class="link" href="../html/08-metodyTablic.html"
-              >08. Metody tablic
-            </a>
-          </li>
-          <li>
-            <a class="link" href="../html/09-slowoKluczoweThis.html"
-              >09. Słowo kluczowe this
-            </a>
-          </li>
-          <li>
-            <a class="link" href="../html/10-prototypyKlasy.html"
-              >10. Prototypy i klasy
-            </a>
-          </li>
-          <li>
-            <a class="link" href="../html/11-dom.html">11. DOM </a>
-          </li>
-          <li>
-            <a class="link current-page" href="../html/12-zdarzenia.html"
-              >12. Zdarzenia
-            </a>
-          </li>
-        </ul>
+        <ul id="main-menu" class="nav-list-container"></ul>
       </nav>
     </header>
     <main class="main-container">
@@ -679,10 +623,11 @@
         <p></p>
       </div>
       <div class="footer-date">
-        <p>04.05.2024r.</p>
+        <p>05.05.2024r.</p>
       </div>
     </footer>
     <!-- SKRYPTY JS -->
-    <script defer src="../scripts/12.mjs"></script>
+    <script defer src="../scripts/menu.mjs"></script>
+    <script defer src="../scripts/12.mjs" type="module"></script>
   </body>
 </html>

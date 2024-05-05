@@ -15,7 +15,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.min.css"
     />
-    <!-- <style type="text/css">	@import url(./styles/stylStartowy.css);	</style> -->
+    <link rel="stylesheet" href="../styles/patternButton.scss" />
     <link rel="stylesheet" href="../styles/stylStartowy.scss" />
     <link rel="stylesheet" href="../styles/08-metodyTablic.scss" />
     <title>Metody tablic</title>
@@ -24,53 +24,15 @@
     <header class="menu-sticky">
       <nav class="nav-container">
         <!-- Nawigacja do innych stron -->
-        <ul class="nav-list-container">
-          <li>
-            <a class="link" href="../index.html">Menu</a>
-          </li>
-          <li>
-            <a class="link" href="../html/01-zajeciaWprowadzajace.html"
-              >01. Zmienne i typy
-            </a>
-          </li>
-          <li>
-            <a class="link" href="../html/02-rozgalezieniaCykle.html"
-              >02. Rozgałęzienia i cykle
-            </a>
-          </li>
-          <li>
-            <a class="link" href="../html/03-tablice.html">03. Tablice </a>
-          </li>
-          <li>
-            <a class="link" href="../html/04-funkcje.html">04. Funkcje </a>
-          </li>
-          <li>
-            <a class="link" href="../html/05-obiekty.html">05. Obiekty </a>
-          </li>
-          <li>
-            <a class="link" href="../html/06-operacjeSpreadRest.html"
-              >06. Operacje spread/rest
-            </a>
-          </li>
-          <li>
-            <a class="link" href="../html/07-callbackFunkcjeStrzalkowe.html"
-              >07. Callback i funkcje strzałkowe
-            </a>
-          </li>
-          <li>
-            <a class="link current-page" href="../html/08-metodyTablic.html"
-              >08. Metody tablic
-            </a>
-          </li>
-        </ul>
+        <ul id="main-menu" class="nav-list-container"></ul>
       </nav>
     </header>
     <main class="main-container">
       <!-- section1 -->
       <section class="text">
-        <article>
+        <article id="article1">
           <h1>Moduł4 - Zajęcia 8 - Metody tablic</h1>
-          <h2>Czyste funkcje</h2>
+          <h2>Section1 Article1: Czyste funkcje</h2>
           <p>
             Funkcja z efektami ubocznymi to funkcja, podczas wykonywania której
             mogą zmieniać się lub być wykorzystywane zmienne globalne, zmieniają
@@ -127,8 +89,8 @@
       </section>
       <!-- section2 -->
       <section class="text">
-        <article>
-          <h2>Metody iteracji po tablicy</h2>
+        <article id="article1">
+          <h2>Section2 Article1: Metody iteracji po tablicy</h2>
           <p>
             JavaScript posiada metody tablicowe, które pochodzą z języków
             funkcyjnych. Większość z nich to czyste funkcje. Tworzą nową
@@ -168,8 +130,8 @@
       </section>
       <!-- section3 -->
       <section class="text">
-        <article>
-          <h2>Metoda map()</h2>
+        <article id="article1">
+          <h2>Section3 Article1: Metoda map()</h2>
           <p>
             Metoda map(callback) jest używana do otrzymania przekształconej
             kopii tablicy. Wywołuje ona funkcję zwrotną dla każdego elementu
@@ -210,8 +172,8 @@
             dzięki czemu kod jest czystszy i łatwiejszy do odczytania.
           </p>
         </article>
-        <article>
-          <h2>Tablica obiektów</h2>
+        <article id="article2">
+          <h2>Section3 Article2: Tablica obiektów</h2>
           <p>
             Wiemy już, że jednym z codziennych zadań programisty jest
             manipulowanie tablicą obiektów. Możemy na przykład chcieć uzyskać
@@ -239,8 +201,8 @@
       </section>
       <!-- section4 -->
       <section class="text">
-        <article>
-          <h2>Metoda flatMap()</h2>
+        <article id="article1">
+          <h2>Section4 Article1: Metoda flatMap()</h2>
           <p>
             Metoda flatMap(callback) jest podobna do metody map(), ale jest
             używana w przypadkach, gdy wynikiem jest tablica wielowymiarowa,
@@ -282,8 +244,8 @@
       </section>
       <!-- section5 -->
       <section class="text">
-        <article>
-          <h2>Metoda filter()</h2>
+        <article id="article1">
+          <h2>Section5 Article1: Metoda filter()</h2>
           <p>
             Metoda filter(callback) służy do filtrowania tablicy, gdy konieczne
             jest wybranie więcej niż jednego elementu ze zbioru według jakiegoś
@@ -335,8 +297,8 @@
             true, bieżący element jest dodawany do nowej tablicy.
           </p>
         </article>
-        <article>
-          <h3>Filtrowanie unikalnych elementów</h3>
+        <article id="article2">
+          <h3>Section5 Article2: Filtrowanie unikalnych elementów</h3>
           <p>
             Używając metody filter(), możesz filtrować tablicę tak, aby
             pozostały w niej tylko unikalne elementy. To podejście działa tylko
@@ -401,8 +363,8 @@
             </li>
           </ul>
         </article>
-        <article>
-          <h3>Tablica obiektów</h3>
+        <article id="article3">
+          <h3>Section5 Article3 : Tablica obiektów</h3>
           <p>
             Podczas pracy z tablicą obiektów filtrowanie odbywa się według
             wartości wybranej/wybranych właściwości. Rezultatem jest nowa
@@ -1127,24 +1089,24 @@
         </article>
       </section>
     </main>
-    <footer class="container footer">
-      <div class="contener-shadow-text2">
-        <h2>Footer</h2>
-        <div class="display-footer">
-          <a
-            class="link-footer"
-            href=""
-            target="_blank"
-            rel="noreferrer noopener"
-          >
-            <img src="../images/footer/konikMaly24x24Squoosh.png" alt="logo" />
-          </a>
-          <div class="display-footer2">
-            <p class="footer-selection">All rights reserved &copy;</p>
-            <p>Konrad</p>
-          </div>
-        </div>
+    <footer class="footer">
+      <div class="footer-logo">
+        <img
+          src="../images/footer/konikMaly24x24Squoosh.png"
+          alt="logoImage"
+          width="24"
+        />
+        <img src="../images/footer/3KLogo.png" alt="logoText" />
+      </div>
+      <div id="footer-title">
+        <p></p>
+      </div>
+      <div class="footer-date">
+        <p>05.05.2024r.</p>
       </div>
     </footer>
+    <!-- SKRYPTY JS -->
+    <script defer src="../scripts/menu.mjs"></script>
+    <script defer src="../scripts/08.mjs" type="module"></script>
   </body>
 </html>

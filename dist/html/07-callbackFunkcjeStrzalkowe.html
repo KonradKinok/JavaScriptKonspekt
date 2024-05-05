@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.min.css">
     <!-- <style type="text/css">	@import url(./styles/stylStartowy.css);	</style> -->
+    <link rel="stylesheet" href="/html/01-zajeciaWprowadzajace.2ed1891a.css">
     <link rel="stylesheet" href="/index.7643dd02.css">
     <link rel="stylesheet" href="/html/07-callbackFunkcjeStrzalkowe.231cf7db.css">
     <title>Callback i funkcje strzałkowe</title>
@@ -18,43 +19,15 @@
     <header class="menu-sticky">
       <nav class="nav-container">
         <!-- Nawigacja do innych stron -->
-        <ul class="nav-list-container">
-          <li>
-            <a class="link" href="/index.html">Menu</a>
-          </li>
-          <li>
-            <a class="link" href="/html/01-zajeciaWprowadzajace.html">01. Zmienne i typy
-            </a>
-          </li>
-          <li>
-            <a class="link" href="/html/02-rozgalezieniaCykle.html">02. Rozgałęzienia i cykle
-            </a>
-          </li>
-          <li>
-            <a class="link" href="/html/03-tablice.html">03. Tablice </a>
-          </li>
-          <li>
-            <a class="link" href="/html/04-funkcje.html">04. Funkcje </a>
-          </li>
-          <li>
-            <a class="link" href="/html/05-obiekty.html">05. Obiekty </a>
-          </li>
-          <li>
-            <a class="link" href="/html/06-operacjeSpreadRest.html">06. Operacje spread/rest
-            </a>
-          </li>
-          <li>
-            <a class="link current-page" href="/html/07-callbackFunkcjeStrzalkowe.html">07. Callback i funkcje strzałkowe
-            </a>
-          </li>
-        </ul>
+        <ul id="main-menu" class="nav-list-container"></ul>
       </nav>
     </header>
     <main class="main-container">
       <!-- section1 -->
       <section class="text">
-        <article>
+        <article id="article1">
           <h1>Moduł4 - Zajęcia 7 - Callback i funkcje strzałkowe</h1>
+          <h2>Section1 Article1:</h2>
           <p>
             Funkcje w JavaScript nie różnią się niczym od liczb, ciągów znaków
             czy tablic — są po prostu specjalnym typem danych (obiektem wyższego
@@ -112,8 +85,8 @@
             cb.
           </p>
         </article>
-        <article>
-          <h2>Wywołania zwrotne inline</h2>
+        <article id="article2">
+          <h2>Section1 Article2: Wywołania zwrotne inline</h2>
           <p>
             Jeśli funkcja zwrotna jest krótka i potrzebna tylko do przekazywania
             jako argument, można ją zadeklarować bezpośrednio podczas
@@ -138,8 +111,8 @@
             });
           </pre>
         </article>
-        <article>
-          <h2>Kilka wywołań zwrotnych</h2>
+        <article id="article3">
+          <h2>Section1 Article3: Kilka wywołań zwrotnych</h2>
           <p>
             Funkcja może akceptować dowolną liczbę callbacków, tak jak możemy
             podać jej dowolna ilość argumentów. Załóżmy, że piszemy logikę
@@ -220,8 +193,8 @@
             danego kodu.
           </p>
         </article>
-        <article>
-          <h2>Abstrakcja powtórzeń</h2>
+        <article id="article4">
+          <h2>Section1 Article4: Abstrakcja powtórzeń</h2>
           <p>
             Abstrakcja - ukrywanie szczegółów implementacji. Pozwala myśleć o
             zadaniach na wyższym (abstrakcyjnym) poziomie. Funkcje to dobry
@@ -285,8 +258,8 @@
       </section>
       <!-- section2 -->
       <section class="text">
-        <article>
-          <h2>Metoda forEach</h2>
+        <article id="article1">
+          <h2>Section2 Article1: Metoda forEach</h2>
           <p>
             Metoda do iteracji, zawarta w tablicach i używana jako zamiennik
             pętli for i for...of podczas pracy z kolekcją danych.
@@ -332,8 +305,8 @@
       </section>
       <!-- section3 -->
       <section class="text">
-        <article>
-          <h2>Funkcje strzałek</h2>
+        <article id="article1">
+          <h2>Section3 Article1: Funkcje strzałek</h2>
           <p>
             Funkcje strzałkowe (anonimowe) mają krótszą, bardziej zwięzłą
             składnię, co pozwala zmniejszyć ilość kodu, zwłaszcza gdy funkcja
@@ -385,8 +358,8 @@
             };
         </pre>
         </article>
-        <article>
-          <h2>Niejawny zwrot</h2>
+        <article id="article2">
+          <h2>Section3 Article2: Niejawny zwrot</h2>
           <p>W funkcji strzałki jej ciało znajduje się po symbolu =></p>
           <p>Mamy dwie opcje jego zapisu: z nawiasami klamrowymi lub bez.</p>
           <pre>
@@ -427,8 +400,8 @@
             const arrowAdd = (a, b, c) => a + b + c;
           </pre>
         </article>
-        <article>
-          <h2>Pseudotablica arguments</h2>
+        <article id="article3">
+          <h2>Section3 Article3: Pseudotablica arguments</h2>
           <p>
             Funkcje strzałkowe nie mają zmiennej lokalnej arguments zawierającej
             wszystkie argumenty. Jeśli konieczne jest zebranie wszystkich
@@ -442,8 +415,8 @@
             add(1, 2, 3);// [1, 2, 3]
           </pre>
         </article>
-        <article>
-          <h2>Funkcje strzałkowe jak callback</h2>
+        <article id="article4">
+          <h2>Section3 Article4: Funkcje strzałkowe jak callback</h2>
           <p>
             Anonimowe funkcje strzałkowe są świetne jako wywołania zwrotne
             między innymi dla metod tablicowych ze względu na krótszą składnię
@@ -481,9 +454,9 @@
       </section>
       <!-- section4 -->
       <section class="text">
-        <article>
-          <h2>Rodzaje kodu</h2>
-          <h3>Programowanie imperatywne</h3>
+        <article id="article1">
+          <h2>Section4: Rodzaje kodu</h2>
+          <h3>Section4 Article1: Programowanie imperatywne</h3>
           <p>
             Opisuje proces obliczeniowy w postaci zadanej sekwencji instrukcji
             zmieniających stan programu. Innymi słowy jest to opis tego, jak coś
@@ -499,12 +472,12 @@
             Można to porównać do przepisu na danie. Przepis to zestaw instrukcji
             krok po kroku potrzebny do uzyskania pożądanego rezultatu.
           </p>
-          <div class="section4-img-container">
+          <div class="section4-img-container grow_up-img">
             <img src="/imperative-recipe.28114cae.jpg" alt="">
           </div>
         </article>
-        <article>
-          <h3>Programowanie deklaratywne</h3>
+        <article id="article2">
+          <h3>Section4 Article2: Programowanie deklaratywne</h3>
           <p>
             Opisuje, jaki jest rezultat, a nie jak to zrobić. Nie ma znaczenia
             kolejność wykonania i sposób osiągnięcia.
@@ -520,7 +493,7 @@
             dań do zamówienia, których szczegóły przygotowania i podania są
             ukryte.
           </p>
-          <div class="section4-img-container">
+          <div class="section4-img-container grow_up-img">
             <img src="/declarative-menu.53bbcc07.jpg" alt="">
           </div>
           <p>
@@ -531,8 +504,8 @@
             głównego kodu.
           </p>
         </article>
-        <article>
-          <h3>Imperatywne vs deklaratywne</h3>
+        <article id="article3">
+          <h3>Section4 Article3: Imperatywne vs deklaratywne</h3>
           <p>
             Rozważmy różnicę w podejściach na przykładzie podstawowej operacji
             filtrowania kolekcji. Napiszmy kod do iteracji i filtrowania tablicy
@@ -565,19 +538,20 @@
         </article>
       </section>
     </main>
-    <footer class="container footer">
-      <div class="contener-shadow-text2">
-        <h2>Footer</h2>
-        <div class="display-footer">
-          <a class="link-footer" href="" target="_blank" rel="noreferrer noopener">
-            <img src="/konikMaly24x24Squoosh.b1d18e80.png" alt="logo">
-          </a>
-          <div class="display-footer2">
-            <p class="footer-selection">All rights reserved &copy;</p>
-            <p>Konrad</p>
-          </div>
-        </div>
+    <footer class="footer">
+      <div class="footer-logo">
+        <img src="/konikMaly24x24Squoosh.b1d18e80.png" alt="logoImage" width="24">
+        <img src="/3KLogo.3d63d982.png" alt="logoText">
+      </div>
+      <div id="footer-title">
+        <p></p>
+      </div>
+      <div class="footer-date">
+        <p>05.05.2024r.</p>
       </div>
     </footer>
-  <script src="/07-callbackFunkcjeStrzalkowe.19e007a7.js"></script></body>
+    <!-- SKRYPTY JS -->
+    <script defer="" src="/html/01-zajeciaWprowadzajace.1cba540e.js"></script>
+    <script defer="" src="/html/07-callbackFunkcjeStrzalkowe.52704781.js"></script>
+  </body>
 </html>

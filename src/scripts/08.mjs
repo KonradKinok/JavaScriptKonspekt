@@ -803,3 +803,109 @@ console.log(
     'male'
   )}\nKobiety: ${getTotalBalanceByGender(users, 'female')}`
 );
+
+//--------------------------------------------------------------------
+const persons = [
+  {
+    firstName: 'Adam',
+    secondName: 'Bogota',
+    sex: 'man',
+    streetName: 'Piękna',
+    streetNumber: '8b/2',
+    zipCode: '22-800',
+    lacality: 'Wrocław',
+    dateOfBirth: new Date('1986 - 12 - 24'),
+    accountBalance: 156_000,
+    activeAccount: true,
+    phoneNumber: 325_346_543,
+    recentExpenses: [125, 2043, 468, 7843, 6775, 53432, 432, 4, 4325, 545436],
+    stats: {
+      followers: 603,
+      views: 487,
+      likes: 138,
+    },
+  },
+  {
+    firstName: 'Anna',
+    secondName: 'Nowak',
+    sex: 'woman',
+    streetName: 'Widok',
+    streetNumber: '2',
+    zipCode: '32-660',
+    lacality: 'Poznań',
+    dateOfBirth: new Date(1945 - 6 - 14),
+    accountBalance: 2355_040,
+    activeAccount: false,
+    phoneNumber: 527_949_383,
+    recentExpenses: [
+      543, 345, 34563, 23554, 11323, 43632, 4378, 864, 7564, 45636,
+    ],
+    stats: {
+      followers: 5603,
+      views: 4827,
+      likes: 1308,
+    },
+  },
+  {
+    firstName: 'Karol',
+    secondName: 'Cevalo',
+    sex: 'man',
+    streetName: 'Eklerda',
+    streetNumber: '15',
+    zipCode: '40-066',
+    lacality: 'Świebodzin',
+    dateOfBirth: new Date(1977 - 6 - 1),
+    accountBalance: 335_156_000_000,
+    activeAccount: true,
+    phoneNumber: 456_041_479,
+    recentExpenses: [
+      12452, 173053, 423054, 1100765, 92, 24000, 7843, 17004, 500, 500,
+    ],
+    stats: {
+      followers: 9503,
+      views: 27,
+      likes: 1,
+    },
+  },
+];
+
+// section3 article2
+console.log(
+  '%c section3 article2 ',
+  'color: rgb(0, 0, 0); background-color: rgb(255, 255, 0)',
+  'Tablica obiektów Metoda map()'
+);
+
+console.group('Metoda map()');
+const names_s3a2 = persons.map(person => person.firstName);
+console.table(names_s3a2);
+console.groupEnd();
+console.log('-----------------------------------------------');
+
+// section5 article1
+console.log(
+  '%c section5 article1 ',
+  'color: rgb(0, 0, 0); background-color: rgb(255, 255, 0)',
+  'Tablica obiektów Metoda filter()'
+);
+
+console.group('Metoda filter()');
+const names_s5a1 = persons.filter(person => person.firstName.startsWith('K'));
+console.table(names_s5a1);
+
+console.groupEnd();
+console.log('-----------------------------------------------');
+
+// section5 article2
+console.log(
+  '%c section5 article2 ',
+  'color: rgb(0, 0, 0); background-color: rgb(255, 255, 0)',
+  'Tablica obiektów Metoda filter()'
+);
+
+console.group('Metoda filter()');
+const names_s5a2 = persons.filter(person => person.firstName.startsWith('K'));
+console.table(names_s5a2);
+
+console.groupEnd();
+console.log('-----------------------------------------------');
