@@ -580,6 +580,6 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 
 },{}],"4M6V8":[function(require,module,exports) {
 
-},{}]},["HBA8c","4M6V8"], "4M6V8", "parcelRequiref4e4")
+},{}]},["HBA8c","4M6V8"], "4M6V8", "parcelRequired7c6")
 
 //# sourceMappingURL=JavaScriptKonspekt.59712999.js.map

@@ -585,6 +585,6 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 // export const diag2 = (x, y) => square(x) + square(y);
 // console.log(diag2(4, 3));
 
-},{}]},["ffDnG","aQ1Hw"], "aQ1Hw", "parcelRequiref4e4")
+},{}]},["ffDnG","aQ1Hw"], "aQ1Hw", "parcelRequired7c6")
 
 //# sourceMappingURL=15-modulowoscKodu.b0eef612.js.map
