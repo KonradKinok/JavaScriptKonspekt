@@ -1,0 +1,28 @@
+{
+  "name": "goit-17-js",
+  "version": "1.0.0",
+  "description": "Kurs JavaScript dla grupy FSON17 - repozytorium pomocnicze",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel src/index.html"
+  },
+  "keywords": [
+    "goit",
+    "javascript",
+    "course",
+    "js"
+  ],
+  "author": "Konrad",
+  "license": "ISC",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.11.0",
+    "buffer": "^6.0.3",
+    "parcel": "^2.11.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.8",
+    "notiflix": "^3.2.7"
+  }
+}
+
+
